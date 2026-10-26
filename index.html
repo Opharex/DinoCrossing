@@ -709,7 +709,7 @@ let dangerRing=new THREE.Mesh(new THREE.RingGeometry(.61,.68,32),new THREE.MeshB
   row.tarPits=[];
   for(let i=0;i<row.tarSlots.length;i++)row.tarPits.push(makeTar(group,row.tarSlots[i],y*17+i));
 }if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
-  // Stone-paved lane remains recognizable even when no lavasurge is imminent.
+  // Stone-paved lane remains recognizable between surge and flood events.
   // Individual low-poly cobbles use shared materials and geometry for mobile FPS.
   const cobbleColors=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
   const cobbleMats=cobbleColors.map(color=>new THREE.MeshLambertMaterial({color,flatShading:true}));
@@ -874,10 +874,8 @@ function fx(name,power=1){
    case 'warningLava':fxNoise(.72,.22*v,900,'lowpass');fxTone(114,.42,.14*v,'sawtooth',.55);break;
    case 'lavaSurge':fxNoise(1.03,.34*v,1050,'lowpass');fxNoise(.73,.23*v,2450,'bandpass');fxTone(69,.75,.22*v,'sawtooth',.68);break;
    case 'warningWater':fxNoise(.68,.14*v,1550,'lowpass');fxNoise(.34,.05*v,2600,'highpass',.07);break;
-   case 'warningRock':fxNoise(.42,.20*v,530,'lowpass');fxTone(82,.30,.10*v,'triangle',.73);break;
    case 'warningHerd':for(let j=0;j<4;j++){fxTone(90+j*11,.12,.09*v,'triangle',.8,j*.12);fxNoise(.1,.07*v,770,'bandpass',j*.12)}break;
    case 'flood':fxNoise(.97,.40*v,1300,'lowpass');fxNoise(.80,.22*v,3500,'bandpass');fxTone(73,.66,.18*v,'sine',.64);break;
-   case 'lavasurge':fxNoise(.94,.35*v,620,'lowpass');fxNoise(.7,.26*v,1900,'bandpass');fxTone(68,.67,.24*v,'sawtooth',.55);break;
    case 'stampede':for(let j=0;j<7;j++){fxTone(60+Math.random()*22,.19,.16*v,'sine',.61,j*.09);fxNoise(.15,.10*v,900,'bandpass',j*.09)}fxNoise(.68,.18*v,340,'lowpass');break;
    default:fxTone(300,.13,.1,'triangle',.67);
   }
