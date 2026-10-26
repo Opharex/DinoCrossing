@@ -44,6 +44,12 @@
 #select #roster .dinoicon.speciesIcon{display:block;flex:none;width:64px;height:64px;margin:0;background-image:url("./shop-dinosaur-icons-v1.webp");background-size:300% 300%;background-repeat:no-repeat}
 @media(max-width:600px){#select #roster .dinoicon.speciesIcon{width:52px;height:52px}}
 
+/* Rendered tiny side-profile portraits share the existing icon footprint. */
+#select #roster .dinoicon.modelPortrait{
+ background-size:contain!important;background-position:center!important;
+ background-repeat:no-repeat!important;image-rendering:auto;
+ filter:drop-shadow(0 2px 2px #15130f75);
+}
 /* Keep each original/Tech pair together in the roster. */
 #select #roster{grid-template-columns:repeat(4,minmax(0,1fr))}
 #select #roster .dinoicon.techIcon{background-image:url("./shop-tech-dinosaur-icons-v1.webp")}
@@ -57,7 +63,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Breakable Amber Fossils with Cracking and Rebound">💥 BREAKABLE FOSSIL AMBER! 🕷️</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Actual 3D Dinosaur Model Shop Icons">🦖 REAL DINO SHOP PORTRAITS! 🛒</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -1472,8 +1478,79 @@ function updateShopModel(){
 }
 function shopDetails(){const [name,cost]=species[inspected],owned=unlocked.has(inspected);$('shopName').textContent=name;$('shopDescription').textContent=shopDescriptions[inspected];$('shopStatus').textContent=chosen===inspected?'✓ EQUIPPED':owned?'✓ UNLOCKED':'🔒 LOCKED';$('shopStatus').style.background=owned?'#345e3c':'#72512b';const btn=$('shopAction');btn.disabled=chosen===inspected;btn.textContent=chosen===inspected?'✓ EQUIPPED':owned?'EQUIP DINOSAUR':'🟠 UNLOCK FOR '+cost;}
 function selectShopDino(i){inspected=i;fx('select');shopDetails();updateShopModel();renderRoster()}
-function renderRoster(){$('shopAmber').textContent=bank;$('roster').innerHTML='';shopOrder.forEach(i=>{const [name,cost]=species[i],base=i%9;let b=document.createElement('button');b.className=(inspected===i?'selected ':'')+(i>=9?'techSkin':'');b.setAttribute('aria-label',name+(unlocked.has(i)?' unlocked':' costs '+cost+' amber'));b.innerHTML='<span class="dinoicon speciesIcon'+(i>=9?' techIcon':'')+'" aria-hidden="true" data-species="'+i+'" style="background-position:'+((base%3)*50)+'% '+(Math.floor(base/3)*50)+'%"></span><span class="shopCardName">'+name+'</span><span class="cost">'+(chosen===i?'✓ EQUIPPED':unlocked.has(i)?'✓ OWNED':'🟠 '+cost)+'</span>';b.onclick=()=>selectShopDino(i);$('roster').appendChild(b)});shopDetails()}
+// Render the *actual* model of each skin into a tiny static side-view
+// portrait. Cache image data so repainting cards and scrolling costs nothing.
+// One thumbnail per frame avoids a big synchronous mobile GPU stall.
+const rosterPortraits=new Map();
+let rosterPortraitNext=0,rosterPortraitTarget=null,rosterPortraitScene=null,
+ rosterPortraitCamera=null,rosterPortraitPixels=null,rosterPortraitCanvas=null,
+ rosterPortraitContext=null,rosterPortraitFailed=false;
+function updateRosterPortraitImage(id){
+ const url=rosterPortraits.get(id);if(!url)return;
+ for(const node of $('roster').querySelectorAll('.dinoicon[data-species="'+id+'"]')){
+  node.classList.add('modelPortrait');
+  node.style.backgroundImage='url("'+url+'")';
+  node.style.backgroundPosition='center';
+  node.style.backgroundSize='contain';
+ }
+}
+function makeRosterPortraitStep(){
+ if(rosterPortraitFailed||!shopRenderer||$('select').classList.contains('hidden')
+    ||rosterPortraitNext>=species.length)return;
+ try{
+  if(!rosterPortraitScene){
+   rosterPortraitScene=new THREE.Scene();
+   rosterPortraitScene.add(new THREE.HemisphereLight(0xfcfff1,0x5a6f62,2.7));
+   const key=new THREE.DirectionalLight(0xffedc7,3.3);key.position.set(4,7,5);
+   rosterPortraitScene.add(key);
+   rosterPortraitCamera=new THREE.PerspectiveCamera(35,1,.1,40);
+   rosterPortraitTarget=new THREE.WebGLRenderTarget(128,128,{format:THREE.RGBAFormat,
+     minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,depthBuffer:true});
+   rosterPortraitPixels=new Uint8Array(128*128*4);
+   rosterPortraitCanvas=document.createElement('canvas');
+   rosterPortraitCanvas.width=rosterPortraitCanvas.height=128;
+   rosterPortraitContext=rosterPortraitCanvas.getContext('2d');
+  }
+  const id=rosterPortraitNext++;
+  const model=dino(id,1);
+  rosterPortraitScene.add(model);
+  model.rotation.y=0;model.updateMatrixWorld(true);
+  const bounds=new THREE.Box3().setFromObject(model);
+  const center=bounds.getCenter(new THREE.Vector3());
+  const extent=bounds.getSize(new THREE.Vector3());
+  // Camera points along X: pure side profile of the actual model.
+  const radius=Math.max(extent.y,extent.z,extent.x*.75,1.4);
+  rosterPortraitCamera.position.set(center.x+radius*2.15,center.y+radius*.24,center.z);
+  rosterPortraitCamera.lookAt(center.x,center.y,center.z);
+  rosterPortraitCamera.updateProjectionMatrix();
+  const previousTarget=shopRenderer.getRenderTarget();
+  try{
+   shopRenderer.setRenderTarget(rosterPortraitTarget);
+   shopRenderer.setClearColor(0x000000,0);
+   shopRenderer.clear(true,true,true);
+   shopRenderer.render(rosterPortraitScene,rosterPortraitCamera);
+   shopRenderer.readRenderTargetPixels(rosterPortraitTarget,0,0,128,128,rosterPortraitPixels);
+  }finally{shopRenderer.setRenderTarget(previousTarget)}
+  const frame=rosterPortraitContext.createImageData(128,128);
+  for(let y=0;y<128;y++){
+   const src=(127-y)*128*4,dst=y*128*4;
+   frame.data.set(rosterPortraitPixels.subarray(src,src+512),dst);
+  }
+  rosterPortraitContext.putImageData(frame,0,0);
+  rosterPortraits.set(id,rosterPortraitCanvas.toDataURL('image/png'));
+  rosterPortraitScene.remove(model);
+  updateRosterPortraitImage(id);
+  if(rosterPortraitNext===species.length){
+   rosterPortraitTarget.dispose();rosterPortraitTarget=null;
+  }
+ }catch(err){
+  rosterPortraitFailed=true;
+  if(rosterPortraitTarget)rosterPortraitTarget.dispose();
+  console.warn('Shop portrait rendering unavailable, using original icons',err);
+ }
+}
+function renderRoster(){$('shopAmber').textContent=bank;$('roster').innerHTML='';shopOrder.forEach(i=>{const [name,cost]=species[i],base=i%9;let b=document.createElement('button');b.className=(inspected===i?'selected ':'')+(i>=9?'techSkin':'');b.setAttribute('aria-label',name+(unlocked.has(i)?' unlocked':' costs '+cost+' amber'));b.innerHTML='<span class="dinoicon speciesIcon'+(i>=9?' techIcon':'')+'" aria-hidden="true" data-species="'+i+'" style="background-position:'+((base%3)*50)+'% '+(Math.floor(base/3)*50)+'%"></span><span class="shopCardName">'+name+'</span><span class="cost">'+(chosen===i?'✓ EQUIPPED':unlocked.has(i)?'✓ OWNED':'🟠 '+cost)+'</span>';b.onclick=()=>selectShopDino(i);$('roster').appendChild(b);updateRosterPortraitImage(i)});shopDetails()}
 $('shopAction').onclick=()=>{let cost=species[inspected][1];if(!unlocked.has(inspected)){if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return}bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35)}else fx('select');chosen=inspected;persist();refreshShopPreview();renderRoster()};
-function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);shopCamera.aspect=w/h;shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);shopCamera.updateProjectionMatrix();if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
+function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;makeRosterPortraitStep();const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);shopCamera.aspect=w/h;shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);shopCamera.updateProjectionMatrix();if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
 menu();window.__dinoStarted=true;document.getElementById('startupError').style.display='none';frame();
 </script><script>if('serviceWorker' in navigator && location.protocol!=='file:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Offline cache unavailable',e)));}</script></body></html>
