@@ -966,8 +966,8 @@ const sharedArtGeometries=new Set([trunkGeo,facetGeo,leafGeo,ringGeo,shadowGeo])
 function ensureRows(){
  // Fill the landscape behind spawn immediately, even before score increases.
  // Negative rows are safe grass scenery and never count toward movement/score.
- if(!rows.has(-BACK_TERRAIN_ROWS)){
-  for(let y=-BACK_TERRAIN_ROWS;y<0;y++)if(!rows.has(y))makeRow(y);
+ if(maxGenerated<0){
+  for(let y=-BACK_TERRAIN_ROWS;y<0;y++)makeRow(y);
  }
  for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23);y++)makeRow(y);
  // Keep the existing one-row-per-step retirement rate, including the
