@@ -328,6 +328,33 @@ function animateLiquidSurface(info,time,dir){
  }
  pos.needsUpdate=true;info.mesh.geometry.computeVertexNormals();
 }
+function createSpillingFlow(group,type,dir,seed){
+ // A curved, uninterrupted ramp between lane water level and the lower basin.
+ const bands=22,lines=4,verts=new Float32Array((bands+1)*(lines+1)*3),indices=[];
+ for(let i=0;i<bands;i++)for(let j=0;j<lines;j++){
+  const a=i*(lines+1)+j,b=a+lines+1;
+  indices.push(a,b,a+1,a+1,b,b+1);
+ }
+ const geom=new THREE.BufferGeometry(),attr=new THREE.BufferAttribute(verts,3);
+ attr.setUsage(THREE.DynamicDrawUsage);geom.setAttribute('position',attr);geom.setIndex(indices);
+ const mesh=new THREE.Mesh(geom,liquidTopMats[type]);mesh.frustumCulled=false;group.add(mesh);
+ return {mesh,attr,bands,lines,type,dir,seed};
+}
+function updateSpillingFlow(cascade,time){
+ const {attr,bands,lines,type,dir,seed}=cascade;
+ for(let i=0;i<=bands;i++){
+  const p=i/bands;
+  const x=dir*(7.43+p*1.65);
+  // Drop from the road surface, then curl smoothly into the receiving basin.
+  const fall=p*p*(3-2*p),base=-.116-.51*fall;
+  for(let j=0;j<=lines;j++){
+   const z=(j/lines-.5)*.98;
+   const wav=liquidWave(x,z,time,dir,type,seed)*(.35+.35*Math.sin(p*Math.PI));
+   attr.setXYZ(i*(lines+1)+j,x,base+wav,z);
+  }
+ }
+ attr.needsUpdate=true;cascade.mesh.geometry.computeVertexNormals();
+}
 function makeLiquidSpillway(group,row){
  const type=row.type,dir=row.dir,source=-dir,material=liquidTopMats[type],sprayMat=type==='river'?liquidFoamMat:lavaSprayMat;
  const inletX=source*11,outletX=dir*10.9;
@@ -341,7 +368,9 @@ function makeLiquidSpillway(group,row){
  box(group,materials.stone,dir*8.03,-.39,0,1.1,.44,1.35);
  box(group,materials.stone,dir*11.15,-.77,0,5.65,.25,1.55);
  liquidSurface(group,type,dir>0?8.55:-13.9,dir>0?13.9:-8.55,1.12,-.61,20,4,row.y*.71+2.1);
- // Animated falling curtain assembled in small vertical strips.
+ // Continuous animated outflow connects the playable lane to the lower pool.
+ const spilling=createSpillingFlow(group,type,dir,row.y*.61);
+ // Animated falling curtain underneath reinforces the vertical drop.
  const curtain=new THREE.Group();group.add(curtain);
  for(let j=0;j<7;j++){
   const z=(j-3)*.143;
@@ -358,11 +387,12 @@ function makeLiquidSpillway(group,row){
   const inlet=box(group,sprayMat,source*(7.52+.22*Math.sin(i*3)),.32,(i/7-.5)*1.08,.095,.017,.072);
   inlet.userData.splash=true;inlet.userData.splashIndex=i+13;
  }
- row.liquidEffects={curtain,dir,type};
+ row.liquidEffects={curtain,spilling,dir,type};
 }
 function liquidLaneUpdate(r,time){
  if(!r||!r.liquidEffects)return;
- const {curtain,dir,type}=r.liquidEffects;
+ const {curtain,spilling,dir,type}=r.liquidEffects;
+ updateSpillingFlow(spilling,time);
  for(const mesh of curtain.children){
   const k=mesh.userData.cascadeIndex;
   mesh.scale.y=.59+.12*Math.sin(time*(type==='river'?8:4)+k*1.3);
