@@ -625,215 +625,28 @@ function hasNearbyLiquidRow(y){
 
  // Polished, opaque rounded-square amber collectible. Every variant stays
  // grounded, centred, and completely motionless (no float or spin animation).
- const amberBodyMat=new THREE.MeshPhysicalMaterial({color:0xffb547,metalness:0,roughness:.13,clearcoat:1,clearcoatRoughness:.075,ior:1.45,transmission:.12,transparent:true,opacity:.43,depthWrite:false,side:THREE.DoubleSide});
- const amberFaceMat=new THREE.MeshPhysicalMaterial({color:0xffba42,metalness:0,roughness:.16,clearcoat:1,ior:1.45,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide});
- const amberHighlightMat=new THREE.MeshBasicMaterial({color:0xffefb3,transparent:true,opacity:.85,depthWrite:false});
- const amberWarmMat=new THREE.MeshLambertMaterial({color:0xc96d13});
- const amberFossilMat=new THREE.MeshLambertMaterial({color:0x4b2816});
- const amberFossilLightMat=new THREE.MeshLambertMaterial({color:0x794018});
- const amberWingMat=new THREE.MeshBasicMaterial({color:0xffefd2,transparent:true,opacity:.72,depthWrite:false,side:THREE.DoubleSide});
- function amberRoundedGeometry(width,height,depth,radius){
-   const key='amber:rounded:'+width+':'+height+':'+depth;
-   return cachedGeo(key,()=>{
-     // Rounded face with gently bevelled 3D sides, rather than a hard cube.
-     const w=width*.5,h=height*.5,r=radius;
-     const shape=new THREE.Shape();
-     shape.moveTo(-w+r,-h);
-     shape.lineTo(w-r,-h);shape.quadraticCurveTo(w,-h,w,-h+r);
-     shape.lineTo(w,h-r);shape.quadraticCurveTo(w,h,w-r,h);
-     shape.lineTo(-w+r,h);shape.quadraticCurveTo(-w,h,-w,h-r);
-     shape.lineTo(-w,-h+r);shape.quadraticCurveTo(-w,-h,-w+r,-h);
-     const geometry=new THREE.ExtrudeGeometry(shape,{depth:depth-.065,bevelEnabled:true,bevelSize:.032,bevelThickness:.032,bevelSegments:2,curveSegments:5,steps:1});
-     geometry.translate(0,0,-depth*.5+.032);
-     return geometry;
-   });
+
+// ORIGINAL FLOATING AMBER: lightweight gold gem with optional mosquito inclusion.
+// Restored from the historical build before rounded-square fossil blocks.
+const classicInsectMat=new THREE.MeshLambertMaterial({color:0x51341e});
+const classicWingMat=new THREE.MeshLambertMaterial({color:0xfff2bb,transparent:true,opacity:.72,side:THREE.DoubleSide});
+const classicWingGeo=new THREE.BoxGeometry(.16,.018,.015);
+function makeClassicAmber(coin,fossil){
+ const gem=ball(coin,materials.amber,0,0,0,.27,.36,.2);
+ gem.rotation.z=.2;
+ if(!fossil)return;
+ ball(coin,classicInsectMat,0,.04,.215,.075,.13,.045);
+ ball(coin,classicInsectMat,0,.15,.225,.055,.055,.04);
+ for(const side of [-1,1]){
+  const wing=new THREE.Mesh(classicWingGeo,classicWingMat);
+  wing.position.set(side*.105,.09,.245);
+  wing.rotation.z=side*.4;
+  coin.add(wing);
+  for(let i=0;i<3;i++)stem(coin,classicInsectMat,side*.035,.025-i*.045,.23,side*.16,-.03-i*.045,.24,.009);
  }
- function amberStroke(g,m,x1,y1,z1,x2,y2,z2,r){
-   return stem(g,m,x1,y1,z1,x2,y2,z2,r);
- }
-// Subtle moving glint plus a tiny diamond sparkle, drawn on the upward-facing
-// amber surface. Only these overlay meshes animate, never the amber block.
-const amberGlintCanvas=document.createElement('canvas');
-amberGlintCanvas.width=128;amberGlintCanvas.height=128;
-const amberGlintCtx=amberGlintCanvas.getContext('2d');
-const glintGradient=amberGlintCtx.createLinearGradient(0,0,128,0);
-glintGradient.addColorStop(0,'rgba(255,255,215,0)');
-glintGradient.addColorStop(.30,'rgba(255,253,220,.04)');
-glintGradient.addColorStop(.47,'rgba(255,255,244,.65)');
-glintGradient.addColorStop(.55,'rgba(255,255,255,.86)');
-glintGradient.addColorStop(.72,'rgba(255,245,189,.03)');
-glintGradient.addColorStop(1,'rgba(255,255,215,0)');
-amberGlintCtx.fillStyle=glintGradient;amberGlintCtx.beginPath();
-amberGlintCtx.moveTo(63,0);amberGlintCtx.lineTo(120,0);
-amberGlintCtx.lineTo(62,128);amberGlintCtx.lineTo(4,128);amberGlintCtx.closePath();amberGlintCtx.fill();
-const amberGlintTexture=new THREE.CanvasTexture(amberGlintCanvas);
-const amberGlintGeometry=new THREE.PlaneGeometry(.18,.49);
-const amberSparkGeometry=new THREE.PlaneGeometry(.17,.17);
-const amberSparkCanvas=document.createElement('canvas');
-amberSparkCanvas.width=amberSparkCanvas.height=64;
-const sparkle=amberSparkCanvas.getContext('2d');
-const sparkGlow=sparkle.createRadialGradient(32,32,1,32,32,26);
-sparkGlow.addColorStop(0,'rgba(255,255,255,1)');
-sparkGlow.addColorStop(.17,'rgba(255,249,207,.9)');
-sparkGlow.addColorStop(1,'rgba(255,249,207,0)');
-sparkle.fillStyle=sparkGlow;sparkle.fillRect(0,0,64,64);
-sparkle.strokeStyle='rgba(255,255,239,.96)';sparkle.lineWidth=3;
-sparkle.beginPath();sparkle.moveTo(32,4);sparkle.lineTo(32,60);
-sparkle.moveTo(5,32);sparkle.lineTo(59,32);sparkle.stroke();
-const amberSparkTexture=new THREE.CanvasTexture(amberSparkCanvas);
-function addAmberShimmer(coin){
- const face=coin.userData.amberFaceUp;if(!face)return;
- const glint=new THREE.Mesh(amberGlintGeometry,new THREE.MeshBasicMaterial({
-  map:amberGlintTexture,transparent:true,opacity:0,depthWrite:false,
-  depthTest:false,side:THREE.DoubleSide
- }));
- glint.position.set(-.2,.315,.315);glint.renderOrder=11;face.add(glint);
- const spark=new THREE.Mesh(amberSparkGeometry,new THREE.MeshBasicMaterial({
-  map:amberSparkTexture,transparent:true,opacity:0,depthWrite:false,
-  depthTest:false,side:THREE.DoubleSide
- }));
- spark.position.set(.20,.47,.322);spark.renderOrder=12;face.add(spark);
- coin.userData.amberShimmer={glint,spark,phase:Math.random()*6.6};
+ stem(coin,classicInsectMat,0,.16,.23,0,.26,.24,.012);
 }
-function updateAmberShimmer(coin,time){
- const sh=coin.mesh.userData.amberShimmer;if(!sh)return;
- // Every 6.6 seconds for each gem, with staggered phases.
- const cycle=(time+sh.phase)%6.6;
- if(cycle>.95){sh.glint.material.opacity=0;sh.spark.material.opacity=0;return}
- const progress=cycle/.95;
- const fade=Math.sin(progress*Math.PI);
- sh.glint.position.x=-.23+.46*progress;
- sh.glint.material.opacity=.62*fade;
- sh.spark.material.opacity=.95*Math.pow(Math.max(0,1-Math.abs(progress-.77)/.2),2);
-}
- function makeAmberBlock(g,kind){
-   // A fixed, horizontal fossil plaque: decorated +Z face becomes upward +Y.
-   // The block never receives an idle bob, bounce or rotation animation.
-   const root=g,faceUp=new THREE.Group();
-   faceUp.rotation.x=-Math.PI/2;
-   // Thickness is .38 with a soft bevel. Rest its underside on the tile.
-   faceUp.position.set(0,.19,.31);
-   root.add(faceUp);
-   root.userData.amberFaceUp=faceUp;
-   g=faceUp;
-   const block=new THREE.Mesh(amberRoundedGeometry(.70,.56,.38,.13),amberBodyMat);
-   block.position.y=.31;block.castShadow=false;block.renderOrder=4;g.add(block);
-   // Subtle golden surface facets and polished corner lights, always opaque.
-   const face=new THREE.Mesh(amberRoundedGeometry(.61,.48,.018,.115),amberFaceMat);
-   face.position.set(0,.315,.206);face.castShadow=false;face.renderOrder=5;g.add(face);
-   amberStroke(g,amberHighlightMat,-.22,.49,.234,.15,.49,.234,.015);
-   amberStroke(g,amberHighlightMat,-.25,.46,.236,-.25,.26,.236,.015);
-   amberStroke(g,amberWarmMat,-.22,.13,.237,.21,.13,.237,.013);
-   // Dark insect models float INSIDE the translucent honey-colored amber;
-   // the amber's glass shell renders over them without hiding their silhouette.
-   if(kind==='mosquito'){
-     const z=.07;
-     ball(g,amberFossilMat,.01,.33,z,.044,.065,.014);
-     ball(g,amberFossilMat,.007,.235,z,.031,.095,.015);
-     ball(g,amberFossilMat,0,.402,z,.040,.043,.018);
-     amberStroke(g,amberFossilMat,0,.395,z,.00,.44,z,.009);
-     amberStroke(g,amberFossilMat,0,.418,z,.063,.465,z,.006);
-     for(const side of [-1,1]){
-       const wing=mesh(g,cachedGeo('amber:wing',()=>new THREE.SphereGeometry(1,8,6)),amberWingMat,side*.106,.357,z+.002,.105,.033,.009);
-       wing.rotation.z=side*.44;
-       for(let i=0;i<3;i++){
-         const sy=.33-i*.044,ex=side*(.135+i*.025),ey=.22-i*.01;
-         amberStroke(g,amberFossilLightMat,side*.025,sy,z,ex,sy-.035,z,.007);
-         amberStroke(g,amberFossilLightMat,ex,sy-.035,z,side*(.16+i*.024),ey,z,.006);
-       }
-     }
-   }else if(kind==='spider'){
-     const z=.07;
-     ball(g,amberFossilMat,0,.315,z,.086,.094,.027);
-     ball(g,amberFossilLightMat,0,.414,z,.049,.049,.021);
-     for(const side of [-1,1]){
-       for(let i=0;i<4;i++){
-         const angle=[.22,.68,2.42,2.93][i];
-         const x1=side*.045, y1=i<2?.416:.33;
-         const bendX=side*(.145+(i===0||i===3?.015:.045));
-         const bendY=[.485,.445,.272,.228][i];
-         const tipX=side*(.205+(i===1||i===2?.022:0));
-         const tipY=[.446,.395,.22,.17][i];
-         amberStroke(g,amberFossilMat,x1,y1,z,bendX,bendY,z,.012);
-         amberStroke(g,amberFossilMat,bendX,bendY,z,tipX,tipY,z,.009);
-       }
-     }
-   }
-   if(kind!=='plain')g.traverse(o=>{if(o.isMesh&&o!==block&&o!==face)o.renderOrder=3});
-   return root;
- }
-// Hairline fracture geometry sits on the front of opaque amber and builds
-// with each failed strike without rotating or moving the collectible.
-// Repaint one translucent crack texture over the same amber model on each hit.
-// The SAME amber object keeps its cracks; damage updates a CanvasTexture.
-const amberCrackPlaneGeo=new THREE.PlaneGeometry(.60,.47);
-function crackAmber(coin,hit){
- const faceUp=coin.mesh.userData.amberFaceUp;
- if(!faceUp)return;
- if(!coin.crackCanvas){
-  const canvas=document.createElement('canvas');canvas.width=canvas.height=512;
-  const texture=new THREE.CanvasTexture(canvas);
-  texture.colorSpace=THREE.SRGBColorSpace;
-  texture.minFilter=THREE.LinearFilter;texture.magFilter=THREE.LinearFilter;
-  const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,
-   opacity:.84,side:THREE.DoubleSide,depthWrite:false,depthTest:true});
-  const overlay=new THREE.Mesh(amberCrackPlaneGeo,material);
-  // Set the fracture immediately against the resin face, not suspended above it.
-  // Render between the amber shell (4) and glass topcoat (5), which tints the
-  // fractures and makes them look physically inside the amber.
-  overlay.position.set(0,.315,.255);overlay.renderOrder=4.5;
-  faceUp.add(overlay);coin.crackCanvas=canvas;coin.crackOverlay=overlay;
- }
- const ctx=coin.crackCanvas.getContext('2d');ctx.clearRect(0,0,512,512);
- ctx.save();ctx.translate(256,256);ctx.scale(512/.60,-512/.47);
- // Rounded-square clip keeps damage INSIDE the polished amber face.
- const w=.294,h=.229,r=.095;
- ctx.beginPath();
- ctx.moveTo(-w+r,-h);ctx.lineTo(w-r,-h);
- ctx.quadraticCurveTo(w,-h,w,-h+r);
- ctx.lineTo(w,h-r);ctx.quadraticCurveTo(w,h,w-r,h);
- ctx.lineTo(-w+r,h);ctx.quadraticCurveTo(-w,h,-w,h-r);
- ctx.lineTo(-w,-h+r);ctx.quadraticCurveTo(-w,-h,-w+r,-h);
- ctx.closePath();ctx.clip();
- ctx.lineCap='round';ctx.lineJoin='round';
- const first=[
-  [[-.30,.17],[-.18,.09],[-.06,.02],[.03,-.06],[.14,-.17],[.25,-.22]],
-  [[-.06,.02],[-.14,-.07],[-.27,-.16]],
-  [[.03,-.06],[.17,.03],[.29,.11]],
-  [[-.06,.02],[-.01,.16],[.07,.235]]
- ];
- const second=[
-  [[.28,.23],[.15,.14],[.035,.11],[-.10,.02],[-.22,-.08],[-.30,-.20]],
-  [[.035,.11],[.105,.22],[.19,.255]],
-  [[-.22,-.08],[-.28,.035],[-.315,.13]],
-  [[.15,.14],[.28,.03],[.315,-.08]],
-  [[-.10,.02],[-.025,-.15],[.06,-.245]],
-  [[.03,-.06],[.115,-.19],[.22,-.24]]
- ];
- const paths=hit===1?first:first.concat(second);
- for(const path of paths){
-  ctx.beginPath();ctx.moveTo(...path[0]);for(let i=1;i<path.length;i++)ctx.lineTo(...path[i]);
-  // Warm internal fracture lines, with a thin light-catching bevel.
-  ctx.strokeStyle='rgba(255,218,130,.88)';ctx.lineWidth=.018;ctx.stroke();
-  ctx.strokeStyle='rgba(98,45,14,.98)';ctx.lineWidth=.009;ctx.stroke();
-  ctx.strokeStyle='rgba(255,241,184,.82)';ctx.lineWidth=.003;ctx.stroke();
- }
- const centers=hit===1?[[-.06,.02]]:[[-.06,.02],[.035,.11],[.15,-.15]];
- for(const [x,y] of centers)for(let n=0;n<8;n++){
-  const angle=n*Math.PI/4+.31,len=(hit===1?.053:.072)*(n%2?.75:1);
-  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(angle)*len,y+Math.sin(angle)*len*.8);
-  ctx.strokeStyle='rgba(255,249,223,.96)';ctx.lineWidth=.013;ctx.stroke();
- }
- ctx.restore();coin.crackOverlay.material.map.needsUpdate=true;
- coin.crackFlash=1;
-}
-function amberImpact(coin){
- coin.hits++;
- crackAmber(coin,coin.hits);
- fx('amberCrack',coin.kind==='spider'?.95:.85);
- burst(coin.x,.42,-coin.rowY,1,coin.kind==='spider'?6:4);
- toast(coin.kind==='mosquito'?'🦟 AMBER CRACKED · ONE MORE HIT':coin.hits===1?'🕷️ AMBER CRACKED · TWO MORE HITS':'🕷️ AMBER CRACKED · ONE MORE HIT');
-}
+function amberImpact(){/* Original amber is always collected in one touch. */}
 function makeRow(y){
  let difficulty=Math.min(.9,highest/180);
  // Separate, uncommon 2.7% chance to start a FIVE-row safe stretch.
@@ -1043,19 +856,15 @@ if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
   row.special={kind:type,wave,warning,warnMat,dir:row.dir,phase:rand(0,1.1),period:7.5,warningLength:2.25,activeLength:1.05,played:-1};
 }
 if(y>2&&Math.random()<.34&&type!=='river'&&type!=='lava'&&!row.special){
- let x=Math.floor(rand(-6,7));
+ const x=Math.floor(rand(-6,7));
  if(!row.solid.has(x)){
-   // Plain 78%, mosquito 17%, spider 5%. Spider is rarer than mosquito.
-   const roll=Math.random();
-   const kind=roll<.05?'spider':roll<.22?'mosquito':'plain';
-   const value=kind==='spider'?10:kind==='mosquito'?5:1;
-   const coin=new THREE.Group();
-   // Keep collectibles anchored to their tile, without any idle animation.
-   coin.position.set(x,groundTileHeight(row,x),0);
-   makeAmberBlock(coin,kind);
-   addAmberShimmer(coin);
-   group.add(coin);
-   row.coins.push({x,rowY:y,mesh:coin,taken:false,value,kind,hits:0,maxHits:kind==='spider'?3:kind==='mosquito'?2:1});
+  const fossil=Math.random()<.18;
+  const coin=new THREE.Group();
+  // Original .68 height above the tile; adjust for newer raised terrain.
+  coin.position.set(x,groundTileHeight(row,x)+.68,0);
+  makeClassicAmber(coin,fossil);
+  group.add(coin);
+  row.coins.push({x,rowY:y,mesh:coin,taken:false,value:fossil?5:1,kind:fossil?'mosquito':'plain',hits:0,maxHits:1});
  }
 }
 rows.set(y,row);buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
@@ -1529,25 +1338,18 @@ function support(r,x){return r.moving.find(m=>m.platform&&platformTileAt(m,x)!==
 function nearestPlatformTile(r,x){let best=null,d=.49;for(const p of r.moving){if(!p.platform)continue;for(let i=0;i<p.width;i++){const center=platformTileCenter(p,i),delta=Math.abs(center-x);if(delta<d){d=delta;best={platform:p,index:i,center}}}}return best}
 function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hypot(x-m.dangerDisc.position.x,player.position.z-(-r.y))<=.65)}
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
-function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);if(c.crackOverlay){c.crackOverlay.material.map.dispose();c.crackOverlay.material.dispose()}
- if(c.mesh.userData.amberShimmer){
-  c.mesh.userData.amberShimmer.glint.material.dispose();
-  c.mesh.userData.amberShimmer.spark.material.dispose();
- }bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
+function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
- // Impact crack flash only; the amber mesh itself remains completely still.
- for(const row of rows.values())for(const c of row.coins){
-  if(c.crackOverlay&&c.crackFlash>0){
-   c.crackFlash=Math.max(0,c.crackFlash-dt*3.4);
-   c.crackOverlay.material.opacity=.76+.17*c.crackFlash;
+ // Original floating gems animate near the camera, just as before the amber redesign.
+ if(state==='playing'||state==='menu'){
+  const center=state==='menu'?3:camSmooth+3;
+  for(const row of rows.values()){
+   if(row.y<center-24||row.y>=center+18)continue;
+   for(const c of row.coins)if(!c.taken){
+    c.mesh.rotation.y=t*2;
+    c.mesh.position.y=groundTileHeight(row,c.x)+.67+Math.sin(t*3+c.x)*.09;
+   }
   }
- }
- // Shimmer periodically while the treasure itself remains firmly on the tile.
- if(state==='playing'||state==='menu')for(const row of rows.values()){
-  // Hidden back rows do not need their purely visual shimmer refreshed.
-  const viewCenter=state==='menu'?3:camSmooth+3;
-  if(row.y<viewCenter-23||row.y>=viewCenter+17)continue;
-  for(const amber of row.coins)if(!amber.taken)updateAmberShimmer(amber,gameTime);
  }
  // Clock mode runs independently of movement/score. Pause, death and menus
  // freeze its timer; only actual gameplay advances the day.
