@@ -63,7 +63,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: T Rex Prime Normal Variant in Shop">🦖 T. REX PRIME ARRIVES! 🛍️</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Velociraptor Prime Skin Added to Shop">🦖 VELOCIRAPTOR PRIME IS HERE! 🛍️</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -105,7 +105,9 @@ const species=[['T. Rex',0,0x5dbb63],['Velociraptor',20,0x4ac8b1],['Triceratops'
 species.push(...species.slice(0,9).map(([name,,color])=>['Tech '+name,150,color]));
 // ID 18 is normal-only: preserve all original 0..17 save IDs.
 species.push(['T. Rex Prime',40,0x5dbb63]);
-const shopOrder=Array.from({length:9},(_,i)=>[i,...(i===0?[18]:[]),i+9]).flat();
+// ID 19 is a second, normal-only Prime skin. Never shift old save IDs.
+species.push(['Velociraptor Prime',50,0x4ac8b1]);
+const shopOrder=Array.from({length:9},(_,i)=>[i,...(i===0?[18]:i===1?[19]:[]),i+9]).flat();
 
 const scene=new THREE.Scene();scene.background=new THREE.Color(0xafe6e5);scene.fog=new THREE.Fog(0xafe6e5,24,65);const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio, /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?1:1.25));renderer.shadowMap.enabled=!/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);renderer.shadowMap.type=THREE.PCFShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.prepend(renderer.domElement);function applyQuality(){const mobile=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);const dpr=quality==='low'?.72:quality==='medium'?(mobile?1:1.25):Math.min(devicePixelRatio,mobile?1.3:1.75);renderer.setPixelRatio(dpr);renderer.shadowMap.enabled=quality==='high'&&!mobile;renderer.shadowMap.needsUpdate=true;renderer.setSize(innerWidth,innerHeight)}applyQuality();$('quality').onchange=()=>{quality=$('quality').value;applyQuality();persist()};$('showFps').onchange=()=>{showFps=$('showFps').checked;$('fps').style.display=showFps?'block':'none';persist()};const camera=new THREE.OrthographicCamera(-8,8,12,-12,.1,140);const sun=new THREE.DirectionalLight(0xfff4c9,2.3);sun.position.set(-7,16,11);sun.castShadow=true;sun.shadow.mapSize.set(512,512);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-20;const skyFill=new THREE.HemisphereLight(0xe2ffff,0x66824a,2.0);scene.add(sun,skyFill);
 sun.shadow.bias=-.0005;sun.shadow.normalBias=.035;sun.shadow.camera.far=95;sun.shadow.camera.updateProjectionMatrix();
@@ -463,8 +465,84 @@ function makeTrexPrime(){
  g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
  return g;
 }
+// A separately purchasable, normal-only athletic Velociraptor design.
+// All model components have overlapping joints; no original skin geometry changes.
+function makeRaptorPrime(){
+ const g=new THREE.Group();
+ const skin=mat(0x4ac8b1),shade=mat(0x238a83),belly=mat(0x9be4c5);
+ const hornMat=materials.horn;
+ // Slender, forward-leaning barrel and waist, with a continuous neck.
+ const torso=mesh(g,facetGeo,skin,0,.79,-.18,.33,.34,.63);
+ torso.rotation.x=-.08;
+ mesh(g,facetGeo,belly,0,.68,.22,.24,.24,.30);
+ const chest=mesh(g,facetGeo,skin,0,1.00,.28,.275,.30,.34);
+ chest.rotation.x=-.20;
+ const neck=mesh(g,facetGeo,skin,0,1.17,.47,.215,.245,.30);
+ neck.rotation.x=-.25;
+ // Thin, wedge-shaped head with a narrow elongated muzzle.
+ mesh(g,facetGeo,skin,0,1.34,.69,.32,.245,.335);
+ const snout=mesh(g,facetGeo,skin,0,1.245,1.035,.225,.135,.35);
+ snout.rotation.x=.07;
+ mesh(g,facetGeo,belly,0,1.165,1.038,.20,.052,.29);
+ for(const side of [-1,1]){
+  // Eyes sit close to the head's side rather than floating outward.
+  mesh(g,facetGeo,shade,side*.285,1.39,.785,.056,.079,.080);
+  mesh(g,facetGeo,materials.white,side*.300,1.39,.813,.042,.058,.055);
+  mesh(g,facetGeo,materials.black,side*.319,1.39,.839,.025,.041,.028);
+  // Long but light three-fingered grasping forelimbs.
+  const upper=mesh(g,facetGeo,skin,side*.285,.96,.365,.096,.20,.115);
+  upper.rotation.z=side*.18;
+  const wrist=mesh(g,facetGeo,shade,side*.32,.80,.48,.072,.15,.115);
+  wrist.rotation.x=-.38;
+  for(const offset of [-.06,0,.06]){
+   const talon=horn(g,hornMat,side*.32+offset,.716,.57,.025,.092,Math.PI*.34);
+   talon.rotation.z=side*.06;
+  }
+ }
+ // Distinctively long, overlapping, gently rising counterbalance tail.
+ for(let i=0;i<10;i++){
+  const t=i/9;
+  const seg=mesh(g,facetGeo,i%3===0?shade:skin,0,
+   .74+t*.18,-.59-i*.23,
+   .265*(1-t)+.045,.24*(1-t)+.045,.29-i*.011);
+  seg.rotation.x=.08;
+ }
+ // Small dorsal spikes follow the contour through back and tail and
+ // embed their bases into the actual body volumes.
+ const spikes=[
+  [-.03,1.105,.105],[-.31,1.095,.10],[-.56,.97,.095],
+  [-.80,.91,.085],[-1.06,.94,.072],[-1.32,.97,.060]
+ ];
+ for(const [z,y,r] of spikes){
+  const spike=horn(g,shade,0,y,z,r,r*2.65,-.21);
+  spike.rotation.z=.04;
+ }
+ const feet=[];
+ for(const side of [-1,1]){
+  // Athletic thighs, angled shins, substantial grounded feet.
+  const thigh=mesh(g,facetGeo,skin,side*.225,.55,-.28,.195,.285,.28);
+  thigh.rotation.x=-.18;
+  const shin=mesh(g,facetGeo,shade,side*.245,.29,-.12,.107,.265,.14);
+  shin.rotation.x=.16;feet.push(shin);
+  mesh(g,facetGeo,skin,side*.25,.105,.105,.155,.104,.31);
+  for(const offset of [-.08,.085]){
+   const toe=horn(g,hornMat,side*.25+offset,.095,.33,.04,.125,Math.PI*.38);
+   toe.rotation.z=side*.08;
+  }
+  // Raised inner second-toe sickle, distinct from the ground-contact claws.
+  // The big curved claw sits ABOVE the other toes and sweeps forward.
+  const sickleBase=mesh(g,facetGeo,shade,side*.17,.19,.20,.082,.10,.11);
+  sickleBase.rotation.x=-.30;
+  const sickle=horn(g,hornMat,side*.17,.27,.29,.071,.25,-.75);
+  sickle.rotation.z=side*.20;
+ }
+ g.userData.feet=feet;
+ g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
+ return g;
+}
 function dino(type=0,size=1){
 if(type===18){const prime=makeTrexPrime();prime.scale.setScalar(size);return prime;}
+if(type===19){const prime=makeRaptorPrime();prime.scale.setScalar(size);return prime;}
 const techno=type>=9;type=type%9;
 // Each purchased species now builds a distinct silhouette rather than recoloring the T. rex.
 let g;
@@ -1693,6 +1771,7 @@ const shopDescriptions=[
 ];
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Tech edition: metallic armor, cyan energy seams and glowing eyes. '+text));
 shopDescriptions.push('A refined T. Rex with a smoother neck, tiny clawed arms, a flowing tail and inset eyes.');
+shopDescriptions.push('An athletic raptor with an agile body, embedded back spikes, a long balance tail, narrow snout and raised sickle claws.');
 
 let inspected=chosen,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
 function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
