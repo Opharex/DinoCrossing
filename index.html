@@ -234,9 +234,9 @@ g.scale.setScalar(size);
 return g;
 }
 const world=new THREE.Group();scene.add(world);const ROW_W=15,LEFT=-7,RIGHT=7;let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){return artProp(g,x,y,kind,x*7+y*13)}
-function makeRow(y){let difficulty=Math.min(.9,highest/180),type=y<3?'grass':pick(['grass','grass','forest','path','path','river','lava','tar','sky']);if(y>=9&&Math.random()<.105)type=pick(['stampede','rockslide','flashflood']);if(y>3&&y%9===0)type='grass';if(y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede')?materials.path:type==='rockslide'?materials.stone:type==='flashflood'?materials.path:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3],0,-.19,0,ROW_W,.36,1);ground.castShadow=false;if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(y+k+1)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75}}if(type==='river'||type==='lava'){const flowMat=new THREE.MeshBasicMaterial({color:type==='river'?0xb6eaf2:0xffd061,transparent:true,opacity:type==='river'?.26:.36,depthWrite:false});for(let i=0;i<5;i++){let strip=box(group,flowMat,-6+i*3.1,-.002,.05,.9,.009,.045);strip.userData.flow=i*1.9;strip.userData.baseX=strip.position.x;strip.userData.flowSpeed=type==='river'?.65:1.1}}if(type==='river'||type==='lava'){ground.userData.liquid=type;ground.material=ground.material.clone();ground.material.color=ground.material.color.clone()}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
+function makeRow(y){let difficulty=Math.min(.9,highest/180),type=y<3?'grass':pick(['grass','grass','forest','path','path','river','lava','tar','sky']);if(y>=9&&Math.random()<.105)type=pick(['stampede','rockslide','flashflood']);if(y>3&&y%9===0)type='grass';if(y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede'||type==='rockslide'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3],0,-.19,0,ROW_W,.36,1);ground.castShadow=false;if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(y+k+1)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75}}if(type==='river'||type==='lava'){const flowMat=new THREE.MeshBasicMaterial({color:type==='river'?0xb6eaf2:0xffd061,transparent:true,opacity:type==='river'?.26:.36,depthWrite:false});for(let i=0;i<5;i++){let strip=box(group,flowMat,-6+i*3.1,-.002,.05,.9,.009,.045);strip.userData.flow=i*1.9;strip.userData.baseX=strip.position.x;strip.userData.flowSpeed=type==='river'?.65:1.1}}if(type==='river'||type==='lava'){ground.userData.liquid=type;ground.material=ground.material.clone();ground.material.color=ground.material.color.clone()}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
 // These strips never enter row.solid, moving hazards, collectibles or collision checks.
-const sideMat=(type==='stampede')?materials.path:type==='rockslide'?materials.stone:type==='flashflood'?materials.path:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3];
+const sideMat=(type==='stampede'||type==='rockslide'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3];
 for(const side of [-1,1]){
   const edgeX=side*14.5;
   const extension=box(group,sideMat,edgeX,-.19,0,14,.36,1);
@@ -268,7 +268,7 @@ row.moving.push({mesh:bird,x:-11,speed:row.speed*1.7,width:1.1,platform:false,bi
   for(let i=slots.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[slots[i],slots[j]]=[slots[j],slots[i]];}
   row.tarPits=[];
   for(let i=0;i<3;i++)row.tarPits.push(makeTar(group,slots[i],y*17+i));
-}if(type==='rockslide'){
+}if(type==='stampede'||type==='rockslide'||type==='flashflood'){
   // Stone-paved lane remains recognizable even when no rockslide is imminent.
   // Individual low-poly cobbles use shared materials and geometry for mobile FPS.
   const cobbleColors=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
@@ -282,22 +282,36 @@ row.moving.push({mesh:bird,x:-11,speed:row.speed*1.7,width:1.1,platform:false,bi
     const stone=new THREE.Mesh(cobbleGeo,cobbleMats[Math.floor(seed*cobbleMats.length)]);
     stone.position.set(x,.012+seed*.008,z);stone.scale.set(.43,.042,.39);stone.rotation.y=(seed-.5)*.15;
     group.add(stone);
-    if((col*7+band*13+y*3)%11===0){
+    if(type==='rockslide'&&(col*7+band*13+y*3)%11===0){
       const lit=new THREE.Mesh(cobbleGeo,glowMat);
       lit.position.set(x,.041,z);lit.scale.set(.40,.013,.36);lit.rotation.y=stone.rotation.y;
       group.add(lit);litCobbles.push(lit);
     }
   }
-  group.userData.rockslideGlow={litCobbles,glowMat};
+  if(type==='rockslide')group.userData.rockslideGlow={litCobbles,glowMat};
 }
 if(type==='stampede'||type==='rockslide'||type==='flashflood'){
   const warning=new THREE.Group();group.add(warning);
   const signColor=type==='stampede'?0xffb44b:type==='rockslide'?0xf1d2a0:0x69d9f9;
   const warnMat=new THREE.MeshBasicMaterial({color:signColor,transparent:true,opacity:.8,depthWrite:false,side:THREE.DoubleSide});
-  for(let k=-6;k<=6;k+=3){if(type==='rockslide')break;const pad=new THREE.Mesh(new THREE.PlaneGeometry(1.35,.58),warnMat);pad.rotation.x=-Math.PI/2;pad.position.set(k,.032,0);warning.add(pad)}
+  // Harmless scouts stay separate from every moving-hazard collision list.
+  if(type==='flashflood'){
+    const shallow=new THREE.Mesh(new THREE.BoxGeometry(3.8,.075,.86),new THREE.MeshLambertMaterial({color:0x75d9ef,transparent:true,opacity:.62}));
+    shallow.position.y=.085;warning.add(shallow);
+    const rippleMat=new THREE.MeshBasicMaterial({color:0xd9ffff,transparent:true,opacity:.72});
+    for(let i=0;i<5;i++)box(warning,rippleMat,i*.72-1.44,.126,(i%3-1)*.22,.46,.012,.045);
+  }else if(type==='stampede'){
+    for(let i=0;i<7;i++){
+      const scout=obstacleDino([2,3,4,5][i%4],i%5);
+      scout.scale.setScalar(.095+(i%3)*.012);
+      scout.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;
+      scout.position.set(i*.48-1.44,.045,(i%2?1:-1)*.19);
+      scout.userData.scout=i;warning.add(scout);
+    }
+  }
   for(const edge of [-7.7,7.7]){box(group,materials.stone,edge,.22,0,.26,.48,.82)}
   const wave=new THREE.Group();group.add(wave);wave.visible=false;
-  if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=Math.PI/2;animal.position.x=i*1.65-7;wave.add(animal)}}
+  if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;animal.position.x=i*1.65-7;wave.add(animal)}}
   else if(type==='rockslide'){for(let i=0;i<18;i++){const b=ball(wave,materials.stone,i*.85-7.5,.24+(i%3)*.11,((i%3)-1)*.23,.37+(i%4)*.08,.36,.35);b.userData.roll=i}}
   else {const water=new THREE.Mesh(new THREE.BoxGeometry(19,.44,.86),new THREE.MeshLambertMaterial({color:0x56c9e8,transparent:true,opacity:.86}));water.position.y=.16;wave.add(water);for(let i=0;i<15;i++){const foam=box(wave,new THREE.MeshBasicMaterial({color:0xe6ffff}),i*1.3-9,.41,(i%3-1)*.22,.62,.035,.12);foam.userData.foam=i}}
   row.special={kind:type,wave,warning,warnMat,dir:row.dir,phase:rand(0,1.1),period:7.5,warningLength:2.25,activeLength:1.05,played:-1};
@@ -422,9 +436,21 @@ if(kind==='stampede'){for(let i=0;i<8;i++){const osc=ctx.createOscillator(),g=ct
 function specialProgress(sp){return (gameTime+sp.phase)%sp.period}
 function specialActive(sp){const t=specialProgress(sp);return t>=sp.warningLength&&t<sp.warningLength+sp.activeLength}
 function specialHit(r){if(!r||!r.special||!specialActive(r.special))return false;const sp=r.special;const t=(specialProgress(sp)-sp.warningLength)/sp.activeLength;const x=sp.dir>0?-18+36*t:18-36*t;return playerOverlaps(px,x,sp.kind==='flashflood'?9.3:sp.kind==='stampede'?8:8.4)}
-function checkSpecial(){const r=rows.get(py);if(!specialHit(r))return;const kind=r.special.kind;die(kind==='stampede'?'Trampled by a stampede!':kind==='rockslide'?'Crushed by a rockslide!':'Swept away by a flash flood!', 'Watch the flashing lane and listen for the warning before crossing.');}
+function checkSpecial(){const r=rows.get(py);if(!specialHit(r))return;const kind=r.special.kind;die(kind==='stampede'?'Trampled by a stampede!':kind==='rockslide'?'Crushed by a rockslide!':'Swept away by a flash flood!', kind==='flashflood'?'The shallow water is safe. Move out before the deep flood follows.':kind==='stampede'?'The tiny scouts are safe. Move out before the full-size herd follows.':'Watch the flashing lane and listen for the warning before crossing.');}
 function updateSpecial(r){const sp=r.special;if(!sp)return;const time=specialProgress(sp),warning=time<sp.warningLength,active=specialActive(sp),t=(time-sp.warningLength)/sp.activeLength;
-sp.warning.visible=warning;sp.warnMat.opacity=warning?(.22+.62*Math.abs(Math.sin(time*9))):.12;sp.wave.visible=active;
+sp.warning.visible=warning;sp.wave.visible=active;
+if(sp.kind==='rockslide')sp.warnMat.opacity=warning?(.22+.62*Math.abs(Math.sin(time*9))):.12;
+else{
+  sp.warnMat.opacity=0;
+  // The last scout/ripple clears the road before the dangerous wave activates.
+  sp.warning.position.x=sp.dir*(-10+20*Math.min(1,time/sp.warningLength));
+  if(warning&&sp.kind==='stampede')for(const scout of sp.warning.children){
+    const seed=scout.userData.scout||0;
+    scout.position.y=.045+Math.abs(Math.sin(gameTime*28+seed))*.025;
+    const parts=scout.userData.walkParts;
+    if(parts)parts.legs.forEach((leg,i)=>leg.rotation.x=Math.sin(gameTime*28+seed+i*Math.PI)*.55);
+  }
+}
 if(sp.kind==='rockslide'&&r.group.userData.rockslideGlow){
   const glow=r.group.userData.rockslideGlow;
   glow.glowMat.opacity=warning?(.28+.68*Math.abs(Math.sin(time*8.5))):active?.08:0;
