@@ -1524,13 +1524,15 @@ function makeRosterPortraitStep(){
   rosterPortraitCamera.lookAt(center.x,center.y,center.z);
   rosterPortraitCamera.updateProjectionMatrix();
   const previousTarget=shopRenderer.getRenderTarget();
+  const previousClear=shopRenderer.getClearColor(new THREE.Color()).clone();
+  const previousAlpha=shopRenderer.getClearAlpha();
   try{
    shopRenderer.setRenderTarget(rosterPortraitTarget);
    shopRenderer.setClearColor(0x000000,0);
    shopRenderer.clear(true,true,true);
    shopRenderer.render(rosterPortraitScene,rosterPortraitCamera);
    shopRenderer.readRenderTargetPixels(rosterPortraitTarget,0,0,128,128,rosterPortraitPixels);
-  }finally{shopRenderer.setRenderTarget(previousTarget)}
+  }finally{shopRenderer.setRenderTarget(previousTarget);shopRenderer.setClearColor(previousClear,previousAlpha)}
   const frame=rosterPortraitContext.createImageData(128,128);
   for(let y=0;y<128;y++){
    const src=(127-y)*128*4,dst=y*128*4;
