@@ -1601,7 +1601,16 @@ if(state==='playing')for(let r of rows.values())for(let m of r.moving){m.x+=r.di
  // Keep the directional shadow-map coverage centered on the visible rows.
  sun.target.position.z=targetZ;
  sun.position.z+=targetZ;
- if(shake>0){camera.position.x+=rand(-shake,shake);camera.position.y+=rand(-shake,shake);shake=Math.max(0,shake-dt*1.5)}updateEffects(dt);fpsTime+=dt;fpsFrames++;if(fpsTime>=.6){if(showFps)$('fps').textContent='FPS '+Math.round(fpsFrames/fpsTime);fpsTime=0;fpsFrames=0}if(scoreMusic.master&&Math.floor(t*5)!==scoreMusic._lastSync){scoreMusic._lastSync=Math.floor(t*5);musicSync()}renderer.render(scene,camera);drawShopPreview(t)}let phoneWideView=false;
+ if(shake>0){camera.position.x+=rand(-shake,shake);camera.position.y+=rand(-shake,shake);shake=Math.max(0,shake-dt*1.5)}updateEffects(dt);fpsTime+=dt;fpsFrames++;if(fpsTime>=.6){if(showFps)$('fps').textContent='FPS '+Math.round(fpsFrames/fpsTime);fpsTime=0;fpsFrames=0}if(scoreMusic.master&&Math.floor(t*5)!==scoreMusic._lastSync){scoreMusic._lastSync=Math.floor(t*5);musicSync()}// When browsing skins, the world is only a backdrop: avoid redrawing two
+// independent WebGL scenes at 60Hz. The showroom stays fluid at ~30fps.
+const shopVisible=!$('select').classList.contains('hidden');
+if(!shopVisible||t-lastShopBackdropRender>=.10){
+ renderer.render(scene,camera);lastShopBackdropRender=t;
+}
+if(!shopVisible||t-lastShopPreviewRender>=1/30){
+ drawShopPreview(t);lastShopPreviewRender=t;
+}
+}let lastShopBackdropRender=0,lastShopPreviewRender=0;let phoneWideView=false;
 function resize(){
  renderer.setSize(innerWidth,innerHeight);
  const aspect=innerWidth/Math.max(1,innerHeight);
