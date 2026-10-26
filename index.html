@@ -779,7 +779,7 @@ if(fossil){
   stem(coin,insectMat,0,.16,.23,0,.26,.24,.012);
 }
 group.add(coin);row.coins.push({x,mesh:coin,taken:false,value:fossil?5:1})}}rows.set(y,row);buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
-const sharedArtGeometries=new Set([trunkGeo,facetGeo,leafGeo,ringGeo]);
+const sharedArtGeometries=new Set([trunkGeo,facetGeo,leafGeo,ringGeo,shadowGeo]);
 function ensureRows(){for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23);y++)makeRow(y);for(let [y,r] of rows)if(y<Math.max(0,highest-12)){world.remove(r.group);r.group.traverse(o=>{if(o.geometry&&!sharedArtGeometries.has(o.geometry)&&!cachedGeometrySet.has(o.geometry)&&o.geometry!==cubeGeo&&o.geometry!==sphereGeo&&o.geometry!==coneGeo)o.geometry.dispose()});rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
 // Procedurally built in the browser, so all sounds work offline without licensed assets.
 const mixer={master:null,fx:null,music:null,ambient:null,noise:null,loops:null,lastStep:0,lastAmbience:0};
@@ -1258,7 +1258,11 @@ if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.m
  camSide=THREE.MathUtils.damp(camSide,wantedSide,5.8,dt);
  let target=new THREE.Vector3(phoneWideView?camSide:0,0,targetZ);
  camera.position.set(12+(phoneWideView?camSide:0),18,targetZ+21);
- camera.lookAt(target);if(shake>0){camera.position.x+=rand(-shake,shake);camera.position.y+=rand(-shake,shake);shake=Math.max(0,shake-dt*1.5)}updateEffects(dt);fpsTime+=dt;fpsFrames++;if(fpsTime>=.6){if(showFps)$('fps').textContent='FPS '+Math.round(fpsFrames/fpsTime);fpsTime=0;fpsFrames=0}if(scoreMusic.master&&Math.floor(t*5)!==scoreMusic._lastSync){scoreMusic._lastSync=Math.floor(t*5);musicSync()}renderer.render(scene,camera);drawShopPreview(t)}let phoneWideView=false;
+ camera.lookAt(target);
+ // Keep the directional shadow-map coverage centered on the visible rows.
+ sun.target.position.z=targetZ;
+ sun.position.z+=targetZ;
+ if(shake>0){camera.position.x+=rand(-shake,shake);camera.position.y+=rand(-shake,shake);shake=Math.max(0,shake-dt*1.5)}updateEffects(dt);fpsTime+=dt;fpsFrames++;if(fpsTime>=.6){if(showFps)$('fps').textContent='FPS '+Math.round(fpsFrames/fpsTime);fpsTime=0;fpsFrames=0}if(scoreMusic.master&&Math.floor(t*5)!==scoreMusic._lastSync){scoreMusic._lastSync=Math.floor(t*5);musicSync()}renderer.render(scene,camera);drawShopPreview(t)}let phoneWideView=false;
 function resize(){
  renderer.setSize(innerWidth,innerHeight);
  const aspect=innerWidth/Math.max(1,innerHeight);
