@@ -961,7 +961,8 @@ function updateShopModel(){
  shopModel.updateMatrixWorld(true);
  const bounds=new THREE.Box3().setFromObject(shopModel);
  const center=bounds.getCenter(new THREE.Vector3());
- shopModel.userData.previewY=inspected%9===8?.82-bounds.min.y:Math.max(.035,-bounds.min.y+.035);
+ const localBottom=bounds.min.y-shopModel.position.y;
+ shopModel.userData.previewY=inspected%9===8?.78-localBottom:Math.max(.035,.035-localBottom);
  shopModel.position.set(-center.x,shopModel.userData.previewY,-center.z);
  shopModel.rotation.y=shopTurn;
  shopScene.add(shopModel);
