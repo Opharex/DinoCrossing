@@ -63,7 +63,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Glassy Amber Strong Cracks Platform Smash">💎 GLASSY AMBER & POWER SMASH! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Amber Shimmers and Instant Buffered Rebound Hits">✨ SHIMMERING AMBER & FAST RETRIES! 🟠</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -611,6 +611,61 @@ function hasNearbyLiquidRow(y){
  function amberStroke(g,m,x1,y1,z1,x2,y2,z2,r){
    return stem(g,m,x1,y1,z1,x2,y2,z2,r);
  }
+// Subtle moving glint plus a tiny diamond sparkle, drawn on the upward-facing
+// amber surface. Only these overlay meshes animate, never the amber block.
+const amberGlintCanvas=document.createElement('canvas');
+amberGlintCanvas.width=128;amberGlintCanvas.height=128;
+const amberGlintCtx=amberGlintCanvas.getContext('2d');
+const glintGradient=amberGlintCtx.createLinearGradient(0,0,128,0);
+glintGradient.addColorStop(0,'rgba(255,255,215,0)');
+glintGradient.addColorStop(.30,'rgba(255,253,220,.04)');
+glintGradient.addColorStop(.47,'rgba(255,255,244,.65)');
+glintGradient.addColorStop(.55,'rgba(255,255,255,.86)');
+glintGradient.addColorStop(.72,'rgba(255,245,189,.03)');
+glintGradient.addColorStop(1,'rgba(255,255,215,0)');
+amberGlintCtx.fillStyle=glintGradient;amberGlintCtx.beginPath();
+amberGlintCtx.moveTo(63,0);amberGlintCtx.lineTo(120,0);
+amberGlintCtx.lineTo(62,128);amberGlintCtx.lineTo(4,128);amberGlintCtx.closePath();amberGlintCtx.fill();
+const amberGlintTexture=new THREE.CanvasTexture(amberGlintCanvas);
+const amberGlintGeometry=new THREE.PlaneGeometry(.18,.49);
+const amberSparkGeometry=new THREE.PlaneGeometry(.17,.17);
+const amberSparkCanvas=document.createElement('canvas');
+amberSparkCanvas.width=amberSparkCanvas.height=64;
+const sparkle=amberSparkCanvas.getContext('2d');
+const sparkGlow=sparkle.createRadialGradient(32,32,1,32,32,26);
+sparkGlow.addColorStop(0,'rgba(255,255,255,1)');
+sparkGlow.addColorStop(.17,'rgba(255,249,207,.9)');
+sparkGlow.addColorStop(1,'rgba(255,249,207,0)');
+sparkle.fillStyle=sparkGlow;sparkle.fillRect(0,0,64,64);
+sparkle.strokeStyle='rgba(255,255,239,.96)';sparkle.lineWidth=3;
+sparkle.beginPath();sparkle.moveTo(32,4);sparkle.lineTo(32,60);
+sparkle.moveTo(5,32);sparkle.lineTo(59,32);sparkle.stroke();
+const amberSparkTexture=new THREE.CanvasTexture(amberSparkCanvas);
+function addAmberShimmer(coin){
+ const face=coin.userData.amberFaceUp;if(!face)return;
+ const glint=new THREE.Mesh(amberGlintGeometry,new THREE.MeshBasicMaterial({
+  map:amberGlintTexture,transparent:true,opacity:0,depthWrite:false,
+  depthTest:false,side:THREE.DoubleSide
+ }));
+ glint.position.set(-.2,.315,.315);glint.renderOrder=11;face.add(glint);
+ const spark=new THREE.Mesh(amberSparkGeometry,new THREE.MeshBasicMaterial({
+  map:amberSparkTexture,transparent:true,opacity:0,depthWrite:false,
+  depthTest:false,side:THREE.DoubleSide
+ }));
+ spark.position.set(.20,.47,.322);spark.renderOrder=12;face.add(spark);
+ coin.userData.amberShimmer={glint,spark,phase:Math.random()*6.6};
+}
+function updateAmberShimmer(coin,time){
+ const sh=coin.mesh.userData.amberShimmer;if(!sh)return;
+ // Every 6.6 seconds for each gem, with staggered phases.
+ const cycle=(time+sh.phase)%6.6;
+ if(cycle>.95){sh.glint.material.opacity=0;sh.spark.material.opacity=0;return}
+ const progress=cycle/.95;
+ const fade=Math.sin(progress*Math.PI);
+ sh.glint.position.x=-.23+.46*progress;
+ sh.glint.material.opacity=.62*fade;
+ sh.spark.material.opacity=.95*Math.pow(Math.max(0,1-Math.abs(progress-.77)/.2),2);
+}
  function makeAmberBlock(g,kind){
    // A fixed, horizontal fossil plaque: decorated +Z face becomes upward +Y.
    // The block never receives an idle bob, bounce or rotation animation.
@@ -945,6 +1000,7 @@ if(y>2&&Math.random()<.34&&type!=='river'&&type!=='lava'&&!row.special){
    // Keep collectibles anchored to their tile, without any idle animation.
    coin.position.set(x,groundTileHeight(row,x),0);
    makeAmberBlock(coin,kind);
+   addAmberShimmer(coin);
    group.add(coin);
    row.coins.push({x,rowY:y,mesh:coin,taken:false,value,kind,hits:0,maxHits:kind==='spider'?3:kind==='mosquito'?2:1});
  }
@@ -1339,7 +1395,7 @@ function menu(){queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
  for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;ensureRows();updateDaylight(0,0,true);if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');fx('death',.65);$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist();fx('record')} $('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
-const queue=[];function requestMove(dx,dy){if(state!=='playing'||hop?.amberBounce)return;if(queue.length<1)queue.push([dx,dy])}function groundTileHeight(r,x){return r?.raised?.get(Math.round(x))||0}
+const queue=[];function requestMove(dx,dy){if(state!=='playing')return;if(queue.length<1)queue.push([dx,dy])}function groundTileHeight(r,x){return r?.raised?.get(Math.round(x))||0}
 function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sourceRow?.type==='river'||sourceRow?.type==='lava')?support(sourceRow,px):null;const sourceIndex=sourcePlatform?platformTileAt(sourcePlatform,px):-1;const tileX=sourcePlatform?platformTileCenter(sourcePlatform,sourceIndex):Math.round(px);let nx=(sourcePlatform&&dy===0?tileX:Math.round(px))+dx,ny=py+dy;if(nx<LEFT||nx>RIGHT||ny<0)return;let r=rows.get(ny);if(!r||r.solid.has(Math.round(nx))){fx('denied',.55);return}
  // A fossil block resists the first one or two contacts. Show a hop into
  // the block and spring back, leaving score/position/hazards unchanged.
@@ -1420,7 +1476,11 @@ function support(r,x){return r.moving.find(m=>m.platform&&platformTileAt(m,x)!==
 function nearestPlatformTile(r,x){let best=null,d=.49;for(const p of r.moving){if(!p.platform)continue;for(let i=0;i<p.width;i++){const center=platformTileCenter(p,i),delta=Math.abs(center-x);if(delta<d){d=delta;best={platform:p,index:i,center}}}}return best}
 function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hypot(x-m.dangerDisc.position.x,player.position.z-(-r.y))<=.65)}
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
-function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);if(c.crackOverlay){c.crackOverlay.material.map.dispose();c.crackOverlay.material.dispose()}bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
+function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);if(c.crackOverlay){c.crackOverlay.material.map.dispose();c.crackOverlay.material.dispose()}
+ if(c.mesh.userData.amberShimmer){
+  c.mesh.userData.amberShimmer.glint.material.dispose();
+  c.mesh.userData.amberShimmer.spark.material.dispose();
+ }bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
  // Impact crack flash only; the amber mesh itself remains completely still.
  for(const row of rows.values())for(const c of row.coins){
@@ -1428,6 +1488,11 @@ function update(dt,t){
    c.crackFlash=Math.max(0,c.crackFlash-dt*3.4);
    c.crackOverlay.material.opacity=.94+.06*c.crackFlash;
   }
+ }
+ // Shimmer periodically while the treasure itself remains firmly on the tile.
+ if(state==='playing'||state==='menu')for(const row of rows.values()){
+  if(Math.abs(row.y-(state==='menu'?3:py))>18)continue;
+  for(const amber of row.coins)if(!amber.taken)updateAmberShimmer(amber,gameTime);
  }
  // Clock mode runs independently of movement/score. Pause, death and menus
  // freeze its timer; only actual gameplay advances the day.
@@ -1462,7 +1527,7 @@ if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.m
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
   const b=hop;
-  b.t=Math.min(1,b.t+dt*4.6);
+  b.t=Math.min(1,b.t+dt*7.4);
   const phase=b.t<=.5?b.t*2:(1-b.t)*2;
   const travel=phase*phase*(3-2*phase)*.78;
   player.position.set(THREE.MathUtils.lerp(b.fromX,b.toX,travel),
@@ -1474,7 +1539,9 @@ if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.m
   if(b.t>=.5&&!b.impactPlayed){b.impactPlayed=true;amberImpact(b.amberBounce)}
   if(b.t===1){
    player.position.set(b.fromX,groundTileHeight(rows.get(b.fromY),b.fromX),-b.fromY);
-   avatar.scale.set(1,1,1);hop=null;queue.length=0;
+   avatar.scale.set(1,1,1);hop=null;
+   // Buffer one move during rebound and trigger it immediately when grounded.
+   if(state==='playing'&&queue.length)doMove(...queue.shift());
   }
  }else{
  if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);hop.t=Math.min(1,hop.t+dt*7.4);let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){const visibleRowCenter=state==='menu'?3:camSmooth+3;
