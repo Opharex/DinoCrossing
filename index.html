@@ -400,7 +400,7 @@ avatar.updateMatrixWorld(true);
 const playerBounds=new THREE.Box3().setFromObject(avatar);
 const playerExtent=new THREE.Vector3();playerBounds.getSize(playerExtent);
 const playerFit=Math.min(.82/Math.max(playerExtent.x,.001),.82/Math.max(playerExtent.z,.001),.70);
-avatar.scale.setScalar(playerFit);
+avatar.scale.setScalar(playerFit * 0.5);
 // Recenter geometry above the center of its tile and seat its lowest point on ground.
 const playerCenter=new THREE.Vector3();playerBounds.getCenter(playerCenter);
 const fittedCenter=new THREE.Vector3();
