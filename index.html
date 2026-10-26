@@ -472,7 +472,23 @@ function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,
  pos.setUsage(THREE.DynamicDrawUsage);geo.setAttribute('position',pos);geo.setAttribute('uv',new THREE.BufferAttribute(uv,2));geo.setIndex(tri);
  const surface=new THREE.Mesh(geo,liquidTopMats[type]);
  surface.frustumCulled=false;parent.add(surface);
- const info={mesh:surface,pos,type,startX,endX,zWidth,baseY,sections,lines,offset,frame:-1};
+ // Precompute immutable per-vertex input once. Use Float64 values so the
+ // existing wave equations receive the same coordinates as before.
+ const vertexCount=(sections+1)*(lines+1);
+ const waveXs=new Float64Array(vertexCount);
+ const waveZs=new Float64Array(vertexCount);
+ const edgeDamping=new Float64Array(vertexCount);
+ for(let i=0;i<=sections;i++){
+  const x=startX+(endX-startX)*i/sections;
+  for(let j=0;j<=lines;j++){
+   const index=i*(lines+1)+j;
+   const z=(j/lines-.5)*zWidth;
+   waveXs[index]=x;waveZs[index]=z;
+   edgeDamping[index]=Math.min(1,Math.max(.1,(.5-Math.abs(z))*7));
+  }
+ }
+ const info={mesh:surface,pos,type,startX,endX,zWidth,baseY,sections,lines,offset,frame:-1,
+  waveXs,waveZs,edgeDamping};
  liquidMeshes.push(info);return info;
 }
 function liquidWave(x,z,time,dir,type,seed=0){
@@ -483,16 +499,12 @@ function liquidWave(x,z,time,dir,type,seed=0){
  return main+ripple+sway;
 }
 function animateLiquidSurface(info,time,dir){
- const {pos,sections,lines,startX,endX,zWidth,baseY,type,offset}=info;
- for(let i=0;i<=sections;i++){
-  const x=startX+(endX-startX)*i/sections;
-  for(let j=0;j<=lines;j++){
-   const z=(j/lines-.5)*zWidth;
-   // Damped wave right at the bank, so shore water cannot clip through ground.
-   const edge=Math.min(1,Math.max(.1,(.5-Math.abs(z))*7));
-   const lift=liquidWave(x,z,time,dir,type,offset)*edge;
-   pos.setXYZ(i*(lines+1)+j,x,baseY+lift,z);
-  }
+ const {pos,baseY,type,offset,waveXs,waveZs,edgeDamping}=info;
+ for(let index=0;index<waveXs.length;index++){
+  const x=waveXs[index],z=waveZs[index];
+  // Identical wave formula, timing, edge damping, vertices and normals.
+  const lift=liquidWave(x,z,time,dir,type,offset)*edgeDamping[index];
+  pos.setXYZ(index,x,baseY+lift,z);
  }
  pos.needsUpdate=true;info.mesh.geometry.computeVertexNormals();
 }
@@ -506,20 +518,29 @@ function createSpillingFlow(group,type,dir,seed){
  const geom=new THREE.BufferGeometry(),attr=new THREE.BufferAttribute(verts,3);
  attr.setUsage(THREE.DynamicDrawUsage);geom.setAttribute('position',attr);geom.setIndex(indices);
  const mesh=new THREE.Mesh(geom,liquidTopMats[type]);mesh.frustumCulled=false;group.add(mesh);
- return {mesh,attr,bands,lines,type,dir,seed};
-}
-function updateSpillingFlow(cascade,time){
- const {attr,bands,lines,type,dir,seed}=cascade;
+ // The spillway shape does not change, only its wave displacement does.
+ const vertexCount=(bands+1)*(lines+1);
+ const spillXs=new Float64Array(vertexCount),spillZs=new Float64Array(vertexCount);
+ const spillBases=new Float64Array(vertexCount),spillDamping=new Float64Array(vertexCount);
  for(let i=0;i<=bands;i++){
   const p=i/bands;
   const x=dir*(7.43+p*1.65);
-  // Drop from the road surface, then curl smoothly into the receiving basin.
   const fall=p*p*(3-2*p),base=-.116-.51*fall;
+  const damping=.35+.35*Math.sin(p*Math.PI);
   for(let j=0;j<=lines;j++){
-   const z=(j/lines-.5)*.98;
-   const wav=liquidWave(x,z,time,dir,type,seed)*(.35+.35*Math.sin(p*Math.PI));
-   attr.setXYZ(i*(lines+1)+j,x,base+wav,z);
+   const index=i*(lines+1)+j;
+   spillXs[index]=x;spillZs[index]=(j/lines-.5)*.98;
+   spillBases[index]=base;spillDamping[index]=damping;
   }
+ }
+ return {mesh,attr,bands,lines,type,dir,seed,spillXs,spillZs,spillBases,spillDamping};
+}
+function updateSpillingFlow(cascade,time){
+ const {attr,type,dir,seed,spillXs,spillZs,spillBases,spillDamping}=cascade;
+ for(let index=0;index<spillXs.length;index++){
+  const x=spillXs[index],z=spillZs[index];
+  const wav=liquidWave(x,z,time,dir,type,seed)*spillDamping[index];
+  attr.setXYZ(index,x,spillBases[index]+wav,z);
  }
  attr.needsUpdate=true;cascade.mesh.geometry.computeVertexNormals();
 }
