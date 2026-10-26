@@ -63,7 +63,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Full Terrain Behind Starting Position">🌿 FULL LANDSCAPE FROM THE START! 🦕</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Glassy Amber Strong Cracks Platform Smash">💎 GLASSY AMBER & POWER SMASH! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -585,13 +585,13 @@ function hasNearbyLiquidRow(y){
 
  // Polished, opaque rounded-square amber collectible. Every variant stays
  // grounded, centred, and completely motionless (no float or spin animation).
- const amberBodyMat=new THREE.MeshPhongMaterial({color:0xea971f,emissive:0x4a1b03,emissiveIntensity:.12,shininess:115,specular:0xffdb88,flatShading:false});
- const amberFaceMat=new THREE.MeshPhongMaterial({color:0xf1a925,emissive:0x713208,emissiveIntensity:.09,shininess:105,specular:0xffe4a0});
- const amberHighlightMat=new THREE.MeshBasicMaterial({color:0xffde7c,transparent:true,opacity:.70,depthWrite:false});
+ const amberBodyMat=new THREE.MeshPhysicalMaterial({color:0xffb547,metalness:0,roughness:.13,clearcoat:1,clearcoatRoughness:.075,ior:1.45,transmission:.12,transparent:true,opacity:.43,depthWrite:false,side:THREE.DoubleSide});
+ const amberFaceMat=new THREE.MeshPhysicalMaterial({color:0xffba42,metalness:0,roughness:.16,clearcoat:1,ior:1.45,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide});
+ const amberHighlightMat=new THREE.MeshBasicMaterial({color:0xffefb3,transparent:true,opacity:.85,depthWrite:false});
  const amberWarmMat=new THREE.MeshLambertMaterial({color:0xc96d13});
  const amberFossilMat=new THREE.MeshLambertMaterial({color:0x4b2816});
  const amberFossilLightMat=new THREE.MeshLambertMaterial({color:0x794018});
- const amberWingMat=new THREE.MeshBasicMaterial({color:0xffdf91,transparent:true,opacity:.86,depthWrite:false,side:THREE.DoubleSide});
+ const amberWingMat=new THREE.MeshBasicMaterial({color:0xffefd2,transparent:true,opacity:.72,depthWrite:false,side:THREE.DoubleSide});
  function amberRoundedGeometry(width,height,depth,radius){
    const key='amber:rounded:'+width+':'+height+':'+depth;
    return cachedGeo(key,()=>{
@@ -622,17 +622,17 @@ function hasNearbyLiquidRow(y){
    root.userData.amberFaceUp=faceUp;
    g=faceUp;
    const block=new THREE.Mesh(amberRoundedGeometry(.70,.56,.38,.13),amberBodyMat);
-   block.position.y=.31;block.castShadow=true;g.add(block);
+   block.position.y=.31;block.castShadow=false;block.renderOrder=4;g.add(block);
    // Subtle golden surface facets and polished corner lights, always opaque.
    const face=new THREE.Mesh(amberRoundedGeometry(.61,.48,.018,.115),amberFaceMat);
-   face.position.set(0,.315,.206);face.castShadow=false;g.add(face);
+   face.position.set(0,.315,.206);face.castShadow=false;face.renderOrder=5;g.add(face);
    amberStroke(g,amberHighlightMat,-.22,.49,.234,.15,.49,.234,.015);
    amberStroke(g,amberHighlightMat,-.25,.46,.236,-.25,.26,.236,.015);
    amberStroke(g,amberWarmMat,-.22,.13,.237,.21,.13,.237,.013);
-   // Preserved insects are surface-visible motifs with 3D depth, not hidden
-   // behind the opaque amber material. Their dark silhouettes read on phones.
+   // Dark insect models float INSIDE the translucent honey-colored amber;
+   // the amber's glass shell renders over them without hiding their silhouette.
    if(kind==='mosquito'){
-     const z=.252;
+     const z=.07;
      ball(g,amberFossilMat,.01,.33,z,.044,.065,.014);
      ball(g,amberFossilMat,.007,.235,z,.031,.095,.015);
      ball(g,amberFossilMat,0,.402,z,.040,.043,.018);
@@ -648,7 +648,7 @@ function hasNearbyLiquidRow(y){
        }
      }
    }else if(kind==='spider'){
-     const z=.254;
+     const z=.07;
      ball(g,amberFossilMat,0,.315,z,.086,.094,.027);
      ball(g,amberFossilLightMat,0,.414,z,.049,.049,.021);
      for(const side of [-1,1]){
@@ -664,70 +664,60 @@ function hasNearbyLiquidRow(y){
        }
      }
    }
+   if(kind!=='plain')g.traverse(o=>{if(o.isMesh&&o!==block&&o!==face)o.renderOrder=3});
    return root;
  }
 // Hairline fracture geometry sits on the front of opaque amber and builds
 // with each failed strike without rotating or moving the collectible.
 // Repaint one translucent crack texture over the same amber model on each hit.
-const amberCrackPlaneGeo=new THREE.PlaneGeometry(.61,.48);
+// The SAME amber object keeps its cracks; damage updates a CanvasTexture.
+const amberCrackPlaneGeo=new THREE.PlaneGeometry(.67,.54);
 function crackAmber(coin,hit){
  const faceUp=coin.mesh.userData.amberFaceUp;
  if(!faceUp)return;
  if(!coin.crackCanvas){
-  const canvas=document.createElement('canvas');
-  canvas.width=canvas.height=256;
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=512;
   const texture=new THREE.CanvasTexture(canvas);
   texture.colorSpace=THREE.SRGBColorSpace;
-  texture.minFilter=THREE.LinearFilter;
-  texture.magFilter=THREE.LinearFilter;
-  const material=new THREE.MeshBasicMaterial({
-   map:texture,transparent:true,opacity:.96,side:THREE.DoubleSide,
-   depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2
-  });
+  texture.minFilter=THREE.LinearFilter;texture.magFilter=THREE.LinearFilter;
+  const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,
+   opacity:1,side:THREE.DoubleSide,depthWrite:false,depthTest:false});
   const overlay=new THREE.Mesh(amberCrackPlaneGeo,material);
-  overlay.position.set(0,.315,.295);
-  overlay.renderOrder=3;
-  faceUp.add(overlay);
-  coin.crackCanvas=canvas;
-  coin.crackOverlay=overlay;
+  overlay.position.set(0,.315,.305);overlay.renderOrder=9;
+  faceUp.add(overlay);coin.crackCanvas=canvas;coin.crackOverlay=overlay;
  }
- const ctx=coin.crackCanvas.getContext('2d');
- ctx.clearRect(0,0,256,256);
- ctx.save();
- ctx.translate(128,128);
- ctx.scale(256/.61,-256/.48);
+ const ctx=coin.crackCanvas.getContext('2d');ctx.clearRect(0,0,512,512);
+ ctx.save();ctx.translate(256,256);ctx.scale(512/.67,-512/.54);
  ctx.lineCap='round';ctx.lineJoin='round';
- const traces=[
-  [[-.27,.14],[-.16,.08],[-.075,.015],[.005,-.045],[.09,-.14],[.16,-.17]],
-  [[-.075,.015],[-.13,-.07],[-.20,-.11]],
-  [[.005,-.045],[.12,.035],[.21,.095]],
-  [[.19,.21],[.12,.135],[.02,.10],[-.07,.04],[-.17,-.025],[-.24,-.15]],
-  [[.02,.10],[.07,.18],[.13,.225]],
-  [[-.17,-.025],[-.22,.07],[-.265,.105]],
-  [[.12,.135],[.22,.02],[.26,-.04]],
-  [[-.07,.04],[-.015,-.13],[.04,-.20]]
+ const first=[
+  [[-.30,.17],[-.18,.09],[-.06,.02],[.03,-.06],[.14,-.17],[.25,-.22]],
+  [[-.06,.02],[-.14,-.07],[-.27,-.16]],
+  [[.03,-.06],[.17,.03],[.29,.11]],
+  [[-.06,.02],[-.01,.16],[.07,.235]]
  ];
- const count=hit===1?3:traces.length;
- for(let k=0;k<count;k++){
-  const path=traces[k];
-  ctx.beginPath();ctx.moveTo(path[0][0],path[0][1]);
-  for(let i=1;i<path.length;i++)ctx.lineTo(path[i][0],path[i][1]);
-  ctx.strokeStyle='rgba(255,240,191,.88)';
-  ctx.lineWidth=.013;ctx.stroke();
-  ctx.strokeStyle='rgba(86,37,10,.98)';
-  ctx.lineWidth=.0065;ctx.stroke();
+ const second=[
+  [[.28,.23],[.15,.14],[.035,.11],[-.10,.02],[-.22,-.08],[-.30,-.20]],
+  [[.035,.11],[.105,.22],[.19,.255]],
+  [[-.22,-.08],[-.28,.035],[-.315,.13]],
+  [[.15,.14],[.28,.03],[.315,-.08]],
+  [[-.10,.02],[-.025,-.15],[.06,-.245]],
+  [[.03,-.06],[.115,-.19],[.22,-.24]]
+ ];
+ const paths=hit===1?first:first.concat(second);
+ for(const path of paths){
+  ctx.beginPath();ctx.moveTo(...path[0]);for(let i=1;i<path.length;i++)ctx.lineTo(...path[i]);
+  ctx.strokeStyle='rgba(255,246,205,.98)';ctx.lineWidth=.029;ctx.stroke();
+  ctx.strokeStyle='rgba(80,29,5,.99)';ctx.lineWidth=.015;ctx.stroke();
+  ctx.strokeStyle='rgba(255,214,136,.95)';ctx.lineWidth=.006;ctx.stroke();
  }
- const centers=hit===1?[[-.075,.015]]:[[-.075,.015],[.02,.10]];
- for(const [x,y] of centers){
-  for(let n=0;n<5;n++){
-   const angle=n*Math.PI*2/5+.4;
-   ctx.beginPath();ctx.moveTo(x,y);
-   ctx.lineTo(x+Math.cos(angle)*.036,y+Math.sin(angle)*.028);
-   ctx.strokeStyle='rgba(255,242,209,.92)';ctx.lineWidth=.007;ctx.stroke();
-  }
+ const centers=hit===1?[[-.06,.02]]:[[-.06,.02],[.035,.11],[.15,-.15]];
+ for(const [x,y] of centers)for(let n=0;n<8;n++){
+  const angle=n*Math.PI/4+.31,len=(hit===1?.053:.072)*(n%2?.75:1);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(angle)*len,y+Math.sin(angle)*len*.8);
+  ctx.strokeStyle='rgba(255,249,223,.96)';ctx.lineWidth=.013;ctx.stroke();
  }
- ctx.restore();
- coin.crackOverlay.material.map.needsUpdate=true;
+ ctx.restore();coin.crackOverlay.material.map.needsUpdate=true;
+ coin.crackFlash=1;
 }
 function amberImpact(coin){
  coin.hits++;
@@ -1044,13 +1034,13 @@ function fx(name,power=1){
     fxNoise(.12,.31*v,2050,'bandpass');
     fxNoise(.17,.14*v,5100,'highpass',.035);
     fxTone(570*variation,.09,.06*v,'sine',.57,.025);break;
-   case 'amberBreak': // Layered urn-smash: low ceramic body, sharp snap, falling shards.
-    fxTone(148*variation,.2,.29*v,'triangle',.39);
-    fxNoise(.19,.42*v,1300,'bandpass');
-    fxNoise(.29,.31*v,4100,'highpass',.015);
-    for(let i=0;i<5;i++){
-     fxNoise(.075,.085*v,2800+i*440,'bandpass',.065+i*.045);
-     fxTone((640+i*90)*variation,.075,.035*v,'triangle',.54,.045+i*.037);
+   case 'amberBreak': // Fuller glassy urn shatter with overlapping shard clinks.
+    fxTone(135*variation,.22,.34*v,'triangle',.42);
+    fxNoise(.22,.46*v,1100,'bandpass');
+    fxNoise(.34,.34*v,4200,'highpass',.012);
+    for(let i=0;i<7;i++){
+     fxNoise(.085,.10*v,2400+i*520,'bandpass',.05+i*.03);
+     fxTone((620+i*110)*variation,.08,.045*v,'triangle',.58,.035+i*.028);
     }break;
    case 'amber':fxTone(720,.13,.18*v,'sine',1.18);fxTone(1025,.23,.16*v,'triangle',.94,.08);break;
    case 'fossil':for(let j=0;j<4;j++)fxTone([740,930,1175,1568][j],.28,.19*v,'sine',1.03,j*.065);fxNoise(.22,.055*v,4400,'highpass',.16);break;
@@ -1354,7 +1344,7 @@ function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sou
  // A fossil block resists the first one or two contacts. Show a hop into
  // the block and spring back, leaving score/position/hazards unchanged.
  const amberTarget=r.coins.find(c=>!c.taken&&Math.abs(c.x-nx)<.48);
- if(amberTarget&&amberTarget.hits<amberTarget.maxHits-1){
+ if(amberTarget&&amberTarget.hits<amberTarget.maxHits-1&&!sourcePlatform){
   queue.length=0;
   hop={amberBounce:amberTarget,impactPlayed:false,t:0,fromX:px,fromY:py,
     fromHeight:player.position.y,toX:nx,toY:ny,
@@ -1362,6 +1352,8 @@ function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sou
   fx('hop',.7);
   return;
  }
+ // Landing from a moving log or lava platform breaks any amber instantly.
+ // Ground approach still respects the mosquito/spider multi-hit requirement.
  const landing=(r.type==='river'||r.type==='lava')?nearestPlatformTile(r,nx):null;if(landing)nx=landing.center;hop={fromX:fromX,fromY:py,fromHeight:player.position.y,fromRoll:player.rotation.z,toX:nx,toY:ny,targetPlatform:landing?.platform||null,targetIndex:landing?.index??-1,t:0,turnFrom:avatar.rotation.y,turnTo:dx>0?Math.PI/2:dx<0?-Math.PI/2:dy>0?Math.PI:0};px=nx;py=ny;fx('hop')}// Visible player bounds include facing and hop squash/stretch, excluding the shadow.
 const playerHitBounds=new THREE.Box3();
 function playerOverlaps(x,center,halfWidth){
@@ -1430,6 +1422,13 @@ function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hy
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
 function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);if(c.crackOverlay){c.crackOverlay.material.map.dispose();c.crackOverlay.material.dispose()}bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
+ // Impact crack flash only; the amber mesh itself remains completely still.
+ for(const row of rows.values())for(const c of row.coins){
+  if(c.crackOverlay&&c.crackFlash>0){
+   c.crackFlash=Math.max(0,c.crackFlash-dt*3.4);
+   c.crackOverlay.material.opacity=.94+.06*c.crackFlash;
+  }
+ }
  // Clock mode runs independently of movement/score. Pause, death and menus
  // freeze its timer; only actual gameplay advances the day.
  if(lightingMode==='clock'&&state==='playing')lightingClockProgress+=dt*(120/180);
