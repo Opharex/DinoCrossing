@@ -57,7 +57,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Fixed Title Screen Shadow Circles">🛠️ SHADOW CIRCLES FIXED! 🌿</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Molten Lava Surge Replaces Rockslide">🌋 LAVA SURGE HAZARD! 🌊</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -577,9 +577,9 @@ function makeRow(y){
  if(calmStretch){calmRowsRemaining--;if(calmRowsRemaining===0)lastCalmEnd=y;}
  let type=y<3||calmStretch?'grass':
    pick(['grass','grass','grass','grass','forest','path','path','river','lava','tar','sky']);
- if(!calmStretch&&y>=9&&Math.random()<.085)type=pick(['stampede','rockslide','flashflood']);
+ if(!calmStretch&&y>=9&&Math.random()<.085)type=pick(['stampede','lavasurge','flashflood']);
  if(!calmStretch&&y>3&&y%9===0)type='grass';
- if(y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede'||type==='rockslide'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
+ if(y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
 // TEMPORARY FLOOR-BOUND GRID: each line is part of the actual ground mesh.
 const floorGridMat=new THREE.MeshBasicMaterial({color:tileGridColor,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
 const floorGrid=new THREE.Group();
@@ -595,7 +595,7 @@ floorGrid.position.y=.5;
 floorGrid.visible=tileGridEnabled;ground.add(floorGrid);ground.userData.floorGrid=floorGrid;group.userData.floorGrid=floorGrid;
 if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(y+k+1)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();liquidSurface(group,type,-7.49,7.49,.98,-.116,42,4,y*.47)}if(type==='river'||type==='lava'){ground.userData.liquid=type;ground.material=ground.material.clone();ground.material.color=ground.material.color.clone()}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
 // These strips never enter row.solid, moving hazards, collectibles or collision checks.
-const sideMat=(type==='stampede'||type==='rockslide'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3];
+const sideMat=(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[y%3];
 for(const side of [-1,1]){
   const edgeX=side*14.5;
   const extension=box(group,materials.grass[(y+1)%3],edgeX,-.19,0,14,.36,1);
@@ -677,14 +677,14 @@ if(type==='tar'){
 }
 // Low-relief individual ground tiles; only visuals and rider elevation change.
 if(type!=='river'&&type!=='lava'){
- const tileMat=(type==='path')?materials.path:(type==='tar')?materials.tar:(type==='stampede'||type==='rockslide'||type==='flashflood')?materials.stone:materials.grass[y%3];
+ const tileMat=(type==='path')?materials.path:(type==='tar')?materials.tar:(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:materials.grass[y%3];
  for(let x=LEFT;x<=RIGHT;x++){
   if(row.solid.has(x)||row.tarSlots?.includes(x)||Math.random()>.38)continue;
   const elevation=.105+Math.random()*.065;
   row.raised.set(x,elevation);
   const tile=box(group,tileMat,x,elevation/2,0,.98,elevation,.98);
   tile.castShadow=true;tile.receiveShadow=true;
-  if(type==='stampede'||type==='rockslide'||type==='flashflood'){
+  if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
     // Pebble outlines are carried up with the block, not buried underneath it.
     const cobblePalette=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
     for(let u=0;u<3;u++)for(let v=0;v<2;v++){
@@ -708,35 +708,28 @@ let dangerRing=new THREE.Mesh(new THREE.RingGeometry(.61,.68,32),new THREE.MeshB
   // Unique positions ensure every tar pit is an obvious, avoidable lethal tile.
   row.tarPits=[];
   for(let i=0;i<row.tarSlots.length;i++)row.tarPits.push(makeTar(group,row.tarSlots[i],y*17+i));
-}if(type==='stampede'||type==='rockslide'||type==='flashflood'){
-  // Stone-paved lane remains recognizable even when no rockslide is imminent.
+}if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
+  // Stone-paved lane remains recognizable even when no lavasurge is imminent.
   // Individual low-poly cobbles use shared materials and geometry for mobile FPS.
   const cobbleColors=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
   const cobbleMats=cobbleColors.map(color=>new THREE.MeshLambertMaterial({color,flatShading:true}));
-  const cobbleGeo=cachedGeo('rockslide:cobble',()=>new THREE.BoxGeometry(1,1,1));
-  const litCobbles=[];
-  const glowMat=new THREE.MeshBasicMaterial({color:0xffdb79,transparent:true,opacity:0,depthWrite:false});
+  const cobbleGeo=cachedGeo('hazard:cobble',()=>new THREE.BoxGeometry(1,1,1));
   for(let col=0;col<30;col++)for(let band=0;band<2;band++){
     const seed=Math.abs(Math.sin(y*41.13+col*13.79+band*7.31));
     const x=-7.26+col*.5+(band?.10:0),z=(band? .245:-.245);
     const stone=new THREE.Mesh(cobbleGeo,cobbleMats[Math.floor(seed*cobbleMats.length)]);
     stone.position.set(x,(row.raised.get(Math.round(x))||0)+.012+seed*.008,z);stone.scale.set(.43,.042,.39);stone.rotation.y=(seed-.5)*.15;
     group.add(stone);
-    if(type==='rockslide'&&(col*7+band*13+y*3)%11===0){
-      const lit=new THREE.Mesh(cobbleGeo,glowMat);
-      lit.position.set(x,(row.raised.get(Math.round(x))||0)+.041,z);lit.scale.set(.40,.013,.36);lit.rotation.y=stone.rotation.y;
-      group.add(lit);litCobbles.push(lit);
-    }
   }
-  if(type==='rockslide')group.userData.rockslideGlow={litCobbles,glowMat};
+
 }
-if(type==='stampede'||type==='rockslide'||type==='flashflood'){
+if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
   const warning=new THREE.Group();group.add(warning);
-  const signColor=type==='stampede'?0xffb44b:type==='rockslide'?0xf1d2a0:0x69d9f9;
+  const signColor=type==='stampede'?0xffb44b:type==='lavasurge'?0xffa045:0x69d9f9;
   const warnMat=new THREE.MeshBasicMaterial({color:signColor,transparent:true,opacity:.8,depthWrite:false,side:THREE.DoubleSide});
   // Continuous harmless streams stay separate from every collision list.
-  if(type==='flashflood'){
-    // One continuous, deformable water sheet. Heights blend over raised cobblestones,
+  if(type==='flashflood'||type==='lavasurge'){
+    // One continuous, deformable flood or lava sheet. Heights blend over raised cobblestones,
     // rather than making separate visible squares with seams between them.
     const vertices=new Float32Array((FLOOD_SAMPLES+1)*4*3);
     const indices=[];
@@ -750,10 +743,10 @@ if(type==='stampede'||type==='rockslide'||type==='flashflood'){
     const positions=new THREE.BufferAttribute(vertices,3);positions.setUsage(THREE.DynamicDrawUsage);
     waterGeometry.setAttribute('position',positions);waterGeometry.setIndex(indices);
     const waterSheet=new THREE.Mesh(waterGeometry,new THREE.MeshLambertMaterial({
-      color:0x75d9ef,transparent:true,opacity:.72,depthWrite:false,side:THREE.DoubleSide
+      color:type==='lavasurge'?0xff772e:0x75d9ef,emissive:type==='lavasurge'?0xb8320a:0x000000,emissiveIntensity:type==='lavasurge'?.48:0,transparent:true,opacity:type==='lavasurge'?.9:.72,depthWrite:false,side:THREE.DoubleSide
     }));
     waterSheet.frustumCulled=false;warning.add(waterSheet);
-    const rippleMat=new THREE.MeshBasicMaterial({color:0xd9ffff,transparent:true,opacity:.72});
+    const rippleMat=new THREE.MeshBasicMaterial({color:type==='lavasurge'?0xffcf68:0xd9ffff,transparent:true,opacity:.72});
     for(let i=0;i<5;i++)box(warning,rippleMat,i*.72-1.44,.126,(i%3-1)*.22,.46,.012,.045);
   }else if(type==='stampede'){
     for(let i=0;i<14;i++){
@@ -767,7 +760,7 @@ if(type==='stampede'||type==='rockslide'||type==='flashflood'){
   for(const edge of [-7.7,7.7]){box(group,materials.stone,edge,.22,0,.26,.48,.82)}
   const wave=new THREE.Group();group.add(wave);wave.visible=false;
   if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;animal.position.x=i*1.65-7;wave.add(animal)}}
-  else if(type==='rockslide'){for(let i=0;i<18;i++){const b=ball(wave,materials.stone,i*.85-7.5,.24+(i%3)*.11,((i%3)-1)*.23,.37+(i%4)*.08,.36,.35);b.userData.roll=i}}
+
   else {
   // A deformable flood volume with connected top and sides, not a sliding cube.
   const segments=38,verts=new Float32Array((segments+1)*4*3),tris=[];
@@ -776,9 +769,9 @@ if(type==='stampede'||type==='rockslide'||type==='flashflood'){
   }
   const geo=new THREE.BufferGeometry(),position=new THREE.BufferAttribute(verts,3);
   position.setUsage(THREE.DynamicDrawUsage);geo.setAttribute('position',position);geo.setIndex(tris);
-  const water=new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:0x56c9e8,emissive:0x086077,emissiveIntensity:.24,shininess:85,transparent:true,opacity:.9,side:THREE.DoubleSide,depthWrite:false}));
-  water.userData.floodVolume=true;water.frustumCulled=false;wave.add(water);
-  for(let i=0;i<15;i++){const foam=box(wave,liquidFoamMat,i*1.3-9,.41,(i%3-1)*.22,.62,.035,.12);foam.userData.foam=i}
+  const water=new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:type==='lavasurge'?0xff6722:0x56c9e8,emissive:type==='lavasurge'?0xe33408:0x086077,emissiveIntensity:type==='lavasurge'?.72:.24,shininess:85,transparent:true,opacity:.94,side:THREE.DoubleSide,depthWrite:false}));
+  water.userData.floodVolume=true;water.userData.lavaSurge=type==='lavasurge';water.frustumCulled=false;wave.add(water);
+  for(let i=0;i<15;i++){const foam=box(wave,type==='lavasurge'?lavaSprayMat:liquidFoamMat,i*1.3-9,.41,(i%3-1)*.22,.62,.035,.12);foam.userData.foam=i}
 }
   row.special={kind:type,wave,warning,warnMat,dir:row.dir,phase:rand(0,1.1),period:7.5,warningLength:2.25,activeLength:1.05,played:-1};
 }
@@ -878,11 +871,13 @@ function fx(name,power=1){
    case 'denied':fxTone(185,.12,.13*v,'triangle',.8);fxTone(140,.14,.12*v,'triangle',.75,.12);break;
    case 'pause':fxTone(320,.11,.095*v,'triangle',.6);break;
    case 'resume':fxTone(330,.15,.095*v,'triangle',1.5);break;
+   case 'warningLava':fxNoise(.72,.22*v,900,'lowpass');fxTone(114,.42,.14*v,'sawtooth',.55);break;
+   case 'lavaSurge':fxNoise(1.03,.34*v,1050,'lowpass');fxNoise(.73,.23*v,2450,'bandpass');fxTone(69,.75,.22*v,'sawtooth',.68);break;
    case 'warningWater':fxNoise(.68,.14*v,1550,'lowpass');fxNoise(.34,.05*v,2600,'highpass',.07);break;
    case 'warningRock':fxNoise(.42,.20*v,530,'lowpass');fxTone(82,.30,.10*v,'triangle',.73);break;
    case 'warningHerd':for(let j=0;j<4;j++){fxTone(90+j*11,.12,.09*v,'triangle',.8,j*.12);fxNoise(.1,.07*v,770,'bandpass',j*.12)}break;
    case 'flood':fxNoise(.97,.40*v,1300,'lowpass');fxNoise(.80,.22*v,3500,'bandpass');fxTone(73,.66,.18*v,'sine',.64);break;
-   case 'rockslide':fxNoise(.94,.35*v,620,'lowpass');fxNoise(.7,.26*v,1900,'bandpass');fxTone(68,.67,.24*v,'sawtooth',.55);break;
+   case 'lavasurge':fxNoise(.94,.35*v,620,'lowpass');fxNoise(.7,.26*v,1900,'bandpass');fxTone(68,.67,.24*v,'sawtooth',.55);break;
    case 'stampede':for(let j=0;j<7;j++){fxTone(60+Math.random()*22,.19,.16*v,'sine',.61,j*.09);fxNoise(.15,.10*v,900,'bandpass',j*.09)}fxNoise(.68,.18*v,340,'lowpass');break;
    default:fxTone(300,.13,.1,'triangle',.67);
   }
@@ -985,7 +980,7 @@ function ambientSync(){
    const r=rows.get(py+d);if(!r)continue;
    const weight=1/(1+Math.abs(d)*1.9);
    if(r.type==='river'||r.type==='flashflood')river=Math.max(river,weight);
-   if(r.type==='lava')lava=Math.max(lava,weight);
+   if(r.type==='lava'||r.type==='lavasurge')lava=Math.max(lava,weight);
    if(['grass','forest','sky'].includes(r.type))forest=Math.max(forest,weight);
   }
  }
@@ -1044,26 +1039,16 @@ $('testAudio').addEventListener('click',async()=>{
   status.textContent='Audio preview: amber, wooden landing, then flood. Output: '+ctx.state+'.';
  }catch(e){status.textContent='Audio error: '+e.message;}
 });
-function originalRockslideSound(){
- if(!+$('sfx').value)return;
- try{
-  mixInit();const ctx=audio(),now=ctx.currentTime;
-  const source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();
-  // Restored from the pre-overhaul rockslide: one-second filtered rumble.
-  source.buffer=mixer.noise;source.loop=true;
-  filter.type='lowpass';filter.frequency.value=650;
-  gain.gain.setValueAtTime(.001,now);
-  gain.gain.linearRampToValueAtTime(.18,now+.12);
-  gain.gain.exponentialRampToValueAtTime(.001,now+.98);
-  source.connect(filter).connect(gain).connect(mixer.fx);
-  source.start(now);source.stop(now+1);
- }catch(e){console.warn('Rockslide sound unavailable',e)}
-}
-function specialSound(kind){if(kind==='rockslide')originalRockslideSound();else fx(kind==='flashflood'?'flood':'stampede')}
+function specialSound(kind){fx(kind==='flashflood'?'flood':kind==='lavasurge'?'lavaSurge':'stampede')}
 function specialProgress(sp){return (gameTime+sp.phase)%sp.period}
 function specialActive(sp){const t=specialProgress(sp);return t>=sp.warningLength&&t<sp.warningLength+sp.activeLength}
-function specialHit(r){if(!r||!r.special||!specialActive(r.special))return false;const sp=r.special;const t=(specialProgress(sp)-sp.warningLength)/sp.activeLength;const x=sp.dir>0?-18+36*t:18-36*t;return playerOverlaps(px,x,sp.kind==='flashflood'?9.3:sp.kind==='stampede'?8:8.4)}
-function checkSpecial(){const r=rows.get(py);if(!specialHit(r))return;const kind=r.special.kind;die(kind==='stampede'?'Trampled by a stampede!':kind==='rockslide'?'Crushed by a rockslide!':'Swept away by a flash flood!', kind==='flashflood'?'The shallow water is safe. Move out before the deep flood follows.':kind==='stampede'?'The tiny scouts are safe. Move out before the full-size herd follows.':'Watch the flashing lane and listen for the warning before crossing.');}
+function specialHit(r){if(!r||!r.special||!specialActive(r.special))return false;const sp=r.special;const t=(specialProgress(sp)-sp.warningLength)/sp.activeLength;const x=sp.dir>0?-18+36*t:18-36*t;return playerOverlaps(px,x,sp.kind==='stampede'?8:9.3)}
+function checkSpecial(){
+ const r=rows.get(py);if(!specialHit(r))return;
+ const kind=r.special.kind;
+ die(kind==='stampede'?'Trampled by a stampede!':kind==='lavasurge'?'Engulfed by a lava surge!':'Swept away by a flash flood!',
+ kind==='lavasurge'?'The shallow lava warns you before the deadly molten surge arrives.':kind==='flashflood'?'The shallow water is safe. Move out before the deep flood follows.':'The tiny scouts are safe. Move out before the full-size herd follows.');
+}
 const FLOOD_SAMPLES=80;
 // Interpolate tile heights for a flowing sheet that rises gently over block tops.
 function floodGroundHeight(r,x){
@@ -1077,7 +1062,7 @@ function updateFloodSheet(mesh,row,start,end){
   const attr=mesh.geometry.attributes.position;
   for(let i=0;i<=FLOOD_SAMPLES;i++){
     const x=from+(to-from)*i/FLOOD_SAMPLES;
-    const waveMotion=liquidWave(x,0,gameTime,row.dir,'river',row.y*.33);
+    const waveMotion=liquidWave(x,0,gameTime,row.dir,row.type==='lavasurge'?'lava':'river',row.y*.33);
     const surface=floodGroundHeight(row,x)+.13+waveMotion*.8;
     const n=i*4;
     attr.setXYZ(n,x,surface,-.43);
@@ -1094,7 +1079,7 @@ function updateFloodVolume(mesh,row,worldCenter,time){
  for(let i=0;i<=segments;i++){
   const x=-9.5+19*i/segments,wx=worldCenter+x;
   const slope=floodGroundHeight(row,wx);
-  const wave=liquidWave(wx,0,time,row.dir,'river',row.y*.37);
+  const wave=liquidWave(wx,0,time,row.dir,row.type==='lavasurge'?'lava':'river',row.y*.37);
   const top=slope+.40+wave*1.25,lower=slope-.08;
   const k=i*4;
   attr.setXYZ(k,x,top,-.43);
@@ -1105,21 +1090,20 @@ function updateFloodVolume(mesh,row,worldCenter,time){
  attr.needsUpdate=true;mesh.geometry.computeVertexNormals();
 }
 function updateSpecial(r){const sp=r.special;if(!sp)return;const time=specialProgress(sp),warning=time<sp.warningLength,active=specialActive(sp),t=(time-sp.warningLength)/sp.activeLength;
-sp.warning.visible=sp.kind==='rockslide'?warning:warning||active;sp.wave.visible=active;
+sp.warning.visible=warning||active;sp.wave.visible=active;
 if(state==='playing'&&warning&&Math.abs(py-r.y)<=2&&gameTime>(sp.nextAudioCue||0)){
  sp.nextAudioCue=gameTime+1.05;
- if(sp.kind!=='rockslide')fx(sp.kind==='flashflood'?'warningWater':'warningHerd',.48);
+ fx(sp.kind==='lavasurge'?'warningLava':sp.kind==='flashflood'?'warningWater':'warningHerd',.48);
 }
-if(sp.kind==='rockslide')sp.warnMat.opacity=warning?(.22+.62*Math.abs(Math.sin(time*9))):.12;
-else{
+{
   sp.warnMat.opacity=0;
   // The warning remains continuous until the incoming hazard physically washes it away.
   // Both use the same direction-independent lane coordinate, so there is no phase reset.
   sp.warning.position.x=0;
   const travel=time*20/sp.warningLength;
-  const waveFront=active?(-18+36*t+(sp.kind==='flashflood'?9.3:8)):-10;
+  const waveFront=active?(-18+36*t+(sp.kind==='stampede'?8:9.3)):-10;
   const remainingStart=Math.max(-10,Math.min(10,waveFront));
-  if(sp.kind==='flashflood'){
+  if(sp.kind==='flashflood'||sp.kind==='lavasurge'){
     const water=sp.warning.children[0];
     // The uninterrupted stream grows from its source and is erased by the
     // approaching dangerous flood front; its shape follows raised ground.
@@ -1143,16 +1127,11 @@ else{
     if(parts)parts.legs.forEach((leg,i)=>leg.rotation.x=Math.sin(gameTime*28+seed+i*Math.PI)*.55);
   }
 }
-if(sp.kind==='rockslide'&&r.group.userData.rockslideGlow){
-  const glow=r.group.userData.rockslideGlow;
-  glow.glowMat.opacity=warning?(.28+.68*Math.abs(Math.sin(time*8.5))):active?.08:0;
-  glow.litCobbles.forEach((stone,i)=>{stone.visible=warning||active;stone.scale.y=warning?.017+.012*Math.abs(Math.sin(time*9+i)):.013});
-}
-if(active){sp.wave.position.x=sp.dir>0?-18+36*t:18-36*t;sp.wave.scale.x=1;if(sp.played!==Math.floor((gameTime+sp.phase)/sp.period)){sp.played=Math.floor((gameTime+sp.phase)/sp.period);if(state==='playing'&&Math.abs(py-r.y)<5)specialSound(sp.kind)}if(sp.kind==='rockslide')sp.wave.children.forEach((m,i)=>{m.rotation.z+=.11*(i%2?1:-1)});if(sp.kind==='stampede')sp.wave.children.forEach((m,i)=>{m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.04+Math.abs(Math.sin(gameTime*19+i))*.11});
-if(sp.kind==='rockslide')sp.wave.children.forEach(m=>{m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.24+(m.userData.roll%3)*.11});
-if(sp.kind==='flashflood')sp.wave.children.forEach(m=>{
+if(active){sp.wave.position.x=sp.dir>0?-18+36*t:18-36*t;sp.wave.scale.x=1;if(sp.played!==Math.floor((gameTime+sp.phase)/sp.period)){sp.played=Math.floor((gameTime+sp.phase)/sp.period);if(state==='playing'&&Math.abs(py-r.y)<5)specialSound(sp.kind)}if(sp.kind==='stampede')sp.wave.children.forEach((m,i)=>{m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.04+Math.abs(Math.sin(gameTime*19+i))*.11});
+
+if(sp.kind==='flashflood'||sp.kind==='lavasurge')sp.wave.children.forEach(m=>{
  if(m.userData.floodVolume){updateFloodVolume(m,r,sp.wave.position.x,gameTime);return;}
- m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.41+liquidWave(sp.wave.position.x+m.position.x,m.position.z,gameTime,sp.dir,'river',r.y*.4)*1.1;
+ m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.41+liquidWave(sp.wave.position.x+m.position.x,m.position.z,gameTime,sp.dir,sp.kind==='lavasurge'?'lava':'river',r.y*.4)*1.1;
  m.scale.y=.035+.015*Math.sin(gameTime*9+(m.userData.foam||0));
 });}
 }
@@ -1273,7 +1252,7 @@ if(audioCtx&&audioCtx.state==='running'&&audioCtx.currentTime>mixer.lastStep+.3)
   mixer.lastHerd=audioCtx.currentTime;fx('herdStep',.40);
  }
 }
-if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.moving){m.x+=r.dir*m.speed*dt;if(m.x>12)m.x=-12;if(m.x< -12)m.x=12;m.mesh.position.x=m.x;if(m.platform&&(r.type==='river'||r.type==='lava'))updateLogMotion(m,dt)}if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);hop.t=Math.min(1,hop.t+dt*7.4);let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='rockslide'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){r.group.visible=Math.abs(r.y-(state==='menu'?3:camSmooth+3))<17;if(!r.group.visible)continue;if(r.special)updateSpecial(r);r.group.children.forEach(o=>{if(o.userData.sway)o.rotation.z=Math.sin(gameTime*1.5+o.userData.seed)*.035;if(o.userData.flow!==undefined)o.position.x=o.userData.baseX+Math.sin(gameTime*1.25+o.userData.flow)*.33});for(let m of r.moving){if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}else if(r.type!=='river'){m.mesh.position.y=Math.sin(gameTime*2+m.x)*.028;m.mesh.rotation.z=Math.sin(gameTime*1.7+m.x)*.009}}for(let c of r.coins)if(!c.taken){c.mesh.rotation.y=t*2;c.mesh.position.y=.67+Math.sin(t*3+c.x)*.09}if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);let targetZ=state==='menu'?-3:-camSmooth-3.0;// On phones, follow horizontal movement while preserving the original zoom and angle.
+if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.moving){m.x+=r.dir*m.speed*dt;if(m.x>12)m.x=-12;if(m.x< -12)m.x=12;m.mesh.position.x=m.x;if(m.platform&&(r.type==='river'||r.type==='lava'))updateLogMotion(m,dt)}if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);hop.t=Math.min(1,hop.t+dt*7.4);let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){r.group.visible=Math.abs(r.y-(state==='menu'?3:camSmooth+3))<17;if(!r.group.visible)continue;if(r.special)updateSpecial(r);r.group.children.forEach(o=>{if(o.userData.sway)o.rotation.z=Math.sin(gameTime*1.5+o.userData.seed)*.035;if(o.userData.flow!==undefined)o.position.x=o.userData.baseX+Math.sin(gameTime*1.25+o.userData.flow)*.33});for(let m of r.moving){if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}else if(r.type!=='river'){m.mesh.position.y=Math.sin(gameTime*2+m.x)*.028;m.mesh.rotation.z=Math.sin(gameTime*1.7+m.x)*.009}}for(let c of r.coins)if(!c.taken){c.mesh.rotation.y=t*2;c.mesh.position.y=.67+Math.sin(t*3+c.x)*.09}if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);let targetZ=state==='menu'?-3:-camSmooth-3.0;// On phones, follow horizontal movement while preserving the original zoom and angle.
  // Use the animated player position so the camera glides during a jump.
  const wantedSide=phoneWideView&&state==='playing'&&player
    ?THREE.MathUtils.clamp(player.position.x,-7,7):0;
