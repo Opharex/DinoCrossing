@@ -57,7 +57,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Full Size Sticky Dinosaur Preview">🦕 FULL-SIZE STICKY PREVIEW! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Dynamic Daylight and Moving Object Shadows">🌅 DAYLIGHT & MOVING SHADOWS! 🌳</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -90,7 +90,74 @@ const species=[['T. Rex',0,0x5dbb63],['Velociraptor',20,0x4ac8b1],['Triceratops'
 species.push(...species.slice(0,9).map(([name,,color])=>['Tech '+name,150,color]));
 const shopOrder=Array.from({length:9},(_,i)=>[i,i+9]).flat();
 
-const scene=new THREE.Scene();scene.background=new THREE.Color(0xafe6e5);scene.fog=new THREE.Fog(0xafe6e5,24,65);const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio, /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?1:1.25));renderer.shadowMap.enabled=!/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);renderer.shadowMap.type=THREE.PCFShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.prepend(renderer.domElement);function applyQuality(){const mobile=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);const dpr=quality==='low'?.72:quality==='medium'?(mobile?1:1.25):Math.min(devicePixelRatio,mobile?1.3:1.75);renderer.setPixelRatio(dpr);renderer.shadowMap.enabled=quality==='high'&&!mobile;renderer.shadowMap.needsUpdate=true;renderer.setSize(innerWidth,innerHeight)}applyQuality();$('quality').onchange=()=>{quality=$('quality').value;applyQuality();persist()};$('showFps').onchange=()=>{showFps=$('showFps').checked;$('fps').style.display=showFps?'block':'none';persist()};const camera=new THREE.OrthographicCamera(-8,8,12,-12,.1,140);const sun=new THREE.DirectionalLight(0xfff4c9,2.3);sun.position.set(-7,16,11);sun.castShadow=true;sun.shadow.mapSize.set(512,512);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-20;scene.add(sun,new THREE.HemisphereLight(0xe2ffff,0x66824a,2.0));const shadowMat=new THREE.MeshBasicMaterial({color:0x152d24,transparent:true,opacity:.16,depthWrite:false});const shadowGeo=new THREE.CircleGeometry(1,16);function blob(g,x=0,z=0,r=.65){let sh=new THREE.Mesh(shadowGeo,shadowMat);sh.rotation.x=-Math.PI/2;sh.position.set(x,.017,z);sh.scale.set(r,r*.7,1);g.add(sh);return sh}
+const scene=new THREE.Scene();scene.background=new THREE.Color(0xafe6e5);scene.fog=new THREE.Fog(0xafe6e5,24,65);const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio, /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?1:1.25));renderer.shadowMap.enabled=!/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);renderer.shadowMap.type=THREE.PCFShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.prepend(renderer.domElement);function applyQuality(){const mobile=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);const dpr=quality==='low'?.72:quality==='medium'?(mobile?1:1.25):Math.min(devicePixelRatio,mobile?1.3:1.75);renderer.setPixelRatio(dpr);renderer.shadowMap.enabled=quality==='high'&&!mobile;renderer.shadowMap.needsUpdate=true;renderer.setSize(innerWidth,innerHeight)}applyQuality();$('quality').onchange=()=>{quality=$('quality').value;applyQuality();persist()};$('showFps').onchange=()=>{showFps=$('showFps').checked;$('fps').style.display=showFps?'block':'none';persist()};const camera=new THREE.OrthographicCamera(-8,8,12,-12,.1,140);const sun=new THREE.DirectionalLight(0xfff4c9,2.3);sun.position.set(-7,16,11);sun.castShadow=true;sun.shadow.mapSize.set(512,512);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-20;const skyFill=new THREE.HemisphereLight(0xe2ffff,0x66824a,2.0);scene.add(sun,skyFill);
+sun.shadow.bias=-.0005;sun.shadow.normalBias=.035;sun.shadow.camera.far=95;sun.shadow.camera.updateProjectionMatrix();
+sun.target.position.set(0,0,0);scene.add(sun.target);
+const dayColors=[
+ {t:0,sky:0xf3ba93,light:0xffd2a1,fill:0xffca9e,power:1.65,ambient:1.25,angle:-1.1,height:8,shade:.34},
+ {t:.26,sky:0xafe6e5,light:0xfff4c9,fill:0xe2ffff,power:2.3,ambient:2,angle:-.22,height:20,shade:.17},
+ {t:.57,sky:0xafe6e5,light:0xfff4c9,fill:0xe2ffff,power:2.3,ambient:1.95,angle:.35,height:18,shade:.2},
+ {t:.82,sky:0xee987b,light:0xff9e72,fill:0xffae87,power:1.5,ambient:1.15,angle:1.1,height:7,shade:.38},
+ {t:1,sky:0x263b59,light:0x8da4d0,fill:0x6485b7,power:.7,ambient:.7,angle:1.5,height:8,shade:.27}
+];
+let dayShadowX=-.4,dayShadowZ=-.4,dayShadowStretch=1,dayShadowAlpha=.2,lastDayScore=-1;
+const shadeTmpA=new THREE.Color(),shadeTmpB=new THREE.Color();
+function updateDaylight(score,force=false){
+ // One full day per 120 tiles crossed. Changes smoothly, not per-frame time.
+ const phase=(score%120)/120;
+ let from=dayColors[0],to=dayColors[1];
+ for(let i=0;i<dayColors.length-1;i++)if(phase>=dayColors[i].t&&phase<=dayColors[i+1].t){from=dayColors[i];to=dayColors[i+1];break}
+ const p=THREE.MathUtils.smoothstep(phase,from.t,to.t);
+ const lerp=(a,b)=>THREE.MathUtils.lerp(a,b,p);
+ const blend=(a,b)=>shadeTmpA.setHex(a).lerp(shadeTmpB.setHex(b),p);
+ scene.background.copy(blend(from.sky,to.sky));scene.fog.color.copy(scene.background);
+ sun.color.copy(blend(from.light,to.light));sun.intensity=lerp(from.power,to.power);
+ skyFill.color.copy(blend(from.fill,to.fill));skyFill.intensity=lerp(from.ambient,to.ambient);
+ const angle=lerp(from.angle,to.angle),height=lerp(from.height,to.height);
+ sun.position.set(Math.sin(angle)*17,height,Math.cos(angle)*17-3);
+ dayShadowX=-sun.position.x/Math.max(height,5);
+ dayShadowZ=-sun.position.z/Math.max(height,5);
+ dayShadowStretch=THREE.MathUtils.clamp(17/height,.7,2.6);
+ dayShadowAlpha=lerp(from.shade,to.shade);
+ shadowMat.opacity=dayShadowAlpha*.65;
+ sunShadeMat.opacity=dayShadowAlpha*.77;
+ if(force||score!==lastDayScore){lastDayScore=score;updateGroundShadows()}
+}const shadowMat=new THREE.MeshBasicMaterial({color:0x152d24,transparent:true,opacity:.16,depthWrite:false});const shadowGeo=new THREE.CircleGeometry(1,16);const sunShadeMat=new THREE.MeshBasicMaterial({color:0x152d24,transparent:true,opacity:.2,depthWrite:false,side:THREE.DoubleSide});
+const sunShadowGroups=new Map(),sunBlobList=[],sunShadowTransform=new THREE.Object3D();
+function blob(g,x=0,z=0,r=.65){
+ const sh=new THREE.Mesh(shadowGeo,shadowMat);
+ sh.rotation.x=-Math.PI/2;sh.position.set(x,.017,z);sh.scale.set(r,r*.7,1);
+ sh.userData.sunBlob={x,z,r,height:.7};g.add(sh);sunBlobList.push(sh);return sh;
+}
+function registerGroundShadow(group,x,z,h,r){
+ (group.userData.shadowProps??=[]).push({x,z,h,r});
+}
+function buildGroundShadows(group,rowY){
+ const props=group.userData.shadowProps||[];if(!props.length)return;
+ const inst=new THREE.InstancedMesh(shadowGeo,sunShadeMat,props.length);
+ inst.frustumCulled=false;inst.renderOrder=2;group.add(inst);
+ sunShadowGroups.set(rowY,{inst,props});
+}
+function updateGroundShadows(){
+ for(const [y,{inst,props}] of sunShadowGroups){
+  if(!rows.has(y))continue;
+  for(let i=0;i<props.length;i++){
+   const {x,z,h,r}=props[i];sunShadowTransform.position.set(x+dayShadowX*h,.02,z+dayShadowZ*h);
+   sunShadowTransform.rotation.set(-Math.PI/2,0,Math.atan2(dayShadowZ,dayShadowX));
+   sunShadowTransform.scale.set(r*(.8+dayShadowStretch*.55),r*(.5+dayShadowStretch*.36),1);
+   sunShadowTransform.updateMatrix();inst.setMatrixAt(i,sunShadowTransform.matrix);
+  }
+  inst.instanceMatrix.needsUpdate=true;
+ }
+}
+function updateSunBlobs(){
+ for(let i=sunBlobList.length-1;i>=0;i--){
+  const sh=sunBlobList[i];if(!sh.parent){sunBlobList.splice(i,1);continue}
+  const {x,z,r,height}=sh.userData.sunBlob;
+  sh.position.x=x+dayShadowX*height;sh.position.z=z+dayShadowZ*height;
+  sh.scale.set(r*(.7+dayShadowStretch*.45),r*(.45+dayShadowStretch*.35),1);
+ }
+}
 const mat=c=>new THREE.MeshLambertMaterial({color:c,flatShading:true});const materials={grass:[mat(0x80c85c),mat(0x91d269),mat(0x77bc57)],path:mat(0xd5a66b),river:mat(0x4db4d6),lava:mat(0xef6a2b),tar:mat(0x605b51),stone:mat(0x797a77),wood:mat(0x966143),leaf:mat(0x3c9d59),fern:mat(0x39a660),amber:mat(0xffc94d),white:mat(0xffffff),black:mat(0x172c31),horn:mat(0xffe6a0)};const cubeGeo=new THREE.BoxGeometry(1,1,1),sphereGeo=new THREE.IcosahedronGeometry(1,0),coneGeo=new THREE.ConeGeometry(1,1,5);function box(parent,m,x,y,z,w,h,d){let o=new THREE.Mesh(cubeGeo,m);o.position.set(x,y,z);o.scale.set(w,h,d);o.castShadow=false;o.receiveShadow=false;parent.add(o);return o}function ball(parent,m,x,y,z,sx,sy,sz){let o=new THREE.Mesh(sphereGeo,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=false;parent.add(o);return o}function cone(parent,m,x,y,z,r,h){let o=new THREE.Mesh(coneGeo,m);o.position.set(x,y,z);o.scale.set(r,h,r);o.castShadow=false;parent.add(o);return o}
 
 // V1.2 procedural art kit. Every piece is real 3D geometry, no external models.
@@ -327,7 +394,11 @@ g.scale.setScalar(size);
 return g;
 }
 const world=new THREE.Group();scene.add(world);const ROW_W=15,LEFT=-7,RIGHT=7;let calmRowsRemaining=0,lastCalmEnd=-30;
-let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){return artProp(g,x,y,kind,x*7+y*13)}
+let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
+ const obj=artProp(g,x,y,kind,x*7+y*13);
+ registerGroundShadow(g,x,y,kind==='tree'||kind==='cycad'?1.2:kind==='rock'?.65:.4,kind==='tree'||kind==='cycad'?.65:.44);
+ return obj;
+}
 
 // Lightweight animated liquid surfaces. Visual displacement only, preserving tile gameplay.
 const liquidTopMats={
@@ -527,6 +598,8 @@ for(const side of [-1,1]){
       height,crownWidth,crownDepth,crownHeight,variant,lift:(Math.sin(seed*.37)+1)*.025};
   });
   const visibleTrees=hasNearbyLiquidRow(y)?trees.filter(tree=>Math.abs(tree.x)>9.2):trees;
+  // The surrounding forest casts low-cost projected shadows even on phones.
+  for(const tr of visibleTrees)registerGroundShadow(group,tr.x,tr.z,tr.height+tr.crownHeight*.65,.52);
   const forestCube=cachedGeo('forest:unitCube',()=>new THREE.BoxGeometry(1,1,1));
   const transform=new THREE.Object3D();
   for(let palette=0;palette<forestColors.length;palette++){
@@ -703,9 +776,9 @@ if(fossil){
   }
   stem(coin,insectMat,0,.16,.23,0,.26,.24,.012);
 }
-group.add(coin);row.coins.push({x,mesh:coin,taken:false,value:fossil?5:1})}}rows.set(y,row);maxGenerated=Math.max(maxGenerated,y)}
+group.add(coin);row.coins.push({x,mesh:coin,taken:false,value:fossil?5:1})}}rows.set(y,row);buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
 const sharedArtGeometries=new Set([trunkGeo,facetGeo,leafGeo,ringGeo]);
-function ensureRows(){for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23);y++)makeRow(y);for(let [y,r] of rows)if(y<Math.max(0,highest-12)){world.remove(r.group);r.group.traverse(o=>{if(o.geometry&&!sharedArtGeometries.has(o.geometry)&&!cachedGeometrySet.has(o.geometry)&&o.geometry!==cubeGeo&&o.geometry!==sphereGeo&&o.geometry!==coneGeo)o.geometry.dispose()});rows.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
+function ensureRows(){for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23);y++)makeRow(y);for(let [y,r] of rows)if(y<Math.max(0,highest-12)){world.remove(r.group);r.group.traverse(o=>{if(o.geometry&&!sharedArtGeometries.has(o.geometry)&&!cachedGeometrySet.has(o.geometry)&&o.geometry!==cubeGeo&&o.geometry!==sphereGeo&&o.geometry!==coneGeo)o.geometry.dispose()});rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
 // Procedurally built in the browser, so all sounds work offline without licensed assets.
 const mixer={master:null,fx:null,music:null,ambient:null,noise:null,loops:null,lastStep:0,lastAmbience:0};
 function mixInit(){
@@ -1062,7 +1135,7 @@ if(sp.kind==='flashflood')sp.wave.children.forEach(m=>{
  m.scale.y=.035+.015*Math.sin(gameTime*9+(m.userData.foam||0));
 });}
 }
-function start(){if(menuPreview){scene.remove(menuPreview);menuPreview=null}for(let e of effects)scene.remove(e.o);effects.length=0;queue.length=0;if(state!=='menu'||rows.size===0){world.clear();rows.clear();liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;gameTime=0;}px=0;py=0;highest=0;earned=0;camY=0;camSmooth=0;camSide=0;hop=null;state='playing';if(player)scene.remove(player);player=new THREE.Group();avatar=dino(chosen,1);
+function start(){if(menuPreview){scene.remove(menuPreview);menuPreview=null}for(let e of effects)scene.remove(e.o);effects.length=0;queue.length=0;if(state!=='menu'||rows.size===0){world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;gameTime=0;}px=0;py=0;highest=0;earned=0;camY=0;camSmooth=0;camSide=0;hop=null;state='playing';if(player)scene.remove(player);player=new THREE.Group();avatar=dino(chosen,1);
 // Permanent model fit; turning and squash/stretch animate its parent.
 const model=avatar;
 model.updateMatrixWorld(true);
@@ -1080,8 +1153,8 @@ avatar=new THREE.Group();
 avatar.rotation.y=Math.PI;
 avatar.add(fittedModel);
 player.add(avatar);
-blob(player,0,0,.66);scene.add(player);ensureRows();updateHud();show(null);clock.getDelta();lastTime=performance.now()}let menuPreview=null;
-function menu(){queue.length=0;state='menu';hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;gameTime=0;world.clear();rows.clear();liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;ensureRows();if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');fx('death',.65);$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist();fx('record')} $('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
+blob(player,0,0,.66);scene.add(player);ensureRows();updateDaylight(0,true);updateHud();show(null);clock.getDelta();lastTime=performance.now()}let menuPreview=null;
+function menu(){queue.length=0;state='menu';hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;gameTime=0;world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;ensureRows();updateDaylight(0,true);if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');fx('death',.65);$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist();fx('record')} $('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
 const queue=[];function requestMove(dx,dy){if(state!=='playing')return;if(queue.length<1)queue.push([dx,dy])}function groundTileHeight(r,x){return r?.raised?.get(Math.round(x))||0}
 function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sourceRow?.type==='river'||sourceRow?.type==='lava')?support(sourceRow,px):null;const sourceIndex=sourcePlatform?platformTileAt(sourcePlatform,px):-1;const tileX=sourcePlatform?platformTileCenter(sourcePlatform,sourceIndex):Math.round(px);let nx=(sourcePlatform&&dy===0?tileX:Math.round(px))+dx,ny=py+dy;if(nx<LEFT||nx>RIGHT||ny<0)return;let r=rows.get(ny);if(!r||r.solid.has(Math.round(nx))){fx('denied',.55);return}const landing=(r.type==='river'||r.type==='lava')?nearestPlatformTile(r,nx):null;if(landing)nx=landing.center;hop={fromX:fromX,fromY:py,fromHeight:player.position.y,fromRoll:player.rotation.z,toX:nx,toY:ny,targetPlatform:landing?.platform||null,targetIndex:landing?.index??-1,t:0,turnFrom:avatar.rotation.y,turnTo:dx>0?Math.PI/2:dx<0?-Math.PI/2:dy>0?Math.PI:0};px=nx;py=ny;fx('hop')}// Visible player bounds include facing and hop squash/stretch, excluding the shadow.
 const playerHitBounds=new THREE.Box3();
@@ -1150,7 +1223,11 @@ function nearestPlatformTile(r,x){let best=null,d=.49;for(const p of r.moving){i
 function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hypot(x-m.dangerDisc.position.x,player.position.z-(-r.y))<=.65)}
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
 function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.75,-py,1,c.value===5?16:8);fx(c.value===5?'fossil':'amber');toast(c.value===5?'🦟 FOSSIL AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
-function update(dt,t){if(state==='playing'||state==='menu'){
+function update(dt,t){
+ const lightScore=state==='menu'?0:highest;
+ updateDaylight(lightScore);
+ updateSunBlobs();
+ if(state==='playing'||state==='menu'){
  gameTime+=dt;
  // Only nearby rows animate, bounded per-frame CPU work on mobile.
  for(const info of liquidMeshes){
