@@ -545,7 +545,7 @@ const scoreMusic={master:null,bus:null,filter:null,delay:null,feedback:null,cloc
 function musicLevel(){return Math.pow((+ $('music').value||0)/100,1.45)*.48}
 function musicInit(){
  const m=scoreMusic;if(m.master)return;
- const ctx=audio();m.master=ctx.createGain();m.master.gain.value=0;m.master.connect(ctx.destination);
+ mixInit();const ctx=audio();m.master=ctx.createGain();m.master.gain.value=0;m.master.connect(mixer.music);
  m.bus=ctx.createGain();m.bus.gain.value=.85;m.filter=ctx.createBiquadFilter();m.filter.type='lowpass';m.filter.frequency.value=3000;
  m.bus.connect(m.filter).connect(m.master);
  m.delay=ctx.createDelay(.8);m.delay.delayTime.value=.375;m.feedback=ctx.createGain();m.feedback.gain.value=.19;
@@ -575,36 +575,87 @@ function musicPerc(when,vol,kind){
   src.connect(f).connect(g).connect(m.bus);src.start(when);src.stop(when+duration+.01);
  }
 }
+// Three arrangements share a pentatonic tonal center and crossfade by mode.
+function musicMood(){
+ if(state!=='playing')return 'menu';
+ const near=rows.get(py),forward=rows.get(py+1);
+ if([near,forward].some(r=>r&&(r.type==='lava'||r.special&&specialProgress(r.special)<r.special.warningLength+r.special.activeLength)))return 'danger';
+ return 'game';
+}
 function musicSchedule(){
  const m=scoreMusic;if(!m.active||!m.master)return;const ctx=audio();if(ctx.state!=='running')return;
- // 94 BPM: a 16-step tribal pulse, five independent musical layers.
- const beat=60/94,stepTime=beat/4;
  const roots=[110,98,130.81,87.31],pent=[0,3,5,7,10,12,15,17,19];
  let guard=0;
  while(m.next<ctx.currentTime+.28&&guard++<16){
+  const mode=musicMood(),bpm=mode==='menu'?108:120,beat=60/bpm;
   const n=m.step,bar=Math.floor(n/16),phase=n%16,root=roots[Math.floor(bar/2)%roots.length],t=m.next;
-  // Layer 1: low sustained cinematic drone, two detuned oscillators.
-  if(phase===0){musicNote(root/2,t,beat*7.7,.052,'sawtooth',350,.2);musicNote(root*.997,t,beat*7.5,.019,'triangle',550,.2);}
-  // Layer 2: hand-drum heartbeat and alternating wood taps.
-  if(phase===0||phase===8)musicPerc(t,phase===0?.19:.14,'drum');
-  if(phase===4||phase===12)musicPerc(t,.065,'wood');
-  // Layer 3: delicate seed-pod shaker, with syncopated accents.
-  if(phase%2===0)musicPerc(t,(phase===2||phase===10)?.022:.013,'rattle');
-  // Layer 4: earthy tuned wooden plucks and a slow repeating ostinato.
-  const pattern=[0,-1,2,-1,4,-1,2,-1,0,-1,3,-1,5,-1,2,-1];
-  if(pattern[phase]>=0){let sem=pent[pattern[phase]];musicNote(root*2*Math.pow(2,sem/12),t,.21,.034,'triangle',1550,.008);}
-  // Layer 5: airy pentatonic flute that enters every other four bars.
-  if(bar%4>=2&&(phase===0||phase===6||phase===11)){
-   const ix=phase===0?4:phase===6?6:5;
-   musicNote(root*4*Math.pow(2,pent[ix]/12),t+.02,phase===11?beat*.9:beat*1.6,.021,'sine',2200,.09);
+  const pattern=mode==='menu'?[0,-1,2,4,3,-1,5,-1,0,2,-1,4,5,-1,2,-1]:
+   [0,-1,2,-1,4,5,2,-1,3,-1,4,2,5,-1,2,-1];
+  const danger=mode==='danger';
+  if(phase===0){
+   musicNote(root/2,t,beat*7.7,danger?.07:.035,'triangle',500,.14);
+   musicNote(root*.997,t,beat*5.8,.018,'sine',630,.14);
   }
-  m.step++;m.next+=stepTime;
+  if(phase===0||phase===8||danger&&phase===4)musicPerc(t,danger?.18:.11,'drum');
+  if(phase===4||phase===12||danger&&phase===2)musicPerc(t,danger?.085:.045,'wood');
+  if(phase%2===0)musicPerc(t,danger?.026:.013,'rattle');
+  if(pattern[phase]>=0){
+   const sem=pent[pattern[phase]];
+   musicNote(root*2*Math.pow(2,sem/12),t,danger?.15:.23,danger?.039:.043,mode==='menu'?'sine':'triangle',danger?1200:2500,.008);
+   if(mode==='menu'&&phase%4===0)musicNote(root*4*Math.pow(2,sem/12),t+.025,.16,.012,'sine',3000,.007);
+  }
+  if(!danger&&bar%4>=2&&(phase===0||phase===6||phase===11)){
+   const ix=phase===0?4:phase===6?6:5;
+   musicNote(root*4*Math.pow(2,pent[ix]/12),t+.02,beat*(phase===11?.9:1.5),.025,'sine',2500,.075);
+  }
+  if(danger&&phase%4===0)musicNote(root, t,beat*.8,.022,'sawtooth',420,.02);
+  m.step++;m.next+=beat/4;
  }
 }
 function musicSync(){
- const m=scoreMusic;const level=musicLevel();if(!m.master)return;
- const ctx=audio(),target=(state==='paused'||state==='dead'||state==='menu'||state==='select'||state==='options')?level*.36:level;
- m.master.gain.setTargetAtTime(level===0?0:target,ctx.currentTime,.13);
+ const m=scoreMusic;if(!m.master)return;
+ mixSync();const ctx=audio(),mode=musicMood();
+ const level=state==='paused'||state==='dead'?.13:mode==='menu'?.70:mode==='danger'?.72:.85;
+ m.master.gain.setTargetAtTime(level,ctx.currentTime,.35);
+}
+function ambientInit(){
+ if(mixer.loops)return;mixInit();
+ const ctx=audio();mixer.loops={};
+ for(const [name,freq,gain] of [['forest',3800,.38],['river',850,.28],['lava',240,.45]]){
+  const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),volume=ctx.createGain();
+  src.buffer=mixer.noise;src.loop=true;src.loopStart=0;src.loopEnd=1.97;
+  filter.type=name==='forest'?'highpass':'lowpass';filter.frequency.value=freq;
+  volume.gain.value=0;
+  src.connect(filter).connect(volume).connect(mixer.ambient);src.start();
+  mixer.loops[name]={volume,gain};
+ }
+}
+function ambientSync(){
+ if(!mixer.master)return;
+ ambientInit();const now=audio().currentTime;
+ let forest=0,river=0,lava=0;
+ if(state==='playing'||state==='menu'){
+  for(let d=-2;d<=3;d++){
+   const r=rows.get(py+d);if(!r)continue;
+   const weight=1/(1+Math.abs(d)*1.9);
+   if(r.type==='river'||r.type==='flashflood')river=Math.max(river,weight);
+   if(r.type==='lava')lava=Math.max(lava,weight);
+   if(['grass','forest','sky'].includes(r.type))forest=Math.max(forest,weight);
+  }
+ }
+ for(const [name,amount] of Object.entries({forest,river,lava})){
+  const item=mixer.loops[name];
+  item.volume.gain.setTargetAtTime(item.gain*amount,now,.45);
+ }
+ // Occasional birds and distant insects, subtle enough not to obscure hazards.
+ if(state==='playing'&&forest>.5&&now>mixer.lastAmbience+4+Math.random()*3&&+$('ambience').value){
+  mixer.lastAmbience=now;const o=audio().createOscillator(),g=audio().createGain();
+  o.type='sine';o.frequency.setValueAtTime(1350+Math.random()*400,now);
+  o.frequency.exponentialRampToValueAtTime(850+Math.random()*280,now+.20);
+  g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.045,now+.035);
+  g.gain.exponentialRampToValueAtTime(.0001,now+.26);
+  o.connect(g).connect(mixer.ambient);o.start(now);o.stop(now+.27);
+ }
 }
 // Android/Chrome audio must be unlocked in a real user gesture. Retry on later
 // gestures too: a one-shot listener can be consumed before audio is permitted.
@@ -612,7 +663,7 @@ let audioResumePending=false;
 function musicUnlock(){
  try{
   const ctx=audio();
-  musicInit();
+  musicInit();ambientInit();mixSync();
   if(!scoreMusic.active){scoreMusic.active=true;scoreMusic.clock=setInterval(musicSchedule,65)}
   if(ctx.state==='running'){
    if(scoreMusic.next<ctx.currentTime||scoreMusic.next>ctx.currentTime+2)scoreMusic.next=ctx.currentTime+.08;
@@ -637,16 +688,13 @@ document.addEventListener('visibilitychange',()=>{
   scoreMusic.next=audioCtx.currentTime+.08;musicSync();
  }
 });
-$('music').addEventListener('input',()=>{if(scoreMusic.master)musicSync()});
+for(const id of ['music','ambience','sfx','masterVolume'])$(id).addEventListener('input',()=>{mixSync();musicSync()});
 $('testAudio').addEventListener('click',async()=>{
  const status=$('audioStatus');
  try{musicUnlock();const ctx=audio();await ctx.resume();
   if(ctx.state!=='running'){status.textContent='Audio is '+ctx.state+'. Try tapping Play, then test again.';return;}
-  const osc=ctx.createOscillator(),g=ctx.createGain(),now=ctx.currentTime;
-  osc.type='sine';osc.frequency.setValueAtTime(440,now);osc.frequency.exponentialRampToValueAtTime(660,now+.23);
-  g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.16,now+.03);g.gain.exponentialRampToValueAtTime(.0001,now+.32);
-  osc.connect(g).connect(ctx.destination);osc.start(now);osc.stop(now+.33);
-  status.textContent='Test tone played. Audio engine: '+ctx.state+'. If silent, check media volume and site sound permissions.';
+  fx('amber');setTimeout(()=>fx('log'),240);setTimeout(()=>fx('flood',.45),630);
+  status.textContent='Audio preview: amber, wooden landing, then flood. Output: '+ctx.state+'.';
  }catch(e){status.textContent='Audio error: '+e.message;}
 });
 function specialSound(kind){if(+$('sfx').value===0)return;try{const ctx=audio(),now=ctx.currentTime,vol=(+$('sfx').value/100)*.18;
