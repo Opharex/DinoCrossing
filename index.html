@@ -442,30 +442,31 @@ sp.warning.visible=sp.kind==='rockslide'?warning:warning||active;sp.wave.visible
 if(sp.kind==='rockslide')sp.warnMat.opacity=warning?(.22+.62*Math.abs(Math.sin(time*9))):.12;
 else{
   sp.warnMat.opacity=0;
-  // Warning effects stay AHEAD of the dangerous wave, never trailing behind it.
-  // As the collision wave crosses the lane, its front consumes the harmless stream.
+  // The harmless flow is the thin tail connected to the BACK of the hazard.
+  // It never appears beyond the wave or remains once the collision phase ends.
   sp.warning.position.x=0;
   const travel=time*20/sp.warningLength;
-  const waveFront=active?(-18+36*t+ (sp.kind==='flashflood'?9.3:8)): -Infinity;
+  const waveRear=active?(-18+36*t-(sp.kind==='flashflood'?9.3:8)):0;
+  const tailEnd=active?Math.min(10,waveRear):Math.min(10,-10+travel);
+  const tailStart=active?Math.max(-10,tailEnd-6):-10;
   if(sp.kind==='flashflood'){
-    const fill=Math.min(1,time/sp.warningLength),water=sp.warning.children[0];
-    const front=Math.max(-10,Math.min(10,waveFront));
-    const end=-10+20*fill;
-    const length=Math.max(0,end-front);
+    const water=sp.warning.children[0];
+    const length=Math.max(0,tailEnd-tailStart);
     water.visible=length>.01;
     water.scale.x=length/20;
-    water.position.x=sp.dir*(front+length/2);
+    water.position.x=sp.dir*(tailStart+length/2);
     for(let i=1;i<sp.warning.children.length;i++){
       const ripple=sp.warning.children[i],distance=travel-(i-1)*3.6;
       const x=-10+((distance%20)+20)%20;
-      ripple.visible=distance>=0&&x>waveFront&&x<=end;
+      ripple.visible=distance>=0&&x>=tailStart&&x<=tailEnd;
       ripple.position.x=sp.dir*x;
     }
   }else if(sp.kind==='stampede')for(const scout of sp.warning.children){
     const seed=scout.userData.scout||0;
     const distance=travel-seed*(20/sp.warning.children.length);
-    const x=-10+((distance%20)+20)%20;
-    scout.visible=distance>=0&&x>waveFront;
+    // Keep the small dinosaurs immediately behind the full-size herd.
+    const x=active?tailEnd-((seed+.5)/sp.warning.children.length)*6:-10+((distance%20)+20)%20;
+    scout.visible=active?(x>=tailStart&&x<=tailEnd):(distance>=0);
     scout.position.x=sp.dir*x;
     scout.position.y=.045+Math.abs(Math.sin(gameTime*28+seed))*.025;
     const parts=scout.userData.walkParts;
