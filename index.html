@@ -815,7 +815,7 @@ if(type==='river'||type==='lava'){
  // Clear only the two closest trees on either bank of the immediately adjacent row,
  // leaving the rest of the side forest dense around each visible spillway.
  for(let d=1;d<=2;d++)clearSideForestNearLiquid(rows.get(y-d));
- if(poolIndex===-1||poolIndex===1)makeLiquidSpillway(group,row,poolIndex===1?3:1);for(let i=0;i<5;i++){let x=-8+i*4.1+rand(-.5,.5),p=new THREE.Group();p.position.x=x;group.add(p);const length=Math.random()<.5?2:3;p.add(floatingPlatform(type,x+y,length));blob(p,0,0,length*.42).userData.sunBlob.height=.33;row.moving.push({mesh:p,x,speed:row.speed*(type==='lava'?.75:.9),width:length,platform:true})}}if(type==='path'){for(let i=0;i<3;i++){let x=-9+i*6.8+rand(-1,1),mob=obstacleDino(pick([2,3,4,5,6]),Math.floor(rand(0,5)));mob.scale.setScalar(rand(.78,.95));mob.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;mob.position.set(x,0,0);blob(mob,0,0,.85);group.add(mob);row.moving.push({mesh:mob,x,speed:row.speed,width:1.05,platform:false})}for(let x=-7;x<=7;x+=2)box(group,materials.wood,x,-.01,-.43,.5,.05,.1)}if(type==='sky'){let bird=makePterosaur();bird.scale.setScalar(.85);bird.position.set(-11,2.1,0);bird.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;group.add(bird);let dangerDisc=new THREE.Mesh(new THREE.CircleGeometry(.65,28),new THREE.MeshBasicMaterial({color:0xff6244,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide}));dangerDisc.rotation.x=-Math.PI/2;dangerDisc.position.set(-11,.055,0);group.add(dangerDisc);
+ if(poolIndex===-1||poolIndex===1)makeLiquidSpillway(group,row,poolIndex===1?3:1);for(let i=0;i<5;i++){let x=-row.dir*(12.7-i*5.15+rand(-.35,.35)),p=new THREE.Group();p.position.x=x;group.add(p);const length=Math.random()<.5?2:3;p.add(floatingPlatform(type,x+y,length));blob(p,0,0,length*.42).userData.sunBlob.height=.33;row.moving.push({mesh:p,x,speed:row.speed*(type==='lava'?.75:.9),width:length,platform:true})}}if(type==='path'){for(let i=0;i<3;i++){let x=-9+i*6.8+rand(-1,1),mob=obstacleDino(pick([2,3,4,5,6]),Math.floor(rand(0,5)));mob.scale.setScalar(rand(.78,.95));mob.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;mob.position.set(x,0,0);blob(mob,0,0,.85);group.add(mob);row.moving.push({mesh:mob,x,speed:row.speed,width:1.05,platform:false})}for(let x=-7;x<=7;x+=2)box(group,materials.wood,x,-.01,-.43,.5,.05,.1)}if(type==='sky'){let bird=makePterosaur();bird.scale.setScalar(.85);bird.position.set(-11,2.1,0);bird.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;group.add(bird);let dangerDisc=new THREE.Mesh(new THREE.CircleGeometry(.65,28),new THREE.MeshBasicMaterial({color:0xff6244,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide}));dangerDisc.rotation.x=-Math.PI/2;dangerDisc.position.set(-11,.055,0);group.add(dangerDisc);
 let dangerRing=new THREE.Mesh(new THREE.RingGeometry(.61,.68,32),new THREE.MeshBasicMaterial({color:0xffe58b,transparent:true,opacity:.9,depthWrite:false,side:THREE.DoubleSide}));dangerRing.rotation.x=-Math.PI/2;dangerRing.position.set(-11,.062,0);group.add(dangerRing);
 // Bird collision indicator remains the original unchanged ring/disc.
  row.moving.push({mesh:bird,x:-11,speed:row.speed*1.7,width:1.1,platform:false,bird:true,dangerDisc,dangerRing});box(group,materials.stone,0,.006,0,1.3,.015,.65).material.transparent=true;row.bird=bird}if(type==='tar'){
@@ -971,6 +971,8 @@ function fx(name,power=1){
    case 'dirt':fxNoise(.13,.15*v,650,'lowpass');fxTone(110*variation,.09,.08*v,'sine',.65);break;
    case 'log':fxNoise(.27,.17*v,500,'bandpass');fxTone(110*variation,.29,.21*v,'sawtooth',.49);fxTone(210*variation,.15,.05*v,'sine',.62,.07);fxNoise(.17,.075*v,1800,'highpass',.05);break;
    case 'logRock':fxNoise(.25,.045*v,650,'bandpass');fxTone(90*variation,.22,.065*v,'sawtooth',.64);break;
+   case 'waterfallSplash':fxNoise(.25,.22*v,1050,'bandpass');fxNoise(.24,.16*v,2600,'highpass',.06);fxTone(170*variation,.16,.10*v,'sine',.56);break;
+   case 'lavaFallSplash':fxNoise(.34,.27*v,600,'lowpass');fxNoise(.24,.15*v,1800,'highpass');fxTone(96*variation,.29,.14*v,'sawtooth',.55);break;
    case 'lavaStone':fxNoise(.24,.23*v,450,'bandpass');fxTone(100*variation,.23,.18*v,'triangle',.49);fxNoise(.22,.12*v,2400,'highpass',.08);break;
    case 'rockGrind':fxNoise(.27,.10*v,650,'bandpass');fxTone(75*variation,.18,.085*v,'sawtooth',.78);break;
    case 'waterDeath':fxNoise(.55,.34*v,1600,'lowpass');fxNoise(.40,.22*v,230,'lowpass',.06);fxTone(125,.37,.19*v,'sine',.43);break;
@@ -1319,12 +1321,32 @@ function hitMoving(r,x){return r.moving.find(m=>!m.platform&&!m.bird&&playerOver
 // Log landing motion is shared by the deck and its rider in the same frame.
 const logSurfaceRay=new THREE.Raycaster(),logSurfaceOrigin=new THREE.Vector3(),logSurfaceDown=new THREE.Vector3(0,-1,0),logSurfaceHits=[],logSurfacePoint=new THREE.Vector3();
 function logMotion(p){return p.logMotion||(p.logMotion={dip:0,dipV:0,roll:0,rollV:0})}
-function updateLogMotion(p,dt){
+// Height and pitch follow the water's two height changes without requiring a physics engine.
+// Rider landing springs remain additive so occupied logs still bob and rock naturally.
+function waterfallLogPose(p,r){
+ const along=p.x*r.dir;
+ let y=0,pitch=0;
+ if(along< -LIQUID_INLET_START)y=LIQUID_FEEDER_Y-LIQUID_LANE_Y;
+ else if(along< -LIQUID_INLET_END){
+  const a=(along+LIQUID_INLET_START)/(LIQUID_INLET_START-LIQUID_INLET_END);
+  const fall=a*a*(3-2*a);
+  y=(LIQUID_FEEDER_Y-LIQUID_LANE_Y)*(1-fall);
+  pitch=-r.dir*Math.sin(a*Math.PI)*.58;
+ }else if(along>=LIQUID_OUTFALL_START&&along<LIQUID_OUTFALL_END){
+  const a=(along-LIQUID_OUTFALL_START)/(LIQUID_OUTFALL_END-LIQUID_OUTFALL_START);
+  const fall=a*a*(3-2*a);
+  y=(LIQUID_LOWER_Y-LIQUID_LANE_Y)*fall;
+  pitch=-r.dir*Math.sin(a*Math.PI)*.68;
+ }else if(along>=LIQUID_OUTFALL_END)y=LIQUID_LOWER_Y-LIQUID_LANE_Y;
+ return {y,pitch};
+}
+function updateLogMotion(p,dt,r){
   const m=logMotion(p);
   m.dipV+=(-64*m.dip-8*m.dipV)*dt;m.dip+=m.dipV*dt;
   m.rollV+=(-48*m.roll-6*m.rollV)*dt;m.roll+=m.rollV*dt;
-  p.mesh.position.y=Math.sin(gameTime*2+p.x)*.028+m.dip;
-  p.mesh.rotation.z=Math.sin(gameTime*1.7+p.x)*.009+m.roll;
+  const waterfall=waterfallLogPose(p,r);
+  p.mesh.position.y=waterfall.y+Math.sin(gameTime*2+p.x)*.028+m.dip;
+  p.mesh.rotation.z=waterfall.pitch+Math.sin(gameTime*1.7+p.x)*.009+m.roll;
   if(state==='playing'&&!hop&&rows.get(py)?.moving?.includes(p)&&support(rows.get(py),px)===p&&Math.abs(m.rollV)>.18&&gameTime>(p.nextCreak||0)){p.nextCreak=gameTime+.85;fx(rows.get(py).type==='river'?'logRock':'rockGrind',.45)}
 }
 function logSurfaceHeight(r,p,x){
@@ -1421,11 +1443,33 @@ if(state==='playing'||state==='menu'){
   const visuallyNear=r.y>=viewCenter-24&&r.y<viewCenter+18;
   for(const m of r.moving){
    m.x+=r.dir*m.speed*dt;
+   if(m.platform&&(r.type==='river'||r.type==='lava')){
+    // Loop from the upper reservoir, travel the lane and finish below the exit falls.
+    const before=(m.x-r.dir*m.speed*dt)*r.dir;
+    if(m.x*r.dir>13.5)m.x=-r.dir*13.5;
+    if(!visuallyNear)continue;
+    m.mesh.position.x=m.x;
+    updateLogMotion(m,dt,r);
+    const after=m.x*r.dir;
+    if(after>=before&&state==='playing'){
+     for(const [threshold,landingY] of [[-LIQUID_INLET_END,LIQUID_LANE_Y],[LIQUID_OUTFALL_END,LIQUID_LOWER_Y]]){
+      if(before<threshold&&after>=threshold){
+       const splashX=r.dir*threshold;
+       // Effects are short-lived, bounded, and only emitted for nearby falls.
+       burst(splashX,landingY+.04,-r.y,r.type==='river'?2:3,10);
+       const spring=logMotion(m);spring.dipV-=.54;spring.rollV+=r.dir*.36;
+       if(Math.abs(r.y-py)<5&&gameTime>(r.nextFallSound||0)){
+        r.nextFallSound=gameTime+.26;fx(r.type==='river'?'waterfallSplash':'lavaFallSplash',.65);
+       }
+      }
+     }
+    }
+    continue;
+   }
    if(m.x>12)m.x=-12;
    if(m.x< -12)m.x=12;
    if(!visuallyNear)continue;
    m.mesh.position.x=m.x;
-   if(m.platform&&(r.type==='river'||r.type==='lava'))updateLogMotion(m,dt);
   }
  }
 }if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){
