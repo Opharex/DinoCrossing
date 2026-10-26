@@ -41,7 +41,7 @@
 @media(max-height:700px) and (min-width:601px){#select .shopFeature{min-height:200px}#select .shopStage{min-height:200px}#select #roster button{min-height:75px}}
 
 /* Cute cartoon species icons, in exactly the same order as the skin roster. */
-#select #roster .dinoicon.speciesIcon{display:block;flex:none;width:64px;height:64px;margin:0;background-image:url("./shop-dinosaur-icons-v1.webp");background-size:300% 300%;background-repeat:no-repeat}
+#select #roster .dinoicon.speciesIcon{display:block;flex:none;width:64px;height:64px;margin:0;background-image:none;background-size:contain;background-repeat:no-repeat}
 @media(max-width:600px){#select #roster .dinoicon.speciesIcon{width:52px;height:52px}}
 
 /* Rendered tiny side-profile portraits share the existing icon footprint. */
@@ -52,7 +52,7 @@
 }
 /* Keep each original/Tech pair together in the roster. */
 #select #roster{grid-template-columns:repeat(4,minmax(0,1fr))}
-#select #roster .dinoicon.techIcon{background-image:url("./shop-tech-dinosaur-icons-v1.webp")}
+#select #roster .dinoicon.techIcon{background-image:none}
 #select #roster button.techSkin{border-color:#497e8b}
 #select #roster button.techSkin.selected{border-color:#65eeff;background:linear-gradient(#315966,#1d333f);box-shadow:0 0 12px #48dfff60,0 4px #142b34}
 @media(max-width:600px){#select #roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -63,7 +63,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Seven Prime Species and Tech Armor Upgrades">🦖 PRIME COLLECTION & TECH UPGRADES! ✨</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Shop and Rendering Performance">⚡ SMOOTHER SHOP & LIGHTER RENDERING! 🦕</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -103,13 +103,7 @@ $('tileGridColor').addEventListener('input',()=>{tileGridColor=$('tileGridColor'
 const species=[['T. Rex',0,0x5dbb63],['Velociraptor',20,0x4ac8b1],['Triceratops',35,0xf4a75a],['Stegosaurus',45,0xa0a0ed],['Ankylosaurus',55,0xdca66b],['Parasaurolophus',65,0xe67cb3],['Spinosaurus',80,0x71a9eb],['Brachiosaurus',100,0x7fcf7b],['Pterodactyl',120,0xc6a0e4]];
 // Original IDs remain 0..8 so existing saves and unlocked skins keep their identity.
 species.push(...species.slice(0,9).map(([name,,color])=>['Tech '+name,150,color]));
-// ID 18 is normal-only: preserve all original 0..17 save IDs.
-species.push(['T. Rex Prime',40,0x5dbb63]);
-// ID 19 is a second, normal-only Prime skin. Never shift old save IDs.
-species.push(['Velociraptor Prime',50,0x4ac8b1]);
-// Prime IDs 20..26 correspond to base species 2..8. All legacy IDs remain fixed.
-species.push(...species.slice(2,9).map(([name,,color],i)=>[name+' Prime',60+i*10,color]));
-const shopOrder=Array.from({length:9},(_,i)=>[i,i===0?18:i===1?19:18+i,i+9]).flat();
+const shopOrder=Array.from({length:9},(_,i)=>[i,i+9]).flat();
 
 const scene=new THREE.Scene();scene.background=new THREE.Color(0xafe6e5);scene.fog=new THREE.Fog(0xafe6e5,24,65);const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio, /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?1:1.25));renderer.shadowMap.enabled=!/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);renderer.shadowMap.type=THREE.PCFShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.prepend(renderer.domElement);function applyQuality(){const mobile=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);const dpr=quality==='low'?.72:quality==='medium'?(mobile?1:1.25):Math.min(devicePixelRatio,mobile?1.3:1.75);renderer.setPixelRatio(dpr);renderer.shadowMap.enabled=quality==='high'&&!mobile;renderer.shadowMap.needsUpdate=true;renderer.setSize(innerWidth,innerHeight)}applyQuality();$('quality').onchange=()=>{quality=$('quality').value;applyQuality();persist()};$('showFps').onchange=()=>{showFps=$('showFps').checked;$('fps').style.display=showFps?'block':'none';persist()};const camera=new THREE.OrthographicCamera(-8,8,12,-12,.1,140);const sun=new THREE.DirectionalLight(0xfff4c9,2.3);sun.position.set(-7,16,11);sun.castShadow=true;sun.shadow.mapSize.set(512,512);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-20;const skyFill=new THREE.HemisphereLight(0xe2ffff,0x66824a,2.0);scene.add(sun,skyFill);
 sun.shadow.bias=-.0005;sun.shadow.normalBias=.035;sun.shadow.camera.far=95;sun.shadow.camera.updateProjectionMatrix();
@@ -418,451 +412,7 @@ function applyTechSkin(g){
   }
   g.userData.tech=true;return g;
 }
-// Standalone normal-only T. Rex Prime: rounded neck, inset eyes, tiny claws,
-// and overlapping tapered tail sections. Existing dinosaurs are untouched.
-function makeTrexPrime(){
- const g=new THREE.Group();
- const skin=mat(0x5dbb63),belly=mat(0xb9db8e);
- const shade=mat(0x3b8246),clawMat=materials.horn;
- // Rounded mass and sloped shoulders, all body joints overlap.
- mesh(g,facetGeo,skin,0,.79,-.12,.47,.48,.68);
- mesh(g,facetGeo,belly,0,.69,.315,.34,.34,.18);
- mesh(g,facetGeo,skin,0,1.04,.26,.39,.36,.44);
- mesh(g,facetGeo,skin,0,1.24,.43,.39,.34,.40);
- // Broad friendly predator skull and a short attached upper/lower muzzle.
- mesh(g,facetGeo,skin,0,1.38,.63,.51,.34,.49);
- mesh(g,facetGeo,skin,0,1.235,1.005,.40,.19,.36);
- mesh(g,facetGeo,belly,0,1.12,1.015,.34,.075,.30);
- // Inset eye sockets and subtle pupils tucked against side of skull.
- for(const side of [-1,1]){
-  mesh(g,facetGeo,shade,side*.452,1.48,.77,.067,.105,.095);
-  mesh(g,facetGeo,materials.white,side*.464,1.48,.797,.052,.076,.073);
-  mesh(g,facetGeo,materials.black,side*.488,1.48,.841,.030,.048,.036);
-  // Small, readable two-piece arms with two short curved-looking claws.
-  const shoulder=mesh(g,facetGeo,skin,side*.383,.995,.30,.125,.14,.15);
-  shoulder.rotation.z=side*.23;
-  const forearm=mesh(g,facetGeo,skin,side*.435,.83,.40,.095,.15,.13);
-  forearm.rotation.x=-.33;
-  for(const offset of [-.045,.045]){
-   const claw=horn(g,clawMat,side*.44+offset,.733,.52,.035,.105,Math.PI*.37,0);
-   claw.rotation.z=side*.09;
-  }
- }
- const feet=[];
- for(const side of [-1,1]){
-  const leg=mesh(g,facetGeo,shade,side*.31,.39,-.21,.22,.42,.26);feet.push(leg);
-  mesh(g,facetGeo,skin,side*.32,.15,.07,.23,.16,.34);
-  for(const toe of [-.12,0,.12])horn(g,clawMat,side*.32+toe,.105,.30,.045,.12,Math.PI*.42);
- }
- // Overlapping tapered segments create one continuous tail silhouette.
- let prevY=.76,prevZ=-.53;
- for(let i=0;i<7;i++){
-  const z=-.57-i*.235,y=.76-i*.052;
-  const radius=.33-i*.042;
-  const seg=mesh(g,facetGeo,skin,0,y,z,radius,.28-i*.031,.30-i*.026);
-  seg.rotation.x=-.11;
-  prevY=y;prevZ=z;
- }
- g.userData.feet=feet;
- g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
- return g;
-}
-// A separately purchasable, normal-only athletic Velociraptor design.
-// All model components have overlapping joints; no original skin geometry changes.
-function makeRaptorPrime(){
- const g=new THREE.Group();
- const skin=mat(0x4ac8b1),shade=mat(0x238a83),belly=mat(0x9be4c5);
- const hornMat=materials.horn;
- // Slender, forward-leaning barrel and waist, with a continuous neck.
- const torso=mesh(g,facetGeo,skin,0,.79,-.18,.33,.34,.63);
- torso.rotation.x=-.08;
- mesh(g,facetGeo,belly,0,.68,.22,.24,.24,.30);
- const chest=mesh(g,facetGeo,skin,0,1.00,.28,.275,.30,.34);
- chest.rotation.x=-.20;
- const neck=mesh(g,facetGeo,skin,0,1.17,.47,.215,.245,.30);
- neck.rotation.x=-.25;
- // Thin, wedge-shaped head with a narrow elongated muzzle.
- mesh(g,facetGeo,skin,0,1.34,.69,.32,.245,.335);
- const snout=mesh(g,facetGeo,skin,0,1.245,1.035,.225,.135,.35);
- snout.rotation.x=.07;
- mesh(g,facetGeo,belly,0,1.165,1.038,.20,.052,.29);
- for(const side of [-1,1]){
-  // Eyes sit close to the head's side rather than floating outward.
-  mesh(g,facetGeo,shade,side*.285,1.39,.785,.056,.079,.080);
-  mesh(g,facetGeo,materials.white,side*.300,1.39,.813,.042,.058,.055);
-  mesh(g,facetGeo,materials.black,side*.319,1.39,.839,.025,.041,.028);
-  // Long but light three-fingered grasping forelimbs.
-  const upper=mesh(g,facetGeo,skin,side*.285,.96,.365,.096,.20,.115);
-  upper.rotation.z=side*.18;
-  const wrist=mesh(g,facetGeo,shade,side*.32,.80,.48,.072,.15,.115);
-  wrist.rotation.x=-.38;
-  for(const offset of [-.06,0,.06]){
-   const talon=horn(g,hornMat,side*.32+offset,.716,.57,.025,.092,Math.PI*.34);
-   talon.rotation.z=side*.06;
-  }
- }
- // Distinctively long, overlapping, gently rising counterbalance tail.
- for(let i=0;i<10;i++){
-  const t=i/9;
-  const seg=mesh(g,facetGeo,i%3===0?shade:skin,0,
-   .74+t*.18,-.59-i*.23,
-   .265*(1-t)+.045,.24*(1-t)+.045,.29-i*.011);
-  seg.rotation.x=.08;
- }
- // Small dorsal spikes follow the contour through back and tail and
- // embed their bases into the actual body volumes.
- const spikes=[
-  [-.03,1.105,.105],[-.31,1.095,.10],[-.56,.97,.095],
-  [-.80,.91,.085],[-1.06,.94,.072],[-1.32,.97,.060]
- ];
- for(const [z,y,r] of spikes){
-  const spike=horn(g,shade,0,y,z,r,r*2.65,-.21);
-  spike.rotation.z=.04;
- }
- const feet=[];
- for(const side of [-1,1]){
-  // Athletic thighs, angled shins, substantial grounded feet.
-  const thigh=mesh(g,facetGeo,skin,side*.225,.55,-.28,.195,.285,.28);
-  thigh.rotation.x=-.18;
-  const shin=mesh(g,facetGeo,shade,side*.245,.29,-.12,.107,.265,.14);
-  shin.rotation.x=.16;feet.push(shin);
-  mesh(g,facetGeo,skin,side*.25,.105,.105,.155,.104,.31);
-  for(const offset of [-.08,.085]){
-   const toe=horn(g,hornMat,side*.25+offset,.095,.33,.04,.125,Math.PI*.38);
-   toe.rotation.z=side*.08;
-  }
-  // Raised inner second-toe sickle, distinct from the ground-contact claws.
-  // The big curved claw sits ABOVE the other toes and sweeps forward.
-  const sickleBase=mesh(g,facetGeo,shade,side*.17,.19,.20,.082,.10,.11);
-  sickleBase.rotation.x=-.30;
-  const sickle=horn(g,hornMat,side*.17,.27,.29,.071,.25,-.75);
-  sickle.rotation.z=side*.20;
- }
- g.userData.feet=feet;
- g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
- return g;
-}
-
-function primeEye(g,head,side,x,y,z,shade){
- // Small inset sockets and eyes; no free-floating eyeballs.
- mesh(head,facetGeo,shade,side*x,y,z,.060,.082,.075);
- mesh(head,facetGeo,materials.white,side*(x+.016),y,z+.018,.044,.063,.055);
- mesh(head,facetGeo,materials.black,side*(x+.025),y,z+.053,.027,.040,.028);
-}
-function primeLegs(g,skin,shade,bodyY=.85,front=.43){
- const legs=[];
- for(const side of [-1,1])for(const dz of [-.48,.46]){
-  const joint=new THREE.Group();joint.position.set(side*.345,bodyY-.27,dz);g.add(joint);
-  mesh(joint,facetGeo,skin,0,-.16,0,.17,.30,.19);
-  mesh(joint,facetGeo,shade,0,-.44,.12,.18,.12,.25);
-  for(let c=-1;c<=1;c++)horn(joint,materials.horn,c*.11,-.48,.29,.027,.085,Math.PI*.36);
-  legs.push(joint);
- }
- return legs;
-}
-function primeTail(g,skin,y,z,length=5,step=.225,start=.30){
- for(let i=0;i<length;i++){
-  const taper=1-i/length;
-  const seg=mesh(g,facetGeo,skin,0,y-i*.033,z-i*step,
-   start*taper+.055,.22*taper+.055,step*.77+.095);
-  seg.rotation.x=-.10;
- }
-}
-function makeHerbivorePrime(base){
- const g=new THREE.Group(),color=species[base][2];
- const skin=mat(color),shade=mat(new THREE.Color(color).multiplyScalar(.62));
- const highlight=mat(new THREE.Color(color).lerp(new THREE.Color(0xffffff),.32));
- const hornMat=materials.horn;
- let head=new THREE.Group(),legs=[],body,tail=new THREE.Group();
- g.add(head,tail);
- if(base===2){ // Triceratops Prime: continuous frill silhouette and embedded horns.
-  body=mesh(g,facetGeo,skin,0,.86,-.12,.55,.49,.83);
-  mesh(g,facetGeo,skin,0,1.04,.48,.42,.40,.43);
-  legs=primeLegs(g,skin,shade,.89);
-  head.position.set(0,1.12,.69);
-  mesh(head,facetGeo,skin,0,.02,.12,.41,.36,.44);
-  // Broad rounded frill, layered smoothly behind the skull.
-  const frill=mesh(head,facetGeo,shade,0,.31,-.17,.64,.56,.19);
-  frill.rotation.x=-.15;
-  mesh(head,facetGeo,highlight,0,.32,-.075,.54,.46,.10);
-  for(const side of [-1,1]){
-   // Brow horns grow from bone above the eye socket.
-   const brow=horn(head,hornMat,side*.29,.43,.33,.15,.66,-.28,side*.13);
-   primeEye(g,head,side,.37,.10,.42,shade);
-  }
-  horn(head,hornMat,0,-.035,.59,.11,.33,-.46);
-  mesh(head,facetGeo,skin,0,-.18,.50,.30,.18,.35);
-  mesh(head,facetGeo,hornMat,0,-.27,.735,.19,.13,.16);
-  for(const side of [-1,1])for(let i=0;i<2;i++)
-   horn(head,highlight,side*(.39+i*.16),.65-i*.065,-.22,.085,.16,0,side*.22);
-  primeTail(g,skin,.82,-.86,5,.20,.29);
- }else if(base===3){ // Stegosaurus Prime: graduated staggered embedded plates and tail tip thagomizer.
-  body=mesh(g,facetGeo,skin,0,.80,-.07,.51,.46,.91);
-  legs=primeLegs(g,skin,shade,.84);
-  head.position.set(0,1.02,.74);
-  mesh(head,facetGeo,skin,0,-.12,.33,.275,.215,.36);
-  for(const side of [-1,1])primeEye(g,head,side,.238,-.07,.49,shade);
-  mesh(head,facetGeo,highlight,0,-.22,.55,.22,.085,.21);
-  for(let i=0;i<7;i++){
-   const z=.66-i*.265,curve=Math.sin(Math.PI*(i+.6)/7);
-   const h=.22+.28*curve;
-   const x=i%2===0?-.095:.095;
-   // Off-axis octagonal plates are sunk into the dorsal surface.
-   const plate=mesh(g,cachedGeo('prime:plate',()=>new THREE.OctahedronGeometry(1,0)),
-    i%2?shade:highlight,x,1.19+(h-.27)*.43,z,.17,h,.105);
-   plate.rotation.z=x>0?.17:-.17;plate.rotation.x=.07;
-  }
-  primeTail(g,skin,.77,-.83,7,.24,.34);
-  // Spikes attach to the LAST tail section, not the base of the tail.
-  for(const side of [-1,1])for(const dz of [-2.10,-2.32]){
-   const spike=horn(g,hornMat,side*.135,.54,dz,.09,.42,-Math.PI*.38,side*.72);
-  }
- }else if(base===4){ // Ankylosaurus Prime: low wide torso with layered armor and hefty tail club.
-  body=mesh(g,facetGeo,skin,0,.78,-.07,.68,.42,.84);
-  legs=primeLegs(g,skin,shade,.84);
-  head.position.set(0,1.04,.75);
-  mesh(head,facetGeo,skin,0,-.10,.35,.385,.27,.36);
-  for(const side of [-1,1])primeEye(g,head,side,.326,.08,.47,shade);
-  for(let i=0;i<5;i++)for(const x of [-.43,-.21,0,.21,.43]){
-   const z=.57-i*.29;
-   const sideFactor=1-Math.abs(x)*.48;
-   const armor=mesh(g,facetGeo,(i+Math.round((x+.43)*10))%2?shade:highlight,
-    x,1.025+sideFactor*.07,z+(Math.round(x*10)%2)*.04,.15,.092,.20);
-   armor.rotation.z=x*.32;
-  }
-  for(const side of [-1,1])for(let i=0;i<4;i++){
-   const spike=horn(g,shade,side*.58,.87,.46-i*.30,.14,.24,0,side*1.05);
-  }
-  primeTail(g,skin,.76,-.83,6,.23,.30);
-  mesh(g,facetGeo,shade,0,.53,-2.05,.33,.30,.37);
-  mesh(g,facetGeo,highlight,0,.58,-2.10,.25,.19,.26);
- }else if(base===5){ // Parasaurolophus Prime: joined swept-back crest.
-  body=mesh(g,facetGeo,skin,0,.86,-.15,.45,.47,.75);
-  legs=primeLegs(g,skin,shade,.88);
-  head.position.set(0,1.16,.62);
-  mesh(g,facetGeo,skin,0,1.16,.37,.28,.38,.33);
-  mesh(head,facetGeo,skin,0,.12,.25,.31,.30,.37);
-  mesh(head,facetGeo,skin,0,.00,.61,.295,.17,.41);
-  mesh(head,facetGeo,highlight,0,-.085,.84,.28,.075,.29);
-  for(const side of [-1,1])primeEye(g,head,side,.284,.18,.38,shade);
-  // A continuous, thick, bent crest with overlapping smoothly joined segments.
-  const crestPoints=[[0,.31,.10],[0,.49,-.045],[0,.74,-.26],[0,.94,-.53]];
-  for(let i=0;i<crestPoints.length-1;i++)stem(head,shade,...crestPoints[i],...crestPoints[i+1],.145-i*.023);
-  mesh(head,facetGeo,highlight,0,.96,-.56,.08,.13,.13);
-  primeTail(g,skin,.80,-.85,7,.23,.33);
- }else if(base===7){ // Brachiosaurus Prime: curved neck and taller front shoulders.
-  body=mesh(g,facetGeo,skin,0,.94,-.18,.52,.51,.86);
-  mesh(g,facetGeo,skin,0,1.19,.34,.44,.47,.40);
-  for(const side of [-1,1])for(const front of [false,true]){
-   const leg=new THREE.Group();
-   leg.position.set(side*.35,front?.76:.63,front?.45:-.55);
-   g.add(leg);legs.push(leg);
-   mesh(leg,facetGeo,skin,0,front?-.28:-.22,0,.23,front?.46:.33,.23);
-   mesh(leg,facetGeo,shade,0,front?-.65:-.52,.12,.235,.14,.28);
-  }
-  // Neck has actual overlapping segments forming a smooth forward curve.
-  const curve=[[0,1.17,.39],[0,1.49,.46],[0,1.81,.55],[0,2.08,.70],[0,2.31,.89]];
-  for(let i=0;i<curve.length-1;i++)stem(g,skin,...curve[i],...curve[i+1],.245-i*.021);
-  head.position.set(0,2.36,.93);
-  mesh(head,facetGeo,skin,0,0,.16,.32,.23,.35);
-  mesh(head,facetGeo,highlight,0,-.075,.44,.33,.15,.26);
-  for(const side of [-1,1])primeEye(g,head,side,.27,.07,.32,shade);
-  primeTail(g,skin,.86,-.93,7,.26,.36);
- }
- g.userData.walkParts={legs,head,tail,body};
- g.userData.feet=legs;g.userData.eyeParts=[];
- return g;
-}
-function makeSpinoPrime(){
- const g=new THREE.Group(),skin=mat(0x71a9eb),shade=mat(0x3e719f),belly=mat(0x9dcae9);
- const torso=mesh(g,facetGeo,skin,0,.87,-.12,.44,.44,.76);
- const head=new THREE.Group();head.position.set(0,1.23,.66);g.add(head);
- mesh(g,facetGeo,skin,0,1.09,.36,.30,.32,.43);
- mesh(head,facetGeo,skin,0,.04,.25,.31,.255,.40);
- mesh(head,facetGeo,skin,0,-.10,.68,.205,.125,.51);
- mesh(head,facetGeo,belly,0,-.21,.68,.19,.065,.45);
- for(const side of [-1,1])primeEye(g,head,side,.27,.115,.39,shade);
- // Filled triangulated sail is ONE continuous surface, not isolated boxes.
- const profile=[[-.74,1.09],[-.55,1.53],[-.35,1.88],[-.06,1.99],[.22,1.86],[.49,1.39],[.59,1.04]];
- const vertices=[],indices=[];
- const thickness=.065;
- for(const [z,y] of profile){vertices.push(-thickness,y,z,thickness,y,z)}
- for(let i=0;i<profile.length-1;i++){let j=i*2;indices.push(j,j+2,j+1,j+1,j+2,j+3)}
- const sailGeo=new THREE.BufferGeometry();
- sailGeo.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
- sailGeo.setIndex(indices);sailGeo.computeVertexNormals();
- const sailMat=new THREE.MeshLambertMaterial({color:0x3e719f,side:THREE.DoubleSide,flatShading:true});
- const sail=new THREE.Mesh(sailGeo,sailMat);g.add(sail);
- // Sail membrane filled down to the actual torso, covering the root.
- const fill=new THREE.Shape();
- for(let i=0;i<profile.length;i++){const [z,y]=profile[i];if(i===0)fill.moveTo(z,y);else fill.lineTo(z,y)}
- fill.lineTo(.59,.95);fill.lineTo(-.74,.95);fill.closePath();
- const fillGeo=new THREE.ShapeGeometry(fill);
- // Shape xy coordinates represent z and y; rotate about Y to stand vertical.
- const panel=new THREE.Mesh(fillGeo,new THREE.MeshLambertMaterial({color:0x437eae,side:THREE.DoubleSide}));
- panel.rotation.y=-Math.PI/2;panel.position.x=0;g.add(panel);
- // Subtle ribbing anchored into the body beneath the filled membrane.
- for(let i=1;i<profile.length-1;i++)stem(g,shade,0,.98,profile[i][0],0,profile[i][1],profile[i][0],.034);
- const legs=[];
- for(const side of [-1,1]){
-  const leg=mesh(g,facetGeo,skin,side*.31,.39,-.30,.23,.40,.28);legs.push(leg);
-  mesh(g,facetGeo,shade,side*.32,.13,.08,.22,.12,.30);
-  for(let t=-1;t<=1;t++)horn(g,materials.horn,side*.32+t*.11,.11,.27,.035,.10,Math.PI*.37);
-  mesh(g,facetGeo,skin,side*.39,.90,.36,.14,.23,.17);
- }
- // A taller, broad paddle tail with overlapping broad middle segments.
- for(let i=0;i<9;i++){
-  const t=i/9;
-  mesh(g,facetGeo,i%3===0?shade:skin,0,.75-i*.035,-.70-i*.23,
-   .30*(1-t)+.04,.30*(1-t)+.09,.32);
- }
- g.userData.feet=legs;g.userData.eyeParts=[];
- return g;
-}
-function makePteroPrime(){
- const g=new THREE.Group(),wingL=new THREE.Group(),wingR=new THREE.Group();
- const skin=mat(0xc6a0e4),shade=mat(0x8665ad);
- const membrane=new THREE.MeshLambertMaterial({color:0xb68add,side:THREE.DoubleSide,flatShading:true});
- mesh(g,facetGeo,skin,0,.93,0,.27,.25,.44);
- mesh(g,facetGeo,skin,0,1.08,.39,.17,.16,.31);
- mesh(g,facetGeo,skin,0,1.13,.65,.22,.19,.28);
- const beak=mesh(g,facetGeo,shade,0,1.055,.96,.14,.095,.38);
- beak.rotation.x=.07;
- stem(g,shade,0,1.23,.56,0,1.54,.21,.10);
- for(const side of [-1,1]){
-  primeEye(g,g,side,.195,1.20,.75,shade);
-  stem(g,skin,side*.18,.85,-.18,side*.23,.49,-.35,.077);
-  mesh(g,facetGeo,skin,side*.23,.43,-.39,.12,.10,.15);
-  const wing=side<0?wingL:wingR;wing.position.set(side*.17,1.02,.01);g.add(wing);
-  // Three-dimensional cambered membrane with matching front/back triangles.
-  const points=[[0,0,0],[side*.45,.10,.18],[side*1.07,.18,.22],
-   [side*1.76,.12,-.16],[side*1.52,-.14,-.66],[side*.91,-.15,-.57],
-   [side*.36,-.1,-.32]];
-  const tris=[0,1,6,1,2,6,2,5,6,2,3,5,3,4,5];
-  const v=[],idx=[];
-  for(let n=0;n<points.length;n++){
-   const [x,y,z]=points[n];v.push(x,y,z+.045*Math.sin(n*.9));
-  }
-  for(let k=0;k<tris.length;k++)idx.push(tris[k]);
-  const wingGeo=new THREE.BufferGeometry();
-  wingGeo.setAttribute('position',new THREE.Float32BufferAttribute(v,3));
-  wingGeo.setIndex(idx);wingGeo.computeVertexNormals();
-  const surface=new THREE.Mesh(wingGeo,membrane);wing.add(surface);
-  // Spars support the leading edge and individual wing fingers.
-  stem(wing,skin,0,0,0,side*.45,.10,.18,.074);
-  stem(wing,skin,side*.45,.10,.18,side*1.07,.18,.22,.058);
-  stem(wing,skin,side*1.07,.18,.22,side*1.76,.12,-.16,.037);
-  stem(wing,shade,side*1.07,.18,.22,side*1.52,-.14,-.66,.023);
-  stem(wing,shade,side*.45,.10,.18,side*.91,-.15,-.57,.026);
- }
- g.userData.wings=[wingL,wingR];g.userData.feet=[];g.userData.eyeParts=[];
- // Matches the existing flying model's hovering baseline.
- g.position.y=.47;
- return g;
-}
-function makeDinoPrime(base){
- if(base===6)return makeSpinoPrime();
- if(base===8)return makePteroPrime();
- return makeHerbivorePrime(base);
-}
-
-// Species-specific mechanical detailing, added after the original Tech skin.
-// Shared low-poly geometry and materials keep this lightweight on mobile.
-const techPrimeMetal=new THREE.MeshStandardMaterial({
- color:0x263746,metalness:.82,roughness:.29,flatShading:true});
-const techPrimePlate=new THREE.MeshStandardMaterial({
- color:0x8095ac,metalness:.75,roughness:.33,flatShading:true});
-const techPrimeGlow=new THREE.MeshStandardMaterial({
- color:0x54eaff,emissive:0x00cfff,emissiveIntensity:1.3,
- metalness:.32,roughness:.24,flatShading:true});
-function addTechDetails(g,type){
- const eyeGeo=cachedGeo('techPrime:eyeSocket',()=>new THREE.TorusGeometry(.092,.023,5,8));
- // Twin curved plating runs along the shoulders and back without replacing
- // the existing dinosaur's actual silhouette or animation skeleton.
- if(type!==8){
-  for(const side of [-1,1]){
-   const armor=mesh(g,facetGeo,techPrimePlate,side*.36,1.00,-.16,.15,.12,.40);
-   armor.rotation.z=side*.24;
-   mesh(g,facetGeo,techPrimeMetal,side*.35,.69,-.48,.095,.12,.22);
-   for(const z of [-.25,-.04,.17]){
-    const seam=mesh(g,facetGeo,techPrimeGlow,side*.355,1.082,z,.029,.024,.069);
-    seam.rotation.z=side*.25;
-   }
-   for(const z of [-.47,.46]){
-    // Robotic knee pivot and segmented shin plate.
-    mesh(g,cachedGeo('techPrime:pivot',()=>new THREE.IcosahedronGeometry(1,0)),
-     techPrimeMetal,side*.36,.39,z,.137,.135,.11);
-    mesh(g,facetGeo,techPrimeGlow,side*.41,.38,z,.045,.052,.05);
-   }
-  }
- }
- // Glowing spine units provide a restrained through-line across all skins.
- if(type!==8)for(let i=0;i<4;i++){
-  mesh(g,facetGeo,techPrimeGlow,0,1.26-i*.12,-.30-i*.27,.048,.027,.067);
- }
- // Existing pupils are already cyan from applyTechSkin. Add darker rings
- // without shifting the original eyes so nothing starts floating.
- if(type===0||type===1||type===6){
-  for(const side of [-1,1]){
-   const socket=new THREE.Mesh(eyeGeo,techPrimeMetal);
-   socket.position.set(side*.28,1.48,.77);
-   socket.rotation.y=side*.6;
-   socket.scale.setScalar(.72);g.add(socket);
-  }
- }
- if(type===2){
-  // Metal reinforcement around the triceratops frill.
-  for(const side of [-1,1]){
-   mesh(g,facetGeo,techPrimePlate,side*.46,1.52,.46,.10,.27,.08);
-   mesh(g,facetGeo,techPrimeGlow,side*.46,1.70,.49,.034,.10,.025);
-  }
- }else if(type===3){
-  // Back plates gain cyan energy-lit cores without detached spikes.
-  for(let i=0;i<6;i++){
-   const z=.60-i*.255,y=1.30+Math.sin(i/6*Math.PI)*.055;
-   mesh(g,facetGeo,techPrimeGlow,0,y,z,.05,.17,.08);
-  }
- }else if(type===4){
-  // Anky's armored shell becomes mechanically segmented, plus club ring.
-  for(let i=0;i<4;i++)for(const side of [-1,1]){
-   const z=.44-i*.30;
-   const panel=mesh(g,facetGeo,techPrimePlate,side*.25,1.16,z,.19,.085,.21);
-   panel.rotation.z=side*.2;
-   mesh(g,facetGeo,techPrimeGlow,side*.25,1.22,z,.052,.026,.12);
-  }
-  mesh(g,facetGeo,techPrimePlate,0,.57,-2.00,.29,.25,.29);
-  mesh(g,facetGeo,techPrimeGlow,0,.78,-2.02,.16,.035,.16);
- }else if(type===5){
-  // Parasaurolophus crest incorporates a glowing communication strip.
-  stem(g,techPrimeGlow,0,1.55,.80,0,1.99,.26,.048);
- }else if(type===6){
-  // The current sail remains, with floating-free glowing root brackets.
-  for(let i=0;i<6;i++)mesh(g,facetGeo,techPrimeGlow,0,1.45+Math.sin(i/6*Math.PI)*.38,
-   .37-i*.21,.08,.095,.13);
- }else if(type===7){
-  // Articulated mechanical neck with a light line tracing its front.
-  for(let i=0;i<5;i++){
-   const y=1.51+i*.29;
-   mesh(g,facetGeo,techPrimePlate,0,y,.72,.26,.074,.20);
-   mesh(g,facetGeo,techPrimeGlow,0,y,.84,.10,.03,.045);
-  }
- }else if(type===8){
-  // Pterosaur Tech wing spars follow each wing's local animation group.
-  for(const side of [-1,1]){
-   const wing=g.userData.wings?.[side<0?0:1];
-   if(!wing)continue;
-   stem(wing,techPrimeMetal,0,0,0,side*.92,.02,-.10,.060);
-   stem(wing,techPrimeGlow,side*.92,.02,-.10,side*1.68,-.045,-.31,.026);
-   stem(wing,techPrimePlate,side*.92,.02,-.10,side*1.26,-.07,-.53,.034);
-  }
-  mesh(g,facetGeo,techPrimeGlow,0,.30,.41,.10,.055,.17);
- }
- g.userData.techDetail=true;
-}
 function dino(type=0,size=1){
-if(type===18){const prime=makeTrexPrime();prime.scale.setScalar(size);return prime;}
-if(type===19){const prime=makeRaptorPrime();prime.scale.setScalar(size);return prime;}
-if(type>=20&&type<=26){const prime=makeDinoPrime(type-18);prime.scale.setScalar(size);return prime;}
 const techno=type>=9;type=type%9;
 // Each purchased species now builds a distinct silhouette rather than recoloring the T. rex.
 let g;
@@ -905,12 +455,7 @@ if([2,3,4,5,7].includes(type)){
   g.userData.feet=feet;
   g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
 }
-if(techno){
- applyTechSkin(g);
- if(type===6)g.traverse(o=>{if(o.userData.techSpinoSpine)o.material=new THREE.MeshStandardMaterial({
-  color:0x70faff,emissive:0x00ddff,emissiveIntensity:1.5,metalness:.25,roughness:.3,flatShading:true});});
- addTechDetails(g,type);
-}
+if(techno){applyTechSkin(g);if(type===6)g.traverse(o=>{if(o.userData.techSpinoSpine)o.material=new THREE.MeshStandardMaterial({color:0x70faff,emissive:0x00ddff,emissiveIntensity:1.5,metalness:.25,roughness:.3,flatShading:true});});}
 g.scale.setScalar(size);
 return g;
 }
@@ -1983,15 +1528,15 @@ function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.
  }bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
  // Impact crack flash only; the amber mesh itself remains completely still.
- for(const row of rows.values())for(const c of row.coins){
+ if(state==='playing')for(const row of rows.values())for(const c of row.coins){
   if(c.crackOverlay&&c.crackFlash>0){
    c.crackFlash=Math.max(0,c.crackFlash-dt*3.4);
    c.crackOverlay.material.opacity=.76+.17*c.crackFlash;
   }
  }
  // Shimmer periodically while the treasure itself remains firmly on the tile.
- if(state==='playing'||state==='menu')for(const row of rows.values()){
-  if(Math.abs(row.y-(state==='menu'?3:py))>18)continue;
+ if(state==='playing')for(const row of rows.values()){
+  if(Math.abs(row.y-py)>18)continue;
   for(const amber of row.coins)if(!amber.taken)updateAmberShimmer(amber,gameTime);
  }
  // Clock mode runs independently of movement/score. Pause, death and menus
@@ -2022,7 +1567,7 @@ if(audioCtx&&audioCtx.state==='running'&&audioCtx.currentTime>mixer.lastStep+.3)
   mixer.lastHerd=audioCtx.currentTime;fx('herdStep',.40);
  }
 }
-if(state==='playing'||state==='menu')for(let r of rows.values())for(let m of r.moving){m.x+=r.dir*m.speed*dt;if(m.x>12)m.x=-12;if(m.x< -12)m.x=12;m.mesh.position.x=m.x;if(m.platform&&(r.type==='river'||r.type==='lava'))updateLogMotion(m,dt)}if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){
+if(state==='playing')for(let r of rows.values())for(let m of r.moving){m.x+=r.dir*m.speed*dt;if(m.x>12)m.x=-12;if(m.x< -12)m.x=12;m.mesh.position.x=m.x;if(m.platform&&(r.type==='river'||r.type==='lava'))updateLogMotion(m,dt)}if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){
  if(hop.amberBounce){
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
@@ -2095,24 +1640,16 @@ const shopDescriptions=[
  'Take to the skies with wings, a beak and a crest.'
 ];
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Tech edition: metallic armor, cyan energy seams and glowing eyes. '+text));
-shopDescriptions.push('A refined T. Rex with a smoother neck, tiny clawed arms, a flowing tail and inset eyes.');
-shopDescriptions.push('An athletic raptor with an agile body, embedded back spikes, a long balance tail, narrow snout and raised sickle claws.');
-shopDescriptions.push(
- 'Prime skull sculpt with integrated frill, firmly seated brow horns and a refined beak.',
- 'Prime staggered plates, graduated back ridge, inset eyes and a tail-tip thagomizer.',
- 'Prime overlapping torso scutes, lowered stance, flank spikes and heavy tail club.',
- 'Prime swept-back crest, longer duckbill, joined neck and smoother tail.',
- 'Prime connected curved sail, crocodilian muzzle and broad paddle tail.',
- 'Prime arched neck, raised shoulders, expressive muzzle and balanced proportions.',
- 'Prime cambered wings with reinforced wing fingers, connected beak and small feet.'
-);
 
 let inspected=chosen,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
-function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
+function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?1:1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
+const shopModelCache=new Map();
 function updateShopModel(){
  initShop3D();if(!shopRenderer)return;
  if(shopModel)shopScene.remove(shopModel);
- shopModel=dino(inspected,1.35);
+ // Keep prepared preview geometries on revisits rather than rebuilding them.
+ if(!shopModelCache.has(inspected))shopModelCache.set(inspected,dino(inspected,1.35));
+ shopModel=shopModelCache.get(inspected);
  // Centre the flight model around its actual geometry rather than its empty group origin.
  // Ground dinosaurs remain grounded; pterodactyls hover entirely above the pedestal.
  shopModel.updateMatrixWorld(true);
@@ -2125,82 +1662,140 @@ function updateShopModel(){
  shopScene.add(shopModel);
 }
 function shopDetails(){const [name,cost]=species[inspected],owned=unlocked.has(inspected);$('shopName').textContent=name;$('shopDescription').textContent=shopDescriptions[inspected];$('shopStatus').textContent=chosen===inspected?'✓ EQUIPPED':owned?'✓ UNLOCKED':'🔒 LOCKED';$('shopStatus').style.background=owned?'#345e3c':'#72512b';const btn=$('shopAction');btn.disabled=chosen===inspected;btn.textContent=chosen===inspected?'✓ EQUIPPED':owned?'EQUIP DINOSAUR':'🟠 UNLOCK FOR '+cost;}
-function selectShopDino(i){inspected=i;fx('select');shopDetails();updateShopModel();renderRoster()}
+function selectShopDino(i){
+ if(inspected===i)return;
+ const previous=inspected;inspected=i;fx('select');
+ shopDetails();updateShopModel();
+ updateRosterCard(previous);updateRosterCard(i);
+}
 // Render the *actual* model of each skin into a tiny static side-view
 // portrait. Cache image data so repainting cards and scrolling costs nothing.
 // One thumbnail per frame avoids a big synchronous mobile GPU stall.
 const rosterPortraits=new Map();
-let rosterPortraitNext=0,rosterPortraitTarget=null,rosterPortraitScene=null,
- rosterPortraitCamera=null,rosterPortraitPixels=null,rosterPortraitCanvas=null,
- rosterPortraitContext=null,rosterPortraitFailed=false;
+const pendingPortraits=new Set();
+const rosterButtons=new Map();
+let portraitObserver=null,lastPortraitAt=0;
+let rosterPortraitTarget=null,rosterPortraitScene=null,rosterPortraitCamera=null,
+ rosterPortraitPixels=null,rosterPortraitCanvas=null,rosterPortraitContext=null,
+ rosterPortraitFailed=false;
+function updateRosterCard(id){
+ const b=rosterButtons.get(id);if(!b)return;
+ b.classList.toggle('selected',id===inspected);
+ b.querySelector('.cost').textContent=chosen===id?'✓ EQUIPPED':unlocked.has(id)?'✓ OWNED':'🟠 '+species[id][1];
+}
 function updateRosterPortraitImage(id){
- const url=rosterPortraits.get(id);if(!url)return;
- for(const node of $('roster').querySelectorAll('.dinoicon[data-species="'+id+'"]')){
-  node.classList.add('modelPortrait');
-  node.style.backgroundImage='url("'+url+'")';
-  node.style.backgroundPosition='center';
-  node.style.backgroundSize='contain';
- }
+ const url=rosterPortraits.get(id),node=rosterButtons.get(id)?.querySelector('.dinoicon');
+ if(!url||!node)return;
+ node.classList.add('modelPortrait');node.style.backgroundImage='url("'+url+'")';
+ node.textContent='';
 }
-function makeRosterPortraitStep(){
- if(rosterPortraitFailed||!shopRenderer||$('select').classList.contains('hidden')
-    ||rosterPortraitNext>=species.length)return;
+function requestRosterPortrait(id){if(!rosterPortraits.has(id))pendingPortraits.add(id)}
+function initPortraitScene(){
+ if(rosterPortraitScene)return;
+ rosterPortraitScene=new THREE.Scene();
+ rosterPortraitScene.add(new THREE.HemisphereLight(0xfcfff1,0x5a6f62,2.7));
+ const key=new THREE.DirectionalLight(0xffedc7,3.3);key.position.set(4,7,5);
+ rosterPortraitScene.add(key);
+ rosterPortraitCamera=new THREE.PerspectiveCamera(35,1,.1,40);
+ rosterPortraitTarget=new THREE.WebGLRenderTarget(96,96,{format:THREE.RGBAFormat,
+   minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,depthBuffer:true});
+ rosterPortraitPixels=new Uint8Array(96*96*4);
+ rosterPortraitCanvas=document.createElement('canvas');
+ rosterPortraitCanvas.width=rosterPortraitCanvas.height=96;
+ rosterPortraitContext=rosterPortraitCanvas.getContext('2d');
+}
+function makeRosterPortraitStep(t){
+ if(rosterPortraitFailed||!shopRenderer||$('select').classList.contains('hidden')||
+    !pendingPortraits.size||t-lastPortraitAt<.22)return;
+ const id=pendingPortraits.values().next().value;
+ pendingPortraits.delete(id);lastPortraitAt=t;
  try{
-  if(!rosterPortraitScene){
-   rosterPortraitScene=new THREE.Scene();
-   rosterPortraitScene.add(new THREE.HemisphereLight(0xfcfff1,0x5a6f62,2.7));
-   const key=new THREE.DirectionalLight(0xffedc7,3.3);key.position.set(4,7,5);
-   rosterPortraitScene.add(key);
-   rosterPortraitCamera=new THREE.PerspectiveCamera(35,1,.1,40);
-   rosterPortraitTarget=new THREE.WebGLRenderTarget(128,128,{format:THREE.RGBAFormat,
-     minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,depthBuffer:true});
-   rosterPortraitPixels=new Uint8Array(128*128*4);
-   rosterPortraitCanvas=document.createElement('canvas');
-   rosterPortraitCanvas.width=rosterPortraitCanvas.height=128;
-   rosterPortraitContext=rosterPortraitCanvas.getContext('2d');
-  }
-  const id=rosterPortraitNext++;
-  const model=dino(id,1);
+  initPortraitScene();
+  // Reuse cached full models when available, never render 18 live miniatures.
+  const model=shopModelCache.get(id)||dino(id,1);
+  const priorParent=model.parent;
+  if(priorParent)priorParent.remove(model);
   rosterPortraitScene.add(model);
-  model.rotation.y=0;model.updateMatrixWorld(true);
-  const bounds=new THREE.Box3().setFromObject(model);
-  const center=bounds.getCenter(new THREE.Vector3());
-  const extent=bounds.getSize(new THREE.Vector3());
-  // Camera points along X: pure side profile of the actual model.
-  const radius=Math.max(extent.y,extent.z,extent.x*.75,1.4);
-  rosterPortraitCamera.position.set(center.x+radius*2.15,center.y+radius*.24,center.z);
-  rosterPortraitCamera.lookAt(center.x,center.y,center.z);
-  rosterPortraitCamera.updateProjectionMatrix();
-  const previousTarget=shopRenderer.getRenderTarget();
-  const previousClear=shopRenderer.getClearColor(new THREE.Color()).clone();
-  const previousAlpha=shopRenderer.getClearAlpha();
+  const oldRotation=model.rotation.y,oldPosition=model.position.clone(),oldScale=model.scale.clone();
   try{
-   shopRenderer.setRenderTarget(rosterPortraitTarget);
-   shopRenderer.setClearColor(0x000000,0);
-   shopRenderer.clear(true,true,true);
-   shopRenderer.render(rosterPortraitScene,rosterPortraitCamera);
-   shopRenderer.readRenderTargetPixels(rosterPortraitTarget,0,0,128,128,rosterPortraitPixels);
-  }finally{shopRenderer.setRenderTarget(previousTarget);shopRenderer.setClearColor(previousClear,previousAlpha)}
-  const frame=rosterPortraitContext.createImageData(128,128);
-  for(let y=0;y<128;y++){
-   const src=(127-y)*128*4,dst=y*128*4;
-   frame.data.set(rosterPortraitPixels.subarray(src,src+512),dst);
+   model.rotation.y=0;model.position.set(0,0,0);
+   model.scale.setScalar(1);
+   model.updateMatrixWorld(true);
+   const bounds=new THREE.Box3().setFromObject(model);
+   const center=bounds.getCenter(new THREE.Vector3());
+   const extent=bounds.getSize(new THREE.Vector3());
+   const radius=Math.max(extent.y,extent.z,extent.x*.75,1.4);
+   rosterPortraitCamera.position.set(center.x+radius*2.15,center.y+radius*.24,center.z);
+   rosterPortraitCamera.lookAt(center);rosterPortraitCamera.updateProjectionMatrix();
+   const prevTarget=shopRenderer.getRenderTarget();
+   const prevClear=shopRenderer.getClearColor(new THREE.Color()).clone();
+   const prevAlpha=shopRenderer.getClearAlpha();
+   try{
+    shopRenderer.setRenderTarget(rosterPortraitTarget);
+    shopRenderer.setClearColor(0x000000,0);
+    shopRenderer.clear(true,true,true);
+    shopRenderer.render(rosterPortraitScene,rosterPortraitCamera);
+    shopRenderer.readRenderTargetPixels(rosterPortraitTarget,0,0,96,96,rosterPortraitPixels);
+   }finally{
+    shopRenderer.setRenderTarget(prevTarget);shopRenderer.setClearColor(prevClear,prevAlpha);
+   }
+   const frame=rosterPortraitContext.createImageData(96,96);
+   for(let y=0;y<96;y++)frame.data.set(
+    rosterPortraitPixels.subarray((95-y)*384,(96-y)*384),y*384);
+   rosterPortraitContext.putImageData(frame,0,0);
+   rosterPortraits.set(id,rosterPortraitCanvas.toDataURL('image/png'));
+  }finally{
+   rosterPortraitScene.remove(model);
+   model.position.copy(oldPosition);model.rotation.y=oldRotation;model.scale.copy(oldScale);
+   if(priorParent)priorParent.add(model);
   }
-  rosterPortraitContext.putImageData(frame,0,0);
-  rosterPortraits.set(id,rosterPortraitCanvas.toDataURL('image/png'));
-  rosterPortraitScene.remove(model);
   updateRosterPortraitImage(id);
-  if(rosterPortraitNext===species.length){
-   rosterPortraitTarget.dispose();rosterPortraitTarget=null;
-  }
- }catch(err){
-  rosterPortraitFailed=true;
-  if(rosterPortraitTarget)rosterPortraitTarget.dispose();
-  console.warn('Shop portrait rendering unavailable, using original icons',err);
- }
+ }catch(err){rosterPortraitFailed=true;console.warn('Shop portraits unavailable',err)}
 }
-function renderRoster(){$('shopAmber').textContent=bank;$('roster').innerHTML='';shopOrder.forEach(i=>{const [name,cost]=species[i],base=i%9;let b=document.createElement('button');b.className=(inspected===i?'selected ':'')+(i>=9&&i<18?'techSkin':'');b.setAttribute('aria-label',name+(unlocked.has(i)?' unlocked':' costs '+cost+' amber'));b.innerHTML='<span class="dinoicon speciesIcon'+(i>=9&&i<18?' techIcon':'')+'" aria-hidden="true" data-species="'+i+'" style="background-position:'+((base%3)*50)+'% '+(Math.floor(base/3)*50)+'%"></span><span class="shopCardName">'+name+'</span><span class="cost">'+(chosen===i?'✓ EQUIPPED':unlocked.has(i)?'✓ OWNED':'🟠 '+cost)+'</span>';b.onclick=()=>selectShopDino(i);$('roster').appendChild(b);updateRosterPortraitImage(i)});shopDetails()}
-$('shopAction').onclick=()=>{let cost=species[inspected][1];if(!unlocked.has(inspected)){if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return}bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35)}else fx('select');chosen=inspected;persist();refreshShopPreview();renderRoster()};
-function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;makeRosterPortraitStep();const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);shopCamera.aspect=w/h;shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);shopCamera.updateProjectionMatrix();if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
+function renderRoster(){
+ $('shopAmber').textContent=bank;
+ // Keep button nodes and scroll position stable across selections/purchases.
+ if(rosterButtons.size===shopOrder.length){
+  for(const id of shopOrder)updateRosterCard(id);
+  shopDetails();return;
+ }
+ const roster=$('roster');
+ roster.replaceChildren();rosterButtons.clear();
+ for(const i of shopOrder){
+  const [name,cost]=species[i];
+  const b=document.createElement('button');
+  b.className=i>=9&&i<18?'techSkin':'';
+  b.setAttribute('aria-label',name+(unlocked.has(i)?' unlocked':' costs '+cost+' amber'));
+  b.innerHTML='<span class="dinoicon speciesIcon'+(i>=9&&i<18?' techIcon':'')+'" aria-hidden="true">🦕</span><span class="shopCardName">'+name+'</span><span class="cost"></span>';
+  b.onclick=()=>selectShopDino(i);
+  roster.appendChild(b);rosterButtons.set(i,b);
+  updateRosterCard(i);updateRosterPortraitImage(i);
+ }
+ if('IntersectionObserver' in window){
+  portraitObserver?.disconnect();
+  portraitObserver=new IntersectionObserver(entries=>{
+   for(const entry of entries)if(entry.isIntersecting){
+    const id=Number(entry.target.dataset.portraitId);
+    requestRosterPortrait(id);
+    portraitObserver.unobserve(entry.target);
+   }
+  },{root:roster,rootMargin:'100px'});
+  for(const [id,b] of rosterButtons){
+   b.dataset.portraitId=id;portraitObserver.observe(b);
+  }
+ }else for(const id of shopOrder)requestRosterPortrait(id);
+ shopDetails();
+}
+$('shopAction').onclick=()=>{
+ const cost=species[inspected][1];
+ if(!unlocked.has(inspected)){
+  if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return}
+  bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35);
+ }else fx('select');
+ chosen=inspected;persist();refreshShopPreview();renderRoster();
+};
+function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;makeRosterPortraitStep(t);const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);const aspect=w/h;
+ if(shopCamera.aspect!==aspect){shopCamera.aspect=aspect;shopCamera.updateProjectionMatrix()}
+ shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
 menu();window.__dinoStarted=true;document.getElementById('startupError').style.display='none';frame();
 </script><script>if('serviceWorker' in navigator && location.protocol!=='file:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Offline cache unavailable',e)));}</script></body></html>
