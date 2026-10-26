@@ -101,7 +101,22 @@
  #select #skinVariants .dinoicon{height:70px}
  #select .shopListHeading{margin:9px 0 6px;font-size:12px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Waterfall Loading Screen and Redesigned Shop">🌊 LOADING THE JUNGLE! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+
+/* Real startup gate: behind it the game canvas renders a low-poly Spinosaurus and waterfall. */
+body.loading-active #menu{display:none!important}
+#loadingScreen{position:fixed;inset:0;z-index:9000;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;background:linear-gradient(180deg,#123f45aa 0%,#0c303330 34%,#06272e18 51%,#061c25d9 86%,#071a1fe8 100%);padding:18px 17px max(35px,env(safe-area-inset-bottom))}
+#loadingScreen .loadingPanel{width:min(92vw,570px);border:2px solid #ceebd2a8;border-radius:19px;background:#103c43df;padding:18px 20px 20px;box-shadow:0 8px 35px #06242e95;backdrop-filter:blur(7px);text-align:center}
+#loadingScreen h2{margin:0 0 9px;color:#fff9cf;font-size:clamp(24px,6vw,35px);line-height:1.15;text-shadow:0 3px #235e51;letter-spacing:1px}
+#loadingScreen .loadingKicker{font-size:11px;letter-spacing:3px;color:#bce9e3;font-weight:900}
+#loadingScreen .loadingStatus{margin:11px 0;font-weight:800;color:#e7f6e8;font-size:13px;min-height:20px}
+#loadingScreen .loadingTrack{height:24px;width:100%;border-radius:20px;overflow:hidden;background:#052e34;border:3px solid #add9c9;box-shadow:inset 0 2px 8px #06171ca6}
+#loadingScreen .loadingFill{width:0;height:100%;background:linear-gradient(90deg,#56c9e4,#bdf4e3,#fff4a9);transition:width .13s ease;box-shadow:0 0 11px #93ebffb0}
+#loadingScreen .loadingPercent{font-size:12px;color:#eaf7ec;font-weight:900;margin-top:9px;letter-spacing:1.5px}
+#loadingScreen .loadingError{display:none;color:#ffe3ab;font-weight:800;line-height:1.4;margin:10px 0}
+#loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
+#loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
+@media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Waterfall Loading Screen and Redesigned Shop">🌊 LOADING THE JUNGLE! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -116,7 +131,17 @@
   <div class="shopListHeading">CHOOSE SKIN <span>ORIGINAL · TECH · CHROME</span></div>
   <div id="skinVariants" aria-label="Available skins for selected dinosaur"></div>
  </section>
-</div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><div id="loadingScreen" role="status" aria-live="polite" aria-label="DinoCrossing loading">
+ <div class="loadingPanel">
+  <div class="loadingKicker">WELCOME TO THE JUNGLE</div>
+  <h2>🦖 DINO CROSSING</h2>
+  <div id="loadingStatus" class="loadingStatus">Waking up the dinosaurs...</div>
+  <div class="loadingTrack" role="progressbar" aria-label="Game assets loaded" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="loadingProgress"><div class="loadingFill" id="loadingFill"></div></div>
+  <div id="loadingPercent" class="loadingPercent">0%</div>
+  <div class="loadingError" id="loadingError"></div>
+  <button type="button" id="loadingRetry" class="loadingRetry">↻ RETRY LOADING</button>
+ </div>
+</div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -126,7 +151,7 @@
   function fail(message){if(window.__dinoStarted)return;notice.style.display='block';notice.textContent='Dino Crossing could not start: '+message+' Try opening this HTML file in Chrome with internet access.';}
   window.addEventListener('error',function(e){fail(e.message||'Unknown script error')});
   window.addEventListener('unhandledrejection',function(e){fail(e.reason?.message||String(e.reason)||'Graphics loading error')});
-  setTimeout(function(){if(!window.__dinoStarted)fail('3D engine has not finished loading.')},12000);
+  setTimeout(function(){if(!window.__dinoStarted&&!window.__dinoLoading)fail('3D engine has not finished loading.')},45000);
 })();
 </script><script type="module">
 let THREE;
@@ -1747,5 +1772,123 @@ function renderRoster(){
 }
 $('shopAction').onclick=()=>{let cost=species[inspected][1];if(!unlocked.has(inspected)){if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return}bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35)}else fx('select');chosen=inspected;persist();refreshShopPreview();renderRoster()};
 function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);shopCamera.aspect=w/h;shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);shopCamera.updateProjectionMatrix();if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
-menu();window.__dinoStarted=true;document.getElementById('startupError').style.display='none';frame();
+
+// Genuine boot pipeline. Never reveal the menu before its rows and all 27
+// shop portraits exist. A visual error with Retry replaces a fake 100% bar.
+let loaderScene=null,loaderCamera=null,loaderSpino=null,loaderFoam=[];
+function setLoadingProgress(value,message){
+ const n=Math.max(0,Math.min(100,Math.floor(value)));
+ $('loadingFill').style.width=n+'%';
+ $('loadingPercent').textContent=n+'%';
+ $('loadingStatus').textContent=message;
+ $('loadingProgress').setAttribute('aria-valuenow',String(n));
+}
+function createLoadingWaterfall(){
+ loaderScene=new THREE.Scene();
+ loaderScene.background=new THREE.Color(0x9ed8cf);
+ loaderScene.fog=new THREE.Fog(0x9ed8cf,30,65);
+ loaderCamera=new THREE.PerspectiveCamera(39,innerWidth/Math.max(1,innerHeight),.1,95);
+ loaderCamera.position.set(7.7,5.1,14.5);
+ loaderCamera.lookAt(.05,1.65,-1.2);
+ loaderScene.add(new THREE.HemisphereLight(0xecfff2,0x3b776c,2.15));
+ const sunlight=new THREE.DirectionalLight(0xffebc0,2.4);sunlight.position.set(-6,12,8);loaderScene.add(sunlight);
+ const greenery=mat(0x7acb77),deepGreen=mat(0x397f61),rock=mat(0x6c8f81),rockTop=mat(0x8eb19c);
+ const blue=mat(0x52c5e0),pale=mat(0xb3f7ff),foam=mat(0xf4ffff);
+ // Wide tiered waterfall occupies the left half behind the foreground dinosaur.
+ box(loaderScene,greenery,-2.1,-.5,-2.8,20,1.1,15);
+ box(loaderScene,rock,-3.45,.85,-5.5,9,4.2,2.1);
+ box(loaderScene,rockTop,-3.45,3.02,-5.5,9,.34,2.7);
+ box(loaderScene,blue,-3.5,3.25,-5,5.6,.12,3.8);
+ const curtain=new THREE.Group();loaderScene.add(curtain);
+ for(let i=0;i<15;i++){
+  const x=-6.15+i*.39;
+  const stream=box(curtain,i%4===0?pale:blue,x,1.51,-4.15,.4,3.05,.16);
+  stream.rotation.z=(i%3-1)*.018;stream.userData.waterfallBand=i;
+ }
+ box(loaderScene,blue,-3.45,.14,-1.2,8.5,.15,5.5);
+ box(loaderScene,deepGreen,3.1,.05,-.5,4.8,.35,7);
+ for(let i=0;i<54;i++){
+  const x=-7+(i*1.618)%7.3,z=-2.9+(i*.83)%4.7;
+  const b=ball(loaderScene,i%5===0?pale:foam,x,.23+(i%3)*.023,z,.13+(i%4)*.025,.055+(i%3)*.018,.17+(i%4)*.028);
+  b.userData.foamPhase=i*.73;loaderFoam.push(b);
+ }
+ for(let i=0;i<8;i++){
+  const x=-6.1+i*.83;
+  const b=ball(loaderScene,foam,x,.35,-4,.18,.11,.12);
+  b.userData.foamPhase=i*2.4;loaderFoam.push(b);
+ }
+ for(let i=0;i<6;i++){
+  const tree=new THREE.Group();loaderScene.add(tree);
+  makeTree(tree,i*5.3);
+  tree.position.set(i%2?5.0:-7.0,.4,-6.8+(i%3)*1.9);
+  tree.scale.setScalar(.7+(i%3)*.12);
+ }
+ loaderSpino=dino(6,2.0);
+ loaderSpino.position.set(2.3,.08,2.2);
+ loaderSpino.rotation.y=.58;
+ loaderScene.add(loaderSpino);
+}
+function renderLoadingWaterfall(){
+ if(!loaderScene)return;
+ const time=performance.now()/1000;
+ loaderCamera.aspect=innerWidth/Math.max(1,innerHeight);
+ loaderCamera.updateProjectionMatrix();
+ if(loaderSpino)loaderSpino.rotation.y=.58+Math.sin(time*.65)*.045;
+ for(const f of loaderFoam)f.position.y=.28+Math.sin(time*3.8+f.userData.foamPhase)*.05;
+ renderer.render(loaderScene,loaderCamera);
+}
+const nextBootFrame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
+async function preloadStartup(){
+ window.__dinoLoading=true;
+ $('loadingRetry').onclick=()=>location.reload();
+ try{
+  setLoadingProgress(5,'Painting the waterfall...');
+  createLoadingWaterfall();
+  renderLoadingWaterfall();
+  await nextBootFrame();
+  setLoadingProgress(13,'Generating the world...');
+  // The same world rows the menu and first run use, not a simulated loading task.
+  menu();
+  if(rows.size<25)throw new Error('The initial world did not finish generating.');
+  renderLoadingWaterfall();
+  await nextBootFrame();
+  setLoadingProgress(25,'Building the dinosaur showroom...');
+  initShop3D();
+  if(!shopRenderer)throw new Error('The 3D shop renderer could not start on this device.');
+  inspected=chosen;selectedShopSpecies=chosen%9;
+  updateShopModel();renderRoster();
+  renderLoadingWaterfall();
+  await nextBootFrame();
+  // Pre-render all Original, Tech, and Chrome thumbnails one per frame to
+  // avoid freezing Android during the GPU readback.
+  while(rosterPortraitNext<species.length){
+   makeRosterPortraitStep();
+   if(rosterPortraitFailed)throw new Error('Dinosaur portrait rendering failed. Please retry.');
+   if(rosterPortraits.size!==rosterPortraitNext)throw new Error('A dinosaur thumbnail was not saved.');
+   setLoadingProgress(30+Math.floor(rosterPortraits.size/species.length*67),
+    'Rendering dinosaur skins '+rosterPortraits.size+' / '+species.length+'...');
+   renderLoadingWaterfall();
+   await nextBootFrame();
+  }
+  if(rosterPortraits.size!==species.length)throw new Error('Not all shop portraits are ready.');
+  renderRoster();
+  setLoadingProgress(100,'The jungle is ready!');
+  renderLoadingWaterfall();
+  await nextBootFrame();
+  loaderScene=null;loaderCamera=null;loaderSpino=null;loaderFoam.length=0;
+  document.body.classList.remove('loading-active');
+  $('loadingScreen').remove();
+  window.__dinoLoading=false;window.__dinoStarted=true;
+  $('startupError').style.display='none';
+  clock.getDelta();frame();
+ }catch(err){
+  console.error('DinoCrossing startup preload failed',err);
+  const root=$('loadingScreen');root.classList.add('failed');
+  $('loadingStatus').textContent='Loading interrupted';
+  $('loadingError').textContent=err.message||String(err);
+  window.__dinoLoading=false;
+ }
+}
+preloadStartup();
+
 </script><script>if('serviceWorker' in navigator && location.protocol!=='file:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('Offline cache unavailable',e)));}</script></body></html>
