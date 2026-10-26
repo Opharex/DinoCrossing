@@ -50,7 +50,7 @@
 #select #roster button.techSkin{border-color:#497e8b}
 #select #roster button.techSkin.selected{border-color:#65eeff;background:linear-gradient(#315966,#1d333f);box-shadow:0 0 12px #48dfff60,0 4px #142b34}
 @media(max-width:600px){#select #roster{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Forest Borders and Raised Hazards">🌲 FOREST BORDERS! 🪨</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Sound effects</p><input id="sfx" type="range" min="0" max="100" value="65"><p>Music</p><input id="music" type="range" min="0" max="100" value="25"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Varied Slim Trees">🌳 SLIM VARIED TREES! 🌸</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original and Tech variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 18 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Sound effects</p><input id="sfx" type="range" min="0" max="100" value="65"><p>Music</p><input id="music" type="range" min="0" max="100" value="25"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -98,7 +98,7 @@ function stem(g,m,ax,ay,az,bx,by,bz,r=.09){let d=new THREE.Vector3(bx-ax,by-ay,b
 function jagged(g,m,x,y,z,sx,sy,sz){let a=mesh(g,facetGeo,m,x,y,z,sx,sy,sz);a.rotation.set(.14,.35,.09);return a}
 function leafBlade(g,m,x,y,z,len,width,angle){let a=mesh(g,leafGeo,m,x,y,z,width,len,width*.28);a.rotation.z=angle;return a}
 function makeTree(g,seed=0){
- // Crossy-style block canopy: exactly one world tile wide and deep.
+ // Slim block-shaped foliage remains inside the original collision tile.
  const variants=[
   {leaves:0x5cae64,shade:0x3e8d52,wood:0x886447,stripe:0xb08b60},
   {leaves:0xf3a0c4,shade:0xdb79aa,wood:0xaca4a0,stripe:0x8f765f},
@@ -108,18 +108,24 @@ function makeTree(g,seed=0){
   {leaves:0xb7cd70,shade:0x8cab4e,wood:0x786047,stripe:0xb19a71}
  ];
  const v=variants[Math.abs(Math.floor(seed*13.7+Math.sin(seed*4.7)*19))%variants.length];
- const variation=Math.abs(Math.sin(seed*2.71+3.2));const trunkHeight=.57+variation*.14;const crownY=trunkHeight+ .43;const trunkMat=mat(v.wood),stripeMat=mat(v.stripe),leafMat=mat(v.leaves),shadeMat=mat(v.shade);
- // Narrow rectangular trunk rises into a crisp 1 x 1 cube of foliage.
+ const variation=Math.abs(Math.sin(seed*2.71+3.2));
+ const trunkHeight=.40+variation*.45;
+ const crownWidth=.70+Math.abs(Math.sin(seed*5.83+1.7))*.20;
+ const crownDepth=.72+Math.abs(Math.cos(seed*3.93+2.1))*.17;
+ const crownHeight=.76+Math.abs(Math.cos(seed*1.89+4.4))*.28;
+ const crownY=trunkHeight+crownHeight/2-.04;
+ const trunkMat=mat(v.wood),stripeMat=mat(v.stripe),leafMat=mat(v.leaves),shadeMat=mat(v.shade);
+ // The canopy never exceeds one tile; tile collisions remain unchanged.
  box(g,trunkMat,0,trunkHeight/2,0,.22,trunkHeight,.22);
  for(let k=0;k<4;k++){
-  const y=.12+k*.125;
+  const y=.09+k*trunkHeight*.19;
   box(g,stripeMat,-.113,y,0,.012,.045,.225);
-  box(g,stripeMat,.113,y+.055,0,.012,.04,.225);
+  box(g,stripeMat,.113,y+.035,0,.012,.04,.225);
  }
- box(g,leafMat,0,crownY,0,1,1,1);
+ box(g,leafMat,0,crownY,0,crownWidth,crownHeight,crownDepth);
  // Subtle blocky side shading, kept flush inside the same tile.
- box(g,shadeMat,.493,crownY-.03,0,.014,.86,.92);
- box(g,shadeMat,0,crownY+.46,-.493,.91,.014,.014);
+ box(g,shadeMat,crownWidth/2-.007,crownY-.03,0,.014,crownHeight*.86,crownDepth*.92);
+ box(g,shadeMat,0,crownY+crownHeight/2-.007,-crownDepth/2+.007,crownWidth*.91,.014,.014);
 }
 function makeFern(g,seed=0){let h=.55+Math.abs(Math.sin(seed*7))*.33;stem(g,greens[1],0,.03,0,0,h,0,.045);for(let k=0;k<6;k++){let a=k*Math.PI/3+seed;let endX=Math.cos(a)*(.5+(.1*(k%2))),endZ=Math.sin(a)*(.5+(.1*(k%2)));stem(g,greens[2],0,h*.76,0,endX,.21,endZ,.035);for(let j=1;j<=3;j++){let t=j/4,px=endX*t,pz=endZ*t;for(let side of [-1,1]){let blade=mesh(g,leafGeo,greens[(k+j+2)%greens.length],px+Math.cos(a+Math.PI/2)*side*.09,h*(.76-.55*t),pz+Math.sin(a+Math.PI/2)*side*.09,.085,.26,.045);blade.rotation.z=Math.PI/2;blade.rotation.y=a+side*.4}}}}
 function makeCycad(g,seed=0){prism(g,bark[2],0,.33,0,.19,.65,7);for(let k=0;k<8;k++){let a=k*Math.PI/4+seed;let fr=mesh(g,leafGeo,greens[k%greens.length],Math.cos(a)*.36,.79,Math.sin(a)*.36,.19,.88,.12);fr.rotation.z=Math.PI/2;fr.rotation.y=a}jagged(g,greens[1],0,.83,0,.21,.12,.21)}
@@ -285,9 +291,12 @@ for(const side of [-1,1]){
   const sideCount=14,trees=Array.from({length:sideCount},(_,k)=>{
     const seed=y*103.31+side*47+k*29.17;
     const variant=Math.abs(Math.floor(seed*13.7+Math.sin(seed*4.7)*19))%forestColors.length;
-    const height=.57+Math.abs(Math.sin(seed*2.71+3.2))*.14;
+    const height=.40+Math.abs(Math.sin(seed*2.71+3.2))*.45;
+    const crownWidth=.70+Math.abs(Math.sin(seed*5.83+1.7))*.20;
+    const crownDepth=.72+Math.abs(Math.cos(seed*3.93+2.1))*.17;
+    const crownHeight=.76+Math.abs(Math.cos(seed*1.89+4.4))*.28;
     return {x:side*(8.06+k+.04*Math.sin(seed)),z:.035*Math.cos(seed*1.7),
-      height,variant,lift:(Math.sin(seed*.37)+1)*.025};
+      height,crownWidth,crownDepth,crownHeight,variant,lift:(Math.sin(seed*.37)+1)*.025};
   });
   const forestCube=cachedGeo('forest:unitCube',()=>new THREE.BoxGeometry(1,1,1));
   const transform=new THREE.Object3D();
@@ -306,14 +315,14 @@ for(const side of [-1,1]){
       for(const tree of selected){
         for(let stripe=0;stripe<spec.count;stripe++){
           if(part===0){
-            transform.position.set(tree.x,tree.lift+tree.height+.43,tree.z);
-            transform.scale.set(1,1,1);
+            transform.position.set(tree.x,tree.lift+tree.height+tree.crownHeight/2-.04,tree.z);
+            transform.scale.set(tree.crownWidth,tree.crownHeight,tree.crownDepth);
           }else if(part===1){
             transform.position.set(tree.x,tree.lift+tree.height/2,tree.z);
             transform.scale.set(.22,tree.height,.22);
           }else{
             const face=stripe%2===0?-1:1,band=Math.floor(stripe/2);
-            transform.position.set(tree.x+face*.113,tree.lift+.12+band*.125+(face>0?.055:0),tree.z);
+            transform.position.set(tree.x+face*.113,tree.lift+.09+band*tree.height*.19+(face>0?.035:0),tree.z);
             transform.scale.set(.012,.04,.225);
           }
           transform.rotation.set(0,0,0);transform.updateMatrix();
