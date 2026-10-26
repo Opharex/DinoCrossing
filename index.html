@@ -65,7 +65,7 @@
  #select .shopTop{top:-10px;padding:7px 2px}
  #select .shopFeature{top:48px}
 }
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Pure White Chrome Dinosaurs">🤍 CHROME GOES SNOW WHITE! 🔴</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original, Tech and Chrome variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 27 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Triple Waterfalls and Endless Liquid Channels">🌊 TRIPLE WATERFALLS! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select"><div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div><div class="shopFeature"><div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div><div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original, Tech and Chrome variants share the same shape and hitbox.</div></div></div><div class="shopListHeading">CHOOSE YOUR DINOSAUR <span>9 SPECIES · 27 SKINS</span></div><div id="roster"></div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><script>
 (function(){
   const notice=document.createElement('div');
   notice.id='startupError';
@@ -452,6 +452,8 @@ g.scale.setScalar(size);
 return g;
 }
 const world=new THREE.Group();scene.add(world);const ROW_W=15,LEFT=-7,RIGHT=7;let calmRowsRemaining=0,lastCalmEnd=-30;
+// A controlled three-row river/lava run; independent gameplay rows share one visual basin.
+let poolRowsRemaining=0,poolType=null,poolDirection=1;
 let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
@@ -489,7 +491,7 @@ function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,
    const index=i*(lines+1)+j;
    const z=(j/lines-.5)*zWidth;
    waveXs[index]=x;waveZs[index]=z;
-   edgeDamping[index]=Math.min(1,Math.max(.1,(.5-Math.abs(z))*7));
+   edgeDamping[index]=Math.min(1,Math.max(.1,(zWidth*.5-Math.abs(z))*7));
   }
  }
  const info={mesh:surface,pos,type,startX,endX,zWidth,baseY,sections,lines,offset,frame:-1,
@@ -513,9 +515,9 @@ function animateLiquidSurface(info,time,dir){
  }
  pos.needsUpdate=true;info.mesh.geometry.computeVertexNormals();
 }
-function createSpillingFlow(group,type,dir,seed){
+function createSpillingFlow(group,type,dir,seed,zWidth=.98){
  // A curved, uninterrupted ramp between lane water level and the lower basin.
- const bands=22,lines=4,verts=new Float32Array((bands+1)*(lines+1)*3),indices=[];
+ const bands=22,lines=zWidth>2?10:4,verts=new Float32Array((bands+1)*(lines+1)*3),indices=[];
  for(let i=0;i<bands;i++)for(let j=0;j<lines;j++){
   const a=i*(lines+1)+j,b=a+lines+1;
   indices.push(a,b,a+1,a+1,b,b+1);
@@ -534,7 +536,7 @@ function createSpillingFlow(group,type,dir,seed){
   const damping=.35+.35*Math.sin(p*Math.PI);
   for(let j=0;j<=lines;j++){
    const index=i*(lines+1)+j;
-   spillXs[index]=x;spillZs[index]=(j/lines-.5)*.98;
+   spillXs[index]=x;spillZs[index]=(j/lines-.5)*zWidth;
    spillBases[index]=base;spillDamping[index]=damping;
   }
  }
@@ -549,56 +551,96 @@ function updateSpillingFlow(cascade,time){
  }
  attr.needsUpdate=true;cascade.mesh.geometry.computeVertexNormals();
 }
-function makeLiquidSpillway(group,row){
- const type=row.type,dir=row.dir,source=-dir,material=liquidTopMats[type],sprayMat=type==='river'?liquidFoamMat:lavaSprayMat;
- // Bring either inlet, including right-hand sources, directly beside the playable edge.
- // The shortened reservoir leaves a clear view rather than disappearing into forest.
- const sourceNear=7.55,sourceFar=12.25,sourceCenter=(sourceNear+sourceFar)/2;
- box(group,materials.stone,source*sourceCenter,.015,0,sourceFar-sourceNear,.58,1.38);
- liquidSurface(group,type,source>0?sourceNear+.04:-sourceFar+.04,
-   source>0?sourceFar-.04:-sourceNear-.04,1.12,.335,20,4,row.y*.73);
- box(group,materials.stone,source*(sourceFar+.09),.08,0,.23,.55,1.38);
- // Lip feeds into the main lane without blocking the playable first tile.
- box(group,material,source*7.61,.105,0,.31,.35,1.03);
- // Downstream lip drops from the road into a lower receiving basin.
- box(group,materials.stone,dir*8.03,-.39,0,1.1,.44,1.35);
- box(group,materials.stone,dir*11.15,-.77,0,5.65,.25,1.55);
- liquidSurface(group,type,dir>0?8.55:-13.9,dir>0?13.9:-8.55,1.12,-.61,20,4,row.y*.71+2.1);
- // Continuous animated outflow connects the playable lane to the lower pool.
- const spilling=createSpillingFlow(group,type,dir,row.y*.61);
- // Animated falling curtain underneath reinforces the vertical drop.
- const curtain=new THREE.Group();group.add(curtain);
- for(let j=0;j<7;j++){
-  const z=(j-3)*.143;
-  const mesh=box(curtain,material,dir*8.42,-.36,z,.045,.65,.148);
-  mesh.userData.cascade=true;mesh.userData.cascadeIndex=j;
+// A single wide channel handles both ordinary lanes and three-lane liquid pools.
+// All feature geometry belongs to the middle gameplay row for predictable culling.
+const foamBubbleGeo=cachedGeo('liquid:foamBubble',()=>new THREE.IcosahedronGeometry(1,0));
+function makeLiquidSpillway(group,row,span=1){
+ const type=row.type,dir=row.dir,source=-dir,material=liquidTopMats[type];
+ const sprayMat=type==='river'?liquidFoamMat:lavaSprayMat;
+ const wide=span===3,waterWidth=span-.08,half=span*.5;
+ const sourceNear=7.55,far=46,outerLength=far-sourceNear,outerCenter=(far+sourceNear)/2;
+ const lowerNear=8.55,lowerLength=far-lowerNear,lowerCenter=(far+lowerNear)/2;
+ // Neither side terminates in a short rectangular trough: the upper feeder
+ // and lower receiving channel stretch into the fog on both sides of the map.
+ box(group,materials.stone,source*outerCenter,-.06,0,outerLength,.52,span+.23);
+ liquidSurface(group,type,source>0?sourceNear+.03:-far+.06,
+  source>0?far-.06:-sourceNear-.03,waterWidth,.335,wide?28:24,wide?8:4,row.y*.73);
+ box(group,materials.stone,dir*lowerCenter,-.87,0,lowerLength+.2,.32,span+.23);
+ liquidSurface(group,type,dir>0?lowerNear:-(far-.06),
+  dir>0?far-.06:-lowerNear,waterWidth,-.61,wide?28:24,wide?8:4,row.y*.71+2.1);
+ // Two continuous low-poly stone edges define the single moat, not three
+ // disconnected side-channel boxes when the pool is three rows wide.
+ for(const side of [-1,1]){
+  box(group,materials.stone,source*outerCenter,.18,side*(half+.065),outerLength,.49,.19);
+  box(group,materials.stone,dir*lowerCenter,-.53,side*(half+.065),lowerLength,.43,.19);
+  if(wide)box(group,materials.stone,0,-.27,side*(half+.065),15,.27,.19);
  }
- // Bright splash foam at both waterfall rims, optional molten droplets for lava.
- for(let i=0;i<13;i++){
-  const z=(i/12-.5)*1.08,x=dir*(8.18+.28*Math.sin(i*2.4)),y=-.58+.06*Math.cos(i*1.7);
-  const splash=box(group,sprayMat,x,y,z,.10,.023,.085);
-  splash.userData.splash=true;splash.userData.splashIndex=i;
+ // Broad, uninterrupted source lip and curtain feed the playable surface.
+ box(group,material,source*7.61,.105,0,.31,.35,waterWidth);
+ box(group,materials.stone,dir*8.03,-.39,0,1.1,.44,span+.23);
+ const spilling=createSpillingFlow(group,type,dir,row.y*.61,waterWidth);
+ const curtain=new THREE.Group(),inletCurtain=new THREE.Group();
+ group.add(curtain,inletCurtain);
+ const strands=wide?19:7;
+ for(let j=0;j<strands;j++){
+  const z=(j-(strands-1)/2)*(waterWidth/strands);
+  const bandWidth=waterWidth/strands+.007;
+  const falls=box(curtain,material,dir*8.42,-.36,z,.045,.65,bandWidth);
+  falls.userData.cascadeIndex=j;
+  const inlet=box(inletCurtain,material,source*7.51,.103,z,.045,.46,bandWidth);
+  inlet.userData.cascadeIndex=j;
  }
- for(let i=0;i<8;i++){
-  const inlet=box(group,sprayMat,source*(7.52+.22*Math.sin(i*3)),.32,(i/7-.5)*1.08,.095,.017,.072);
-  inlet.userData.splash=true;inlet.userData.splashIndex=i+13;
+ // White bubbling foam at both height changes. Lava uses the same motion
+ // with golden molten spray instead of inexplicable white bubbles.
+ const outletCount=wide?30:13,inletCount=wide?22:8;
+ for(let i=0;i<outletCount;i++){
+  const z=(i/(outletCount-1)-.5)*waterWidth;
+  const foam=box(group,sprayMat,dir*(8.18+.19*Math.sin(i*2.4)),-.58+.025*Math.cos(i),z,.10,.023,.075);
+  foam.userData.splash=true;foam.userData.splashIndex=i;foam.userData.splashBaseY=-.58;
  }
- row.liquidEffects={curtain,spilling,dir,type};
+ for(let i=0;i<inletCount;i++){
+  const z=(i/(inletCount-1)-.5)*waterWidth;
+  const foam=box(group,sprayMat,source*(7.53+.14*Math.sin(i*3)),-.13,z,.095,.017,.072);
+  foam.userData.splash=true;foam.userData.splashIndex=i+outletCount;foam.userData.splashBaseY=-.13;
+ }
+ const bubbles=wide?32:12;
+ for(let i=0;i<bubbles;i++){
+  const atInlet=i%3===0,side=atInlet?source:dir;
+  const b=new THREE.Mesh(foamBubbleGeo,sprayMat);
+  const z=((i*0.61803398875)%1-.5)*waterWidth;
+  const x=side*(atInlet?7.47+((i*0.37)%1)*.22:8.25+((i*.47)%1)*.58);
+  const baseY=atInlet?-.125:-.59;
+  b.position.set(x,baseY,z);
+  b.scale.set(.033+(i%3)*.012,.025+(i%4)*.009,.035+(i%3)*.009);
+  b.userData.waterBubble={baseY,baseZ:z,phase:i*1.91};
+  group.add(b);
+ }
+ row.liquidEffects={curtain,inletCurtain,spilling,dir,type};
 }
 function liquidLaneUpdate(r,time){
  if(!r||!r.liquidEffects)return;
- const {curtain,spilling,dir,type}=r.liquidEffects;
+ const {curtain,inletCurtain,spilling,type}=r.liquidEffects;
  updateSpillingFlow(spilling,time);
- for(const mesh of curtain.children){
-  const k=mesh.userData.cascadeIndex;
-  mesh.scale.y=.59+.12*Math.sin(time*(type==='river'?8:4)+k*1.3);
-  mesh.position.y=-.36+Math.sin(time*5+k*1.9)*.035;
+ const pulse=type==='river'?8:4;
+ for(const [group,inlet] of [[curtain,false],[inletCurtain,true]]){
+  for(const mesh of group.children){
+   const k=mesh.userData.cascadeIndex;
+   mesh.scale.y=(inlet?.44:.59)+.12*Math.sin(time*pulse+k*1.3);
+   mesh.position.y=(inlet?.103:-.36)+Math.sin(time*5+k*1.9)*.028;
+  }
  }
  for(const part of r.group.children){
   if(part.userData.splash){
    const k=part.userData.splashIndex;
-   part.position.y=(k>=13?.32:-.58)+Math.abs(Math.sin(time*(type==='river'?7:3.5)+k*.9))*.075;
+   part.position.y=part.userData.splashBaseY+Math.abs(Math.sin(time*(type==='river'?7:3.5)+k*.9))*.075;
    part.scale.x=.09+.05*Math.abs(Math.sin(time*6+k));
+  }
+  if(part.userData.waterBubble){
+   const b=part.userData.waterBubble;
+   const phase=time*(type==='river'?4.4:2.2)+b.phase;
+   part.position.y=b.baseY+Math.abs(Math.sin(phase))*.11;
+   part.position.z=b.baseZ+Math.sin(phase*.7)*.028;
+   part.scale.y=.025+Math.abs(Math.cos(phase))*.027;
   }
  }
 }
@@ -656,15 +698,23 @@ function makeRow(y){
  let difficulty=Math.min(.9,highest/180);
  // Separate, uncommon 2.7% chance to start a FIVE-row safe stretch.
  // Do not roll again inside a stretch; allow a gap before another can spawn.
- if(calmRowsRemaining===0&&y>=9&&y-lastCalmEnd>=12&&Math.random()<.027)
+ if(poolRowsRemaining===0&&calmRowsRemaining===0&&y>=9&&y-lastCalmEnd>=12&&Math.random()<.027)
    calmRowsRemaining=5;
  const calmStretch=calmRowsRemaining>0;
  if(calmStretch){calmRowsRemaining--;if(calmRowsRemaining===0)lastCalmEnd=y;}
- let type=y<3||calmStretch?'grass':
+ const continuingPool=poolRowsRemaining>0;
+ let type=continuingPool?poolType:y<3||calmStretch?'grass':
    pick(['grass','grass','grass','grass','forest','path','path','river','lava','tar','sky']);
- if(!calmStretch&&y>=9&&Math.random()<.085)type=pick(['stampede','lavasurge','flashflood']);
- if(!calmStretch&&y>3&&y%9===0)type='grass';
- if(y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
+ if(continuingPool)poolRowsRemaining--;
+ if(!continuingPool&&!calmStretch&&y>=9&&Math.random()<.085)type=pick(['stampede','lavasurge','flashflood']);
+ if(!continuingPool&&!calmStretch&&y>3&&y%9===0)type='grass';
+ if(!continuingPool&&y>3&&rows.get(y-1)?.type===type&&type!=='grass')type='grass';
+ // Deliberate exception to the usual no-adjacent-hazards rule.
+ // The three rows share one wide water/lava surface, source and spillway.
+ const beginsPool=!continuingPool&&y>=12&&(type==='river'||type==='lava')&&Math.random()<.23;
+ if(beginsPool){poolRowsRemaining=2;poolType=type;poolDirection=Math.random()<.5?1:-1;}
+ const poolIndex=beginsPool?0:continuingPool?2-poolRowsRemaining:-1;
+ let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
 // TEMPORARY FLOOR-BOUND GRID: each line is part of the actual ground mesh.
 const floorGridMat=new THREE.MeshBasicMaterial({color:tileGridColor,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
 const floorGrid=new THREE.Group();
@@ -678,7 +728,7 @@ box(floorGrid,floorGridMat,0,.0007,.5,ROW_W,.0014,seamWidth);
 floorGrid.scale.set(1/ROW_W,1/.36,1);
 floorGrid.position.y=.5;
 floorGrid.visible=tileGridEnabled;ground.add(floorGrid);ground.userData.floorGrid=floorGrid;group.userData.floorGrid=floorGrid;
-if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(((y+k+1)%3)+3)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();liquidSurface(group,type,-7.49,7.49,.98,-.116,42,4,y*.47)}if(type==='river'||type==='lava'){ground.userData.liquid=type;ground.material=ground.material.clone();ground.material.color=ground.material.color.clone()}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
+if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(((y+k+1)%3)+3)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();if(poolIndex===-1||poolIndex===1)liquidSurface(group,type,-7.49,7.49,poolIndex===1?2.98:.98,-.116,42,poolIndex===1?10:4,y*.47)}if(type==='river'||type==='lava'){ground.userData.liquid=type;ground.material=ground.material.clone();ground.material.color=ground.material.color.clone()}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
 // These strips never enter row.solid, moving hazards, collectibles or collision checks.
 const sideMat=(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3];
 for(const side of [-1,1]){
@@ -754,7 +804,7 @@ for(const side of [-1,1]){
     }
   }
 }
-let row={y,type,group,raised:new Map(),solid:new Set(),moving:[],coins:[],eruption:[],special:null,speed:rand(1.3,2.5)+difficulty*2.1,dir:Math.random()<.5?1:-1};if(type==='grass'||type==='forest'||type==='sky'){let n=calmStretch?0:type==='forest'?Math.floor(rand(3,7)):type==='sky'?2:Math.floor(rand(0,4));let possible=Array.from({length:15},(_,i)=>i-7).sort(()=>Math.random()-.5);for(let x of possible.slice(0,n)){if(y<3&&Math.abs(x)<2)continue;if(x===0&&y<8)continue;row.solid.add(x);prop(group,x,0,pick(type==='forest'?['tree','tree','rock','cycad']:['rock','cycad','tree','mushroom']))}for(let i=0;i<3;i++){let x=rand(-7,7);if(!row.solid.has(Math.round(x))){let deco=prop(group,x,0,'fern');deco.scale.setScalar(.3);deco.userData.sway=true;deco.userData.seed=x+y}}}// Choose lethal tar tiles before raised terrain, so a raised tile can never conceal a pit.
+let row={y,type,group,raised:new Map(),solid:new Set(),moving:[],coins:[],eruption:[],special:null,poolIndex,speed:rand(1.3,2.5)+difficulty*2.1,dir:poolIndex>=0?poolDirection:Math.random()<.5?1:-1};if(type==='grass'||type==='forest'||type==='sky'){let n=calmStretch?0:type==='forest'?Math.floor(rand(3,7)):type==='sky'?2:Math.floor(rand(0,4));let possible=Array.from({length:15},(_,i)=>i-7).sort(()=>Math.random()-.5);for(let x of possible.slice(0,n)){if(y<3&&Math.abs(x)<2)continue;if(x===0&&y<8)continue;row.solid.add(x);prop(group,x,0,pick(type==='forest'?['tree','tree','rock','cycad']:['rock','cycad','tree','mushroom']))}for(let i=0;i<3;i++){let x=rand(-7,7);if(!row.solid.has(Math.round(x))){let deco=prop(group,x,0,'fern');deco.scale.setScalar(.3);deco.userData.sway=true;deco.userData.seed=x+y}}}// Choose lethal tar tiles before raised terrain, so a raised tile can never conceal a pit.
 if(type==='tar'){
   const slots=[-6,-4,-2,0,2,4,6];
   for(let i=slots.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[slots[i],slots[j]]=[slots[j],slots[i]];}
@@ -786,7 +836,7 @@ if(type==='river'||type==='lava'){
  // Clear only the two closest trees on either bank of the immediately adjacent row,
  // leaving the rest of the side forest dense around each visible spillway.
  for(let d=1;d<=1;d++)clearSideForestNearLiquid(rows.get(y-d));
- makeLiquidSpillway(group,row);for(let i=0;i<5;i++){let x=-8+i*4.1+rand(-.5,.5),p=new THREE.Group();p.position.x=x;group.add(p);const length=Math.random()<.5?2:3;p.add(floatingPlatform(type,x+y,length));blob(p,0,0,length*.42).userData.sunBlob.height=.33;row.moving.push({mesh:p,x,speed:row.speed*(type==='lava'?.75:.9),width:length,platform:true})}}if(type==='path'){for(let i=0;i<3;i++){let x=-9+i*6.8+rand(-1,1),mob=obstacleDino(pick([2,3,4,5,6]),Math.floor(rand(0,5)));mob.scale.setScalar(rand(.78,.95));mob.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;mob.position.set(x,0,0);blob(mob,0,0,.85);group.add(mob);row.moving.push({mesh:mob,x,speed:row.speed,width:1.05,platform:false})}for(let x=-7;x<=7;x+=2)box(group,materials.wood,x,-.01,-.43,.5,.05,.1)}if(type==='sky'){let bird=makePterosaur();bird.scale.setScalar(.85);bird.position.set(-11,2.1,0);bird.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;group.add(bird);let dangerDisc=new THREE.Mesh(new THREE.CircleGeometry(.65,28),new THREE.MeshBasicMaterial({color:0xff6244,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide}));dangerDisc.rotation.x=-Math.PI/2;dangerDisc.position.set(-11,.055,0);group.add(dangerDisc);
+ if(poolIndex===-1||poolIndex===1)makeLiquidSpillway(group,row,poolIndex===1?3:1);for(let i=0;i<5;i++){let x=-8+i*4.1+rand(-.5,.5),p=new THREE.Group();p.position.x=x;group.add(p);const length=Math.random()<.5?2:3;p.add(floatingPlatform(type,x+y,length));blob(p,0,0,length*.42).userData.sunBlob.height=.33;row.moving.push({mesh:p,x,speed:row.speed*(type==='lava'?.75:.9),width:length,platform:true})}}if(type==='path'){for(let i=0;i<3;i++){let x=-9+i*6.8+rand(-1,1),mob=obstacleDino(pick([2,3,4,5,6]),Math.floor(rand(0,5)));mob.scale.setScalar(rand(.78,.95));mob.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;mob.position.set(x,0,0);blob(mob,0,0,.85);group.add(mob);row.moving.push({mesh:mob,x,speed:row.speed,width:1.05,platform:false})}for(let x=-7;x<=7;x+=2)box(group,materials.wood,x,-.01,-.43,.5,.05,.1)}if(type==='sky'){let bird=makePterosaur();bird.scale.setScalar(.85);bird.position.set(-11,2.1,0);bird.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;group.add(bird);let dangerDisc=new THREE.Mesh(new THREE.CircleGeometry(.65,28),new THREE.MeshBasicMaterial({color:0xff6244,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide}));dangerDisc.rotation.x=-Math.PI/2;dangerDisc.position.set(-11,.055,0);group.add(dangerDisc);
 let dangerRing=new THREE.Mesh(new THREE.RingGeometry(.61,.68,32),new THREE.MeshBasicMaterial({color:0xffe58b,transparent:true,opacity:.9,depthWrite:false,side:THREE.DoubleSide}));dangerRing.rotation.x=-Math.PI/2;dangerRing.position.set(-11,.062,0);group.add(dangerRing);
 // Bird collision indicator remains the original unchanged ring/disc.
  row.moving.push({mesh:bird,x:-11,speed:row.speed*1.7,width:1.1,platform:false,bird:true,dangerDisc,dangerRing});box(group,materials.stone,0,.006,0,1.3,.015,.65).material.transparent=true;row.bird=bird}if(type==='tar'){
@@ -1239,7 +1289,7 @@ if(sp.kind==='flashflood'||sp.kind==='lavasurge')sp.wave.children.forEach(m=>{
  m.scale.y=.035+.015*Math.sin(gameTime*9+(m.userData.foam||0));
 });}
 }
-function start(){if(menuPreview){scene.remove(menuPreview);menuPreview=null}for(let e of effects)scene.remove(e.o);effects.length=0;queue.length=0;if(state!=='menu'||rows.size===0){world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;gameTime=0;}px=0;py=0;highest=0;earned=0;lightingClockProgress=0;camY=0;camSmooth=0;camSide=0;hop=null;state='playing';if(player)scene.remove(player);player=new THREE.Group();avatar=dino(chosen,1);
+function start(){if(menuPreview){scene.remove(menuPreview);menuPreview=null}for(let e of effects)scene.remove(e.o);effects.length=0;queue.length=0;if(state!=='menu'||rows.size===0){world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;poolRowsRemaining=0;poolType=null;gameTime=0;}px=0;py=0;highest=0;earned=0;lightingClockProgress=0;camY=0;camSmooth=0;camSide=0;hop=null;state='playing';if(player)scene.remove(player);player=new THREE.Group();avatar=dino(chosen,1);
 // Permanent model fit; turning and squash/stretch animate its parent.
 const model=avatar;
 model.updateMatrixWorld(true);
@@ -1261,7 +1311,7 @@ blob(player,0,0,.66);scene.add(player);ensureRows();updateDaylight(0,0,true);upd
 function menu(){queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
- for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;ensureRows();updateDaylight(0,0,true);if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');fx('death',.65);$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist();fx('record')} $('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
+ for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;world.clear();rows.clear();sunShadowGroups.clear();sunBlobList.length=0;liquidMeshes.length=0;maxGenerated=-1;calmRowsRemaining=0;lastCalmEnd=-30;poolRowsRemaining=0;poolType=null;ensureRows();updateDaylight(0,0,true);if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');fx('death',.65);$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist();fx('record')} $('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
 const queue=[];function requestMove(dx,dy){if(state!=='playing')return;if(queue.length<1)queue.push([dx,dy])}function groundTileHeight(r,x){return r?.raised?.get(Math.round(x))||0}
 function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sourceRow?.type==='river'||sourceRow?.type==='lava')?support(sourceRow,px):null;const sourceIndex=sourcePlatform?platformTileAt(sourcePlatform,px):-1;const tileX=sourcePlatform?platformTileCenter(sourcePlatform,sourceIndex):Math.round(px);let nx=(sourcePlatform&&dy===0?tileX:Math.round(px))+dx,ny=py+dy;if(nx<LEFT||nx>RIGHT||ny<0)return;let r=rows.get(ny);if(!r||r.solid.has(Math.round(nx))){fx('denied',.55);return}
  // A fossil block resists the first one or two contacts. Show a hop into
