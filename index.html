@@ -403,13 +403,13 @@ model.position.x-=playerCenter.x;
 model.position.y-=playerBounds.min.y;
 model.position.z-=playerCenter.z;
 const fittedModel=new THREE.Group();
-fittedModel.scale.setScalar(playerFit);
+fittedModel.scale.setScalar(playerFit * 2);
 fittedModel.add(model);
 avatar=new THREE.Group();
 avatar.rotation.y=Math.PI;
 avatar.add(fittedModel);
 player.add(avatar);
-blob(player,0,0,.33);scene.add(player);ensureRows();updateHud();show(null);clock.getDelta();lastTime=performance.now()}let menuPreview=null;
+blob(player,0,0,.66);scene.add(player);ensureRows();updateHud();show(null);clock.getDelta();lastTime=performance.now()}let menuPreview=null;
 function menu(){queue.length=0;state='menu';hop=null;camY=0;camSmooth=0;shake=0;highest=0;gameTime=0;world.clear();rows.clear();maxGenerated=-1;ensureRows();if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){if(state!=='playing')return;$('deathReason').textContent=reason;$('deathDetail').textContent=detail;state='dead';shake=.22;burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);sound(120,.3,'sawtooth');$('flash').style.opacity='.27';setTimeout(()=>$('flash').style.opacity='0',80);if(highest>best){best=highest;persist()}$('finalScore').textContent=highest;$('finalBest').textContent=best;$('earned').textContent=earned;setTimeout(()=>{if(state==='dead')show('dead')},450)}function pause(){if(state!=='playing')return;state='paused';show('paused')}
 const queue=[];function requestMove(dx,dy){if(state!=='playing')return;if(queue.length<1)queue.push([dx,dy])}function doMove(dx,dy){let nx=px+dx,ny=py+dy;if(nx<LEFT||nx>RIGHT||ny<0)return;let r=rows.get(ny);if(!r||r.solid.has(Math.round(nx))){sound(130,.045,'triangle');return}hop={fromX:px,fromY:py,toX:nx,toY:ny,t:0,turnFrom:avatar.rotation.y,turnTo:dx>0?Math.PI/2:dx<0?-Math.PI/2:dy>0?Math.PI:0};px=nx;py=ny;sound((rows.get(ny)?.type==='path'?235:rows.get(ny)?.type==='tar'?180:340)+Math.random()*45,.075,rows.get(ny)?.type==='path'?'triangle':'sine')}// Visible player bounds include facing and hop squash/stretch, excluding the shadow.
 const playerHitBounds=new THREE.Box3();
