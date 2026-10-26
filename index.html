@@ -275,14 +275,54 @@ for(const side of [-1,1]){
   const edgeX=side*14.5;
   const extension=box(group,materials.grass[(y+1)%3],edgeX,-.19,0,14,.36,1);
   extension.castShadow=false;
-  // Off-grid woodland, not playable: staggered one-tile cube trees to the horizon.
-  // Every row gets a mixed canopy rather than a repeating rock border.
-  for(let k=0;k<14;k++){
+  // Draw many off-grid trees in a few batches, keeping mobile rendering smooth.
+  const forestColors=[
+   [0x5cae64,0x886447,0xb08b60],[0xf3a0c4,0xaca4a0,0x8f765f],
+   [0xe8a65c,0x84604c,0xa98465],[0x7fc8c0,0x77645b,0xa59a85],
+   [0xb6a2e6,0x80706e,0xb09c90],[0xb7cd70,0x786047,0xb19a71]
+  ];
+  // All trees live in the 1-unit cells outside +/-7.5.
+  const sideCount=14,trees=Array.from({length:sideCount},(_,k)=>{
     const seed=y*103.31+side*47+k*29.17;
-    const x=side*(8.06+k+.04*Math.sin(seed));
-    const tree=artProp(group,x,.035*Math.cos(seed*1.7),'tree',seed);
-    // Vary the trunks and crown height, never the one-tile canopy footprint.
-    tree.position.y=(Math.sin(seed*.37)+1)*.025;
+    const variant=Math.abs(Math.floor(seed*13.7+Math.sin(seed*4.7)*19))%forestColors.length;
+    const height=.57+Math.abs(Math.sin(seed*2.71+3.2))*.14;
+    return {x:side*(8.06+k+.04*Math.sin(seed)),z:.035*Math.cos(seed*1.7),
+      height,variant,lift:(Math.sin(seed*.37)+1)*.025};
+  });
+  const forestCube=cachedGeo('forest:unitCube',()=>new THREE.BoxGeometry(1,1,1));
+  const transform=new THREE.Object3D();
+  for(let palette=0;palette<forestColors.length;palette++){
+    const selected=trees.filter(t=>t.variant===palette);
+    if(!selected.length)continue;
+    const [leaf,barkColor,stripeColor]=forestColors[palette];
+    const parts=[
+      {color:leaf,count:1},
+      {color:barkColor,count:1},
+      {color:stripeColor,count:8}
+    ];
+    for(let part=0;part<parts.length;part++){
+      const spec=parts[part],batch=new THREE.InstancedMesh(forestCube,new THREE.MeshLambertMaterial({color:spec.color}),selected.length*spec.count);
+      let slot=0;
+      for(const tree of selected){
+        for(let stripe=0;stripe<spec.count;stripe++){
+          if(part===0){
+            transform.position.set(tree.x,tree.lift+tree.height+.43,tree.z);
+            transform.scale.set(1,1,1);
+          }else if(part===1){
+            transform.position.set(tree.x,tree.lift+tree.height/2,tree.z);
+            transform.scale.set(.22,tree.height,.22);
+          }else{
+            const face=stripe%2===0?-1:1,band=Math.floor(stripe/2);
+            transform.position.set(tree.x+face*.113,tree.lift+.12+band*.125+(face>0?.055:0),tree.z);
+            transform.scale.set(.012,.04,.225);
+          }
+          transform.rotation.set(0,0,0);transform.updateMatrix();
+          batch.setMatrixAt(slot++,transform.matrix);
+        }
+      }
+      batch.instanceMatrix.needsUpdate=true;
+      batch.castShadow=part===0;group.add(batch);
+    }
   }
 }
 let row={y,type,group,raised:new Map(),solid:new Set(),moving:[],coins:[],eruption:[],special:null,speed:rand(1.3,2.5)+difficulty*2.1,dir:Math.random()<.5?1:-1};if(type==='grass'||type==='forest'||type==='sky'){let n=type==='forest'?Math.floor(rand(3,7)):type==='sky'?2:Math.floor(rand(0,4));let possible=Array.from({length:15},(_,i)=>i-7).sort(()=>Math.random()-.5);for(let x of possible.slice(0,n)){if(y<3&&Math.abs(x)<2)continue;if(x===0&&y<8)continue;row.solid.add(x);prop(group,x,0,pick(type==='forest'?['tree','tree','rock','cycad']:['rock','cycad','tree','mushroom']))}for(let i=0;i<3;i++){let x=rand(-7,7);if(!row.solid.has(Math.round(x))){let deco=prop(group,x,0,'fern');deco.scale.setScalar(.3);deco.userData.sway=true;deco.userData.seed=x+y}}}// Low-relief individual ground tiles; only visuals and rider elevation change.
