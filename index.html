@@ -2320,7 +2320,12 @@ function beginImpactDeath(kind,reason,detail){
   turn:avatar.rotation.y,roll:avatar.rotation.z,dir:direction,
   bird:bird?.mesh||null,
   birdX:bird?.mesh.position.x||0,
-  birdY:bird?.mesh.position.y||0};
+  birdY:bird?.mesh.position.y||0,
+  birdLocalZ:bird?.mesh.position.z||0,
+  height:Math.max(.7,player.userData.drowningHeight||1.3),
+  legs:(player.userData.drowningFeet||[]).map(part=>({part,start:part.rotation.x})),
+  row,originalWaveX:kind==='flood'?row?.special?.wave.position.x:0,
+  landed:false,secondSplash:false};
  state='dying';queue.length=0;hop=null;
  if(kind==='collision'){
   shake=Math.max(shake,.16);
@@ -2340,40 +2345,75 @@ function updateImpactDeath(dt){
  const a=d.elapsed/d.duration,ease=a*a*(3-2*a);
  if(d.kind==='collision'){
   // Hit, spin sideways, land on its back, and finish in a tiny bounce.
-  const travel=1.15*ease;
+  const travel=1.15*ease,spin=Math.min(1,a/.78),tumble=spin*spin*(3-2*spin);
+  const floor=groundTileHeight(d.row,d.x);
+  // One strong tumble. Root rises as the head rotates toward the floor,
+  // then the character finishes inverted with feet pointing upward.
   player.position.set(d.x+d.dir*travel,
-   d.y+Math.sin(Math.PI*a)*.55-Math.max(0,(a-.62)/.38)*.12,d.z);
-  avatar.rotation.z=d.roll+d.dir*(Math.PI*.48)*Math.min(1,a/.70);
-  avatar.rotation.x=Math.sin(a*Math.PI*2)*.16*(1-a);
-  const flattened=a>.65?.10*Math.sin(Math.PI*Math.min(1,(a-.65)/.35)):0;
+   floor+Math.sin(Math.PI*Math.min(1,a/.78))*.65+d.height*.95*Math.max(0,(a-.56)/.44),
+   d.z);
+  avatar.rotation.z=d.roll+d.dir*Math.PI*tumble;
+  avatar.rotation.x=Math.sin(a*Math.PI*2)*.13*(1-a);
+  const kick=Math.max(0,1-a*1.4);
+  for(let i=0;i<d.legs.length;i++){
+   const leg=d.legs[i];leg.part.rotation.x=leg.start+Math.sin(d.elapsed*24+i*Math.PI)*.42*kick;
+  }
+  if(!d.landed&&a>=.78){
+   d.landed=true;burst(player.position.x,floor+.11,d.z,0,7);fx('dirt',.50);
+  }
+  const flattened=a>.78?.09*Math.sin(Math.PI*Math.min(1,(a-.78)/.22)):0;
   avatar.scale.set(1+flattened,1-flattened,1+flattened);
  }else if(d.kind==='bird'){
   // Reuse the actual attacking pterosaur, not a duplicate high-poly actor.
   // It visibly dives to collect the player, then rises carrying it upward.
   const dive=Math.min(1,a/.23),lift=Math.max(0,(a-.23)/.77);
-  const arc=lift*lift*(3-2*lift);
-  const birdX=d.x+(d.birdX-d.x)*(1-dive)*.5+arc*.40;
-  const birdY=d.birdY+(d.y+1.05-d.birdY)*dive+arc*3.55;
+  const approach=dive*dive*(3-2*dive),arc=lift*lift*(3-2*lift);
+  const travel=d.dir*1.40*arc,rise=7.30*arc;
+  // The attacker is parented to its lane group (already translated in Z).
+  // Keep its LOCAL z intact; using the player's world z moves it two lanes.
+  const birdX=THREE.MathUtils.lerp(d.birdX,d.x,approach)+travel;
+  const birdY=THREE.MathUtils.lerp(d.birdY,d.y+d.height+.25,approach)+rise;
   if(d.bird){
-   d.bird.position.set(birdX,birdY,d.z);
-   d.bird.rotation.z=Math.sin(d.elapsed*12)*.09;
+   d.bird.position.set(birdX,birdY,d.birdLocalZ);
+   d.bird.rotation.z=Math.sin(d.elapsed*14)*.10;
    const wings=d.bird.userData.wings;
    if(wings)for(let i=0;i<wings.length;i++)wings[i].rotation.z=
-    (i===0?1:-1)*Math.sin(d.elapsed*23)*.42;
+    (i===0?1:-1)*Math.sin(d.elapsed*21)*.65;
   }
-  player.position.set(d.x+arc*.40,d.y+arc*3.55,d.z);
-  avatar.rotation.z=d.roll+Math.sin(d.elapsed*14)*.16*arc;
-  avatar.rotation.x=Math.sin(d.elapsed*18)*.11*arc;
+  // The dinosaur stays grounded during the swoop, then dangles underneath.
+  player.position.set(d.x+travel,d.y+rise,d.z);
+  avatar.rotation.z=d.roll+Math.sin(d.elapsed*12)*.16*arc;
+  avatar.rotation.x=Math.sin(d.elapsed*14)*.13*arc;
   avatar.rotation.y=d.turn+Math.sin(d.elapsed*8)*.14*arc;
+  for(let i=0;i<d.legs.length;i++){
+   const leg=d.legs[i];leg.part.rotation.x=leg.start+
+    Math.sin(d.elapsed*18+i*Math.PI)*.32*arc;
+  }
  }else{
   // Ride the flashflood current, roll, then slip beneath its surface.
-  const travel=4.7*ease;
+  const travel=3.8*ease,submerge=Math.max(0,(a-.52)/.48);
+  const sink=submerge*submerge*(3-2*submerge);
   player.position.set(d.x+d.dir*travel,
-   d.y+Math.sin(Math.PI*Math.min(1,a*1.3))*.50-Math.max(0,(a-.55)/.45)*1.05,
-   d.z+Math.sin(a*Math.PI*2)*.12);
-  avatar.rotation.z=d.roll+d.dir*Math.PI*1.45*ease;
-  avatar.rotation.x=Math.sin(d.elapsed*19)*.18*(1-a);
-  if(a>.78)avatar.scale.setScalar(Math.max(.30,1-(a-.78)*1.6));
+   d.y+Math.sin(Math.PI*Math.min(1,a/.72))*.72-(d.height+.35)*sink,
+   d.z+Math.sin(a*Math.PI*2)*.09);
+  avatar.rotation.z=d.roll+d.dir*Math.PI*1.30*ease;
+  avatar.rotation.x=Math.sin(d.elapsed*20)*.15*(1-a);
+  for(let i=0;i<d.legs.length;i++){
+   const leg=d.legs[i];leg.part.rotation.x=leg.start+
+    Math.sin(d.elapsed*24+i*Math.PI)*.48*(1-a);
+  }
+  // Advance only the visible wave after death, when gameplay is frozen.
+  // It remains aligned with the character for the entire sweep sequence.
+  if(d.row?.special?.wave){
+   const wave=d.row.special.wave;
+   wave.position.x=d.originalWaveX+d.dir*travel;
+   for(const m of wave.children)if(m.userData.floodVolume)
+    updateFloodVolume(m,d.row,wave.position.x,gameTime+d.elapsed);
+  }
+  if(!d.secondSplash&&a>.43){
+   d.secondSplash=true;
+   burst(player.position.x,groundTileHeight(d.row,player.position.x)+.25,d.z,2,8);
+  }
  }
  if(a>=1){
   const reason=d.reason,detail=d.detail;
@@ -2689,7 +2729,7 @@ if(state==='playing'||state==='menu'){
  }
  if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);
  let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){const visibleRowCenter=state==='menu'?3:camSmooth+3;
- r.group.visible=r.y>=visibleRowCenter-23&&r.y<visibleRowCenter+17;if(!r.group.visible)continue;if(r.special)updateSpecial(r);// Cache only animated scenery instead of scanning every child of every
+ r.group.visible=r.y>=visibleRowCenter-23&&r.y<visibleRowCenter+17;if(!r.group.visible)continue;if(r.special&&!(state==='dying'&&impactDeath?.kind==='flood'&&r===impactDeath.row))updateSpecial(r);// Cache only animated scenery instead of scanning every child of every
  // visible row on each frame. Refresh if the row acquires new children.
  if(!r.cosmeticChildren||r.cosmeticChildCount!==r.group.children.length){
   r.cosmeticChildren=r.group.children.filter(o=>o.userData.sway||o.userData.flow!==undefined);
@@ -2698,7 +2738,7 @@ if(state==='playing'||state==='menu'){
  for(const o of r.cosmeticChildren){
   if(o.userData.sway)o.rotation.z=Math.sin(gameTime*1.5+o.userData.seed)*.035;
   if(o.userData.flow!==undefined)o.position.x=o.userData.baseX+Math.sin(gameTime*1.25+o.userData.flow)*.33;
- }for(let m of r.moving){if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}/* Both lava stones and wooden logs retain updateLogMotion physics. */}/* Amber collectible transforms stay fixed. No bobbing or rotation. */if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);
+ }for(let m of r.moving){if(state==='dying'&&impactDeath?.kind==='bird'&&m.mesh===impactDeath.bird)continue;if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}/* Both lava stones and wooden logs retain updateLogMotion physics. */}/* Amber collectible transforms stay fixed. No bobbing or rotation. */if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);
 // Visibility changes only when the camera enters a different row band.
 // Refresh newly exposed shadow instances without recalculating all rows each frame.
 if(state==='playing'){
