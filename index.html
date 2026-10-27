@@ -728,7 +728,7 @@ let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,st
 // to the user's cameraZoom preference. Reset independently on retry/menu.
 let deathCameraBlend=0,deathCameraZoom=1;
 // Keep the character near the middle while the danger edge creeps in behind.
-const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25,CAMERA_CATCHUP_SPEED=2.5;
+const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25,CAMERA_CATCHUP_SPEED=1.65;
 let lastCreepRow=-1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
@@ -2478,6 +2478,14 @@ function beginExtraDeath(kind,reason,detail){
   waveX:(kind==='stampede'||kind==='lavasurge')?row?.special?.wave.position.x:0,
   squashed:false,particles:false,blinkCount:0};
  if(kind==='lavasurge'){
+  // Continue the actual active surge from its current phase through the
+  // opposite edge before allowing the final smoke poof.
+  const sp=row?.special;
+  if(sp){
+   const phase=Math.max(0,specialProgress(sp)-sp.warningLength);
+   extraDeath.surgeRemaining=Math.max(.45,sp.activeLength-phase);
+   extraDeath.duration=Math.max(extraDeath.duration,extraDeath.surgeRemaining+.80);
+  }
   // Clone per-player materials: never blacken shared world/skin materials.
   extraDeath.charredMeshes=[];extraDeath.eyes=[];
   avatar.traverse(mesh=>{
@@ -2534,19 +2542,21 @@ function updateExtraDeath(dt){
   if(d.row?.special?.wave){
    const sp=d.row.special,wave=sp.wave;
    wave.visible=true;
-   wave.position.x=d.waveX+d.dir*(36/sp.activeLength)*d.elapsed;
+   wave.position.x=d.waveX+d.dir*(36/sp.activeLength)*Math.min(d.elapsed,d.surgeRemaining||sp.activeLength);
    for(const m of wave.children){
     if(m.userData.floodVolume)updateFloodVolume(m,d.row,wave.position.x,gameTime+d.elapsed);
     else if(m.position)m.position.y=groundTileHeight(d.row,wave.position.x+m.position.x)+.41+
      liquidWave(wave.position.x+m.position.x,m.position.z,gameTime+d.elapsed,sp.dir,'lava',d.row.y*.37);
    }
   }
-  const blink=(t,c)=>Math.max(0,1-Math.abs(t-c)/.055);
-  const closed=Math.max(blink(a,.46),blink(a,.67));
+  const afterSurge=Math.max(0,d.elapsed-(d.surgeRemaining||.45));
+  const burnPhase=Math.min(1,afterSurge/.80);
+  const blink=(t,c)=>Math.max(0,1-Math.abs(t-c)/.065);
+  const closed=Math.max(blink(burnPhase,.24),blink(burnPhase,.55));
   for(const eye of d.eyes||[])eye.mesh.scale.y=Math.max(.06,eye.y*(1-closed*.94));
-  if(a>=.46&&d.blinkCount===0){d.blinkCount=1;fx('cartoonBlink',.8);}
-  if(a>=.67&&d.blinkCount===1){d.blinkCount=2;fx('cartoonBlink',.8);}
-  if(!d.particles&&a>=.84){
+  if(burnPhase>=.24&&d.blinkCount===0){d.blinkCount=1;fx('cartoonBlink',.8);}
+  if(burnPhase>=.55&&d.blinkCount===1){d.blinkCount=2;fx('cartoonBlink',.8);}
+  if(!d.particles&&burnPhase>=.85){
    d.particles=true;burst(d.x,d.y+d.h*.55,d.z,4,quality==='low'?3:13);
    avatar.visible=false;fx('smokePoof',.7);
   }
@@ -2915,8 +2925,12 @@ if(state==='playing'||state==='menu'){
    m.mesh.position.x=m.x;
   }
  }
-}if(state==='playing'){const wantedCam=Math.max(camY+CAMERA_CREEP_SPEED*dt,highest-CAMERA_FOLLOW_LEAD);
- camY=Math.max(camY+CAMERA_CREEP_SPEED*dt,Math.min(wantedCam,camY+CAMERA_CATCHUP_SPEED*dt));const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
+}if(state==='playing'){// Let forward hops create breathing room; approach the same danger
+ // distance gradually rather than snapping the warning after each hop.
+ const wantedCam=Math.max(camY+CAMERA_CREEP_SPEED*dt,highest-CAMERA_FOLLOW_LEAD);
+ const gap=wantedCam-camY;
+ const follow=Math.min(gap,Math.max(0,CAMERA_CATCHUP_SPEED*dt*(1-Math.exp(-gap*.75))));
+ camY+=Math.max(CAMERA_CREEP_SPEED*dt,follow);const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
  if(hop.amberBounce){
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
