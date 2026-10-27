@@ -995,11 +995,22 @@ if(type==='river'||type==='lava'){
   const worn=box(group,materials.wornTrack,0,.012,z,14.8,.018,.25);
   worn.castShadow=false;
  }
- for(let i=0;i<11;i++){
-  const n=Math.abs(Math.sin(y*4.87+i*13.3)),x=-6.8+i*1.28;
-  const patch=box(group,i%3===0?materials.wornPatch:materials.wornTrack,
-   x,.027,(i%2?.23:-.23)+Math.sin(y+i)*.075,.30+n*.39,.012,.13+n*.08);
-  patch.rotation.y=(n-.5)*.42;patch.castShadow=false;
+ // Batch the scattered scuffs into two instanced meshes instead of
+ // 11 separate per-row draw calls. Shared geometry/materials remain cached.
+ const scuffDummy=new THREE.Object3D();
+ for(let kind=0;kind<2;kind++){
+  const ids=Array.from({length:11},(_,i)=>i).filter(i=>(i%3===0)===(kind===0));
+  const scuffs=new THREE.InstancedMesh(cubeGeo,kind===0?materials.wornPatch:materials.wornTrack,ids.length);
+  for(let index=0;index<ids.length;index++){
+   const i=ids[index],n=Math.abs(Math.sin(y*4.87+i*13.3)),x=-6.8+i*1.28;
+   scuffDummy.position.set(x,.027,(i%2?.23:-.23)+Math.sin(y+i)*.075);
+   scuffDummy.scale.set(.30+n*.39,.012,.13+n*.08);
+   scuffDummy.rotation.set(0,(n-.5)*.42,0);
+   scuffDummy.updateMatrix();
+   scuffs.setMatrixAt(index,scuffDummy.matrix);
+  }
+  scuffs.instanceMatrix.needsUpdate=true;
+  scuffs.castShadow=false;group.add(scuffs);
  }
 }if(type==='sky'){let bird=makePterosaur();bird.scale.setScalar(.85);bird.position.set(-11,2.1,0);bird.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;group.add(bird);let dangerDisc=new THREE.Mesh(new THREE.CircleGeometry(.65,28),new THREE.MeshBasicMaterial({color:0xff6244,transparent:true,opacity:.23,depthWrite:false,side:THREE.DoubleSide}));dangerDisc.rotation.x=-Math.PI/2;dangerDisc.position.set(-11,.055,0);group.add(dangerDisc);
 let dangerRing=new THREE.Mesh(new THREE.RingGeometry(.61,.68,32),new THREE.MeshBasicMaterial({color:0xffe58b,transparent:true,opacity:.9,depthWrite:false,side:THREE.DoubleSide}));dangerRing.rotation.x=-Math.PI/2;dangerRing.position.set(-11,.062,0);group.add(dangerRing);
