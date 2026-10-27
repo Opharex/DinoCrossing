@@ -2939,7 +2939,10 @@ if(state==='playing'){
    camSide=player.position.x-Math.sign(offset)*maxOffset;
   camSide=THREE.MathUtils.clamp(camSide,-7,7);
  }else camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
- const side=THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
+ // Flood camera tracks the swept-away character for the full carry-off,
+ // independent of the normal horizontal pan limit.
+ const side=floodCarry&&player?player.position.x:
+  THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
  // Keep the pterosaur and captive framed together during their ascent.
  const birdLift=impactDeath?.kind==='bird'&&state==='dying';
  const focusY=player?THREE.MathUtils.clamp(player.position.y+(birdLift?.85:.48),-.30,birdLift?7:3.8)*deathCameraBlend*(birdLift?1:.70):0;
