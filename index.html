@@ -1344,9 +1344,8 @@ if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
       scout.userData.scout=i;stampedeRig(scout,i);warning.add(scout);
     }
   }
-  // No stone wall posts on stampede lanes: the herd must enter and exit unobstructed.
-  // Retain the original edge posts for flood and lava lanes only.
-  if(type!=='stampede')for(const edge of [-7.7,7.7]){box(group,materials.stone,edge,.22,0,.26,.48,.82)}
+  // No generic grey posts: water/lava receive a themed source-side dam
+  // instead, while the opposite end stays visually open to the landscape.
   const wave=new THREE.Group();group.add(wave);wave.visible=false;
   if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;animal.position.x=i*1.65-7;animal.position.z=((i%3)-1)*.075;animal.userData.herdSeed=i;stampedeRig(animal,i);wave.add(animal)}}
 
@@ -1950,10 +1949,10 @@ function createBreachDam(row){
  if(!lava){
   // Water dam: timber beams brace pale stone towers.
   breachDamBatch(root,m.gate,[
-   [0,.74,-.28,.42,.11,.30],
-   [0,.74,.28,.42,.11,.30],
-   [0,.23,-.28,.43,.11,.30],
-   [0,.23,.28,.43,.11,.30]
+   [back*.25,.69,-.52,.40,.14,.12],
+   [back*.25,.69,.52,.40,.14,.12],
+   [back*.25,.22,-.52,.40,.14,.12],
+   [back*.25,.22,.52,.40,.14,.12]
   ]);
  }else{
   // Lava dam: hot welded joints in black volcanic rock.
