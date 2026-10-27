@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Forgiving Platform Landings and Trampled Trails">🪵 SOFT LANDINGS! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Rare Fossil Pieces and Nine Skeleton Dinosaur Skins">🦴 SKELETON HUNT! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -994,6 +994,39 @@ function makeClassicAmber(coin,fossil){
  }
  stem(coin,classicInsectMat,0,.16,.23,0,.26,.24,.012);
 }
+// Three lightweight fossil collectible silhouettes are shared by all nine
+// species. They are distinct from classic mosquito-in-amber collectibles.
+function makeFossilArtifact(part){
+ const relic=new THREE.Group(),ivory=skeletonBoneMat,dark=skeletonSocketMat;
+ if(part===0){ // Skull
+  box(relic,ivory,0,.05,0,.46,.33,.45);
+  box(relic,ivory,0,-.19,.15,.38,.075,.38);
+  for(const side of [-1,1]){
+   mesh(relic,sphereGeo,dark,side*.24,.075,.10,.030,.10,.11);
+   box(relic,ivory,side*.15,-.05,.25,.075,.070,.18);
+  }
+  for(let t=-1;t<=1;t++)box(relic,ivory,t*.095,-.25,.30,.055,.095,.08);
+ }else if(part===1){ // Clear rib cage with open spaces
+  stem(relic,ivory,0,.30,-.27,0,.30,.30,.075);
+  for(let i=0;i<5;i++){
+   const z=-.27+i*.14;
+   for(const side of [-1,1]){
+    stem(relic,ivory,0,.29,z,side*.32,.12,z,.043);
+    stem(relic,ivory,side*.32,.12,z,side*.23,-.19,z+.035,.037);
+   }
+  }
+  stem(relic,ivory,0,-.19,-.12,0,-.19,.27,.042);
+ }else{ // Two unmistakable leg bones with kneecaps and feet
+  for(const side of [-1,1]){
+   const x=side*.20;
+   stem(relic,ivory,x,.37,-.07,x+side*.05,.04,-.01,.090);
+   mesh(relic,sphereGeo,ivory,x+side*.05,.035,0,.10,.095,.10);
+   stem(relic,ivory,x+side*.05,.01,0,x,-.32,.11,.069);
+   stem(relic,ivory,x,-.32,.11,x,-.34,.29,.045);
+  }
+ }
+ return relic;
+}
 function amberImpact(){/* Original amber is always collected in one touch. */}
 function makeRow(y){
  let difficulty=Math.min(.9,highest/180);
@@ -1257,6 +1290,28 @@ if(y>2&&Math.random()<.34&&type!=='river'&&type!=='lava'&&type!=='tar'&&!row.spe
   row.coins.push({x,rowY:y,mesh:coin,taken:false,value:fossil?5:1,kind:fossil?'mosquito':'plain',hits:0,maxHits:1});
  }
 }
+// Fossils only exist during a real run, after its initial 25-row safe load.
+// Only the currently equipped species can spawn one, and only its missing
+// pieces qualify. 0.25% chance initially, climbing to at most 1.25% later.
+ // Never spawn on tar/liquid/special rows or atop amber or solid obstacles.
+ if(state==='playing'&&y>=30&&(type==='grass'||type==='forest'||type==='path')
+    &&fossilNeeds(chosen%9).length
+    &&!row.special
+    &&!Array.from(rows.values()).some(existing=>existing.fossil&&!existing.fossil.taken)){
+  const chance=.0025+Math.min(.010,Math.max(0,highest-25)*.000055);
+  if(Math.random()<chance){
+   const missing=FOSSIL_BITS.map((bit,i)=>i).filter(i=>!(fossilMask(chosen%9)&FOSSIL_BITS[i]));
+   const open=Array.from({length:13},(_,i)=>i-6).filter(x=>
+    !row.solid.has(x)&&!row.tarSlots?.includes(x)&&!row.coins.some(c=>c.x===x));
+   if(open.length&&missing.length){
+    const part=pick(missing),x=pick(open),object=new THREE.Group();
+    object.add(makeFossilArtifact(part));
+    object.position.set(x,groundTileHeight(row,x)+.79,0);
+    group.add(object);
+    row.fossil={part,species:chosen%9,x,mesh:object,taken:false};
+   }
+  }
+ }
 rows.set(y,row);buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
 // Keep six extra terrain rows behind the player while still retiring one old row per newly crossed row.
 const BACK_TERRAIN_ROWS=18;
@@ -1921,7 +1976,23 @@ function nearestPlatformTile(r,x,tolerance=PLATFORM_LANDING_OVERLAP){
 }
 function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hypot(x-m.dangerDisc.position.x,player.position.z-(-r.y))<=.65)}
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
-function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberPickup',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
+function checkTile(){
+ let r=rows.get(py);if(!r)return;
+ const relic=r.fossil;
+ if(relic&&!relic.taken&&relic.species===chosen%9&&Math.abs(relic.x-px)<.48){
+  relic.taken=true;
+  r.group.remove(relic.mesh);
+  const bit=FOSSIL_BITS[relic.part],speciesId=relic.species;
+  if(!(fossilMask(speciesId)&bit)){
+   fossilParts[speciesId]|=bit;
+   persist();fx('fossil',.8);
+   burst(px,.50,-py,1,12);
+   toast(fossilReady(speciesId)?
+    '🦴 SKELETON COMPLETE! '+species[speciesId][0].toUpperCase()+' SKIN AVAILABLE IN SHOP':
+    '🦴 '+species[speciesId][0].toUpperCase()+' '+FOSSIL_NAMES[relic.part].toUpperCase()+' FOUND!');
+  }
+ }
+ for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberPickup',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
  // Original floating gems animate near the camera, just as before the amber redesign.
  if(state==='playing'||state==='menu'){
@@ -1931,6 +2002,11 @@ function update(dt,t){
    for(const c of row.coins)if(!c.taken){
     c.mesh.rotation.y=t*2;
     c.mesh.position.y=groundTileHeight(row,c.x)+.67+Math.sin(t*3+c.x)*.09;
+   }
+   if(row.fossil&&!row.fossil.taken){
+    const relic=row.fossil;
+    relic.mesh.rotation.y=t*.85;
+    relic.mesh.position.y=groundTileHeight(row,relic.x)+.79+Math.sin(t*2.2+row.y)*.095;
    }
   }
  }
