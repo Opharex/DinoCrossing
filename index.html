@@ -545,6 +545,10 @@ const liquidTopMats={
 };
 const liquidFoamMat=new THREE.MeshBasicMaterial({color:0xf2ffff,transparent:true,opacity:.88,depthWrite:false,side:THREE.DoubleSide});
 const lavaSprayMat=new THREE.MeshBasicMaterial({color:0xffcc59,transparent:true,opacity:.86,depthWrite:false,side:THREE.DoubleSide});
+const riverCurrentMat=new THREE.MeshBasicMaterial({color:0xd7faff,transparent:true,opacity:.56,depthWrite:false,side:THREE.DoubleSide});
+const lavaCurrentMat=new THREE.MeshBasicMaterial({color:0xffd36b,transparent:true,opacity:.62,depthWrite:false,side:THREE.DoubleSide});
+const riverEddyMat=new THREE.MeshBasicMaterial({color:0xa7e9f4,transparent:true,opacity:.53,depthWrite:false,side:THREE.DoubleSide});
+const lavaEddyMat=new THREE.MeshBasicMaterial({color:0xffab49,transparent:true,opacity:.56,depthWrite:false,side:THREE.DoubleSide});
 const liquidMeshes=[];
 // Two falls connect upper feeder, playable lane and the lower outflow.
 const LIQUID_INLET_START=7.55,LIQUID_INLET_END=6.12;
@@ -688,12 +692,33 @@ function makeLiquidSpillway(group,row,span=1){
  }
  const bubbleMesh=new THREE.InstancedMesh(foamBubbleGeo,sprayMat,bubbleData.length);
  bubbleMesh.frustumCulled=false;group.add(bubbleMesh);
- row.liquidEffects={inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData};
+ // Continuous flowing streaks in three zones. Two instanced meshes per
+ // row, so mobile GPUs pay no per-ripple draw-call cost.
+ const currentData=[],eddyData=[];
+ function addCurrents(zone,min,max,count){
+  for(let i=0;i<count;i++)currentData.push({min,max,
+   phase:(i*.61803398875+zone*.237)%1,
+   z:(((i*.754877666)+zone*.2)%1-.5)*(waterWidth-.17),
+   seed:row.y*2.31+zone*17.7+i*4.618,
+   length:.38+(i%5)*.11,depth:.035+(i%3)*.02});
+ }
+ addCurrents(0,-5.78,7.20,wide?54:25);
+ addCurrents(1,-20.8,-8.25,wide?16:7);
+ addCurrents(2,9.25,20.6,wide?16:7);
+ for(let i=0;i<(wide?24:12);i++)eddyData.push({
+  along:-5.55+((i*.41421356)%1)*12.25,
+  z:((i*.75487766)%1-.5)*(waterWidth-.16),
+  radius:.105+(i%4)*.048,seed:i*.71+row.y});
+ const currentMesh=new THREE.InstancedMesh(liquidCurtainGeo,type==='river'?riverCurrentMat:lavaCurrentMat,currentData.length);
+ const eddyMesh=new THREE.InstancedMesh(liquidCurtainGeo,type==='river'?riverEddyMat:lavaEddyMat,eddyData.length);
+ currentMesh.frustumCulled=false;eddyMesh.frustumCulled=false;
+ group.add(currentMesh,eddyMesh);
+ row.liquidEffects={inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData,currentMesh,currentData,eddyMesh,eddyData};
  liquidLaneUpdate(row,0);
 }
 function liquidLaneUpdate(row,time){
  const e=row?.liquidEffects;if(!e)return;
- const {inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData}=e;
+ const {inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData,currentMesh,currentData,eddyMesh,eddyData}=e;
  updateSpillingFlow(inletFlow,time);updateSpillingFlow(outletFlow,time);
  const pulse=type==='river'?8:4;
  for(const inlet of [true,false]){
@@ -723,6 +748,29 @@ function liquidLaneUpdate(row,time){
   liquidParticleDummy.rotation.set(0,0,0);liquidParticleDummy.updateMatrix();bubbleMesh.setMatrixAt(i,liquidParticleDummy.matrix);
  }
  bubbleMesh.instanceMatrix.needsUpdate=true;
+ // Animated surface highlights follow the current in the same direction
+ // as the logs, with pulses and eddies across water AND lava.
+ const speed=type==='river'?1.65:.90;
+ for(let i=0;i<currentData.length;i++){
+  const c=currentData[i],range=c.max-c.min;
+  const along=c.min+(c.phase*range+time*speed)%range;
+  const x=dir*along,z=c.z+.022*Math.sin(time*.8+c.seed);
+  liquidParticleDummy.position.set(x,flowingLiquidHeight(x,dir)+liquidWave(x,z,time,dir,type,row.y*.47)+.030,z);
+  liquidParticleDummy.scale.set(c.length*(.86+.14*Math.sin(time*1.1+c.seed)),.011,c.depth);
+  liquidParticleDummy.rotation.set(0,Math.sin(time*.6+c.seed)*.14,0);
+  liquidParticleDummy.updateMatrix();currentMesh.setMatrixAt(i,liquidParticleDummy.matrix);
+ }
+ currentMesh.instanceMatrix.needsUpdate=true;
+ for(let i=0;i<eddyData.length;i++){
+  const c=eddyData[i],x=dir*(c.along+Math.sin(time*.5+c.seed)*.11);
+  const z=c.z+Math.cos(time*.7+c.seed)*.031;
+  const pulse=.78+.22*Math.sin(time*(type==='river'?2.9:1.6)+c.seed);
+  liquidParticleDummy.position.set(x,flowingLiquidHeight(x,dir)+liquidWave(x,z,time,dir,type,row.y*.47)+.038,z);
+  liquidParticleDummy.scale.set(c.radius*1.6*pulse,.011,c.radius*.52*pulse);
+  liquidParticleDummy.rotation.set(0,time*.34+c.seed,0);
+  liquidParticleDummy.updateMatrix();eddyMesh.setMatrixAt(i,liquidParticleDummy.matrix);
+ }
+ eddyMesh.instanceMatrix.needsUpdate=true;
 }
 // Cull only the trees closest to waterworks, including rows generated BEFORE
 // a neighboring river/lava lane. Each forest uses instancing, so hide all parts
