@@ -511,7 +511,141 @@ function applyTechSkin(g,chrome=false){
   }
   g.userData.tech=!chrome;g.userData.chrome=chrome;return g;
 }
+// Skeleton skins are real open frameworks, not a white recolour: individual
+// bones outline each species while the ribs have empty space between them.
+const skeletonBoneMat=new THREE.MeshLambertMaterial({color:0xe5dcc4,flatShading:true});
+const skeletonJointMat=new THREE.MeshLambertMaterial({color:0xc9b995,flatShading:true});
+const skeletonSocketMat=new THREE.MeshBasicMaterial({color:0x17191b});
+function skeletonDino(speciesId=0,size=1){
+ const g=new THREE.Group();
+ const isRaptor=speciesId===1,isBrachio=speciesId===7,isPtera=speciesId===8;
+ const isTheropod=[0,1,6].includes(speciesId);
+ const isFourLegged=!isTheropod&&!isPtera;
+ const sizeWidth=isRaptor?.77:isBrachio?1.25:speciesId===4?1.20:1;
+ const spineY=isBrachio?1.24:isPtera?.85:1.02;
+ const spineZ=-.16,headY=isBrachio?2.65:isPtera?1.12:1.45;
+ const headZ=isBrachio?1.05:isPtera?.72:.97;
+ const bone=skeletonBoneMat,joint=skeletonJointMat,socket=skeletonSocketMat;
+ const width=sizeWidth*.39;
+ const boneLine=(ax,ay,az,bx,by,bz,r=.07,m=bone)=>stem(g,m,ax,ay,az,bx,by,bz,r);
+ const jointBall=(x,y,z,r=.10)=>mesh(g,sphereGeo,joint,x,y,z,r,r,r);
+ // Exposed spine and tail vertebrae.
+ boneLine(0,spineY,-.90,0,spineY,.69,.105);
+ for(let i=0;i<7;i++){
+  const z=-.78+i*.21;
+  box(g,joint,0,spineY+.035,z,.21,.16,.115);
+ }
+ for(let i=0;i<6;i++){
+  const a=i/6,b=(i+1)/6;
+  const fromZ=-.90-a*1.72,toZ=-.90-b*1.72;
+  boneLine(0,spineY-.10-a*.48,fromZ,0,spineY-.10-b*.48,toZ,.086-i*.010);
+  box(g,joint,0,spineY-.10-b*.48,toZ,.12-i*.010,.10,.10);
+ }
+ if(speciesId===4)mesh(g,facetGeo,bone,0,spineY-.60,-2.7,.34,.31,.37); // tail club
+ // Curved ribs form two fully open sides: no opaque torso or chest shell.
+ for(let i=0;i<6;i++){
+  const z=-.61+i*.235,spread=Math.sin((i+1)/7*Math.PI);
+  for(const side of [-1,1]){
+   const x=side*(width*.70+.06*spread),outer=side*(width+.12*spread);
+   const y=spineY-.17;
+   boneLine(0,spineY+.012,z,x,y,z+.035,.049);
+   boneLine(x,y,z+.035,outer,spineY-.45,z+.06,.045);
+   boneLine(outer,spineY-.45,z+.06,side*.16,spineY-.56,z+.095,.037);
+  }
+ }
+ // Two real hip bones and a small breastbone, still hollow between ribs.
+ for(const side of [-1,1]){
+  boneLine(side*.12,spineY-.10,-.72,side*.40,spineY-.38,-.52,.083,joint);
+  jointBall(side*.35,spineY-.30,-.48,.115);
+ }
+ boneLine(0,spineY-.47,-.40,0,spineY-.47,.34,.053);
+ // Long neck vertebrae and the high head distinguish Brachiosaurus.
+ if(isBrachio){
+  for(let i=0;i<8;i++){
+   const p=i/8,n=(i+1)/8;
+   boneLine(0,spineY+.1+p*1.36,.37+p*.55,0,spineY+.1+n*1.36,.37+n*.55,.095);
+   jointBall(0,spineY+.1+n*1.36,.37+n*.55,.10);
+  }
+ }else boneLine(0,spineY,.56,0,headY-.20,headZ-.19,.12);
+ // Actual skull and separated lower jaw. Huge nearly-black side eye
+ // cavities replace the opaque living animal's round white eyes.
+ const skullWidth=isRaptor?.53:isBrachio?.58:speciesId===2?.88:.73;
+ const skullLength=isPtera?.50:isRaptor?.65:.76;
+ box(g,bone,0,headY,headZ,skullWidth,.37,skullLength);
+ box(g,joint,0,headY-.24,headZ+.19,skullWidth*.81,.075,skullLength*.77);
+ box(g,bone,0,headY+.18,headZ-.15,skullWidth*.83,.12,skullLength*.58);
+ for(const side of [-1,1]){
+  const eyeX=side*(skullWidth*.5+.013),eyeZ=headZ+.08;
+  mesh(g,sphereGeo,socket,eyeX,headY+.037,eyeZ,.042,.135,.17);
+  boneLine(eyeX,headY+.17,eyeZ-.14,eyeX,headY+.19,eyeZ+.13,.037);
+  mesh(g,sphereGeo,socket,side*(skullWidth*.29),headY-.055,headZ+skullLength*.49,.055,.035,.032);
+ }
+ // Small distinct leg bones and joints. Theropods stand on two hind limbs;
+ // herbivores stand on four, so their skeletal profiles read differently.
+ const legX=isTheropod?[ -.32,.32 ]:[ -.33,.33 ];
+ const legZ=isFourLegged?[-.57,.51]:[-.34];
+ if(!isPtera){
+  for(const z of legZ)for(const x of legX){
+   const y0=spineY-.23,hipX=x*.85;
+   jointBall(hipX,y0,z,.13);
+   const kneeX=x*1.16,kneeY=isBrachio?.49:.43;
+   boneLine(hipX,y0,z,kneeX,kneeY,z+.055,.105);
+   jointBall(kneeX,kneeY,z+.055,.115);
+   boneLine(kneeX,kneeY,z+.055,x,.12,z+.16,.077);
+   boneLine(x,.12,z+.16,x,.065,z+.35,.063);
+   for(const toe of [-1,0,1])boneLine(x,.07,z+.35,x+toe*.09,.045,z+.49,.026);
+  }
+  if(isTheropod)for(const side of [-1,1]){
+   boneLine(side*.30,spineY-.10,.48,side*.44,spineY-.38,.72,.052);
+   boneLine(side*.44,spineY-.38,.72,side*.38,spineY-.52,.86,.038);
+  }
+ }
+ // Species-specific bones make all nine skeletons identifiable.
+ if(speciesId===2){ // Triceratops frill, brow horns, nose horn
+  for(const side of [-1,1]){
+   boneLine(side*.18,headY+.10,headZ-.25,side*.62,headY+.48,headZ-.56,.09);
+   boneLine(side*.62,headY+.48,headZ-.56,side*.62,headY+.68,headZ-.44,.07);
+   horn(g,bone,side*.32,headY+.31,headZ+.42,.095,.60,-.33,side*.12);
+  }
+  horn(g,bone,0,headY+.25,headZ+.67,.082,.34,-.24,0);
+ }else if(speciesId===3){ // Stegosaurus bone plates
+  for(let i=0;i<6;i++){
+   const z=.28-i*.24;
+   mesh(g,cachedGeo('skeleton:plate',()=>new THREE.ConeGeometry(.24,.68,4)),bone,0,spineY+.33+Math.sin(i/5*Math.PI)*.10,z,.86,1,.60);
+  }
+ }else if(speciesId===4){
+  for(const side of [-1,1])for(let i=0;i<3;i++)
+   horn(g,joint,side*(width+.11),spineY+.12,-.51+i*.31,.09,.30,0,side*.70);
+ }else if(speciesId===5){ // Parasaurolophus crest
+  boneLine(0,headY+.20,headZ-.25,0,headY+.79,headZ-.72,.13);
+  boneLine(0,headY+.79,headZ-.72,0,headY+.64,headZ-.96,.09);
+ }else if(speciesId===6){ // Tall spinosaurus sail bony spines
+  for(let i=0;i<7;i++){
+   const z=.41-i*.23,h=.47+Math.sin(i/6*Math.PI)*.80;
+   boneLine(0,spineY+.05,z,0,spineY+h,z,.065);
+   if(i>0)boneLine(0,spineY+h,z,0,spineY+.47+Math.sin((i-1)/6*Math.PI)*.80,z+.23,.030,joint);
+  }
+ }else if(isPtera){ // Open wing struts and finger bones, never filled membranes
+  for(const side of [-1,1]){
+   boneLine(side*.24,spineY+.03,.20,side*1.10,spineY+.25,.18,.091);
+   boneLine(side*1.10,spineY+.25,.18,side*2.05,spineY+.08,-.22,.070);
+   boneLine(side*2.05,spineY+.08,-.22,side*.58,spineY-.15,-.64,.048);
+   boneLine(side*.24,spineY+.03,.20,side*.58,spineY-.15,-.64,.045);
+   boneLine(side*.55,spineY-.13,-.12,side*1.70,spineY-.02,-.49,.032);
+   boneLine(side*.16,spineY-.05,-.25,side*.39,.10,-.37,.065);
+  }
+  boneLine(0,headY+.13,headZ+.14,0,headY+.59,headZ-.18,.091);
+  box(g,bone,0,headY-.12,headZ+.63,.19,.10,.75); // thin beak
+ }else if(isRaptor){
+  for(const side of [-1,1])horn(g,bone,side*.34,.16,-.09,.075,.22,-.2,side*.3);
+ }
+ // Match ordinary player skeleton skin scaling; no special collision behavior.
+ g.userData.feet=[];g.userData.eyeParts=[];
+ g.scale.setScalar(size);
+ return g;
+}
 function dino(type=0,size=1){
+if(type>=27&&type<36)return skeletonDino(type-27,size);
 const chrome=type>=18,techno=type>=9&&type<18;type=type%9;
 // Each purchased species now builds a distinct silhouette rather than recoloring the T. rex.
 let g;
