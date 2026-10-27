@@ -79,7 +79,7 @@
 #select #roster .shopSpeciesCopy{flex:1;min-width:0}
 #select .shopFeature{grid-template-columns:minmax(0,1.35fr) minmax(185px,.9fr);position:relative;top:auto;min-height:300px}
 #select .shopStage{min-height:295px}
-#select #skinVariants{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#select #skinVariants{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;position:relative;z-index:34}
 @media(max-width:700px){#select #skinVariants{grid-template-columns:repeat(2,minmax(0,1fr))}}
 #select #skinVariants button.skeletonSkin{border-color:#c8bca1;background:linear-gradient(#5b5249,#292824);position:relative}
 #select #skinVariants button.selected.skeletonSkin{border-color:#fff3cf;background:linear-gradient(#77715a,#404537)}
@@ -2232,7 +2232,29 @@ function updateShopModel(){
  shopModel.rotation.y=shopTurn;
  shopScene.add(shopModel);
 }
-function shopDetails(){const [name,cost]=species[inspected],owned=unlocked.has(inspected);$('shopName').textContent=name;$('shopDescription').textContent=shopDescriptions[inspected];$('shopStatus').textContent=chosen===inspected?'✓ EQUIPPED':owned?'✓ UNLOCKED':'🔒 LOCKED';$('shopStatus').style.background=owned?'#345e3c':'#72512b';const btn=$('shopAction');btn.disabled=chosen===inspected;btn.textContent=chosen===inspected?'✓ EQUIPPED':owned?'EQUIP DINOSAUR':'🟠 UNLOCK FOR '+cost;}
+function skeletonRequirementsText(base){
+ const acquired=FOSSIL_NAMES.map((name,i)=>(fossilMask(base)&FOSSIL_BITS[i]?'✓ ':'□ ')+name).join('  ·  ');
+ return 'Skeleton '+species[base][0]+': '+acquired+(fossilReady(base)?'  ·  🟠 500 Amber to buy':'  ·  Find every fossil while playing this dinosaur');
+}
+function shopDetails(){
+ const [name,cost]=species[inspected],owned=unlocked.has(inspected);
+ const skeleton=isSkeletonSkin(inspected),base=inspected%9;
+ const lockedBones=skeleton&&!fossilReady(base)&&!owned;
+ $('shopName').textContent=name;
+ $('shopDescription').textContent=shopDescriptions[inspected];
+ $('shopStatus').textContent=chosen===inspected?'✓ EQUIPPED':owned?'✓ UNLOCKED':lockedBones?'🦴 FOSSILS REQUIRED':'🔒 LOCKED';
+ $('shopStatus').style.background=owned?'#345e3c':'#72512b';
+ const requirements=$('fossilRequirements');
+ requirements.style.display=skeleton?'block':'none';
+ if(skeleton){
+  requirements.textContent=skeletonRequirementsText(base);
+  requirements.title='Only fossil parts found while playing '+species[base][0]+' count.';
+ }
+ const btn=$('shopAction');
+ btn.disabled=chosen===inspected||lockedBones;
+ btn.textContent=chosen===inspected?'✓ EQUIPPED':owned?'EQUIP DINOSAUR':
+  lockedBones?'🦴 FIND SKULL, RIBS & LEGS':'🟠 UNLOCK FOR '+cost;
+}
 function selectShopDino(i){
  if(i===inspected)return;
  inspected=i;selectedShopSpecies=i%9;fx('select');
@@ -2320,13 +2342,22 @@ function makeRosterPortraitStep(){
 }
 function renderSkinVariants(){
  const container=$('skinVariants');container.replaceChildren();
- for(const id of [selectedShopSpecies,selectedShopSpecies+9,selectedShopSpecies+18]){
-  const [name,cost]=species[id],label=id<9?'Original':id<18?'Tech':'Chrome';
+ for(const id of [selectedShopSpecies,selectedShopSpecies+9,selectedShopSpecies+18,selectedShopSpecies+27]){
+  const [name,cost]=species[id],skeleton=isSkeletonSkin(id),base=id%9;
+  const label=id<9?'Original':id<18?'Tech':id<27?'Chrome':'Skeleton';
+  const owned=unlocked.has(id),locked=skeleton&&!fossilReady(base)&&!owned;
   const b=document.createElement('button');
-  b.className=(inspected===id?'selected ':'')+(id>=18?'chromeSkin':id>=9?'techSkin':'');
-  b.setAttribute('aria-label',name+(unlocked.has(id)?' owned':' costs '+cost+' amber'));
+  b.className=(inspected===id?'selected ':'')+(skeleton?'skeletonSkin':id>=18?'chromeSkin':id>=9?'techSkin':'');
+  const requirements=skeleton?skeletonRequirementsText(base):'';
+  b.setAttribute('aria-label',name+(owned?' owned':locked?' requires Skull, Ribs and Legs found while playing '+species[base][0]:' costs '+cost+' amber'));
+  if(skeleton){
+   // Native tooltip + hover/focus tooltip for mouse/keyboard; tapping
+   // the same card opens permanent requirements below the skin preview.
+   b.title=requirements;
+   b.dataset.requirements=requirements;
+  }
   b.dataset.speciesId=id;
-  b.innerHTML='<span class="dinoicon" aria-hidden="true" data-species="'+id+'"></span><strong>'+label+'</strong><span class="cost">'+(chosen===id?'✓ EQUIPPED':unlocked.has(id)?'✓ OWNED':cost?'🟠 '+cost:'FREE')+'</span>';
+  b.innerHTML='<span class="dinoicon" aria-hidden="true" data-species="'+id+'"></span><strong>'+label+'</strong><span class="cost">'+(chosen===id?'✓ EQUIPPED':owned?'✓ OWNED':locked?'🦴 '+FOSSIL_NAMES.filter((_,i)=>fossilMask(base)&FOSSIL_BITS[i]).length+'/3':'🟠 '+cost)+'</span>';
   b.onclick=()=>selectShopDino(id);
   container.appendChild(b);updateRosterPortraitImage(id);
  }
@@ -2344,7 +2375,17 @@ function renderRoster(){
  }
  renderSkinVariants();shopDetails();
 }
-$('shopAction').onclick=()=>{let cost=species[inspected][1];if(!unlocked.has(inspected)){if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return}bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35)}else fx('select');chosen=inspected;persist();refreshShopPreview();renderRoster()};
+$('shopAction').onclick=()=>{
+ let cost=species[inspected][1],skeleton=isSkeletonSkin(inspected);
+ if(skeleton&&!unlocked.has(inspected)&&!fossilReady(inspected%9)){
+  fx('denied');shopDetails();return; // Never permit purchasing incomplete skeletons.
+ }
+ if(!unlocked.has(inspected)){
+  if(bank<cost){fx('denied');$('shopAction').textContent='NEED '+(cost-bank)+' MORE AMBER';return;}
+  bank-=cost;unlocked.add(inspected);fx('purchase');fx('roar',.35);
+ }else fx('select');
+ chosen=inspected;persist();refreshShopPreview();renderRoster();
+};
 function drawShopPreview(t){if(!shopRenderer||$('select').classList.contains('hidden'))return;const c=$('shopCanvas'),w=Math.max(1,c.clientWidth),h=Math.max(1,c.clientHeight);if(c.width!==Math.round(w*shopRenderer.getPixelRatio())||c.height!==Math.round(h*shopRenderer.getPixelRatio()))shopRenderer.setSize(w,h,false);shopCamera.aspect=w/h;shopCamera.position.set(4.7,3.1,7.6);shopCamera.lookAt(0,inspected%9===8?1.25:1,0);shopCamera.updateProjectionMatrix();if(shopModel&&!shopDragging){shopTurn+=.003;shopModel.rotation.y=shopTurn}if(shopModel){shopModel.position.y=shopModel.userData.previewY+Math.sin(t*1.6)*(inspected%9===8?.09:.025);shopModel.rotation.y=shopTurn}shopRenderer.render(shopScene,shopCamera)}
 
 // Genuine boot pipeline. Never reveal the menu before its rows and all 27
@@ -2433,7 +2474,7 @@ async function preloadStartup(){
   updateShopModel();renderRoster();
   renderLoadingWaterfall();
   await nextBootFrame();
-  // Pre-render all Original, Tech, and Chrome thumbnails one per frame to
+  // Pre-render all Original, Tech, Chrome and Skeleton thumbnails one per frame to
   // avoid freezing Android during the GPU readback.
   while(rosterPortraitNext<species.length){
    makeRosterPortraitStep();
