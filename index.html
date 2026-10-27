@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Skeleton Skins Match Original Dinosaur Models">🦴 SAME DINO, NEW BONES! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Chunky Block Ribs and Species-Specific Skeleton Accents">🦴 BLOCK BONES! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -404,7 +404,7 @@ let body=mesh(g,facetGeo,skin,0,.83,0,.52,.52,.87),head=new THREE.Group(),tail=n
 for(let x of [-.36,.36])for(let z of [-.48,.48]){let joint=new THREE.Group();joint.position.set(x,.53,z);g.add(joint);prism(joint,shade,0,-.22,.04,.18,.5);for(let t=-1;t<=1;t++)jagged(joint,light,t*.075,-.45,.17,.052,.045,.13);legs.push(joint)}
 for(let i=0;i<4;i++){let seg=mesh(tail,facetGeo,skin,0,-i*.035,-i*.27,.31-i*.055,.24-i*.035,.35);seg.rotation.x=-.13}
 if(type===2){ // triceratops
-mesh(head,facetGeo,skin,0,.15,.1,.45,.37,.47);mesh(head,facetGeo,shade,0,.42,-.12,.72,.67,.22);for(let a=-2;a<=2;a++)horn(head,light,a*.26,.79,-.16,.115,.29,0,a*.14);for(let x of [-.31,.31]){horn(head,light,x,.47,.51,.13,.62,-.42,x*.3)}horn(head,light,0,.1,.69,.1,.38,-.45);mesh(head,facetGeo,light,0,-.06,.45,.32,.16,.38)
+mesh(head,facetGeo,skin,0,.15,.1,.45,.37,.47);let frill=mesh(head,facetGeo,shade,0,.42,-.12,.72,.67,.22);frill.userData.skeletonAccent='frill';for(let a=-2;a<=2;a++)horn(head,light,a*.26,.79,-.16,.115,.29,0,a*.14);for(let x of [-.31,.31]){horn(head,light,x,.47,.51,.13,.62,-.42,x*.3)}horn(head,light,0,.1,.69,.1,.38,-.45);mesh(head,facetGeo,light,0,-.06,.45,.32,.16,.38)
 }else if(type===3){ // stegosaurus
 mesh(head,facetGeo,skin,0,-.12,.38,.28,.22,.37);
 // Plates are rooted within the rounded back rather than hovering over it.
@@ -413,23 +413,23 @@ for(let i=0;i<6;i++)for(let x of [-.14,.14]){
  const curve=Math.sin(i/6*Math.PI);
  let plate=mesh(g,cachedGeo('oct',()=>new THREE.OctahedronGeometry(1,0)),
   i%2?light:shade,x,1.13+curve*.055,.61-i*.255,.16,.34+curve*.055,.12);
- plate.rotation.z=x>0?.16:-.16;
+ plate.rotation.z=x>0?.16:-.16;plate.userData.skeletonAccent='plate';
 }for(let x of [-.2,.2])for(let z of [-1.04,-1.25])horn(tail,light,x,.16,z+.74,.1,.4,0,x>0?-.8:.8)
 }else if(type===4){ // ankylosaurus
 mesh(head,facetGeo,skin,0,-.12,.36,.42,.3,.35);
 // Low-set bony scutes overlap the torso so there is no gap under the armor.
 for(let i=0;i<5;i++)for(let x of [-.27,0,.27]){
  const z=.53-i*.29;
- jagged(g,i%2?shade:light,x,1.08+Math.sin(i*.8)*.035,z,.19,.16,.19);
+ const scute=jagged(g,i%2?shade:light,x,1.08+Math.sin(i*.8)*.035,z,.19,.16,.19);scute.userData.skeletonAccent='armor';
 }
 // Shoulder and flank spikes originate from within the body's sidewall.
 for(let x of [-.40,.40])for(let i=0;i<4;i++)
  horn(g,shade,x,.93,.43-i*.29,.13,.26,0,x>0?.62:-.62);
 jagged(tail,shade,0,-.12,-1.1,.44,.32,.4)
 }else if(type===5){ // parasaurolophus
-mesh(head,facetGeo,skin,0,.18,.32,.28,.31,.35);stem(head,shade,0,.38,.14,0,.9,-.38,.16);horn(head,light,0,.84,-.43,.13,.26,-.5);mesh(head,facetGeo,light,0,.04,.51,.22,.14,.25)
+mesh(head,facetGeo,skin,0,.18,.32,.28,.31,.35);const crest=stem(head,shade,0,.38,.14,0,.9,-.38,.16);crest.userData.skeletonAccent='crest';horn(head,light,0,.84,-.43,.13,.26,-.5);mesh(head,facetGeo,light,0,.04,.51,.22,.14,.25)
 }else if(type===6){ // brachiosaurus
-stem(head,skin,0,-.15,.05,0,1.38,.17,.28);mesh(head,facetGeo,skin,0,1.5,.34,.27,.2,.34);head.position.z=.54;for(let l of legs)l.scale.y=1.24;body.scale.set(.62,.57,.92)
+const neck=stem(head,skin,0,-.15,.05,0,1.38,.17,.28);neck.userData.skeletonAccent='neck';mesh(head,facetGeo,skin,0,1.5,.34,.27,.2,.34);head.position.z=.54;for(let l of legs)l.scale.y=1.24;body.scale.set(.62,.57,.92)
 }else{mesh(head,facetGeo,skin,0,0,.25,.34,.31,.43)}
 if(type===3){
  // Stegosaurus has a low narrow head. Keep its eyes barely proud of the
@@ -484,7 +484,7 @@ function makeTar(group,x,seed){const g=new THREE.Group();g.position.x=x;group.ad
   for(let k=0;k<2;k++){const a=seed*.37+k*2.7;const bubble=mesh(g,new THREE.SphereGeometry(.05+k*.012,6,4),tarBubble,Math.cos(a)*.24,.06,Math.sin(a)*.22);bubble.userData.tarBubble=true;bubble.userData.tarSeed=seed+k*2.3;}
   return {mesh:g,x,tileX:x};
 }
-function makePterosaur(){let g=new THREE.Group(),wingL=new THREE.Group(),wingR=new THREE.Group();let skin=palette(0xb58d66,0x92789b,0x7a9b93)[Math.floor(Math.random()*3)],mem=mat(0xcdb79d);mesh(g,facetGeo,skin,0,0,0,.25,.21,.43);stem(g,skin,0,.08,.19,0,.22,.6,.13);mesh(g,facetGeo,skin,0,.23,.58,.19,.16,.26);horn(g,materials.horn,0,.17,.92,.11,.53,Math.PI/2);horn(g,skin,0,.44,.37,.12,.49,-.65);for(let side of [-1,1]){let wing=side<0?wingL:wingR;wing.position.x=side*.17;g.add(wing);let shape=new THREE.BufferGeometry();let pts=[0,0,0,side*.8,.08,.12,side*1.8,-.05,-.3,side*1.32,-.07,-.6,side*.65,-.08,-.33];let verts=[...pts.slice(0,3),...pts.slice(3,6),...pts.slice(6,9),...pts.slice(0,3),...pts.slice(6,9),...pts.slice(9,12),...pts.slice(0,3),...pts.slice(9,12),...pts.slice(12,15)];shape.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));shape.computeVertexNormals();let surface=new THREE.Mesh(shape,new THREE.MeshLambertMaterial({color:side<0?0xb99580:0xcba98e,side:THREE.DoubleSide,flatShading:true}));wing.add(surface);stem(wing,skin,0,0,0,side*1.8,-.05,-.3,.045);stem(wing,skin,0,0,0,side*1.32,-.07,-.6,.035)}g.userData.wings=[wingL,wingR];return g}
+function makePterosaur(){let g=new THREE.Group(),wingL=new THREE.Group(),wingR=new THREE.Group();let skin=palette(0xb58d66,0x92789b,0x7a9b93)[Math.floor(Math.random()*3)],mem=mat(0xcdb79d);mesh(g,facetGeo,skin,0,0,0,.25,.21,.43);stem(g,skin,0,.08,.19,0,.22,.6,.13);mesh(g,facetGeo,skin,0,.23,.58,.19,.16,.26);horn(g,materials.horn,0,.17,.92,.11,.53,Math.PI/2);const headCrest=horn(g,skin,0,.44,.37,.12,.49,-.65);headCrest.userData.skeletonAccent='crest';for(let side of [-1,1]){let wing=side<0?wingL:wingR;wing.position.x=side*.17;g.add(wing);let shape=new THREE.BufferGeometry();let pts=[0,0,0,side*.8,.08,.12,side*1.8,-.05,-.3,side*1.32,-.07,-.6,side*.65,-.08,-.33];let verts=[...pts.slice(0,3),...pts.slice(3,6),...pts.slice(6,9),...pts.slice(0,3),...pts.slice(6,9),...pts.slice(9,12),...pts.slice(0,3),...pts.slice(9,12),...pts.slice(12,15)];shape.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));shape.computeVertexNormals();let surface=new THREE.Mesh(shape,new THREE.MeshLambertMaterial({color:side<0?0xb99580:0xcba98e,side:THREE.DoubleSide,flatShading:true}));wing.add(surface);stem(wing,skin,0,0,0,side*1.8,-.05,-.3,.045);stem(wing,skin,0,0,0,side*1.32,-.07,-.6,.035)}g.userData.wings=[wingL,wingR];return g}
 
 // Tech variants reuse the original geometry and receive their own materials only.
 const techEdgeCache=new WeakMap();
@@ -618,6 +618,26 @@ function applySkeletonSkin(g,base){
    o.material=shade<.26?skeletonJointMat:skeletonBoneMat;
   }
  });
+ // Adapt the original skull in-place, keeping the original head group,
+ // positioning, animations and silhouette. Brachiosaurus has a separate
+ // neck mesh, so choose the original head primitive instead of its neck.
+ const headGroup=g.userData.walkParts?.head;
+ const skull=headGroup?
+  headGroup.children.find(o=>o.isMesh&&o.geometry===facetGeo)||
+  headGroup.children.find(o=>o.isMesh):
+  ([0,1,6,8].includes(base)?g.children[base===8?2:2]:null);
+ if(skull&&skull!==body&&skull.isMesh){
+  skull.geometry=skeletonVoxelGeometry(skull.geometry,'skull');
+  skull.material=skeletonBoneMat;
+ }
+ // Convert ORIGINAL signature features (not added replacements) to bony
+ // open frames or vertebrae within their pre-existing mesh dimensions.
+ g.traverse(o=>{
+  if(!o.isMesh||!o.userData?.skeletonAccent)return;
+  const style=o.userData.skeletonAccent;
+  o.geometry=skeletonVoxelGeometry(o.geometry,style);
+  o.material=style==='armor'||style==='plate'?skeletonJointMat:skeletonBoneMat;
+ });
  body.geometry=skeletonVoxelGeometry(body.geometry,'ribs');
  body.material=skeletonBoneMat;
  // Living T. Rex, Velociraptor and Spinosaurus have a solid belly inset
@@ -679,7 +699,7 @@ if([2,3,4,5,7].includes(type)){
     for(let x of [-.26,.26]){let claw=cone(g,materials.horn,x,.1,.22,.1,.22);claw.rotation.x=Math.PI/2}
   }
   if(spino){
-    for(let i=0;i<7;i++){let z=.4-i*.21;let sail=box(g,techno?color:i%2?dark:color,0,1.35+Math.sin(i/6*Math.PI)*.38,z,.13,.55+Math.sin(i/6*Math.PI)*.85,.2);sail.userData.techSpinoSpine=techno||chrome;sail.rotation.x=-.08}
+    for(let i=0;i<7;i++){let z=.4-i*.21;let sail=box(g,techno?color:i%2?dark:color,0,1.35+Math.sin(i/6*Math.PI)*.38,z,.13,.55+Math.sin(i/6*Math.PI)*.85,.2);sail.userData.techSpinoSpine=techno||chrome;sail.userData.skeletonAccent='sail';sail.rotation.x=-.08}
     box(g,color,0,1.27,1.04,.49,.22,.64);
   }
   g.userData.feet=feet;
@@ -2196,7 +2216,7 @@ const shopDescriptions=[
 ];
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Tech edition: metallic armor, cyan accents, energy seams and glowing eyes. '+text));
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Chrome edition: pure white armor and glowing red eyes. '+text));
-shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Skeleton edition: the original dinosaur proportions with open ribs, ivory bones and hollow dark eye sockets. '+text));
+shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Skeleton edition: the original dinosaur silhouette with chunky block-shaped ribs, an open bone skull, dark eye sockets and species-specific bony features. '+text));
 
 let inspected=chosen,selectedShopSpecies=chosen%9,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
 function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
