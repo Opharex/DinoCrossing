@@ -116,7 +116,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Waterfalls Without Liquid Walls">🌊 SMOOTH WATERFALLS! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: New Amber Hop SFX and Living Rivers and Lava">🦖 HEAR THE JUNGLE! 🌊</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -1189,7 +1189,14 @@ function fx(name,power=1){
      fxNoise(.085,.10*v,2400+i*520,'bandpass',.05+i*.03);
      fxTone((620+i*110)*variation,.08,.045*v,'triangle',.58,.035+i*.028);
     }break;
-   case 'amber':fxTone(720,.13,.18*v,'sine',1.18);fxTone(1025,.23,.16*v,'triangle',.94,.08);break;
+   // Amber pickup: a short, playful dino-hop bounce with a warm wooden body.
+   // No glass-shard clinks or piercing bell/ping frequencies.
+   case 'amberPickup':
+   case 'amber':
+    fxTone(320*variation,.135,.20*v,'triangle',1.23);
+    fxTone(192*variation,.16,.12*v,'sine',.72,.014);
+    fxNoise(.10,.085*v,720,'bandpass',.012);
+    break;
    case 'fossil':for(let j=0;j<4;j++)fxTone([740,930,1175,1568][j],.28,.19*v,'sine',1.03,j*.065);fxNoise(.22,.055*v,4400,'highpass',.16);break;
    case 'record':for(let j=0;j<5;j++)fxTone([523,659,784,1046,1318][j],.31,.15*v,'triangle',1,j*.095);break;
    case 'purchase':for(let j=0;j<3;j++)fxTone([392,587,784][j],.32,.22*v,'triangle',.99,j*.095);fxNoise(.10,.06*v,3000,'highpass',.10);break;
@@ -1293,29 +1300,74 @@ function musicSync(){
  const level=state==='paused'||state==='dead'?.13:mode==='menu'?.70:mode==='danger'?.72:.85;
  m.master.gain.setTargetAtTime(level,ctx.currentTime,.35);
 }
+// River and lava are proximity-based environmental beds, *not* UI sound effects.
+// Only two looping sources are active, even beside three connected river lanes.
+// They start during the normal audio unlock and fade down when no liquid is near.
 function ambientInit(){
- // No permanent noise loops: these made a constant shhhh sound.
- // Keep only occasional short environmental calls in ambientSync().
  if(mixer.loops)return;
- mixInit();mixer.loops={};
+ mixInit();
+ const ctx=audio();
+ function makeFlow(kind){
+  const water=kind==='river',output=ctx.createGain(),src=ctx.createBufferSource();
+  output.gain.value=0;output.connect(mixer.ambient);
+  src.buffer=mixer.noise;src.loop=true;src.playbackRate.value=water?.88:.64;
+  const body=ctx.createBiquadFilter(),bodyGain=ctx.createGain();
+  body.type='lowpass';body.frequency.value=water?1450:410;body.Q.value=water?.55:.78;
+  bodyGain.gain.value=water?.47:.76;
+  const detail=ctx.createBiquadFilter(),detailGain=ctx.createGain();
+  detail.type='bandpass';detail.frequency.value=water?670:190;detail.Q.value=water?.7:1.25;
+  detailGain.gain.value=water?.23:.39;
+  src.connect(body);body.connect(bodyGain);bodyGain.connect(output);
+  src.connect(detail);detail.connect(detailGain);detailGain.connect(output);
+  src.start(0,water?.12:.87);
+  return {output,src};
+ }
+ mixer.loops={river:makeFlow('river'),lava:makeFlow('lava'),lastGlug:0};
+}
+function lavaAmbientGlug(now,volume){
+ // Rounded, low bubbling sound with a sinking pitch; no sharp plinks.
+ // One brief event at a time, through the existing Ambience slider.
+ const ctx=audio(),o=ctx.createOscillator(),g=ctx.createGain();
+ o.type='sine';
+ const start=94+Math.random()*43,duration=.18+Math.random()*.15;
+ o.frequency.setValueAtTime(start,now);
+ o.frequency.exponentialRampToValueAtTime(start*1.37,now+duration*.30);
+ o.frequency.exponentialRampToValueAtTime(start*.63,now+duration);
+ g.gain.setValueAtTime(.0001,now);
+ g.gain.exponentialRampToValueAtTime(.14*volume,now+.045);
+ g.gain.exponentialRampToValueAtTime(.0001,now+duration);
+ o.connect(g).connect(mixer.ambient);
+ o.start(now);o.stop(now+duration+.025);
 }
 function ambientSync(){
  if(!mixer.master)return;
- ambientInit();const now=audio().currentTime;
+ ambientInit();
+ const ctx=audio(),now=ctx.currentTime;
  let forest=0,river=0,lava=0;
  if(state==='playing'||state==='menu'){
-  for(let d=-2;d<=3;d++){
+  // Relative to the player, not the camera. A wide pool has the same
+  // maximum volume as one lane and cannot stack three roaring sound loops.
+  for(let d=-4;d<=4;d++){
    const r=rows.get(py+d);if(!r)continue;
-   const weight=1/(1+Math.abs(d)*1.9);
+   const weight=1/(1+Math.abs(d)*.83);
    if(r.type==='river'||r.type==='flashflood')river=Math.max(river,weight);
    if(r.type==='lava'||r.type==='lavasurge')lava=Math.max(lava,weight);
    if(['grass','forest','sky'].includes(r.type))forest=Math.max(forest,weight);
   }
  }
- // Intentionally no sustained white-noise ambience. Silent between discrete cues.
- // Occasional birds and distant insects, subtle enough not to obscure hazards.
+ // The menu has a gentle background atmosphere; gameplay has the full mix.
+ // On death or pause, both beds naturally fade away.
+ const locationVolume=state==='playing'?1:state==='menu'?.30:0;
+ mixer.loops.river.output.gain.setTargetAtTime(.30*Math.pow(river,1.35)*locationVolume,now,.26);
+ mixer.loops.lava.output.gain.setTargetAtTime(.34*Math.pow(lava,1.35)*locationVolume,now,.32);
+ if(state==='playing'&&lava>.24&&+$('ambience').value&&now>=mixer.loops.lastGlug){
+  lavaAmbientGlug(now,Math.pow(lava,.8));
+  mixer.loops.lastGlug=now+(.85+Math.random()*.90)/Math.max(.65,lava);
+ }
+ // Keep the existing occasional birds and distant insects; they use the
+ // same ambience bus and won't play with ambience muted.
  if(state==='playing'&&forest>.5&&now>mixer.lastAmbience+4+Math.random()*3&&+$('ambience').value){
-  mixer.lastAmbience=now;const o=audio().createOscillator(),g=audio().createGain();
+  mixer.lastAmbience=now;const o=ctx.createOscillator(),g=ctx.createGain();
   o.type='sine';o.frequency.setValueAtTime(1350+Math.random()*400,now);
   o.frequency.exponentialRampToValueAtTime(850+Math.random()*280,now+.20);
   g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.045,now+.035);
@@ -1363,7 +1415,7 @@ $('testAudio').addEventListener('click',async()=>{
  const status=$('audioStatus');
  try{musicUnlock();const ctx=audio();await ctx.resume();
   if(ctx.state!=='running'){status.textContent='Audio is '+ctx.state+'. Try tapping Play, then test again.';return;}
-  fx('amber');setTimeout(()=>fx('log'),240);setTimeout(()=>fx('flood',.45),630);
+  fx('amberPickup');setTimeout(()=>fx('log'),240);setTimeout(()=>fx('flood',.45),630);
   status.textContent='Audio preview: amber, wooden landing, then flood. Output: '+ctx.state+'.';
  }catch(e){status.textContent='Audio error: '+e.message;}
 });
@@ -1651,7 +1703,7 @@ function support(r,x){return r.moving.find(m=>m.platform&&platformTileAt(m,x)!==
 function nearestPlatformTile(r,x){let best=null,d=.49;for(const p of r.moving){if(!p.platform)continue;for(let i=0;i<p.width;i++){const center=platformTileCenter(p,i),delta=Math.abs(center-x);if(delta<d){d=delta;best={platform:p,index:i,center}}}}return best}
 function birdDanger(r,x){return r.type==='sky'&&r.moving.some(m=>m.bird&&Math.hypot(x-m.dangerDisc.position.x,player.position.z-(-r.y))<=.65)}
 function tarHit(r,x){return r.type==='tar'&&r.tarPits?.some(p=>Math.round(x)===p.tileX)}
-function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberBreak',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
+function checkTile(){let r=rows.get(py);if(!r)return;for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberPickup',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
 function update(dt,t){
  // Original floating gems animate near the camera, just as before the amber redesign.
  if(state==='playing'||state==='menu'){
