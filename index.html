@@ -116,7 +116,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Flowing Water Lava and Matching Platform Physics">🌊 LIQUID IN MOTION! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Beautiful Flowing Water and Lava">🌊 FLOWING LIQUIDS 2.0! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -545,16 +545,76 @@ const liquidTopMats={
 };
 const liquidFoamMat=new THREE.MeshBasicMaterial({color:0xf2ffff,transparent:true,opacity:.88,depthWrite:false,side:THREE.DoubleSide});
 const lavaSprayMat=new THREE.MeshBasicMaterial({color:0xffcc59,transparent:true,opacity:.86,depthWrite:false,side:THREE.DoubleSide});
-const riverCurrentMat=new THREE.MeshBasicMaterial({color:0xd7faff,transparent:true,opacity:.56,depthWrite:false,side:THREE.DoubleSide});
-const lavaCurrentMat=new THREE.MeshBasicMaterial({color:0xffd36b,transparent:true,opacity:.62,depthWrite:false,side:THREE.DoubleSide});
-const riverEddyMat=new THREE.MeshBasicMaterial({color:0xa7e9f4,transparent:true,opacity:.53,depthWrite:false,side:THREE.DoubleSide});
-const lavaEddyMat=new THREE.MeshBasicMaterial({color:0xffab49,transparent:true,opacity:.56,depthWrite:false,side:THREE.DoubleSide});
+// Soft tileable liquid marbling. This scrolls WITHIN the actual waving surface
+// rather than placing bright strips or floating meshes above the water.
+// One 256x256 texture per liquid, two directions share its pixels on the GPU.
+function makeLiquidMarble(type){
+ const n=256,canvas=document.createElement('canvas');canvas.width=canvas.height=n;
+ const ctx=canvas.getContext('2d');
+ if(!ctx)throw new Error('Unable to prepare water and lava materials.');
+ const image=ctx.createImageData(n,n),pixels=image.data;
+ const tau=Math.PI*2;
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+  const u=x*tau/n,v=y*tau/n;
+  // Integer harmonics and periodic warping keep every texture seam invisible.
+  const warp=Math.sin(2*v+Math.sin(u*2)*.8)*.95;
+  const a=Math.sin(2*u+warp+Math.sin(2*v-u)*.85);
+  const b=Math.sin(3*u-2*v+Math.sin(u+v)*.75);
+  const c=Math.cos(3*v+Math.sin(2*u-v)*.8);
+  let t=.5+.235*a+.145*b+.105*c;
+  t=Math.max(0,Math.min(1,t));
+  t=t*t*(3-2*t);
+  // Broad eddies and pooling colours, NOT thin white streaks.
+  const dark=type==='river'?[24,124,158]:[101,39,19];
+  const bright=type==='river'?[93,196,220]:[241,119,31];
+  const glow=Math.max(0,(t-.66)/.34);
+  const k=(y*n+x)*4;
+  for(let channel=0;channel<3;channel++)
+   pixels[k+channel]=Math.min(255,Math.round(
+    dark[channel]+(bright[channel]-dark[channel])*t+
+    glow*(type==='river'?[13,16,17][channel]:[14,52,32][channel])
+   ));
+  pixels[k+3]=255;
+ }
+ ctx.putImageData(image,0,0);
+ return canvas;
+}
+const liquidSurfaceMats={river:{},lava:{}};
+for(const type of ['river','lava']){
+ const canvas=makeLiquidMarble(type);
+ for(const [key,dir] of [['right',1],['left',-1]]){
+  const texture=new THREE.CanvasTexture(canvas);
+  texture.wrapS=texture.wrapT=THREE.RepeatWrapping;
+  texture.minFilter=THREE.LinearMipmapLinearFilter;
+  texture.magFilter=THREE.LinearFilter;
+  texture.colorSpace=THREE.SRGBColorSpace;
+  texture.generateMipmaps=true;
+  const material=liquidTopMats[type].clone();
+  material.color.setHex(0xffffff);
+  material.map=texture;
+  // The slower, darker lava can show pools of incandescent orange between crusts.
+  if(type==='lava')material.emissiveIntensity=.22;
+  liquidSurfaceMats[type][key]={material,texture,dir};
+ }
+}
+function updateLiquidMarble(time){
+ for(const type of ['river','lava'])for(const key of ['left','right']){
+  const skin=liquidSurfaceMats[type][key];
+  // UV x increases with world X. Negative offset advances the pattern right.
+  const speed=type==='river'?.18:.09;
+  skin.texture.offset.x=(-skin.dir*time*speed)%1;
+  skin.texture.offset.y=Math.sin(time*(type==='river'?.25:.12))*.012;
+ }
+}
+function liquidFlowMaterial(type,dir){
+ return liquidSurfaceMats[type][dir>=0?'right':'left'].material;
+}
 const liquidMeshes=[];
 // Two falls connect upper feeder, playable lane and the lower outflow.
 const LIQUID_INLET_START=7.55,LIQUID_INLET_END=6.12;
 const LIQUID_OUTFALL_START=7.49,LIQUID_OUTFALL_END=8.90;
 const LIQUID_FEEDER_Y=.335,LIQUID_LANE_Y=-.116,LIQUID_LOWER_Y=-.61;
-function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,lines=4,offset=0){
+function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,lines=4,offset=0,dir=1){
  const verts=new Float32Array((sections+1)*(lines+1)*3),uv=new Float32Array((sections+1)*(lines+1)*2),tri=[];
  for(let i=0;i<=sections;i++)for(let j=0;j<=lines;j++){
   const k=i*(lines+1)+j;uv[k*2]=i/sections;uv[k*2+1]=j/lines;
@@ -562,7 +622,7 @@ function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,
  }
  const geo=new THREE.BufferGeometry(),pos=new THREE.BufferAttribute(verts,3);
  pos.setUsage(THREE.DynamicDrawUsage);geo.setAttribute('position',pos);geo.setAttribute('uv',new THREE.BufferAttribute(uv,2));geo.setIndex(tri);
- const surface=new THREE.Mesh(geo,liquidTopMats[type]);
+ const surface=new THREE.Mesh(geo,liquidFlowMaterial(type,dir));
  surface.frustumCulled=false;parent.add(surface);
  // Precompute immutable per-vertex input once. Use Float64 values so the
  // existing wave equations receive the same coordinates as before.
@@ -576,6 +636,8 @@ function liquidSurface(parent,type,startX,endX,zWidth=1,baseY=-.115,sections=38,
    const index=i*(lines+1)+j;
    const z=(j/lines-.5)*zWidth;
    waveXs[index]=x;waveZs[index]=z;
+   // World-space coordinates allow the same marbling to flow across pool seams.
+   uv[index*2]=x*.19;uv[index*2+1]=z*.43;
    edgeDamping[index]=Math.min(1,Math.max(.1,(zWidth*.5-Math.abs(z))*7));
   }
  }
@@ -617,17 +679,19 @@ function flowingLiquidHeight(x,dir){
 }
 // Both waterfall surfaces use the same wave phase as adjacent pools, joining at exact vertices.
 function createSpillingFlow(group,type,dir,seed,zWidth=.98,inlet=false){
- const bands=20,lines=zWidth>2?10:4,verts=new Float32Array((bands+1)*(lines+1)*3),indices=[];
+ const bands=20,lines=zWidth>2?10:4,verts=new Float32Array((bands+1)*(lines+1)*3),uv=new Float32Array((bands+1)*(lines+1)*2),indices=[];
  for(let i=0;i<bands;i++)for(let j=0;j<lines;j++){const a=i*(lines+1)+j,b=a+lines+1;indices.push(a,b,a+1,a+1,b,b+1)}
  const geo=new THREE.BufferGeometry(),attr=new THREE.BufferAttribute(verts,3);attr.setUsage(THREE.DynamicDrawUsage);
- geo.setAttribute('position',attr);geo.setIndex(indices);
- const mesh=new THREE.Mesh(geo,liquidTopMats[type]);mesh.frustumCulled=false;group.add(mesh);
+ geo.setAttribute('position',attr);geo.setAttribute('uv',new THREE.BufferAttribute(uv,2));geo.setIndex(indices);
+ const mesh=new THREE.Mesh(geo,liquidFlowMaterial(type,dir));mesh.frustumCulled=false;group.add(mesh);
  const len=(bands+1)*(lines+1),xs=new Float64Array(len),zs=new Float64Array(len),base=new Float64Array(len),damping=new Float64Array(len);
  for(let i=0;i<=bands;i++){
   const p=i/bands,fall=p*p*(3-2*p);
   const x=inlet?-dir*(LIQUID_INLET_START-p*(LIQUID_INLET_START-LIQUID_INLET_END)):dir*(LIQUID_OUTFALL_START+p*(LIQUID_OUTFALL_END-LIQUID_OUTFALL_START));
   const y=inlet?LIQUID_FEEDER_Y+(LIQUID_LANE_Y-LIQUID_FEEDER_Y)*fall:LIQUID_LANE_Y+(LIQUID_LOWER_Y-LIQUID_LANE_Y)*fall;
-  for(let j=0;j<=lines;j++){const k=i*(lines+1)+j,z=(j/lines-.5)*zWidth;xs[k]=x;zs[k]=z;base[k]=y;damping[k]=Math.min(1,Math.max(.1,(zWidth*.5-Math.abs(z))*7))}
+  for(let j=0;j<=lines;j++){const k=i*(lines+1)+j,z=(j/lines-.5)*zWidth;xs[k]=x;zs[k]=z;base[k]=y;
+   uv[k*2]=x*.19;uv[k*2+1]=z*.43;
+   damping[k]=Math.min(1,Math.max(.1,(zWidth*.5-Math.abs(z))*7))}
  }
  return {mesh,attr,type,dir,seed,xs,zs,base,damping};
 }
@@ -645,9 +709,9 @@ function makeLiquidSpillway(group,row,span=1){
  const feederLength=far-LIQUID_INLET_START,feederCenter=source*(far+LIQUID_INLET_START)/2;
  const outLength=far-LIQUID_OUTFALL_END,outCenter=dir*(far+LIQUID_OUTFALL_END)/2;
  box(group,materials.stone,feederCenter,-.005,0,feederLength,.58,span+.25);
- liquidSurface(group,type,source>0?LIQUID_INLET_START:-far,source>0?far:-LIQUID_INLET_START,waterWidth,LIQUID_FEEDER_Y,26,wide?10:4,row.y*.47);
+ liquidSurface(group,type,source>0?LIQUID_INLET_START:-far,source>0?far:-LIQUID_INLET_START,waterWidth,LIQUID_FEEDER_Y,26,wide?10:4,row.y*.47,dir);
  box(group,materials.stone,outCenter,-.91,0,outLength,.36,span+.25);
- liquidSurface(group,type,dir>0?LIQUID_OUTFALL_END:-far,dir>0?far:-LIQUID_OUTFALL_END,waterWidth,LIQUID_LOWER_Y,26,wide?10:4,row.y*.47);
+ liquidSurface(group,type,dir>0?LIQUID_OUTFALL_END:-far,dir>0?far:-LIQUID_OUTFALL_END,waterWidth,LIQUID_LOWER_Y,26,wide?10:4,row.y*.47,dir);
  for(const side of [-1,1]){
   const z=side*(half+.07);
   box(group,materials.stone,feederCenter,.23,z,feederLength,.59,.17);
@@ -692,33 +756,12 @@ function makeLiquidSpillway(group,row,span=1){
  }
  const bubbleMesh=new THREE.InstancedMesh(foamBubbleGeo,sprayMat,bubbleData.length);
  bubbleMesh.frustumCulled=false;group.add(bubbleMesh);
- // Continuous flowing streaks in three zones. Two instanced meshes per
- // row, so mobile GPUs pay no per-ripple draw-call cost.
- const currentData=[],eddyData=[];
- function addCurrents(zone,min,max,count){
-  for(let i=0;i<count;i++)currentData.push({min,max,
-   phase:(i*.61803398875+zone*.237)%1,
-   z:(((i*.754877666)+zone*.2)%1-.5)*(waterWidth-.17),
-   seed:row.y*2.31+zone*17.7+i*4.618,
-   length:.38+(i%5)*.11,depth:.035+(i%3)*.02});
- }
- addCurrents(0,-5.78,7.20,wide?54:25);
- addCurrents(1,-20.8,-8.25,wide?16:7);
- addCurrents(2,9.25,20.6,wide?16:7);
- for(let i=0;i<(wide?24:12);i++)eddyData.push({
-  along:-5.55+((i*.41421356)%1)*12.25,
-  z:((i*.75487766)%1-.5)*(waterWidth-.16),
-  radius:.105+(i%4)*.048,seed:i*.71+row.y});
- const currentMesh=new THREE.InstancedMesh(liquidCurtainGeo,type==='river'?riverCurrentMat:lavaCurrentMat,currentData.length);
- const eddyMesh=new THREE.InstancedMesh(liquidCurtainGeo,type==='river'?riverEddyMat:lavaEddyMat,eddyData.length);
- currentMesh.frustumCulled=false;eddyMesh.frustumCulled=false;
- group.add(currentMesh,eddyMesh);
- row.liquidEffects={inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData,currentMesh,currentData,eddyMesh,eddyData};
+ row.liquidEffects={inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData};
  liquidLaneUpdate(row,0);
 }
 function liquidLaneUpdate(row,time){
  const e=row?.liquidEffects;if(!e)return;
- const {inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData,currentMesh,currentData,eddyMesh,eddyData}=e;
+ const {inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData}=e;
  updateSpillingFlow(inletFlow,time);updateSpillingFlow(outletFlow,time);
  const pulse=type==='river'?8:4;
  for(const inlet of [true,false]){
@@ -748,29 +791,6 @@ function liquidLaneUpdate(row,time){
   liquidParticleDummy.rotation.set(0,0,0);liquidParticleDummy.updateMatrix();bubbleMesh.setMatrixAt(i,liquidParticleDummy.matrix);
  }
  bubbleMesh.instanceMatrix.needsUpdate=true;
- // Animated surface highlights follow the current in the same direction
- // as the logs, with pulses and eddies across water AND lava.
- const speed=type==='river'?1.65:.90;
- for(let i=0;i<currentData.length;i++){
-  const c=currentData[i],range=c.max-c.min;
-  const along=c.min+(c.phase*range+time*speed)%range;
-  const x=dir*along,z=c.z+.022*Math.sin(time*.8+c.seed);
-  liquidParticleDummy.position.set(x,flowingLiquidHeight(x,dir)+liquidWave(x,z,time,dir,type,row.y*.47)+.030,z);
-  liquidParticleDummy.scale.set(c.length*(.86+.14*Math.sin(time*1.1+c.seed)),.011,c.depth);
-  liquidParticleDummy.rotation.set(0,Math.sin(time*.6+c.seed)*.14,0);
-  liquidParticleDummy.updateMatrix();currentMesh.setMatrixAt(i,liquidParticleDummy.matrix);
- }
- currentMesh.instanceMatrix.needsUpdate=true;
- for(let i=0;i<eddyData.length;i++){
-  const c=eddyData[i],x=dir*(c.along+Math.sin(time*.5+c.seed)*.11);
-  const z=c.z+Math.cos(time*.7+c.seed)*.031;
-  const pulse=.78+.22*Math.sin(time*(type==='river'?2.9:1.6)+c.seed);
-  liquidParticleDummy.position.set(x,flowingLiquidHeight(x,dir)+liquidWave(x,z,time,dir,type,row.y*.47)+.038,z);
-  liquidParticleDummy.scale.set(c.radius*1.6*pulse,.011,c.radius*.52*pulse);
-  liquidParticleDummy.rotation.set(0,time*.34+c.seed,0);
-  liquidParticleDummy.updateMatrix();eddyMesh.setMatrixAt(i,liquidParticleDummy.matrix);
- }
- eddyMesh.instanceMatrix.needsUpdate=true;
 }
 // Cull only the trees closest to waterworks, including rows generated BEFORE
 // a neighboring river/lava lane. Each forest uses instancing, so hide all parts
@@ -857,7 +877,7 @@ box(floorGrid,floorGridMat,0,.0007,.5,ROW_W,.0014,seamWidth);
 floorGrid.scale.set(1/ROW_W,1/.36,1);
 floorGrid.position.y=.5;
 floorGrid.visible=tileGridEnabled;ground.add(floorGrid);ground.userData.floorGrid=floorGrid;group.userData.floorGrid=floorGrid;
-if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(((y+k+1)%3)+3)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();if(poolIndex===-1||poolIndex===1)liquidSurface(group,type,laneDirection>0?-LIQUID_INLET_END:-LIQUID_OUTFALL_START,laneDirection>0?LIQUID_OUTFALL_START:LIQUID_INLET_END,poolIndex===1?2.98:.98,LIQUID_LANE_Y,42,poolIndex===1?10:4,y*.47)}if(type==='river'||type==='lava'){ground.userData.liquid=type}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
+if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(((y+k+1)%3)+3)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();if(poolIndex===-1||poolIndex===1)liquidSurface(group,type,laneDirection>0?-LIQUID_INLET_END:-LIQUID_OUTFALL_START,laneDirection>0?LIQUID_OUTFALL_START:LIQUID_INLET_END,poolIndex===1?2.98:.98,LIQUID_LANE_Y,42,poolIndex===1?10:4,y*.47,laneDirection)}if(type==='river'||type==='lava'){ground.userData.liquid=type}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
 // These strips never enter row.solid, moving hazards, collectibles or collision checks.
 const sideMat=(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.path:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3];
 for(const side of [-1,1]){
@@ -1664,6 +1684,7 @@ function update(dt,t){
  updateSunBlobs();
  if(state==='playing'||state==='menu'){
  gameTime+=dt;
+ updateLiquidMarble(gameTime);
  // Only nearby rows animate, bounded per-frame CPU work on mobile.
  for(const info of liquidMeshes){
   if(!info.mesh.parent||!info.mesh.parent.parent)continue;
