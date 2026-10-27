@@ -728,7 +728,7 @@ let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,st
 // to the user's cameraZoom preference. Reset independently on retry/menu.
 let deathCameraBlend=0,deathCameraZoom=1;
 // Keep the character near the middle while the danger edge creeps in behind.
-const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25;
+const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25,CAMERA_CATCHUP_SPEED=2.5;
 let lastCreepRow=-1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
@@ -1463,7 +1463,7 @@ function ensureRows(){
  for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23,Math.ceil(camY)+23);y++)makeRow(y);
  // Keep the existing one-row-per-step retirement rate, including the
  // decorative starting rows, as the world advances.
- for(const [y,r] of rows)if(y<Math.max(-BACK_TERRAIN_ROWS,Math.floor(Math.max(highest,camY))-BACK_TERRAIN_ROWS)){disposeWorldRow(r);world.remove(r.group);rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
+ for(const [y,r] of rows)if(y<Math.max(-BACK_TERRAIN_ROWS,Math.floor(Math.max(highest,camY))-(BACK_TERRAIN_ROWS+6))){disposeWorldRow(r);world.remove(r.group);rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
 // Procedurally built in the browser, so all sounds work offline without licensed assets.
 const mixer={master:null,fx:null,music:null,ambient:null,noise:null,loops:null,lastStep:0,lastAmbience:0};
 function mixInit(){
@@ -2475,7 +2475,7 @@ function beginExtraDeath(kind,reason,detail){
   dir:kind==='stampede'?(row?.special?.dir||1):kind==='edge'?(player.position.x>=0?1:-1):1,
   x:player.position.x,y:player.position.y,z:player.position.z,
   roll:avatar.rotation.z,pitch:avatar.rotation.x,
-  waveX:kind==='stampede'?row?.special?.wave.position.x:0,
+  waveX:(kind==='stampede'||kind==='lavasurge')?row?.special?.wave.position.x:0,
   squashed:false,particles:false,blinkCount:0};
  if(kind==='lavasurge'){
   // Clone per-player materials: never blacken shared world/skin materials.
@@ -2496,7 +2496,7 @@ function beginExtraDeath(kind,reason,detail){
   });
  }
  if(kind==='behind'){
-  const back=Math.max(-BACK_TERRAIN_ROWS,Math.floor(camY)-15);
+  const back=Math.min(...rows.keys());
   extraDeath.crumbleRows=[...rows.values()].filter(r=>r.y>=back&&r.y<=py)
    .sort((a,b)=>a.y-b.y)
    .map(r=>({row:r,y:r.group.position.y,rx:r.group.rotation.x,rz:r.group.rotation.z}));
@@ -2529,8 +2529,18 @@ function updateExtraDeath(dt){
   }
   if(!d.particles&&a>.27){d.particles=true;burst(d.x,d.y+.07,d.z,4,quality==='low'?2:6);}
  }else if(d.kind==='lavasurge'){
-  // The wave passes; charred silhouette blinks twice before black smoke.
+  // Keep the real molten surge moving through the charred dinosaur.
   player.position.set(d.x,d.y,d.z);
+  if(d.row?.special?.wave){
+   const sp=d.row.special,wave=sp.wave;
+   wave.visible=true;
+   wave.position.x=d.waveX+d.dir*(36/sp.activeLength)*d.elapsed;
+   for(const m of wave.children){
+    if(m.userData.floodVolume)updateFloodVolume(m,d.row,wave.position.x,gameTime+d.elapsed);
+    else if(m.position)m.position.y=groundTileHeight(d.row,wave.position.x+m.position.x)+.41+
+     liquidWave(wave.position.x+m.position.x,m.position.z,gameTime+d.elapsed,sp.dir,'lava',d.row.y*.37);
+   }
+  }
   const blink=(t,c)=>Math.max(0,1-Math.abs(t-c)/.055);
   const closed=Math.max(blink(a,.46),blink(a,.67));
   for(const eye of d.eyes||[])eye.mesh.scale.y=Math.max(.06,eye.y*(1-closed*.94));
@@ -2905,7 +2915,8 @@ if(state==='playing'||state==='menu'){
    m.mesh.position.x=m.x;
   }
  }
-}if(state==='playing'){camY=Math.max(camY+CAMERA_CREEP_SPEED*dt,highest-CAMERA_FOLLOW_LEAD);const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
+}if(state==='playing'){const wantedCam=Math.max(camY+CAMERA_CREEP_SPEED*dt,highest-CAMERA_FOLLOW_LEAD);
+ camY=Math.max(camY+CAMERA_CREEP_SPEED*dt,Math.min(wantedCam,camY+CAMERA_CATCHUP_SPEED*dt));const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
  if(hop.amberBounce){
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
@@ -2939,7 +2950,7 @@ if(state==='playing'||state==='menu'){
  }
  if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);
  let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(false&&py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-CAMERA_DANGER_GAP)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){const visibleRowCenter=state==='menu'?3:camSmooth+3;
- r.group.visible=r.y>=visibleRowCenter-23&&r.y<visibleRowCenter+17;if(!r.group.visible)continue;if(r.special&&!(state==='dying'&&((impactDeath?.kind==='flood'&&r===impactDeath.row)||(extraDeath?.kind==='stampede'&&r===extraDeath.row))))updateSpecial(r);// Cache only animated scenery instead of scanning every child of every
+ r.group.visible=r.y>=visibleRowCenter-23&&r.y<visibleRowCenter+17;if(!r.group.visible)continue;if(r.special&&!(state==='dying'&&((impactDeath?.kind==='flood'&&r===impactDeath.row)||((extraDeath?.kind==='stampede'||extraDeath?.kind==='lavasurge')&&r===extraDeath.row))))updateSpecial(r);// Cache only animated scenery instead of scanning every child of every
  // visible row on each frame. Refresh if the row acquires new children.
  if(!r.cosmeticChildren||r.cosmeticChildCount!==r.group.children.length){
   r.cosmeticChildren=r.group.children.filter(o=>o.userData.sway||o.userData.flow!==undefined);
