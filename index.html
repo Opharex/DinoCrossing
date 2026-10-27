@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Stampede Lanes Have No Grey Wall Posts">🦖 CLEAR STAMPEDE LANES! 💨</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Cobblestone and Dinosaur Trails Extend Beyond Playable Area">🛤️ EXTENDED DINO TRAILS! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -1099,7 +1099,7 @@ for(const side of [-1,1]){
   const edgeX=side*14.5;
   // Liquid channels own this off-grid space: grass here obscured the lower outflow.
   if(type!=='river'&&type!=='lava'){
-   const extension=box(group,materials.grass[(((y+1)%3)+3)%3],edgeX,-.19,0,14,.36,1);
+   const extension=box(group,(type==='stampede'||type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.wornGrass:materials.grass[(((y+1)%3)+3)%3],edgeX,-.19,0,14,.36,1);
    extension.castShadow=false;extension.receiveShadow=true;
   }
   // Draw many off-grid trees in a few batches, keeping mobile rendering smooth.
@@ -1109,7 +1109,7 @@ for(const side of [-1,1]){
    [0xb6a2e6,0x80706e,0xb09c90],[0xb7cd70,0x786047,0xb19a71]
   ];
   // All trees live in the 1-unit cells outside +/-7.5.
-  const sideCount=(type==='river'||type==='lava')?0:14,trees=Array.from({length:sideCount},(_,k)=>{
+  const sideCount=(type==='river'||type==='lava'||type==='path'||type==='stampede'||type==='lavasurge'||type==='flashflood')?0:14,trees=Array.from({length:sideCount},(_,k)=>{
     const seed=y*103.31+side*47+k*29.17;
     const variant=Math.abs(Math.floor(seed*13.7+Math.sin(seed*4.7)*19))%forestColors.length;
     const height=.40+Math.abs(Math.sin(seed*2.71+3.2))*.45;
@@ -1207,17 +1207,17 @@ if(type==='river'||type==='lava'){
  // grass patches and hoof marks. All meshes use shared geometry/materials.
  // This reads as a USED GRASS PATH, not safe bright-green turf or a dirt road.
  for(const z of [-.27,.27]){
-  const worn=box(group,materials.wornTrack,0,.012,z,14.8,.018,.25);
+  const worn=box(group,materials.wornTrack,0,.012,z,43,.018,.25);
   worn.castShadow=false;
  }
  // Batch the scattered scuffs into two instanced meshes instead of
  // 11 separate per-row draw calls. Shared geometry/materials remain cached.
  const scuffDummy=new THREE.Object3D();
  for(let kind=0;kind<2;kind++){
-  const ids=Array.from({length:11},(_,i)=>i).filter(i=>(i%3===0)===(kind===0));
+  const ids=Array.from({length:33},(_,i)=>i).filter(i=>(i%3===0)===(kind===0));
   const scuffs=new THREE.InstancedMesh(cubeGeo,kind===0?materials.wornPatch:materials.wornTrack,ids.length);
   for(let index=0;index<ids.length;index++){
-   const i=ids[index],n=Math.abs(Math.sin(y*4.87+i*13.3)),x=-6.8+i*1.28;
+   const i=ids[index],n=Math.abs(Math.sin(y*4.87+i*13.3)),x=-20.48+i*1.28;
    scuffDummy.position.set(x,.027,(i%2?.23:-.23)+Math.sin(y+i)*.075);
    scuffDummy.scale.set(.30+n*.39,.012,.13+n*.08);
    scuffDummy.rotation.set(0,(n-.5)*.42,0);
@@ -1244,9 +1244,9 @@ if(type==='tar'){
   const cobbleColors=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
   const cobbleMats=cobbleColors.map(color=>new THREE.MeshLambertMaterial({color,flatShading:true}));
   const cobbleGeo=cachedGeo('hazard:cobble',()=>new THREE.BoxGeometry(1,1,1));
-  for(let col=0;col<30;col++)for(let band=0;band<2;band++){
+  for(let col=0;col<86;col++)for(let band=0;band<2;band++){
     const seed=Math.abs(Math.sin(y*41.13+col*13.79+band*7.31));
-    const x=-7.26+col*.5+(band?.10:0),z=(band? .245:-.245);
+    const x=-21.26+col*.5+(band?.10:0),z=(band? .245:-.245);
     const stone=new THREE.Mesh(cobbleGeo,cobbleMats[Math.floor(seed*cobbleMats.length)]);
     stone.position.set(x,(row.raised.get(Math.round(x))||0)+.012+seed*.008,z);stone.scale.set(.43,.042,.39);stone.rotation.y=(seed-.5)*.15;
     group.add(stone);
