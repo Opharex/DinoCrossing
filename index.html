@@ -517,58 +517,82 @@ function applyTechSkin(g,chrome=false){
 const skeletonBoneMat=new THREE.MeshLambertMaterial({color:0xe9dfc9,flatShading:true});
 const skeletonJointMat=new THREE.MeshLambertMaterial({color:0xb9a98c,flatShading:true});
 const skeletonSocketMat=new THREE.MeshBasicMaterial({color:0x121519});
-// Share one open rib-cage mesh for each original torso geometry. The mesh
-// replaces the opaque solid WITHOUT modifying the existing body transform.
-const skeletonRibCache=new WeakMap();
-function skeletonRibGeometry(original){
- let geometry=skeletonRibCache.get(original);
- if(geometry)return geometry;
+// Square-edged skeletal geometry fits WITHIN each original mesh's own bounds.
+// Cache by source geometry + style, preserving its parent, transform and rig.
+const skeletonVoxelCache=new WeakMap();
+function skeletonVoxelGeometry(original,style='ribs'){
+ let styles=skeletonVoxelCache.get(original);
+ if(styles?.has(style))return styles.get(style);
  if(!original.boundingBox)original.computeBoundingBox();
- const boxBounds=original.boundingBox,lo=boxBounds.min,hi=boxBounds.max;
- const cx=(lo.x+hi.x)*.5,cy=(lo.y+hi.y)*.5,cz=(lo.z+hi.z)*.5;
- const hx=(hi.x-lo.x)*.5,hy=(hi.y-lo.y)*.5,hz=(hi.z-lo.z)*.5;
- const vertices=[],indices=[],segments=6;
- const rod=(a,b,r)=>{
-  const delta=new THREE.Vector3().subVectors(b,a),length=delta.length();
-  if(length<.0001)return;
-  delta.multiplyScalar(1/length);
-  const helper=Math.abs(delta.y)<.85?new THREE.Vector3(0,1,0):new THREE.Vector3(1,0,0);
-  const u=new THREE.Vector3().crossVectors(delta,helper).normalize();
-  const v=new THREE.Vector3().crossVectors(delta,u).normalize();
-  const start=vertices.length/3;
-  for(const point of [a,b])for(let i=0;i<segments;i++){
-   const angle=i*Math.PI*2/segments;
-   const x=Math.cos(angle)*r,y=Math.sin(angle)*r;
-   vertices.push(point.x+u.x*x+v.x*y,point.y+u.y*x+v.y*y,point.z+u.z*x+v.z*y);
-  }
-  for(let i=0;i<segments;i++){
-   const j=(i+1)%segments,near=start+i,nearNext=start+j,far=start+segments+i,farNext=start+segments+j;
-   indices.push(near,far,nearNext,nearNext,far,farNext);
-  }
- };
- const p=(x,y,z)=>new THREE.Vector3(cx+hx*x,cy+hy*y,cz+hz*z);
- // Backbone and sternum reach through the original torso, leaving true open
- // gaps in the sides. Nine narrow ribs sit INSIDE the old solid body's bounds.
- const r=Math.min(hx,hy,hz)*.075;
- rod(p(0,.65,-.84),p(0,.65,.84),r*1.7);
- rod(p(0,-.64,-.70),p(0,-.64,.71),r*.90);
- for(let i=0;i<9;i++){
-  const z=-.73+i*.183,bulge=.84+.08*Math.sin(i/8*Math.PI);
-  for(const side of [-1,1]){
-   rod(p(0,.63,z),p(side*.68*bulge,.26,z),r);
-   rod(p(side*.68*bulge,.26,z),p(side*.95*bulge,-.24,z+.028),r*.92);
-   rod(p(side*.95*bulge,-.24,z+.028),p(side*.23,-.60,z+.058),r*.78);
-  }
+ const lo=original.boundingBox.min,hi=original.boundingBox.max;
+ const c=[(lo.x+hi.x)/2,(lo.y+hi.y)/2,(lo.z+hi.z)/2];
+ const h=[(hi.x-lo.x)/2,(hi.y-lo.y)/2,(hi.z-lo.z)/2];
+ const verts=[],indices=[];
+ // Individually shaded flat cuboid faces form solid rectangular bone beams.
+ function cube(x0,y0,z0,x1,y1,z1){
+  x0=Math.max(lo.x,x0);y0=Math.max(lo.y,y0);z0=Math.max(lo.z,z0);
+  x1=Math.min(hi.x,x1);y1=Math.min(hi.y,y1);z1=Math.min(hi.z,z1);
+  if(x1-x0<.00001||y1-y0<.00001||z1-z0<.00001)return;
+  const faces=[
+   [[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],
+   [[x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0]],
+   [[x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0]],
+   [[x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1]],
+   [[x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0]],
+   [[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]]
+  ];
+  for(const face of faces){const p=verts.length/3;for(const v of face)verts.push(...v);indices.push(p,p+1,p+2,p,p+2,p+3);}
  }
- // Distinct pelvic and shoulder crossbones maintain the anatomy.
- for(const z of [-.70,.67])rod(p(-.67,.20,z),p(.67,.20,z),r*1.34);
- geometry=new THREE.BufferGeometry();
- geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
- geometry.setIndex(indices);
- geometry.computeVertexNormals();
- geometry.computeBoundingSphere();
- skeletonRibCache.set(original,geometry);
- cachedGeometrySet.add(geometry); // Never dispose shared rib-cage geometry on Retry.
+ function part(x0,y0,z0,x1,y1,z1){cube(c[0]+h[0]*x0,c[1]+h[1]*y0,c[2]+h[2]*z0,c[0]+h[0]*x1,c[1]+h[1]*y1,c[2]+h[2]*z1)}
+ if(style==='ribs'){
+  // Six hefty squared U-ribs running inside the unchanged block torso.
+  // Each of the six openings is a real gap, not a painted-on stripe.
+  part(-.17,.65,-.97,.17,.88,.97); // backbone
+  part(-.14,-.76,-.89,.14,-.59,.89); // lower sternum
+  for(let i=0;i<6;i++){
+   const z=-.76+i*.304,dz=.10;
+   for(const side of [-1,1]){
+    const left=side<0?-.88:.13,right=side<0?-.13:.88;
+    part(left,.58,z-dz,right,.79,z+dz);
+    part(side<0?-.94:.75,-.52,z-dz,side<0?-.75:.94,.73,z+dz);
+    part(left,-.66,z-dz,right,-.45,z+dz);
+   }
+  }
+  for(const z of [-.82,.82])part(-.73,-.08,z-.06,.73,.16,z+.06);
+ }else if(style==='sail'||style==='frill'||style==='plate'){
+  // Original sails, frills and plates become open rectangular bone frameworks,
+  // retaining their exact species-specific scales and rotations.
+  part(-.91,-.93,-.84,-.69,.93,.84);
+  part(.69,-.93,-.84,.91,.93,.84);
+  part(-.91,.69,-.84,.91,.93,.84);
+  part(-.91,-.93,-.84,.91,-.69,.84);
+  part(-.22,-.84,-.14,.22,.84,.14);
+  if(style==='sail')part(-.72,-.10,-.14,.72,.08,.14);
+  if(style==='frill')part(-.72,-.10,-.76,.72,.11,.76);
+ }else if(style==='neck'||style==='crest'){
+  // Segmented original neck and crest: block vertebrae in the same outline.
+  part(-.29,-.95,-.28,.29,.95,.28);
+  for(let i=0;i<5;i++){let y=-.85+i*.42;part(-.79,y-.12,-.61,.79,y+.12,.61);}
+ }else if(style==='skull'){
+  // A boxy skull roof and jaw, with large open side eye recesses.
+  part(-.90,.62,-.89,.90,.93,.89);
+  part(-.90,-.93,-.89,.90,-.64,.89);
+  for(const side of [-1,1]){
+   part(side<0?-.93:.70,-.65,-.93,side<0?-.70:.93,.67,.93);
+   part(side<0?-.81:.46,-.27,.40,side<0?-.46:.81,-.09,.90);
+  }
+  part(-.74,-.14,-.94,.74,.23,-.68);
+ }else if(style==='armor'){
+  // Preserve the ankylosaur's original armor footprint, add ossified ridges.
+  part(-.90,.59,-.89,.90,.91,.89);
+  part(-.72,-.91,-.70,.72,.77,.70);
+  part(-.23,.22,-.91,.23,.88,.91);
+ }
+ const geometry=new THREE.BufferGeometry();
+ geometry.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
+ geometry.setIndex(indices);geometry.computeVertexNormals();geometry.computeBoundingSphere();
+ if(!styles){styles=new Map();skeletonVoxelCache.set(original,styles)}
+ styles.set(style,geometry);cachedGeometrySet.add(geometry);
  return geometry;
 }
 function applySkeletonSkin(g,base){
@@ -594,7 +618,7 @@ function applySkeletonSkin(g,base){
    o.material=shade<.26?skeletonJointMat:skeletonBoneMat;
   }
  });
- body.geometry=skeletonRibGeometry(body.geometry);
+ body.geometry=skeletonVoxelGeometry(body.geometry,'ribs');
  body.material=skeletonBoneMat;
  // Living T. Rex, Velociraptor and Spinosaurus have a solid belly inset
  // immediately after their torso. Hide it so the ribs remain see-through.
