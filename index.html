@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Chunky Block Ribs and Species-Specific Skeleton Accents">🦴 BLOCK BONES! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Animated Stampede Herds and Dust">🦖 THUNDERING HERDS! 💨</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -1284,12 +1284,12 @@ if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
       scout.scale.setScalar(.095+(i%3)*.012);
       scout.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;
       scout.position.set(i*.48-1.44,.045,(i%2?1:-1)*.19);
-      scout.userData.scout=i;warning.add(scout);
+      scout.userData.scout=i;stampedeRig(scout,i);warning.add(scout);
     }
   }
   for(const edge of [-7.7,7.7]){box(group,materials.stone,edge,.22,0,.26,.48,.82)}
   const wave=new THREE.Group();group.add(wave);wave.visible=false;
-  if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;animal.position.x=i*1.65-7;wave.add(animal)}}
+  if(type==='stampede'){for(let i=0;i<9;i++){let animal=obstacleDino(pick([2,3,4,5]),i);animal.scale.setScalar(.65+(i%3)*.08);animal.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;animal.position.x=i*1.65-7;animal.position.z=((i%3)-1)*.075;animal.userData.herdSeed=i;stampedeRig(animal,i);wave.add(animal)}}
 
   else {
   // A deformable flood volume with connected top and sides, not a sliding cube.
@@ -1304,6 +1304,10 @@ if(type==='stampede'||type==='lavasurge'||type==='flashflood'){
   for(let i=0;i<15;i++){const foam=box(wave,type==='lavasurge'?lavaSprayMat:liquidFoamMat,i*1.3-9,.41,(i%3-1)*.22,.62,.035,.12);foam.userData.foam=i}
 }
   row.special={kind:type,wave,warning,warnMat,dir:row.dir,phase:rand(0,1.1),period:7.5,warningLength:2.25,activeLength:1.05,played:-1};
+  if(type==='stampede'){
+   row.special.herdDust=stampedeDustPool(wave);
+   wave.userData.herdAnimals=wave.children.filter(m=>m.userData.herdRig);
+  }
 }
 if(y>2&&Math.random()<.34&&type!=='river'&&type!=='lava'&&type!=='tar'&&!row.special){
  const x=Math.floor(rand(-6,7));
@@ -1742,6 +1746,90 @@ function updateFloodVolume(mesh,row,worldCenter,time){
  }
  attr.needsUpdate=true;mesh.geometry.computeVertexNormals();
 }
+// Stampede-only visuals. Never alter sp.wave movement, specialProgress,
+// specialHit, or any collision-related coordinates.
+const herdDustGeo=cachedGeo('stampede:dust',()=>new THREE.BoxGeometry(1,1,1));
+const herdDustMat=new THREE.MeshLambertMaterial({color:0xb6a48b,transparent:true,opacity:.53,depthWrite:false});
+function stampedeRig(model,seed){
+ const parts=model.userData.walkParts||{};
+ const legs=parts.legs||model.userData.feet||[];
+ const head=parts.head||null,tail=parts.tail||null;
+ const rig={legs,head,tail,phase:seed*1.73,previousStep:-1,originalHead:head?.rotation?.x||0,originalTail:tail?.rotation?.x||0};
+ model.userData.herdRig=rig;
+ return rig;
+}
+function stampedePose(model,time,speed,seed,scout=false){
+ const rig=model.userData.herdRig||stampedeRig(model,seed);
+ const stride=time*(scout?15.5:10.5)*Math.max(.75,Math.min(1.35,speed/20))+rig.phase;
+ const lift=Math.pow(Math.abs(Math.sin(stride)),2);
+ for(let i=0;i<rig.legs.length;i++){
+  const leg=rig.legs[i],phase=stride+(i%2?Math.PI:0)+(i>1?Math.PI*.12:0);
+  leg.rotation.x=Math.sin(phase)*(scout?.45:.63);
+ }
+ if(rig.head)rig.head.rotation.x=rig.originalHead+Math.sin(stride*.5)*.065;
+ if(rig.tail)rig.tail.rotation.x=rig.originalTail-Math.sin(stride*.58)*.085;
+ model.rotation.z=Math.sin(stride*.5+seed)*.025;
+ return lift;
+}
+// One preallocated, bounded dust pool per visible stampede lane.
+function stampedeDustPool(wave){
+ const pool=[];
+ for(let i=0;i<20;i++){
+  const m=new THREE.Mesh(herdDustGeo,herdDustMat);
+  m.visible=false;m.castShadow=false;m.frustumCulled=false;
+  wave.add(m);pool.push({mesh:m,life:0,seed:i});
+ }
+ return {pool,next:0};
+}
+function stampedeDustEmit(sp,x,z,scale=.12){
+ const dust=sp.herdDust;if(!dust)return;
+ const p=dust.pool[dust.next++%dust.pool.length];
+ p.life=.40;p.mesh.visible=true;p.mesh.position.set(x,.11,z);
+ p.mesh.scale.set(scale,.07,scale);
+}
+function stampedeDustUpdate(sp,dt){
+ if(!sp.herdDust)return;
+ for(const p of sp.herdDust.pool){
+  if(p.life<=0)continue;
+  p.life=Math.max(0,p.life-dt);
+  p.mesh.visible=p.life>0;
+  if(!p.mesh.visible)continue;
+  p.mesh.position.y+=dt*.18;
+  p.mesh.scale.x+=dt*.28;p.mesh.scale.z+=dt*.28;
+ }
+}
+function stampedeVisuals(row,sp,dt,time,warning,active){
+ const near=Math.abs(row.y-(state==='menu'?3:py))<11;
+ if(!near){for(const m of sp.wave.children)if(m.userData.herdRig)m.userData.herdRig.previousStep=-1;return;}
+ const herd=sp.wave.userData.herdAnimals||[];
+ if(active){
+  for(let i=0;i<herd.length;i++){
+   const m=herd[i],seed=m.userData.herdSeed;
+   const lift=stampedePose(m,time,36/sp.activeLength,seed);
+   m.position.y=groundTileHeight(row,sp.wave.position.x+m.position.x)+.045+lift*.12;
+   const rig=m.userData.herdRig,step=Math.floor((time*10.5*Math.max(.75,Math.min(1.35,(36/sp.activeLength)/20))+rig.phase)/Math.PI);
+   if(step!==rig.previousStep){
+    rig.previousStep=step;
+    if(i%2===0)stampedeDustEmit(sp,m.position.x+(i%2?.15:-.15),m.position.z,.12+(i%3)*.035);
+   }
+  }
+  if(state==='playing'&&Math.abs(row.y-py)<=2&&time>(sp.nextHerdAudio||0)){
+   sp.nextHerdAudio=time+.31;
+   fx('herdStep',.25+Math.max(0,1-Math.abs(row.y-py)/3)*.16);
+   if(time>(sp.nextHerdRoar||0)){sp.nextHerdRoar=time+2.8;fx('roar',.12);}
+  }
+ }else if(warning){
+  // Warning scouts remain harmless; keep their existing timing and positions.
+  for(const scout of sp.warning.children)if(scout.visible&&scout.userData.herdRig){
+   const lift=stampedePose(scout,time,20/sp.warningLength,scout.userData.scout,true);
+   scout.position.y=groundTileHeight(row,scout.position.x)+.045+lift*.027;
+  }
+  if(state==='playing'&&Math.abs(row.y-py)<4&&time>(sp.nextWarningThud||0)){
+   sp.nextWarningThud=time+.75;fx('herdStep',.14);
+  }
+ }
+ stampedeDustUpdate(sp,dt);
+}
 function updateSpecial(r){const sp=r.special;if(!sp)return;const time=specialProgress(sp),warning=time<sp.warningLength,active=specialActive(sp),t=(time-sp.warningLength)/sp.activeLength;
 sp.warning.visible=warning||active;sp.wave.visible=active;
 if(state==='playing'&&warning&&Math.abs(py-r.y)<=2&&gameTime>(sp.nextAudioCue||0)){
@@ -1776,17 +1864,17 @@ if(state==='playing'&&warning&&Math.abs(py-r.y)<=2&&gameTime>(sp.nextAudioCue||0
     scout.visible=distance>=0&&x>=remainingStart;
     scout.position.x=sp.dir*x;
     scout.position.y=groundTileHeight(r,scout.position.x)+.045+Math.abs(Math.sin(gameTime*28+seed))*.025;
-    const parts=scout.userData.walkParts;
-    if(parts)parts.legs.forEach((leg,i)=>leg.rotation.x=Math.sin(gameTime*28+seed+i*Math.PI)*.55);
+    // Animated below by stampedeVisuals using its original rig.
   }
 }
-if(active){sp.wave.position.x=sp.dir>0?-18+36*t:18-36*t;sp.wave.scale.x=1;if(sp.played!==Math.floor((gameTime+sp.phase)/sp.period)){sp.played=Math.floor((gameTime+sp.phase)/sp.period);if(state==='playing'&&Math.abs(py-r.y)<5)specialSound(sp.kind)}if(sp.kind==='stampede')sp.wave.children.forEach((m,i)=>{m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.04+Math.abs(Math.sin(gameTime*19+i))*.11});
+if(active){sp.wave.position.x=sp.dir>0?-18+36*t:18-36*t;sp.wave.scale.x=1;if(sp.played!==Math.floor((gameTime+sp.phase)/sp.period)){sp.played=Math.floor((gameTime+sp.phase)/sp.period);if(state==='playing'&&Math.abs(py-r.y)<5)specialSound(sp.kind)}if(sp.kind==='stampede')stampedeVisuals(r,sp,1/60,gameTime,warning,active);
 
 if(sp.kind==='flashflood'||sp.kind==='lavasurge')sp.wave.children.forEach(m=>{
  if(m.userData.floodVolume){updateFloodVolume(m,r,sp.wave.position.x,gameTime);return;}
  m.position.y=groundTileHeight(r,sp.wave.position.x+m.position.x)+.41+liquidWave(sp.wave.position.x+m.position.x,m.position.z,gameTime,sp.dir,sp.kind==='lavasurge'?'lava':'river',r.y*.4)*1.1;
  m.scale.y=.035+.015*Math.sin(gameTime*9+(m.userData.foam||0));
 });}
+if(sp.kind==='stampede'&&!active)stampedeVisuals(r,sp,1/60,gameTime,warning,active);
 }
 // Death overlays belong to one run only; Retry invalidates callbacks from older runs.
 let runGeneration=0,deathRevealTimer=null,deathFlashTimer=null;
