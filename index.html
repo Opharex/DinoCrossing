@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Animated River Drowning with Splash Bubbles and Delayed Death Screen">🌊 DROWNING ANIMATION! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Dinosaur Tumble Pterosaur Snatch and Flash Flood Death Animations">🦖 ANIMATED DEATHS! 🌊</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -2159,7 +2159,7 @@ function start(){
  // Ignore extra Retry taps; all resets must complete before another run begins.
  if(state==='playing'||state==='starting')return;
  const oldState=state;
- state='starting';++runGeneration;cancelDeathTimers();cancelDrowningDeath();
+ state='starting';++runGeneration;cancelDeathTimers();cancelDrowningDeath();cancelImpactDeath();
  $('retry').disabled=true;
  $('flash').style.opacity='0';
  $('score').classList.remove('pop');
@@ -2210,7 +2210,7 @@ function menu(){
   $('menuBest').textContent=best;$('menuAmber').textContent=bank;
   show('menu');return;
  }
- ++runGeneration;cancelDeathTimers();cancelDrowningDeath();$('flash').style.opacity='0';
+ ++runGeneration;cancelDeathTimers();cancelDrowningDeath();cancelImpactDeath();$('flash').style.opacity='0';
  $('retry').disabled=false;queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
@@ -2301,11 +2301,94 @@ function updateDrowningDeath(dt){
   finishDeath(reason,detail,true);
  }
 }
+// Batch two: lightweight, source-specific collision, bird and flashflood
+// animations. Each reuses the fitted character and existing row objects.
+const IMPACT_DEATH_DURATIONS={collision:.83,bird:1.10,flood:.96};
+let impactDeath=null;
+function cancelImpactDeath(){
+ impactDeath=null; // No newly constructed scene meshes or materials to dispose.
+}
+function beginImpactDeath(kind,reason,detail){
+ const row=rows.get(py);
+ const moving=kind==='collision'?hitMoving(row,px):null;
+ const bird=kind==='bird'?row?.moving?.find(m=>m.bird):null;
+ const direction=kind==='collision'?(Math.sign(moving?.speed*row.dir)||1)
+  :kind==='flood'?(row?.special?.dir||1):1;
+ impactDeath={kind,reason,detail,elapsed:0,run:runGeneration,
+  duration:IMPACT_DEATH_DURATIONS[kind],
+  x:player.position.x,y:player.position.y,z:player.position.z,
+  turn:avatar.rotation.y,roll:avatar.rotation.z,dir:direction,
+  bird:bird?.mesh||null,
+  birdX:bird?.mesh.position.x||0,
+  birdY:bird?.mesh.position.y||0};
+ state='dying';queue.length=0;hop=null;
+ if(kind==='collision'){
+  shake=Math.max(shake,.16);
+  burst(player.position.x,.18,player.position.z,0,7);fx('crash',.8);
+ }else if(kind==='bird'){
+  fx('bird',.80);fx('wing',.68);
+ }else{
+  burst(player.position.x,.30,player.position.z,2,10);
+  fx('waterfallSplash',.65);fx('flood',.40);
+ }
+}
+function updateImpactDeath(dt){
+ const d=impactDeath;
+ if(!d||state!=='dying'||!player||!avatar)return;
+ if(d.run!==runGeneration){cancelImpactDeath();return;}
+ d.elapsed=Math.min(d.duration,d.elapsed+dt);
+ const a=d.elapsed/d.duration,ease=a*a*(3-2*a);
+ if(d.kind==='collision'){
+  // Hit, spin sideways, land on its back, and finish in a tiny bounce.
+  const travel=1.15*ease;
+  player.position.set(d.x+d.dir*travel,
+   d.y+Math.sin(Math.PI*a)*.55-Math.max(0,(a-.62)/.38)*.12,d.z);
+  avatar.rotation.z=d.roll+d.dir*(Math.PI*.48)*Math.min(1,a/.70);
+  avatar.rotation.x=Math.sin(a*Math.PI*2)*.16*(1-a);
+  const flattened=a>.65?.10*Math.sin(Math.PI*Math.min(1,(a-.65)/.35)):0;
+  avatar.scale.set(1+flattened,1-flattened,1+flattened);
+ }else if(d.kind==='bird'){
+  // Reuse the actual attacking pterosaur, not a duplicate high-poly actor.
+  // It visibly dives to collect the player, then rises carrying it upward.
+  const dive=Math.min(1,a/.23),lift=Math.max(0,(a-.23)/.77);
+  const arc=lift*lift*(3-2*lift);
+  const birdX=d.x+(d.birdX-d.x)*(1-dive)*.5+arc*.40;
+  const birdY=d.birdY+(d.y+1.05-d.birdY)*dive+arc*3.55;
+  if(d.bird){
+   d.bird.position.set(birdX,birdY,d.z);
+   d.bird.rotation.z=Math.sin(d.elapsed*12)*.09;
+   const wings=d.bird.userData.wings;
+   if(wings)for(let i=0;i<wings.length;i++)wings[i].rotation.z=
+    (i===0?1:-1)*Math.sin(d.elapsed*23)*.42;
+  }
+  player.position.set(d.x+arc*.40,d.y+arc*3.55,d.z);
+  avatar.rotation.z=d.roll+Math.sin(d.elapsed*14)*.16*arc;
+  avatar.rotation.x=Math.sin(d.elapsed*18)*.11*arc;
+  avatar.rotation.y=d.turn+Math.sin(d.elapsed*8)*.14*arc;
+ }else{
+  // Ride the flashflood current, roll, then slip beneath its surface.
+  const travel=4.7*ease;
+  player.position.set(d.x+d.dir*travel,
+   d.y+Math.sin(Math.PI*Math.min(1,a*1.3))*.50-Math.max(0,(a-.55)/.45)*1.05,
+   d.z+Math.sin(a*Math.PI*2)*.12);
+  avatar.rotation.z=d.roll+d.dir*Math.PI*1.45*ease;
+  avatar.rotation.x=Math.sin(d.elapsed*19)*.18*(1-a);
+  if(a>.78)avatar.scale.setScalar(Math.max(.30,1-(a-.78)*1.6));
+ }
+ if(a>=1){
+  const reason=d.reason,detail=d.detail;
+  cancelImpactDeath();
+  finishDeath(reason,detail,true);
+ }
+}
 function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
  if(state!=='playing')return;
  // Preserve the normal first-tile grace period.
  if(py===0&&highest===0&&gameTime<.6)return;
  if(reason==='Fell into water!'){beginDrowningDeath(reason,detail);return;}
+ if(reason==='Hit by a dinosaur!'){beginImpactDeath('collision',reason,detail);return;}
+ if(reason==='Pterosaur strike!'){beginImpactDeath('bird',reason,detail);return;}
+ if(reason==='Swept away by a flash flood!'){beginImpactDeath('flood',reason,detail);return;}
  finishDeath(reason,detail,false);
 }
 function finishDeath(reason,detail,drowned=false){
@@ -2316,8 +2399,8 @@ function finishDeath(reason,detail,drowned=false){
  $('deathDetail').textContent=detail;
  cancelDeathTimers();
  if(drowned){
-  // Impact effects played at splash time; keep the screen clear until
-  // the dinosaur has disappeared below the water.
+  // Animated deaths have already completed their impact effects and motion.
+  // Do not obscure the character before the finishing frame.
   fx('death',.50);$('flash').style.opacity='0';
  }else{
   shake=.22;
@@ -2332,7 +2415,7 @@ function finishDeath(reason,detail,drowned=false){
  $('finalBest').textContent=best;
  $('earned').textContent=earned;
  if(drowned){
-  // The complete 1.15s animation has already finished.
+  // The selected death animation has finished.
   if(runGeneration===deathRun)show('dead');
  }else{
   deathRevealTimer=setTimeout(()=>{
@@ -2511,7 +2594,7 @@ function update(dt,t){
  const lightScore=state==='menu'?0:lightingMode==='clock'?lightingClockProgress:highest;
  updateDaylight(lightScore,dt);
  updateSunBlobs();
- if(state==='dying')updateDrowningDeath(dt);
+ if(state==='dying'){updateDrowningDeath(dt);updateImpactDeath(dt);}
  if(state==='playing'||state==='menu'){
  gameTime+=dt;
  updateLiquidMarble(gameTime);
