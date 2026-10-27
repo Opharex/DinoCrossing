@@ -726,7 +726,7 @@ let poolRowsRemaining=0,poolType=null,poolDirection=1;
 let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;
 // Cinematic death camera is entirely transient: never persisted or applied
 // to the user's cameraZoom preference. Reset independently on retry/menu.
-let deathCameraBlend=0,deathCameraZoom=1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
+let deathCameraBlend=0,deathCameraZoom=1;const CAMERA_CREEP_SPEED=.28;let lastCreepRow=-1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
   registerGroundShadow(g,x,y,kind==='rock'?.65:1.2,kind==='rock'?.44:.65);
@@ -1457,10 +1457,10 @@ function ensureRows(){
  if(maxGenerated<0){
   for(let y=-BACK_TERRAIN_ROWS;y<0;y++)makeRow(y);
  }
- for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23);y++)makeRow(y);
+ for(let y=Math.max(0,maxGenerated+1);y<=Math.max(25,highest+23,Math.ceil(camY)+23);y++)makeRow(y);
  // Keep the existing one-row-per-step retirement rate, including the
  // decorative starting rows, as the world advances.
- for(const [y,r] of rows)if(y<Math.max(-BACK_TERRAIN_ROWS,highest-BACK_TERRAIN_ROWS)){disposeWorldRow(r);world.remove(r.group);rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
+ for(const [y,r] of rows)if(y<Math.max(-BACK_TERRAIN_ROWS,Math.floor(Math.max(highest,camY))-BACK_TERRAIN_ROWS)){disposeWorldRow(r);world.remove(r.group);rows.delete(y);sunShadowGroups.delete(y)}liquidMeshes.splice(0,liquidMeshes.length,...liquidMeshes.filter(info=>info.mesh.parent&&info.mesh.parent.parent&&rows.has(-info.mesh.parent.position.z)))}function updateHud(){$('score').textContent=highest;$('amber').textContent='🟠 '+bank}// Layered game-audio engine: category buses, compressor, and cached noise samples.
 // Procedurally built in the browser, so all sounds work offline without licensed assets.
 const mixer={master:null,fx:null,music:null,ambient:null,noise:null,loops:null,lastStep:0,lastAmbience:0};
 function mixInit(){
@@ -2175,7 +2175,7 @@ function start(){
  // Fresh world on Retry, rather than continuing the old hazard phase.
  if(oldState!=='menu'||!rows.has(0))clearGeneratedWorld();
  gameTime=0;px=0;py=0;highest=0;earned=0;
- lightingClockProgress=0;camY=0;camSmooth=0;camSide=0;shake=0;
+ lightingClockProgress=0;camY=0;camSmooth=0;camSide=0;lastCreepRow=-1;shake=0;
  if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}
  player=new THREE.Group();avatar=dino(chosen,1);
  // Keep original model fitting and collision footprint.
@@ -2219,7 +2219,7 @@ function menu(){
  $('retry').disabled=false;queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
- for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}// First death-animation batch: ordinary river drowning ONLY.
+ for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;lastCreepRow=-1;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}// First death-animation batch: ordinary river drowning ONLY.
 // Other hazard deaths retain their original immediate game-over behavior.
 const DROWNING_DURATION=1.15;
 let drowningDeath=null,drowningVisuals=null;
@@ -2749,6 +2749,10 @@ function checkTile(){
   }
  }
  for(let c of r.coins)if(!c.taken&&Math.abs(c.x-px)<.48){c.taken=true;r.group.remove(c.mesh);bank+=c.value||1;earned+=c.value||1;updateHud();persist();burst(px,.44,-py,1,c.value===10?20:c.value===5?16:8);fx('amberPickup',c.kind==='spider'?1.2:c.kind==='mosquito'?1.05:1);toast(c.value===10?'🕷️ SPIDER AMBER +10':c.value===5?'🦟 MOSQUITO AMBER +5':'✦ AMBER +1')}if(r.type==='river'||r.type==='lava'){let p=support(r,px);if(!p){die(r.type==='lava'?'Fell into lava!':'Fell into water!', 'Land near the center of a moving platform.');return}landOnLog(r,p,px)}if(specialHit(r)){checkSpecial();return}if(hitMoving(r,px)){die('Hit by a dinosaur!','Watch the migrating herd before crossing.');return}if(birdDanger(r,px)){die('Pterosaur strike!','Watch for the swooping shadow.');return}if(tarHit(r,px)){die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');return;}}
+const dangerShadeMat=new THREE.MeshBasicMaterial({color:0x160f25,transparent:true,opacity:.35,depthWrite:false,side:THREE.DoubleSide});
+const dangerShadeGeo=new THREE.PlaneGeometry(24,1);
+const dangerShades=Array.from({length:8},()=>{const m=new THREE.Mesh(dangerShadeGeo,dangerShadeMat);m.rotation.x=-Math.PI/2;m.visible=false;scene.add(m);return m;});
+function updateDangerShades(){const limit=camY-7,first=Math.floor(limit)-6;for(let i=0;i<dangerShades.length;i++){const y=first+i,m=dangerShades[i];m.visible=state==='playing'&&rows.has(y)&&y<=limit+1;if(m.visible)m.position.set(0,.065,-y);}}
 function update(dt,t){
  // Original floating gems animate near the camera, just as before the amber redesign.
  if(state==='playing'||state==='menu'){
@@ -2766,6 +2770,7 @@ function update(dt,t){
    }
   }
  }
+ updateDangerShades();
  // Clock mode runs independently of movement/score. Pause, death and menus
  // freeze its timer; only actual gameplay advances the day.
  if(lightingMode==='clock'&&state==='playing')lightingClockProgress+=dt*(120/180);
@@ -2833,7 +2838,7 @@ if(state==='playing'||state==='menu'){
    m.mesh.position.x=m.x;
   }
  }
-}if(state==='playing'){if(!hop&&queue.length)doMove(...queue.shift());if(hop){
+}if(state==='playing'){camY=Math.max(camY+CAMERA_CREEP_SPEED*dt,highest-2);const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
  if(hop.amberBounce){
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
@@ -2866,7 +2871,7 @@ if(state==='playing'||state==='menu'){
   }
  }
  if(hop.targetPlatform)hop.toX=platformTileCenter(hop.targetPlatform,hop.targetIndex);
- let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){const visibleRowCenter=state==='menu'?3:camSmooth+3;
+ let a=hop.t,move= a<.16? .13*(a/.16)**1.4 : .13+.87*((a-.16)/.84),targetRow=rows.get(hop.toY),targetLog=(targetRow?.type==='river'||targetRow?.type==='lava')?hop.targetPlatform:null,targetHeight=targetLog?logSurfaceHeight(targetRow,targetLog,hop.toX):groundTileHeight(targetRow,hop.toX),height=THREE.MathUtils.lerp(hop.fromHeight||0,targetHeight,move)+Math.sin(Math.PI*move)*.46;player.rotation.z=THREE.MathUtils.lerp(hop.fromRoll||0,targetLog?targetLog.mesh.rotation.z:0,move);player.position.set(THREE.MathUtils.lerp(hop.fromX,hop.toX,move),height,-THREE.MathUtils.lerp(hop.fromY,hop.toY,move));avatar.rotation.y=hop.turnFrom+Math.atan2(Math.sin(hop.turnTo-hop.turnFrom),Math.cos(hop.turnTo-hop.turnFrom))*Math.min(1,a*5);avatar.scale.y=a<.16?1-.14*Math.sin(a/.16*Math.PI):1+.07*Math.sin(Math.PI*move)-.12*Math.pow(Math.max(0,a-.88)/.12,2);avatar.scale.x=avatar.scale.z=1+(1-avatar.scale.y)*.27;if(a===1){px=hop.toX;hop=null;avatar.scale.y=.9;avatar.scale.x=avatar.scale.z=1.04;burst(px,.08,-py,rows.get(py)?.type==='tar'?0:0,3);if(py>highest){highest=py;ensureRows();updateHud();$('score').classList.add('pop');setTimeout(()=>$('score').classList.remove('pop'),145)}checkTile();if(state==='playing'){const floor=rows.get(py);if(floor&&floor.type!=='river'&&floor.type!=='lava'&&!tarHit(floor,px)){fx((floor.type==='stampede'||floor.type==='lavasurge'||floor.type==='flashflood')?'cobble':floor.type==='path'||floor.type==='tar'?'dirt':groundTileHeight(floor,px)>.01?'raised':'grass',.78)}}}}}else{player.position.set(px,groundTileHeight(rows.get(py),px),-py);player.rotation.z=0;avatar.scale.y=THREE.MathUtils.damp(avatar.scale.y,1,12,dt);avatar.scale.x=THREE.MathUtils.damp(avatar.scale.x,1,12,dt);avatar.scale.z=THREE.MathUtils.damp(avatar.scale.z,1,12,dt);let r=rows.get(py);if(r&&(r.type==='river'||r.type==='lava')){let p=support(r,px);if(p){px+=r.dir*p.speed*dt;player.position.x=px;player.position.y=logSurfaceHeight(r,p,px);player.rotation.z=p.mesh.rotation.z;if(px<LEFT-.7||px>RIGHT+.7)die('Carried off the edge!','Hop off the moving platform before it leaves the world.')}else die(r.type==='lava'?'Fell into lava!':'Fell into water!','Your dinosaur was not supported by a platform.')}if(r&&specialHit(r))checkSpecial();if(r&&hitMoving(r,px))die('Hit by a dinosaur!','Watch the migrating herd before crossing.');if(r&&birdDanger(r,px))die('Pterosaur strike!','Watch for the swooping shadow.');if(r&&tarHit(r,px))die('Sank into tar!','Avoid the black tar pits. They are deadly on contact.');if(false&&py<highest-7)die('Too far behind!','Keep hopping forward to stay ahead of the camera.')}camY=Math.max(camY,highest-2);if(py<camY-7)die('Camera caught up!','Move forward before the world scrolls past you.')}for(let r of rows.values()){const visibleRowCenter=state==='menu'?3:camSmooth+3;
  r.group.visible=r.y>=visibleRowCenter-23&&r.y<visibleRowCenter+17;if(!r.group.visible)continue;if(r.special&&!(state==='dying'&&((impactDeath?.kind==='flood'&&r===impactDeath.row)||(extraDeath?.kind==='stampede'&&r===extraDeath.row))))updateSpecial(r);// Cache only animated scenery instead of scanning every child of every
  // visible row on each frame. Refresh if the row acquires new children.
  if(!r.cosmeticChildren||r.cosmeticChildCount!==r.group.children.length){
@@ -2907,7 +2912,7 @@ if(state==='playing'){
  // before the view starts chasing it. Movement can temporarily outrun camera.
  // Desktop retains the original fixed center at <=100% zoom.
  const floodCarry=state==='dying'&&impactDeath?.kind==='flood';
- const horizontalFollow=!floodCarry&&(state==='playing'||state==='dying')&&player&&(phoneWideView||cameraZoom>100||deathCameraBlend>.001);
+ const horizontalFollow=(state==='playing'||state==='dying')&&player&&(phoneWideView||cameraZoom>100||deathCameraBlend>.001);
  if(horizontalFollow){
   const halfView=(camera.right-camera.left)/(2*camera.zoom);
   const deadZone=Math.min(1.55,Math.max(.60,halfView*.22));
@@ -2925,9 +2930,8 @@ if(state==='playing'){
   if(Math.abs(offset)>maxOffset)
    camSide=player.position.x-Math.sign(offset)*maxOffset;
   camSide=THREE.MathUtils.clamp(camSide,-7,7);
- }else if(!floodCarry)camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
- const side=floodCarry?impactDeath.floodCameraSide:
-  THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
+ }else camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
+ const side=THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
  // Keep the pterosaur and captive framed together during their ascent.
  const birdLift=impactDeath?.kind==='bird'&&state==='dying';
  const focusY=player?THREE.MathUtils.clamp(player.position.y+(birdLift?.85:.48),-.30,birdLift?7:3.8)*deathCameraBlend*(birdLift?1:.70):0;
