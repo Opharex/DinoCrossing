@@ -1971,6 +1971,10 @@ function createBreachDam(row){
  ]);
  const gate=new THREE.InstancedMesh(cubeGeo,m.gate,8);
  gate.castShadow=false;gate.frustumCulled=false;root.add(gate);
+ // A second tiny rubble pool makes the retaining wall visibly crumble.
+ const rubble=new THREE.InstancedMesh(cubeGeo,m.bank,10);
+ rubble.castShadow=false;rubble.frustumCulled=false;rubble.visible=false;
+ root.add(rubble);
  const stress=breachDamBatch(root,m.glint,[
   [front*.222,.47,-.17,.018,.43,.022],
   [front*.223,.54,.15,.018,.29,.020],
@@ -1988,7 +1992,7 @@ function createBreachDam(row){
  ]);
  const cloud=new THREE.InstancedMesh(cubeGeo,m.cloud,18);
  cloud.castShadow=false;cloud.frustumCulled=false;cloud.renderOrder=6;root.add(cloud);
- const dam={root,back,front,m,pool,ripples,gate,stress,leaks,pour,spray,cloud,
+ const dam={root,back,front,m,pool,ripples,gate,rubble,stress,leaks,pour,spray,cloud,
   dummy:new THREE.Object3D(),lastBreachCycle:-1};
  updateBreachDam(dam,row,0,2.25,1.05,7.5,false);
  return dam;
@@ -2015,6 +2019,20 @@ function updateBreachDam(d,row,t,warningLength,activeLength,period,canSound=true
   dmy.updateMatrix();d.gate.setMatrixAt(i,dmy.matrix);
  }
  d.gate.instanceMatrix.needsUpdate=true;
+ // Ten stable pooled chips tumble down and outward. Nothing becomes a collider.
+ d.rubble.visible=broken;
+ if(broken){
+  for(let i=0;i<10;i++){
+   const seed=Math.abs(Math.sin(row.y*8.17+i*5.81));
+   dmy.position.set(front*(.10+tumble*(.35+seed*.46)),
+    Math.max(.075,.74+seed*.17-tumble*(.65+seed*.19)),
+    (i%5-2)*.17+tumble*(seed-.5)*.35);
+   dmy.rotation.set(tumble*seed*2.4,tumble*(1-seed)*2.7,tumble*seed*1.8);
+   dmy.scale.set(.09+seed*.10,.11+seed*.11,.10+seed*.10);
+   dmy.updateMatrix();d.rubble.setMatrixAt(i,dmy.matrix);
+  }
+  d.rubble.instanceMatrix.needsUpdate=true;
+ }
  d.stress.visible=warning&&warningStrength>.16;
  // Three increasingly lively animated seep channels as pressure rises.
  d.leaks.visible=warning;
