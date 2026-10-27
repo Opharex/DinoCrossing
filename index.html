@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Lava Fall Stampede and Off-World Death Animations">🌋 MORE DEATH ANIMATIONS! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Creeping Camera Crumbling World Dino Knockout and Flood Follow">🌑 CRUMBLING WORLD! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -2370,25 +2370,18 @@ function updateImpactDeath(dt){
  d.elapsed=Math.min(d.duration,d.elapsed+dt);
  const a=d.elapsed/d.duration,ease=a*a*(3-2*a);
  if(d.kind==='collision'){
-  // Hit, spin sideways, land on its back, and finish in a tiny bounce.
-  const travel=1.15*ease,spin=Math.min(1,a/.78),tumble=spin*spin*(3-2*spin);
-  const floor=groundTileHeight(d.row,d.x);
-  // One strong tumble. Root rises as the head rotates toward the floor,
-  // then the character finishes inverted with feet pointing upward.
-  player.position.set(d.x+d.dir*travel,
-   floor+Math.sin(Math.PI*Math.min(1,a/.78))*.65+d.height*.95*Math.max(0,(a-.56)/.44),
-   d.z);
-  avatar.rotation.z=d.roll+d.dir*Math.PI*tumble;
-  avatar.rotation.x=Math.sin(a*Math.PI*2)*.13*(1-a);
-  const kick=Math.max(0,1-a*1.4);
-  for(let i=0;i<d.legs.length;i++){
-   const leg=d.legs[i];leg.part.rotation.x=leg.start+Math.sin(d.elapsed*24+i*Math.PI)*.42*kick;
+  // Launch into the air, complete one flip, land, poof and despawn.
+  const landing=.82,flight=Math.min(1,a/landing),floor=groundTileHeight(d.row,d.x);
+  player.position.set(d.x+d.dir*1.65*ease,floor+Math.sin(Math.PI*flight)*1.8,d.z);
+  avatar.rotation.z=d.roll+d.dir*Math.PI*2*flight;
+  avatar.rotation.x=Math.sin(a*Math.PI*2)*.08*(1-a);
+  for(let k=0;k<d.legs.length;k++){
+   const leg=d.legs[k];leg.part.rotation.x=leg.start+Math.sin(d.elapsed*24+k*Math.PI)*.42*(1-a);
   }
-  if(!d.landed&&a>=.78){
-   d.landed=true;burst(player.position.x,floor+.11,d.z,0,7);fx('dirt',.50);
+  if(!d.landed&&a>=landing){
+   d.landed=true;burst(player.position.x,floor+.20,d.z,0,quality==='low'?3:12);
+   fx('dirt',.65);avatar.visible=false;
   }
-  const flattened=a>.78?.09*Math.sin(Math.PI*Math.min(1,(a-.78)/.22)):0;
-  avatar.scale.set(1+flattened,1-flattened,1+flattened);
  }else if(d.kind==='bird'){
   // One continuous swoop from the actual bird's CURRENT location.
   // Approach from its original x/y/z, meet the dinosaur at grab time,
@@ -2467,7 +2460,7 @@ function updateImpactDeath(dt){
 // Lightweight death batch: lava sinking, herd trampling and off-world falls.
 const EXTRA_DEATH_DURATIONS={lava:.94,stampede:.83,edge:.84,behind:.80};
 let extraDeath=null;
-function cancelExtraDeath(){extraDeath=null;}
+function cancelExtraDeath(){if(extraDeath?.crumbleRows)for(const p of extraDeath.crumbleRows){p.row.group.position.y=p.y;p.row.group.rotation.x=p.rx;p.row.group.rotation.z=p.rz;}extraDeath=null;}
 function beginExtraDeath(kind,reason,detail){
  const row=rows.get(py);
  extraDeath={kind,reason,detail,run:runGeneration,elapsed:0,
@@ -2479,6 +2472,12 @@ function beginExtraDeath(kind,reason,detail){
   roll:avatar.rotation.z,pitch:avatar.rotation.x,
   waveX:kind==='stampede'?row?.special?.wave.position.x:0,
   squashed:false,particles:false};
+ if(kind==='behind'){
+  const back=Math.max(-BACK_TERRAIN_ROWS,Math.floor(camY)-15);
+  extraDeath.crumbleRows=[...rows.values()].filter(r=>r.y>=back&&r.y<=py)
+   .sort((a,b)=>a.y-b.y)
+   .map(r=>({row:r,y:r.group.position.y,rx:r.group.rotation.x,rz:r.group.rotation.z}));
+ }
  state='dying';queue.length=0;hop=null;
  if(kind==='lava'){
   burst(player.position.x,LIQUID_LANE_Y+.10,player.position.z,3,9);fx('lavaDeath',.75);
@@ -2539,20 +2538,29 @@ function updateExtraDeath(dt){
    const leg=d.legs[i];leg.part.rotation.x=leg.angle+Math.sin(d.elapsed*25+i*Math.PI)*.50*(1-a);
   }
  }else{
-  // Too far behind / camera caught up: panic, stumble, then drop away.
-  const stumble=Math.max(0,(a-.25)/.75);
-  player.position.set(d.x+Math.sin(d.elapsed*24)*.12*(1-a),
-   d.y+Math.sin(Math.PI*Math.min(1,a/.46))*.18-2.5*stumble*stumble,
-   d.z+1.35*ease);
-  avatar.rotation.x=d.pitch+Math.PI*.65*ease;
-  avatar.rotation.z=d.roll+Math.sin(d.elapsed*18)*.20*(1-a);
+  // Rear terrain crumbles sequentially, finishing with the player's tile.
+  const parts=d.crumbleRows||[],count=parts.length;
+  let tileDrop=0;
+  for(let k=0;k<count;k++){
+   const p=parts[k],onset=.06+k/Math.max(1,count)*.50;
+   const t=Math.max(0,Math.min(1,(a-onset)/.44));
+   const drop=t*t*4.8;
+   p.row.group.position.y=p.y-drop;
+   p.row.group.rotation.x=p.rx+Math.sin(t*Math.PI)*.11;
+   p.row.group.rotation.z=p.rz+Math.sin(t*Math.PI)*.10*(k%2?1:-1);
+   if(p.row.y===py)tileDrop=drop;
+  }
+  player.position.set(d.x+Math.sin(d.elapsed*15)*.07*(1-a),d.y-tileDrop,d.z);
+  avatar.rotation.x=d.pitch+Math.sin(a*Math.PI)*.14;
+  avatar.rotation.z=d.roll+Math.sin(d.elapsed*18)*.10*(1-a);
   for(let i=0;i<d.legs.length;i++){
    const leg=d.legs[i];leg.part.rotation.x=leg.angle+Math.sin(d.elapsed*29+i*Math.PI)*.58*(1-a);
   }
  }
  if(a>=1){
   const reason=d.reason,detail=d.detail;
-  cancelExtraDeath();finishDeath(reason,detail,true);
+  if(d.kind==='behind')extraDeath=null;else cancelExtraDeath();
+  finishDeath(reason,detail,true);
  }
 }
 function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
