@@ -516,6 +516,44 @@ function applyTechSkin(g,chrome=false){
 const skeletonBoneMat=new THREE.MeshLambertMaterial({color:0xe5dcc4,flatShading:true});
 const skeletonJointMat=new THREE.MeshLambertMaterial({color:0xc9b995,flatShading:true});
 const skeletonSocketMat=new THREE.MeshBasicMaterial({color:0x17191b});
+// Bakes many static skeletal pieces into one mesh per shared material.
+// The hollow gaps remain real geometry, while mobile renderers draw roughly
+// three objects instead of 85-118 separate bones per dinosaur.
+function batchSkeletonGeometry(g){
+ g.updateMatrixWorld(true);
+ const batches=new Map(),v=new THREE.Vector3(),n=new THREE.Vector3(),nm=new THREE.Matrix3();
+ for(const child of [...g.children]){
+  if(!child.isMesh||!child.geometry||!child.material)continue;
+  child.updateMatrix();
+  const geometry=child.geometry,positions=geometry.getAttribute('position'),normals=geometry.getAttribute('normal');
+  if(!positions)continue;
+  let data=batches.get(child.material);
+  if(!data){data={verts:[],normals:[],indices:[]};batches.set(child.material,data);}
+  const offset=data.verts.length/3;
+  nm.getNormalMatrix(child.matrix);
+  for(let i=0;i<positions.count;i++){
+   v.fromBufferAttribute(positions,i).applyMatrix4(child.matrix);
+   data.verts.push(v.x,v.y,v.z);
+   if(normals){n.fromBufferAttribute(normals,i).applyMatrix3(nm).normalize();data.normals.push(n.x,n.y,n.z);}
+   else data.normals.push(0,1,0);
+  }
+  const index=geometry.getIndex();
+  if(index)for(let i=0;i<index.count;i++)data.indices.push(offset+index.getX(i));
+  else for(let i=0;i<positions.count;i++)data.indices.push(offset+i);
+ }
+ g.clear();
+ for(const [material,data] of batches){
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(data.verts,3));
+  geometry.setAttribute('normal',new THREE.Float32BufferAttribute(data.normals,3));
+  geometry.setIndex(data.indices);
+  geometry.computeBoundingSphere();
+  geometry.userData.skeletonOwned=true;
+  const obj=new THREE.Mesh(geometry,material);
+  obj.castShadow=true;
+  g.add(obj);
+ }
+}
 function skeletonDino(speciesId=0,size=1){
  const g=new THREE.Group();
  const isRaptor=speciesId===1,isBrachio=speciesId===7,isPtera=speciesId===8;
@@ -639,6 +677,8 @@ function skeletonDino(speciesId=0,size=1){
  }else if(isRaptor){
   for(const side of [-1,1])horn(g,bone,side*.34,.16,-.09,.075,.22,-.2,side*.3);
  }
+ // Batch static bones for Android before applying the regular model scale.
+ batchSkeletonGeometry(g);
  // Match ordinary player skeleton skin scaling; no special collision behavior.
  g.userData.feet=[];g.userData.eyeParts=[];
  g.scale.setScalar(size);
@@ -1784,7 +1824,7 @@ function start(){
  if(oldState!=='menu'||!rows.has(0))clearGeneratedWorld();
  gameTime=0;px=0;py=0;highest=0;earned=0;
  lightingClockProgress=0;camY=0;camSmooth=0;camSide=0;shake=0;
- if(player)scene.remove(player);
+ if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}
  player=new THREE.Group();avatar=dino(chosen,1);
  // Keep original model fitting and collision footprint.
  const model=avatar;
@@ -1822,7 +1862,7 @@ function menu(){
  $('retry').disabled=false;queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
- for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player)scene.remove(player);if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
+ for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
  if(state!=='playing')return;
  // The first tile is guaranteed safe. Ignore a stale collision during a restart frame.
  if(py===0&&highest===0&&gameTime<.6)return;
@@ -2208,9 +2248,12 @@ function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas
 // progressive renderer memory growth when browsing skins or preloading 27 portraits.
 function disposeDinoPreviewMaterials(model){
  if(!model)return;
- const disposed=new Set();
+ const disposed=new Set(),geometries=new Set();
  model.traverse(o=>{
   if(!o.isMesh||!o.material)return;
+  if(o.geometry?.userData?.skeletonOwned&&!geometries.has(o.geometry)){
+   geometries.add(o.geometry);o.geometry.dispose();
+  }
   const mats=Array.isArray(o.material)?o.material:[o.material];
   for(const mat of mats)if(mat?.userData?.dinoOwned&&!disposed.has(mat)){
    disposed.add(mat);mat.dispose();
