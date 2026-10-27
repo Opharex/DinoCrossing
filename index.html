@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Cinematic Camera Zoom During Death Animations">🎥 CINEMATIC DEATH CAM! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Pterosaur Swoops from Its Actual Position and Carries the Dinosaur Away">🦅 PTEROSAUR GRAB! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -2308,7 +2308,7 @@ function updateDrowningDeath(dt){
 }
 // Batch two: lightweight, source-specific collision, bird and flashflood
 // animations. Each reuses the fitted character and existing row objects.
-const IMPACT_DEATH_DURATIONS={collision:.83,bird:1.10,flood:.96};
+const IMPACT_DEATH_DURATIONS={collision:.83,bird:1.36,flood:.96};
 let impactDeath=null;
 function cancelImpactDeath(){
  impactDeath=null; // No newly constructed scene meshes or materials to dispose.
@@ -2316,7 +2316,13 @@ function cancelImpactDeath(){
 function beginImpactDeath(kind,reason,detail){
  const row=rows.get(py);
  const moving=kind==='collision'?hitMoving(row,px):null;
- const bird=kind==='bird'?row?.moving?.find(m=>m.bird):null;
+ // Use the pterosaur whose warning shadow actually struck the player.
+ // The first bird in the row is not necessarily the attacker.
+ const bird=kind==='bird'?row?.moving?.filter(m=>m.bird).reduce((best,m)=>{
+  const dist=Math.hypot(player.position.x-m.dangerDisc.position.x,
+   player.position.z-(-row.y));
+  return !best||dist<best.dist?{m,dist}:best;
+ },null)?.m:null;
  const direction=kind==='collision'?(Math.sign(moving?.speed*row.dir)||1)
   :kind==='flood'?(row?.special?.dir||1):1;
  impactDeath={kind,reason,detail,elapsed:0,run:runGeneration,
@@ -2324,14 +2330,21 @@ function beginImpactDeath(kind,reason,detail){
   x:player.position.x,y:player.position.y,z:player.position.z,
   turn:avatar.rotation.y,roll:avatar.rotation.z,dir:direction,
   bird:bird?.mesh||null,
-  birdX:bird?.mesh.position.x||0,
-  birdY:bird?.mesh.position.y||0,
+  birdX:bird?.mesh.getWorldPosition(new THREE.Vector3()).x??0,
+  birdY:bird?.mesh.getWorldPosition(new THREE.Vector3()).y??0,
+  birdZ:bird?.mesh.getWorldPosition(new THREE.Vector3()).z??player.position.z,
   birdLocalZ:bird?.mesh.position.z||0,
   height:Math.max(.7,player.userData.drowningHeight||1.3),
   legs:(player.userData.drowningFeet||[]).map(part=>({part,start:part.rotation.x})),
   row,originalWaveX:kind==='flood'?row?.special?.wave.position.x:0,
   landed:false,secondSplash:false};
  state='dying';queue.length=0;hop=null;
+ if(kind==='bird'&&bird){
+  // Keep the actual attacker in its original row, visible throughout
+  // the grab. Its position is now driven only by the death controller.
+  bird.mesh.visible=true;
+  row.group.visible=true;
+ }
  if(kind==='collision'){
   shake=Math.max(shake,.16);
   burst(player.position.x,.18,player.position.z,0,7);fx('crash',.8);
@@ -2369,30 +2382,42 @@ function updateImpactDeath(dt){
   const flattened=a>.78?.09*Math.sin(Math.PI*Math.min(1,(a-.78)/.22)):0;
   avatar.scale.set(1+flattened,1-flattened,1+flattened);
  }else if(d.kind==='bird'){
-  // Reuse the actual attacking pterosaur, not a duplicate high-poly actor.
-  // It visibly dives to collect the player, then rises carrying it upward.
-  const dive=Math.min(1,a/.23),lift=Math.max(0,(a-.23)/.77);
-  const approach=dive*dive*(3-2*dive),arc=lift*lift*(3-2*lift);
-  const travel=d.dir*1.40*arc,rise=7.30*arc;
-  // The attacker is parented to its lane group (already translated in Z).
-  // Keep its LOCAL z intact; using the player's world z moves it two lanes.
-  const birdX=THREE.MathUtils.lerp(d.birdX,d.x,approach)+travel;
-  const birdY=THREE.MathUtils.lerp(d.birdY,d.y+d.height+.25,approach)+rise;
+  // One continuous swoop from the actual bird's CURRENT location.
+  // Approach from its original x/y/z, meet the dinosaur at grab time,
+  // then move the attacker and its captive as one unit.
+  const grabAt=.37;
+  const approach=Math.min(1,a/grabAt);
+  const dive=approach*approach*(3-2*approach);
+  const lift=Math.max(0,(a-grabAt)/(1-grabAt));
+  const rise=lift*lift*(3-2*lift);
+  const travel=d.dir*1.10*rise;
+  const elevation=5.10*rise;
+  const grabX=d.x,grabY=d.y+d.height+.22,grabZ=d.z;
+  const birdX=THREE.MathUtils.lerp(d.birdX,grabX,dive)+travel;
+  const birdY=THREE.MathUtils.lerp(d.birdY,grabY,dive)+elevation;
+  const birdZ=THREE.MathUtils.lerp(d.birdZ,grabZ,dive);
   if(d.bird){
-   d.bird.position.set(birdX,birdY,d.birdLocalZ);
-   d.bird.rotation.z=Math.sin(d.elapsed*14)*.10;
+   // Parent-relative coordinates keep the bird on the same lane and
+   // prevent it from vanishing when the swoop begins.
+   const parent=d.bird.parent;
+   const world=new THREE.Vector3(birdX,birdY,birdZ);
+   if(parent)parent.worldToLocal(world);
+   d.bird.position.copy(world);
+   d.bird.visible=true;
+   d.bird.rotation.z=Math.sin(d.elapsed*14)*.11;
    const wings=d.bird.userData.wings;
    if(wings)for(let i=0;i<wings.length;i++)wings[i].rotation.z=
-    (i===0?1:-1)*Math.sin(d.elapsed*21)*.65;
+    (i===0?1:-1)*Math.sin(d.elapsed*22)*.65;
   }
-  // The dinosaur stays grounded during the swoop, then dangles underneath.
-  player.position.set(d.x+travel,d.y+rise,d.z);
-  avatar.rotation.z=d.roll+Math.sin(d.elapsed*12)*.16*arc;
-  avatar.rotation.x=Math.sin(d.elapsed*14)*.13*arc;
-  avatar.rotation.y=d.turn+Math.sin(d.elapsed*8)*.14*arc;
+  // The dinosaur stays grounded until the bird reaches it, then its
+  // legs dangle below the pterosaur during the shared ascent.
+  player.position.set(d.x+travel,d.y+elevation,d.z);
+  avatar.rotation.z=d.roll+Math.sin(d.elapsed*12)*.17*rise;
+  avatar.rotation.x=Math.sin(d.elapsed*15)*.14*rise;
+  avatar.rotation.y=d.turn+Math.sin(d.elapsed*8)*.16*rise;
   for(let i=0;i<d.legs.length;i++){
    const leg=d.legs[i];leg.part.rotation.x=leg.start+
-    Math.sin(d.elapsed*18+i*Math.PI)*.32*arc;
+    Math.sin(d.elapsed*19+i*Math.PI)*.36*rise;
   }
  }else{
   // Ride the flashflood current, roll, then slip beneath its surface.
@@ -2789,7 +2814,9 @@ if(state==='playing'){
   camSide=THREE.MathUtils.clamp(camSide,-7,7);
  }else camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
  const side=THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
- const focusY=player?THREE.MathUtils.clamp(player.position.y+.48,-.30,3.8)*deathCameraBlend*.70:0;
+ // Keep the pterosaur and captive framed together during their ascent.
+ const birdLift=impactDeath?.kind==='bird'&&state==='dying';
+ const focusY=player?THREE.MathUtils.clamp(player.position.y+(birdLift?.85:.48),-.30,birdLift?7:3.8)*deathCameraBlend*(birdLift?1:.70):0;
  const target=new THREE.Vector3(side,focusY,targetZ);
  camera.position.set(12+side,18,targetZ+21);
  camera.lookAt(target);
