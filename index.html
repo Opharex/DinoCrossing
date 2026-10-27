@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Forest Taper Around Off-Grid Structures">🌲 NATURAL FOREST CLEARINGS! 🌿</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Animated River Drowning with Splash Bubbles and Delayed Death Screen">🌊 DROWNING ANIMATION! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -2159,7 +2159,7 @@ function start(){
  // Ignore extra Retry taps; all resets must complete before another run begins.
  if(state==='playing'||state==='starting')return;
  const oldState=state;
- state='starting';++runGeneration;cancelDeathTimers();
+ state='starting';++runGeneration;cancelDeathTimers();cancelDrowningDeath();
  $('retry').disabled=true;
  $('flash').style.opacity='0';
  $('score').classList.remove('pop');
@@ -2187,6 +2187,10 @@ function start(){
  const fittedModel=new THREE.Group();
  fittedModel.scale.setScalar(playerFit*2);
  fittedModel.add(model);
+ // Record the fitted height and optional limbs for every existing skin.
+ // No new dinosaur model or per-skin special case is required.
+ player.userData.drowningHeight=playerExtent.y*playerFit*2;
+ player.userData.drowningFeet=model.userData.feet||model.userData.walkParts?.legs||[];
  avatar=new THREE.Group();avatar.rotation.y=Math.PI;avatar.add(fittedModel);
  player.add(avatar);
  blob(player,0,0,.66);scene.add(player);
@@ -2206,34 +2210,137 @@ function menu(){
   $('menuBest').textContent=best;$('menuAmber').textContent=bank;
   show('menu');return;
  }
- ++runGeneration;cancelDeathTimers();$('flash').style.opacity='0';
+ ++runGeneration;cancelDeathTimers();cancelDrowningDeath();$('flash').style.opacity='0';
  $('retry').disabled=false;queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
- for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
+ for(const shadow of sunBlobList)shadow.visible=false;hop=null;camY=0;camSmooth=0;camSide=0;shake=0;highest=0;lightingClockProgress=0;gameTime=0;clearGeneratedWorld();ensureRows();updateDaylight(0,0,true);if(player){scene.remove(player);disposeDinoPreviewMaterials(player);player=null;}if(menuPreview){scene.remove(menuPreview);menuPreview=null;}show('menu');$('menuBest').textContent=best;$('menuAmber').textContent=bank}// First death-animation batch: ordinary river drowning ONLY.
+// Other hazard deaths retain their original immediate game-over behavior.
+const DROWNING_DURATION=1.15;
+let drowningDeath=null,drowningVisuals=null;
+function getDrowningVisuals(){
+ if(drowningVisuals)return drowningVisuals;
+ const group=new THREE.Group(),rings=[],bubbles=[];
+ // Reuse the two ripple meshes and a handful of bubbles for every run.
+ const ringGeometry=cachedGeo('death:drownRipple',()=>new THREE.RingGeometry(.33,.41,20));
+ for(let i=0;i<2;i++){
+  const material=new THREE.MeshBasicMaterial({color:i?0x8ce5f2:0xe5fcff,transparent:true,opacity:.80,depthWrite:false,side:THREE.DoubleSide});
+  const ripple=new THREE.Mesh(ringGeometry,material);
+  ripple.rotation.x=-Math.PI/2;ripple.position.y=.012+i*.008;
+  ripple.frustumCulled=false;group.add(ripple);rings.push(ripple);
+ }
+ const bubbleMaterial=new THREE.MeshBasicMaterial({color:0xc5f5ff,transparent:true,opacity:.83,depthWrite:false});
+ for(let i=0;i<4;i++){
+  const b=new THREE.Mesh(effectGeo,bubbleMaterial);
+  b.castShadow=false;group.add(b);bubbles.push(b);
+ }
+ group.visible=false;scene.add(group);
+ drowningVisuals={group,rings,bubbles};
+ return drowningVisuals;
+}
+function cancelDrowningDeath(){
+ drowningDeath=null;
+ if(drowningVisuals)drowningVisuals.group.visible=false;
+}
+function beginDrowningDeath(reason,detail){
+ const waterRow=rows.get(py);
+ const surfaceY=LIQUID_LANE_Y+
+   (waterRow?liquidWave(player.position.x,0,gameTime,waterRow.dir,'river',waterRow.y*.47):0);
+ const parts=player.userData.drowningFeet||[];
+ // Capture poses once so the standard character animation hierarchy survives.
+ const feet=parts.map(part=>({part,angle:part.rotation.x}));
+ drowningDeath={
+  reason,detail,run:runGeneration,elapsed:0,surfaceY,
+  startY:player.position.y,height:Math.max(.62,player.userData.drowningHeight||1.3),
+  feet,startRotation:avatar.rotation.z
+ };
+ state='dying';queue.length=0;hop=null;
+ const visuals=getDrowningVisuals();
+ visuals.group.visible=true;
+ visuals.group.position.set(player.position.x,surfaceY+.025,player.position.z);
+ for(const b of visuals.bubbles)b.visible=false;
+ burst(player.position.x,surfaceY+.10,player.position.z,2,10);
+ fx('waterfallSplash',.70);fx('waterDeath',.48);
+}
+function updateDrowningDeath(dt){
+ const d=drowningDeath;
+ if(!d||state!=='dying'||!player||!avatar)return;
+ if(d.run!==runGeneration){cancelDrowningDeath();return;}
+ d.elapsed=Math.min(DROWNING_DURATION,d.elapsed+dt);
+ const a=d.elapsed/DROWNING_DURATION;
+ const p=Math.max(0,(a-.07)/.93),s=p*p*(3-2*p);
+ // The torso sinks first; the top of the dinosaur clears the surface last.
+ player.position.y=THREE.MathUtils.lerp(d.startY,d.surfaceY-d.height-.16,s);
+ avatar.rotation.z=d.startRotation+Math.sin(d.elapsed*22)*.10*(1-a);
+ avatar.rotation.x=Math.sin(d.elapsed*17)*.055*(1-a);
+ const flail=Math.max(0,1-a*1.25);
+ for(let i=0;i<d.feet.length;i++){
+  const leg=d.feet[i];leg.part.rotation.x=leg.angle+Math.sin(d.elapsed*27+i*Math.PI)*.48*flail;
+ }
+ const squeeze=Math.sin(Math.PI*Math.min(1,a*2.3))*.08;
+ avatar.scale.set(1+squeeze*.45,1-squeeze,1+squeeze*.45);
+ const fxGroup=drowningVisuals;
+ if(fxGroup){
+  for(let i=0;i<fxGroup.rings.length;i++){
+   const r=fxGroup.rings[i],k=(a-i*.16)/.70;
+   r.visible=k>=0&&k<1;
+   if(r.visible){r.scale.setScalar(.75+k*2.1);r.material.opacity=(1-k)*.72;}
+  }
+  for(let i=0;i<fxGroup.bubbles.length;i++){
+   const b=fxGroup.bubbles[i],k=(a-.20-i*.10)/.60;
+   b.visible=k>=0&&k<1;
+   if(b.visible){
+    b.position.set(Math.sin(i*2.4+k*7)*.21,.02+k*.54,Math.cos(i*2.4+k*5)*.16);
+    b.scale.setScalar((.045+i*.009)*(1-k*.42));
+   }
+  }
+ }
+ if(a>=1){
+  const reason=d.reason,detail=d.detail;
+  cancelDrowningDeath();
+  finishDeath(reason,detail,true);
+ }
+}
+function die(reason='Caught by a hazard',detail='Watch your surroundings and try again!'){
  if(state!=='playing')return;
- // The first tile is guaranteed safe. Ignore a stale collision during a restart frame.
+ // Preserve the normal first-tile grace period.
  if(py===0&&highest===0&&gameTime<.6)return;
+ if(reason==='Fell into water!'){beginDrowningDeath(reason,detail);return;}
+ finishDeath(reason,detail,false);
+}
+function finishDeath(reason,detail,drowned=false){
+ if(state!=='playing'&&!(drowned&&state==='dying'))return;
  const deathRun=runGeneration;
  state='dead';$('retry').disabled=false;
  $('deathReason').textContent=reason;
  $('deathDetail').textContent=detail;
- shake=.22;
- burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);
- fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');
- fx('death',.65);
- $('flash').style.opacity='.27';
  cancelDeathTimers();
- deathFlashTimer=setTimeout(()=>{if(runGeneration===deathRun)$('flash').style.opacity='0';deathFlashTimer=null;},80);
+ if(drowned){
+  // Impact effects played at splash time; keep the screen clear until
+  // the dinosaur has disappeared below the water.
+  fx('death',.50);$('flash').style.opacity='0';
+ }else{
+  shake=.22;
+  burst(player.position.x,.35,player.position.z,reason.includes('lava')?3:reason.includes('water')?2:0,12);
+  fx(reason.includes('lava')?'lavaDeath':reason.includes('water')||reason.includes('flood')?'waterDeath':reason.includes('tar')?'tarDeath':reason.includes('Pterosaur')?'bird':'crash');
+  fx('death',.65);
+  $('flash').style.opacity='.27';
+  deathFlashTimer=setTimeout(()=>{if(runGeneration===deathRun)$('flash').style.opacity='0';deathFlashTimer=null;},80);
+ }
  if(highest>best){best=highest;persist();fx('record');}
  $('finalScore').textContent=highest;
  $('finalBest').textContent=best;
  $('earned').textContent=earned;
- deathRevealTimer=setTimeout(()=>{
-  // A prior run cannot reopen the death panel over a new retry.
-  if(runGeneration===deathRun&&state==='dead')show('dead');
-  deathRevealTimer=null;
- },450);
+ if(drowned){
+  // The complete 1.15s animation has already finished.
+  if(runGeneration===deathRun)show('dead');
+ }else{
+  deathRevealTimer=setTimeout(()=>{
+   // A prior run cannot reopen the death panel over a new retry.
+   if(runGeneration===deathRun&&state==='dead')show('dead');
+   deathRevealTimer=null;
+  },450);
+ }
 }
 function pause(){if(state!=='playing')return;fx('pause');state='paused';show('paused')}
 const queue=[];function requestMove(dx,dy){if(state!=='playing')return;if(queue.length<1)queue.push([dx,dy])}function groundTileHeight(r,x){return r?.raised?.get(Math.round(x))||0}
@@ -2404,6 +2511,7 @@ function update(dt,t){
  const lightScore=state==='menu'?0:lightingMode==='clock'?lightingClockProgress:highest;
  updateDaylight(lightScore,dt);
  updateSunBlobs();
+ if(state==='dying')updateDrowningDeath(dt);
  if(state==='playing'||state==='menu'){
  gameTime+=dt;
  updateLiquidMarble(gameTime);
@@ -2521,7 +2629,7 @@ let targetZ=state==='menu'?-3:-camSmooth-3.0;
  // Soft horizontal camera follow: the dinosaur may roam within a dead zone
  // before the view starts chasing it. Movement can temporarily outrun camera.
  // Desktop retains the original fixed center at <=100% zoom.
- const horizontalFollow=state==='playing'&&player&&(phoneWideView||cameraZoom>100);
+ const horizontalFollow=(state==='playing'||state==='dying')&&player&&(phoneWideView||cameraZoom>100);
  if(horizontalFollow){
   const halfView=(camera.right-camera.left)/(2*camera.zoom);
   const deadZone=Math.min(1.55,Math.max(.60,halfView*.22));
