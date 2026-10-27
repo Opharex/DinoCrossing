@@ -116,7 +116,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Beautiful Flowing Water and Lava">🌊 FLOWING LIQUIDS 2.0! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Waterfalls Without Liquid Walls">🌊 SMOOTH WATERFALLS! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -705,7 +705,7 @@ const liquidCurtainGeo=cachedGeo('liquid:curtain',()=>new THREE.BoxGeometry(1,1,
 const liquidParticleDummy=new THREE.Object3D();
 function makeLiquidSpillway(group,row,span=1){
  const type=row.type,dir=row.dir,source=-dir,waterWidth=span-.02,half=span*.5,far=46;
- const sprayMat=type==='river'?liquidFoamMat:lavaSprayMat,material=liquidTopMats[type],wide=span===3;
+ const sprayMat=type==='river'?liquidFoamMat:lavaSprayMat,wide=span===3;
  const feederLength=far-LIQUID_INLET_START,feederCenter=source*(far+LIQUID_INLET_START)/2;
  const outLength=far-LIQUID_OUTFALL_END,outCenter=dir*(far+LIQUID_OUTFALL_END)/2;
  box(group,materials.stone,feederCenter,-.005,0,feederLength,.58,span+.25);
@@ -724,10 +724,10 @@ function makeLiquidSpillway(group,row,span=1){
  }
  const inletFlow=createSpillingFlow(group,type,dir,row.y*.47,waterWidth,true);
  const outletFlow=createSpillingFlow(group,type,dir,row.y*.47,waterWidth,false);
- const strands=wide?20:8;
- const inletCurtain=new THREE.InstancedMesh(liquidCurtainGeo,material,strands);
- const outletCurtain=new THREE.InstancedMesh(liquidCurtainGeo,material,strands);
- inletCurtain.frustumCulled=false;outletCurtain.frustumCulled=false;group.add(inletCurtain,outletCurtain);
+ // The inletFlow and outletFlow are continuous, textured, sloped surfaces.
+ // Do not overlay upright solid-colour waterfall curtains: those produced
+ // tall orange/blue "walls" at a channel end on both flow directions.
+ // Keep the foam/spray at each height transition.
  // White foam at all four water edges: source lip, source landing, exit lip and exit landing.
  const foamData=[],perEdge=wide?32:16;
  for(let edge=0;edge<4;edge++){
@@ -756,25 +756,13 @@ function makeLiquidSpillway(group,row,span=1){
  }
  const bubbleMesh=new THREE.InstancedMesh(foamBubbleGeo,sprayMat,bubbleData.length);
  bubbleMesh.frustumCulled=false;group.add(bubbleMesh);
- row.liquidEffects={inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData};
+ row.liquidEffects={inletFlow,outletFlow,dir,type,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData};
  liquidLaneUpdate(row,0);
 }
 function liquidLaneUpdate(row,time){
  const e=row?.liquidEffects;if(!e)return;
- const {inletCurtain,outletCurtain,inletFlow,outletFlow,dir,type,strands,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData}=e;
+ const {inletFlow,outletFlow,dir,type,waterWidth,bubbleMesh,bubbleData,foamMesh,foamData}=e;
  updateSpillingFlow(inletFlow,time);updateSpillingFlow(outletFlow,time);
- const pulse=type==='river'?8:4;
- for(const inlet of [true,false]){
-  const target=inlet?inletCurtain:outletCurtain,sign=inlet?-dir:dir;
-  const x=inlet?(LIQUID_INLET_START+LIQUID_INLET_END)/2:(LIQUID_OUTFALL_START+LIQUID_OUTFALL_END)/2;
-  for(let i=0;i<strands;i++){
-   const z=(i-(strands-1)/2)*waterWidth/strands;
-   liquidParticleDummy.position.set(sign*x,(inlet?(LIQUID_FEEDER_Y+LIQUID_LANE_Y):(LIQUID_LANE_Y+LIQUID_LOWER_Y))/2,z);
-   liquidParticleDummy.scale.set(.055,(inlet?.45:.49)+Math.sin(time*pulse+i*.8)*.035,waterWidth/strands+.008);
-   liquidParticleDummy.rotation.set(0,0,sign*(inlet?.34:-.30));liquidParticleDummy.updateMatrix();target.setMatrixAt(i,liquidParticleDummy.matrix);
-  }
-  target.instanceMatrix.needsUpdate=true;
- }
  for(let i=0;i<foamData.length;i++){
   const f=foamData[i],motion=time*(type==='river'?7:3.8)+f.seed;
   const wave=liquidWave(f.x,f.z,time,dir,type,row.y*.47)*.8;
