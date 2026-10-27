@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth interpolated camera follow and independent danger creep">🎥 SMOOTH CAMERA FIX! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Forward camera framing and restored danger catch-up">🎥 CHASE RESTORED! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -728,7 +728,7 @@ let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,st
 // to the user's cameraZoom preference. Reset independently on retry/menu.
 let deathCameraBlend=0,deathCameraZoom=1;
 // Keep the character near the middle while the danger edge creeps in behind.
-const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25;
+const CAMERA_CREEP_SPEED=.45,CAMERA_DANGER_GAP=3.25,CAMERA_FOLLOW_LEAD=1.25,CAMERA_CATCHUP_THRESHOLD=5.5,CAMERA_CATCHUP_BOOST=2.8;
 let lastCreepRow=-1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
@@ -2930,9 +2930,13 @@ if(state==='playing'||state==='menu'){
  }
 }if(state==='playing'){// Let forward hops create breathing room; approach the same danger
  // distance gradually rather than snapping the warning after each hop.
- // The danger boundary advances independently at its existing steady pace.
- // The actual camera follows the dinosaur separately, as before the chase mechanic.
- camY+=CAMERA_CREEP_SPEED*dt;const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
+ // The danger boundary always advances at its baseline pace. When the player
+ // opens a large lead it speeds up smoothly, then returns to baseline near them.
+ // This is independent of the visible camera's interpolated follow.
+ const dangerLead=highest-camY;
+ const catchupExcess=Math.max(0,dangerLead-CAMERA_CATCHUP_THRESHOLD);
+ const catchupBoost=CAMERA_CATCHUP_BOOST*(1-Math.exp(-catchupExcess*.35));
+ camY+=(CAMERA_CREEP_SPEED+catchupBoost)*dt;const creepRow=Math.floor(camY);if(creepRow!==lastCreepRow){lastCreepRow=creepRow;ensureRows();}if(!hop&&queue.length)doMove(...queue.shift());if(hop){
  if(hop.amberBounce){
   // Travel toward the amber, bump it, then return to the original safe tile.
   // No tile crossing, pickup, or landing checks occur during the rebound.
@@ -2980,7 +2984,7 @@ if(state==='playing'||state==='menu'){
  // Track the dinosaur's interpolated world position rather than stepping the camera
  // forward only when a hop finishes. The danger boundary remains independent.
  const playerForward=player?-player.position.z:highest;
- const cameraTarget=state==='playing'?Math.max(playerForward-2,camY):camY;
+ const cameraTarget=state==='playing'?Math.max(playerForward-1,camY):camY;
  camSmooth=THREE.MathUtils.damp(camSmooth,cameraTarget,5.5,dt);
 // Visibility changes only when the camera enters a different row band.
 // Refresh newly exposed shadow instances without recalculating all rows each frame.
