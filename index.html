@@ -401,8 +401,8 @@ function artProp(g,x,z,kind,seed=0){let o=new THREE.Group();o.position.set(x,0,z
 function horn(g,m,x,y,z,r,h,rx=0,rz=0){let a=mesh(g,cachedGeo(`h:${r}:${h}`,()=>new THREE.ConeGeometry(r,h,5)),m,x,y,z);a.rotation.set(rx,0,rz);return a}
 function obstacleDino(type,variant=0){let g=new THREE.Group(),skin=palette(0x689c69,0x9a845b,0x7196a0,0xbd825a,0x8caa63)[variant%5],shade=palette(0x466b4b,0x66583d,0x4c6670,0x805b42,0x587746)[variant%5],light=palette(0xb2c88a,0xe1b98a,0xa4c7bd,0xe3b483,0xc5d49c)[variant%5];
 let body=mesh(g,facetGeo,skin,0,.83,0,.52,.52,.87),head=new THREE.Group(),tail=new THREE.Group(),legs=[];g.add(head,tail);head.position.set(0,1.08,.65);tail.position.set(0,.81,-.74);
-for(let x of [-.36,.36])for(let z of [-.48,.48]){let joint=new THREE.Group();joint.position.set(x,.53,z);g.add(joint);prism(joint,shade,0,-.22,.04,.18,.5);for(let t=-1;t<=1;t++)jagged(joint,light,t*.075,-.45,.17,.052,.045,.13);legs.push(joint)}
-for(let i=0;i<4;i++){let seg=mesh(tail,facetGeo,skin,0,-i*.035,-i*.27,.31-i*.055,.24-i*.035,.35);seg.rotation.x=-.13}
+for(let x of [-.36,.36])for(let z of [-.48,.48]){let joint=new THREE.Group();joint.position.set(x,.53,z);g.add(joint);const shin=prism(joint,shade,0,-.22,.04,.18,.5);shin.userData.skeletonAccent='limb';for(let t=-1;t<=1;t++)jagged(joint,light,t*.075,-.45,.17,.052,.045,.13);legs.push(joint)}
+for(let i=0;i<4;i++){let seg=mesh(tail,facetGeo,skin,0,-i*.035,-i*.27,.31-i*.055,.24-i*.035,.35);seg.rotation.x=-.13;seg.userData.skeletonAccent='tail'}
 if(type===2){ // triceratops
 mesh(head,facetGeo,skin,0,.15,.1,.45,.37,.47);let frill=mesh(head,facetGeo,shade,0,.42,-.12,.72,.67,.22);frill.userData.skeletonAccent='frill';for(let a=-2;a<=2;a++)horn(head,light,a*.26,.79,-.16,.115,.29,0,a*.14);for(let x of [-.31,.31]){horn(head,light,x,.47,.51,.13,.62,-.42,x*.3)}horn(head,light,0,.1,.69,.1,.38,-.45);mesh(head,facetGeo,light,0,-.06,.45,.32,.16,.38)
 }else if(type===3){ // stegosaurus
@@ -587,6 +587,17 @@ function skeletonVoxelGeometry(original,style='ribs'){
   part(-.90,.59,-.89,.90,.91,.89);
   part(-.72,-.91,-.70,.72,.77,.70);
   part(-.23,.22,-.91,.23,.88,.91);
+ }else if(style==='limb'){
+  // Leg and arm bone joints are block-shaped, replacing solid flesh within
+  // the ORIGINAL animated shin mesh; there are no new character limbs.
+  part(-.34,-.86,-.33,.34,.86,.33);
+  part(-.66,.65,-.57,.66,.91,.57);
+  part(-.64,-.91,-.57,.64,-.65,.57);
+  part(-.47,-.14,-.40,.47,.10,.40);
+ }else if(style==='tail'){
+  // Square vertebrae replace original tail chunks in their exact positions.
+  part(-.31,-.30,-.94,.31,.30,.94);
+  for(let i=0;i<4;i++){const z=-.73+i*.48;part(-.57,-.56,z-.12,.57,.56,z+.12);}
  }
  const geometry=new THREE.BufferGeometry();
  geometry.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
@@ -686,12 +697,12 @@ if([2,3,4,5,7].includes(type)){
   box(g,color,0,1.24,.86,raptor?.46:.6,.25,raptor?.57:.45);
   const feet=[];
   for(let x of [-.26,.26]){
-    let leg=box(g,dark,x,.3,-.12,raptor?.17:.25,.52,.34);feet.push(leg);
+    let leg=box(g,dark,x,.3,-.12,raptor?.17:.25,.52,.34);leg.userData.skeletonAccent='limb';feet.push(leg);
     box(g,color,x*.95,.88,.47,.17,.25,.24);
     box(g,materials.white,x*.98,1.48,.72,.17,.17,.13);
     box(g,materials.black,x*.98,1.48,.8,.085,.11,.075);
   }
-  for(let i=0;i<5;i++){let tail=box(g,color,0,.69-i*.085,-.68-i*.27,.43-i*.065,.31-i*.045,.37);tail.rotation.x=-.18}
+  for(let i=0;i<5;i++){let tail=box(g,color,0,.69-i*.085,-.68-i*.27,.43-i*.065,.31-i*.045,.37);tail.rotation.x=-.18;tail.userData.skeletonAccent='tail'}
   if(raptor){
     // Neck-to-tail raptor spines have their bases embedded in the actual body.
  const spineRoots=[{z:-.18,y:1.13},{z:-.41,y:1.02},{z:-.65,y:.83}];
