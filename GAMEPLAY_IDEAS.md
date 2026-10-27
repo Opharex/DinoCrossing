@@ -9,7 +9,9 @@
 ### 1. Hatchling Rescue · NEXT
 Rare nests appear on optional but reachable paths. The player collects an egg, a baby dinosaur hatches, and the hatchling follows the player's recent footsteps for a short escort. Deliver it to a safe release area after several rows for Amber and a fossil fragment. Protect current river, lava, log, and platform support systems: hatchlings must attach to the same moving-platform support when necessary, not create an extra player collision or expensive pathfinding. If the player dies or the hatchling is lost, that escort fails; prior unlocks remain saved.
 
-### 2. Fossil Collection · NEXT
+### 2. Fossil Collection · IN PROGRESS
+
+**Implemented 2026-10-27 (pending Android visual/performance validation):** collect one rare Skull, Ribs, and Legs fossil per base species, only during runs using that species; chance climbs gradually with score. All three pieces unlock eligibility to buy its Skeleton variant for 500 Amber. The shop shows hover/touch requirements. Existing 27 skin IDs and old saves remain intact; new IDs 27–35 are Skeleton variants.
 Collect rare fossil fragments from carefully placed pickups and successful rescues. A persistent museum/journal tracks skeleton pieces for the nine base species. Completing a skeleton unlocks a cosmetic reward, achievement, or thematic shop decoration; no compulsory stat advantage or changes to existing skin IDs. Allow duplicate fragments to become a small amount of ordinary Amber or another bounded currency exchange later, if desired.
 
 ### 3. Amber Combo Multiplier · NEXT
@@ -44,7 +46,7 @@ Start a run → collect Amber to build a combo → discover an optional fossil o
 - **[BACKLOG] 04. Risky Alternate Routes:** Choose safer low-reward paths or more hazardous, higher-reward paths affecting a stretch of rows.
 
 ### New hazards, world interactions, and collectibles
-- **[NEXT] 05. Fossil Collection:** Find rare bones, complete species skeletons in a museum, and unlock cosmetic rewards.
+- **[IN PROGRESS] 05. Fossil Collection:** Find rare bones, complete species skeletons in a museum, and unlock cosmetic rewards.
 - **[NEXT] 06. Amber Combo Multiplier:** Collect consecutive Amber without breaking the streak to improve rewards.
 - **[BACKLOG] 07. Temporary Power-ups:** Time-limited shield, Amber magnet, and slow-motion pickups.
 - **[BACKLOG] 08. Dynamic Weather:** Rain, fog, and storms that alter river speeds, visibility, and hazard frequency.
