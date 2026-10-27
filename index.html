@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Breakable Water and Lava Dams with Reservoirs and Smoke Rebuilds">🌊 DAM BREACH! 🌋</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Forest Taper Around Off-Grid Structures">🌲 NATURAL FOREST CLEARINGS! 🌿</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -972,31 +972,45 @@ function liquidLaneUpdate(row,time){
  }
  bubbleMesh.instanceMatrix.needsUpdate=true;
 }
-// Cull only the trees closest to waterworks, including rows generated BEFORE
-// a neighboring river/lava lane. Each forest uses instancing, so hide all parts
-// of a cleared tree together without changing gameplay collisions.
-function clearSideForestNearLiquid(r){
- const batches=r?.group?.userData?.sideForestBatches;
- if(!batches)return;
- const hiddenMatrix=new THREE.Matrix4().makeScale(0,0,0);
- for(const entry of batches){
-  const {batch,treeXs,partCount}=entry;
-  let changed=false;
-  for(let t=0;t<treeXs.length;t++){
-   if(Math.abs(treeXs[t])>13.6)continue;
-   for(let part=0;part<partCount;part++)batch.setMatrixAt(t*partCount+part,hiddenMatrix);
-   changed=true;
+// Smooth, deterministic off-grid forest thinning around decorative landmarks.
+// Adjacent rows are updated retroactively when a landmark is generated, so
+// trees never abruptly end at a lane boundary. This changes scenery only.
+function sideForestLandmark(type){return type==='river'||type==='lava'||type==='flashflood'||type==='lavasurge'||type==='stampede'||type==='path'}
+function sideForestTreeKeep(y,x,landmarkY,landmarkType,landmarkDir){
+ const dy=Math.abs(y-landmarkY),ax=Math.abs(x);
+ // Keep the reservoir source visibly open, with a gentler far-bank taper.
+ const source=landmarkType==='flashflood'||landmarkType==='lavasurge';
+ const sideFactor=source&&Math.sign(x)===-landmarkDir?1:.72;
+ const distance=Math.sqrt((dy/2.45)**2+((ax-9.0)/(5.4*sideFactor))**2);
+ const clearing=Math.max(0,Math.min(1,(1.52-distance)/1.16));
+ const n=Math.abs(Math.sin(y*19.417+x*7.911+Math.cos(y*3.07+x)*11.13));
+ return n>=clearing*.96;
+}
+function forestTreeAllowed(y,x,extra){
+ if(extra&&sideForestLandmark(extra.type)&&!sideForestTreeKeep(y,x,extra.y,extra.type,extra.dir))return false;
+ for(let d=-4;d<=4;d++){
+  const r=rows.get(y+d);
+  if(r&&sideForestLandmark(r.type)&&!sideForestTreeKeep(y,x,r.y,r.type,r.dir))return false;
+ }
+ return true;
+}
+function thinSideForestAround(landmark){
+ for(let dy=-4;dy<=4;dy++){
+  const r=rows.get(landmark.y+dy),batches=r?.group?.userData?.sideForestBatches;
+  if(!batches)continue;
+  for(const entry of batches){
+   const {batch,treeXs,partCount}=entry;
+   let changed=false;
+   for(let t=0;t<treeXs.length;t++){
+    if(forestTreeAllowed(r.y,treeXs[t],landmark))continue;
+    for(let part=0;part<partCount;part++)batch.setMatrixAt(t*partCount+part,sideForestHiddenMatrix);
+    changed=true;
+   }
+   if(changed)batch.instanceMatrix.needsUpdate=true;
   }
-  if(changed)batch.instanceMatrix.needsUpdate=true;
  }
 }
-function hasNearbyLiquidRow(y){
- for(let d=1;d<=2;d++){
-  const row=rows.get(y-d);
-  if(row&&(row.type==='river'||row.type==='lava'))return true;
- }
- return false;
-}
+const sideForestHiddenMatrix=new THREE.Matrix4().makeScale(0,0,0);
 
  // Polished, opaque rounded-square amber collectible. Every variant stays
  // grounded, centred, and completely motionless (no float or spin animation).
@@ -1136,7 +1150,7 @@ for(const side of [-1,1]){
     return {x:side*(8.06+k+.04*Math.sin(seed)),z:.035*Math.cos(seed*1.7),
       height,crownWidth,crownDepth,crownHeight,variant,lift:(Math.sin(seed*.37)+1)*.025};
   });
-  const visibleTrees=hasNearbyLiquidRow(y)?trees.filter(tree=>Math.abs(tree.x)>13.6):trees;
+  const visibleTrees=trees.filter(tree=>forestTreeAllowed(y,tree.x,{y,type,dir:laneDirection}));
   // The surrounding forest casts low-cost projected shadows even on phones.
   for(const tr of visibleTrees)registerGroundShadow(group,tr.x,tr.z,tr.height+tr.crownHeight*.65,.52);
   const forestCube=cachedGeo('forest:unitCube',()=>new THREE.BoxGeometry(1,1,1));
@@ -1206,9 +1220,7 @@ if(type!=='river'&&type!=='lava'){
  }
 }
 if(type==='river'||type==='lava'){
- // Clear only the two closest trees on either bank of the immediately adjacent row,
- // leaving the rest of the side forest dense around each visible spillway.
- for(let d=1;d<=2;d++)clearSideForestNearLiquid(rows.get(y-d));
+ // Forest thinning now follows a graded radius for all landmarks below.
  if(poolIndex===-1||poolIndex===1)makeLiquidSpillway(group,row,poolIndex===1?3:1);for(let i=0;i<5;i++){let x=-row.dir*(12.7-i*5.15+rand(-.35,.35)),p=new THREE.Group();p.position.x=x;group.add(p);const length=Math.random()<.5?2:3;p.add(floatingPlatform(type,x+y,length));blob(p,0,0,length*.42).userData.sunBlob.height=.33;row.moving.push({mesh:p,x,speed:row.speed*(type==='lava'?.75:.9),width:length,platform:true})}}if(type==='path'){for(let i=0;i<3;i++){let x=-9+i*6.8+rand(-1,1),mob=obstacleDino(pick([2,3,4,5,6]),Math.floor(rand(0,5)));mob.scale.setScalar(rand(.78,.95));mob.rotation.y=row.dir>0?Math.PI/2:-Math.PI/2;mob.position.set(x,0,0);blob(mob,0,0,.85);group.add(mob);row.moving.push({mesh:mob,x,speed:row.speed,width:1.05,platform:false})} // Trampled, faded lanes: continuous scuffed track with broken flattened
  // grass patches and hoof marks. All meshes use shared geometry/materials.
  // This reads as a USED GRASS PATH, not safe bright-green turf or a dirt road.
@@ -1402,7 +1414,9 @@ if(y>2&&Math.random()<.34&&type!=='river'&&type!=='lava'&&type!=='tar'&&!row.spe
    }
   }
  }
-rows.set(y,row);buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
+rows.set(y,row);
+if(sideForestLandmark(type))thinSideForestAround(row);
+buildGroundShadows(group,y);maxGenerated=Math.max(maxGenerated,y)}
 // Keep six extra terrain rows behind the player while still retiring one old row per newly crossed row.
 const BACK_TERRAIN_ROWS=18;
 const sharedArtGeometries=new Set([trunkGeo,facetGeo,leafGeo,ringGeo,shadowGeo]);
