@@ -469,7 +469,7 @@ function applyTechSkin(g,chrome=false){
     const eye=original===materials.black||brightness<.025;
     const panel=replacements.size%3;
     const material=new THREE.MeshStandardMaterial({color:eye?(chrome?0xff2222:0x70faff):chrome?0xffffff:(brightness>.65?0xc4d4df:panel===0?0x405365:panel===1?0x59eaff:0x263747),metalness:chrome?.16:.72,roughness:chrome?.38:.32,flatShading:true,emissive:eye?(chrome?0xff1200:0x00ddff):chrome?0x000000:panel===1?0x006677:0x00333f,emissiveIntensity:eye?1.5:chrome?.02:panel===1?.36:.12,side:original.side,transparent:original.transparent,opacity:original.opacity});
-    replacements.set(original,material);return material;
+    material.userData.dinoOwned=true;replacements.set(original,material);return material;
   }
   for(const mesh of meshes){
     mesh.material=Array.isArray(mesh.material)?mesh.material.map(armor):armor(mesh.material);
@@ -497,6 +497,7 @@ if([2,3,4,5,7].includes(type)){
 }else{
   g=new THREE.Group();
   const color=mat(species[type][2]),belly=mat(0xcbe7a0),dark=mat(new THREE.Color(species[type][2]).multiplyScalar(.72));
+  color.userData.dinoOwned=true;belly.userData.dinoOwned=true;dark.userData.dinoOwned=true;
   const raptor=type===1,spino=type===6;
   box(g,color,0,.78,-.06,raptor?.54:.78,.75,spino?1.25:1.0);
   box(g,belly,0,.75,.44,raptor?.38:.52,.55,.13);
@@ -517,13 +518,13 @@ if([2,3,4,5,7].includes(type)){
     for(let x of [-.26,.26]){let claw=cone(g,materials.horn,x,.1,.22,.1,.22);claw.rotation.x=Math.PI/2}
   }
   if(spino){
-    for(let i=0;i<7;i++){let z=.4-i*.21;let sail=box(g,techno?new THREE.MeshStandardMaterial({color:0x70faff,emissive:0x00ddff,emissiveIntensity:1.5,metalness:.25,roughness:.3}):i%2?dark:color,0,1.35+Math.sin(i/6*Math.PI)*.38,z,.13,.55+Math.sin(i/6*Math.PI)*.85,.2);sail.userData.techSpinoSpine=techno||chrome;sail.rotation.x=-.08}
+    for(let i=0;i<7;i++){let z=.4-i*.21;let sail=box(g,techno?color:i%2?dark:color,0,1.35+Math.sin(i/6*Math.PI)*.38,z,.13,.55+Math.sin(i/6*Math.PI)*.85,.2);sail.userData.techSpinoSpine=techno||chrome;sail.rotation.x=-.08}
     box(g,color,0,1.27,1.04,.49,.22,.64);
   }
   g.userData.feet=feet;
   g.userData.eyeParts=g.children.filter(o=>o.isMesh&&o.material===materials.black);
 }
-if(techno||chrome){applyTechSkin(g,chrome);if(type===6)g.traverse(o=>{if(o.userData.techSpinoSpine)o.material=new THREE.MeshStandardMaterial({color:chrome?0xffffff:0x70faff,emissive:chrome?0x220000:0x00ddff,emissiveIntensity:chrome?.08:1.5,metalness:chrome?.16:.25,roughness:.3,flatShading:true});});}
+if(techno||chrome){applyTechSkin(g,chrome);if(type===6)g.traverse(o=>{if(o.userData.techSpinoSpine){o.material=new THREE.MeshStandardMaterial({color:chrome?0xffffff:0x70faff,emissive:chrome?0x220000:0x00ddff,emissiveIntensity:chrome?.08:1.5,metalness:chrome?.16:.25,roughness:.3,flatShading:true});o.material.userData.dinoOwned=true;}});}
 g.scale.setScalar(size);
 return g;
 }
@@ -1736,9 +1737,22 @@ shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Chrome edition: 
 
 let inspected=chosen,selectedShopSpecies=chosen%9,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
 function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
+// Releasing per-dinosaur GPU materials after a preview is removed prevents
+// progressive renderer memory growth when browsing skins or preloading 27 portraits.
+function disposeDinoPreviewMaterials(model){
+ if(!model)return;
+ const disposed=new Set();
+ model.traverse(o=>{
+  if(!o.isMesh||!o.material)return;
+  const mats=Array.isArray(o.material)?o.material:[o.material];
+  for(const mat of mats)if(mat?.userData?.dinoOwned&&!disposed.has(mat)){
+   disposed.add(mat);mat.dispose();
+  }
+ });
+}
 function updateShopModel(){
  initShop3D();if(!shopRenderer)return;
- if(shopModel)shopScene.remove(shopModel);
+ if(shopModel){shopScene.remove(shopModel);disposeDinoPreviewMaterials(shopModel);}
  shopModel=dino(inspected,1.35);
  // Centre the flight model around its actual geometry rather than its empty group origin.
  // Ground dinosaurs remain grounded; pterodactyls hover entirely above the pedestal.
@@ -1826,6 +1840,7 @@ function makeRosterPortraitStep(){
   rosterPortraitContext.putImageData(frame,0,0);
   rosterPortraits.set(id,rosterPortraitCanvas.toDataURL('image/png'));
   rosterPortraitScene.remove(model);
+  disposeDinoPreviewMaterials(model);
   updateRosterPortraitImage(id);
   if(rosterPortraitNext===species.length){
    rosterPortraitTarget.dispose();rosterPortraitTarget=null;
