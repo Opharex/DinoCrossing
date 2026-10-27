@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Dinosaur Tumble Pterosaur Snatch and Flash Flood Death Animations">🦖 ANIMATED DEATHS! 🌊</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Smooth Cinematic Camera Zoom During Death Animations">🎥 CINEMATIC DEATH CAM! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -723,7 +723,10 @@ return g;
 const world=new THREE.Group();scene.add(world);const ROW_W=15,LEFT=-7,RIGHT=7;let calmRowsRemaining=0,lastCalmEnd=-30;
 // A controlled three-row river/lava run; independent gameplay rows share one visual basin.
 let poolRowsRemaining=0,poolType=null,poolDirection=1;
-let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
+let rows=new Map(),maxGenerated=-1,player,avatar,px=0,py=0,highest=0,earned=0,state='menu',hop=null,camY=0,camSmooth=0,camSide=0,clock=new THREE.Clock(),lastTime=0,shake=0,toastTimer=0;
+// Cinematic death camera is entirely transient: never persisted or applied
+// to the user's cameraZoom preference. Reset independently on retry/menu.
+let deathCameraBlend=0,deathCameraZoom=1;const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];function prop(g,x,y,kind){
  const obj=artProp(g,x,y,kind,x*7+y*13);
  if(kind==='tree'||kind==='cycad'||kind==='rock')
   registerGroundShadow(g,x,y,kind==='rock'?.65:1.2,kind==='rock'?.44:.65);
@@ -2160,6 +2163,7 @@ function start(){
  if(state==='playing'||state==='starting')return;
  const oldState=state;
  state='starting';++runGeneration;cancelDeathTimers();cancelDrowningDeath();cancelImpactDeath();
+ deathCameraBlend=0;deathCameraZoom=1;camera.zoom=cameraZoom/100;camera.updateProjectionMatrix();
  $('retry').disabled=true;
  $('flash').style.opacity='0';
  $('score').classList.remove('pop');
@@ -2211,6 +2215,7 @@ function menu(){
   show('menu');return;
  }
  ++runGeneration;cancelDeathTimers();cancelDrowningDeath();cancelImpactDeath();$('flash').style.opacity='0';
+ deathCameraBlend=0;deathCameraZoom=1;camera.zoom=cameraZoom/100;camera.updateProjectionMatrix();
  $('retry').disabled=false;queue.length=0;state='menu';
  // Hide projected shadow circles immediately, before the new menu rows load.
  for(const {inst} of sunShadowGroups.values())inst.visible=false;
@@ -2748,11 +2753,23 @@ if(state==='playing'){
   updateGroundShadows();
  }
 }else lastShadowCameraBand=NaN;
-let targetZ=state==='menu'?-3:-camSmooth-3.0;
+// Fast, eased death focus, followed by an automatic background return.
+ // This multiplier does not change the saved zoom slider or cameraZoom.
+ const cinematicDeath=state==='dying'&&!!player;
+ deathCameraBlend=THREE.MathUtils.damp(deathCameraBlend,cinematicDeath?1:0,cinematicDeath?12:7,dt);
+ deathCameraZoom=1+deathCameraBlend*1.25;
+ const desiredZoom=(cameraZoom/100)*deathCameraZoom;
+ if(Math.abs(camera.zoom-desiredZoom)>.0005){
+  camera.zoom=desiredZoom;
+  camera.updateProjectionMatrix();
+ }
+ let targetZ=state==='menu'?-3:-camSmooth-3.0;
+ if(player&&deathCameraBlend>.001)
+  targetZ=THREE.MathUtils.lerp(targetZ,player.position.z,deathCameraBlend*.93);
  // Soft horizontal camera follow: the dinosaur may roam within a dead zone
  // before the view starts chasing it. Movement can temporarily outrun camera.
  // Desktop retains the original fixed center at <=100% zoom.
- const horizontalFollow=(state==='playing'||state==='dying')&&player&&(phoneWideView||cameraZoom>100);
+ const horizontalFollow=(state==='playing'||state==='dying')&&player&&(phoneWideView||cameraZoom>100||deathCameraBlend>.001);
  if(horizontalFollow){
   const halfView=(camera.right-camera.left)/(2*camera.zoom);
   const deadZone=Math.min(1.55,Math.max(.60,halfView*.22));
@@ -2771,8 +2788,9 @@ let targetZ=state==='menu'?-3:-camSmooth-3.0;
    camSide=player.position.x-Math.sign(offset)*maxOffset;
   camSide=THREE.MathUtils.clamp(camSide,-7,7);
  }else camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
- const side=camSide;
- const target=new THREE.Vector3(side,0,targetZ);
+ const side=THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
+ const focusY=player?THREE.MathUtils.clamp(player.position.y+.48,-.30,3.8)*deathCameraBlend*.70:0;
+ const target=new THREE.Vector3(side,focusY,targetZ);
  camera.position.set(12+side,18,targetZ+21);
  camera.lookAt(target);
  // Keep the directional shadow-map coverage centered on the visible rows.
@@ -2788,7 +2806,7 @@ function resize(){
  const viewH=aspect<.75?19:17,viewW=viewH*aspect;
  camera.left=-viewW/2;camera.right=viewW/2;
  camera.top=viewH/2;camera.bottom=-viewH/2;
- camera.zoom=cameraZoom/100;
+ camera.zoom=(cameraZoom/100)*deathCameraZoom;
  camera.updateProjectionMatrix();
 }window.addEventListener('resize',resize);resize();function frame(){requestAnimationFrame(frame);let dt=Math.min(clock.getDelta(),.05),t=performance.now()/1000;update(dt,t)}
 function refreshControls(){const arrows=controlMode==='arrows';$('dpad').classList.toggle('visible',arrows);$('touchHint').classList.toggle('arrowHint',arrows);$('controlMode').value=controlMode;}
