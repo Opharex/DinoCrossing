@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Natural Dirt Stampede Trail with Dinosaur Footprints">🦖 NEW STAMPEDE TRAIL! 🐾</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Walkable Water Runoff and Volcanic Surge Paths">🌊 NEW SURGE FLOORS! 🌋</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -287,7 +287,7 @@ function updateSunBlobs(){
  // They are intentionally hidden in every game state.
  for(const sh of sunBlobList)if(sh.visible)sh.visible=false;
 }
-const mat=c=>new THREE.MeshLambertMaterial({color:c,flatShading:true});const materials={grass:[mat(0x80c85c),mat(0x91d269),mat(0x77bc57)],path:mat(0xd5a66b),wornGrass:mat(0x82965b),stampedeDirt:mat(0xa87846),stampedeTrack:mat(0x795331),stampedePebble:mat(0x8f8068),wornTrack:mat(0x8c8660),wornPatch:mat(0x6a8150),river:mat(0x4db4d6),lava:mat(0xef6a2b),tar:mat(0x605b51),stone:mat(0x797a77),wood:mat(0x966143),leaf:mat(0x3c9d59),fern:mat(0x39a660),amber:mat(0xffc94d),white:mat(0xffffff),black:mat(0x172c31),horn:mat(0xffe6a0)};const cubeGeo=new THREE.BoxGeometry(1,1,1),sphereGeo=new THREE.IcosahedronGeometry(1,0),coneGeo=new THREE.ConeGeometry(1,1,5);function box(parent,m,x,y,z,w,h,d){let o=new THREE.Mesh(cubeGeo,m);o.position.set(x,y,z);o.scale.set(w,h,d);o.castShadow=true;o.receiveShadow=false;parent.add(o);return o}function ball(parent,m,x,y,z,sx,sy,sz){let o=new THREE.Mesh(sphereGeo,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=true;parent.add(o);return o}function cone(parent,m,x,y,z,r,h){let o=new THREE.Mesh(coneGeo,m);o.position.set(x,y,z);o.scale.set(r,h,r);o.castShadow=true;parent.add(o);return o}
+const mat=c=>new THREE.MeshLambertMaterial({color:c,flatShading:true});const materials={grass:[mat(0x80c85c),mat(0x91d269),mat(0x77bc57)],path:mat(0xd5a66b),wornGrass:mat(0x82965b),stampedeDirt:mat(0xa87846),stampedeTrack:mat(0x795331),stampedePebble:mat(0x8f8068),waterbed:mat(0x736f60),waterStone:mat(0x958e7c),waterSeam:mat(0x3b8296),waterMoss:mat(0x658351),lavaBed:mat(0x37343a),lavaStone:mat(0x51434a),lavaSeam:mat(0xe65b19),lavaAsh:mat(0x78635b),wornTrack:mat(0x8c8660),wornPatch:mat(0x6a8150),river:mat(0x4db4d6),lava:mat(0xef6a2b),tar:mat(0x605b51),stone:mat(0x797a77),wood:mat(0x966143),leaf:mat(0x3c9d59),fern:mat(0x39a660),amber:mat(0xffc94d),white:mat(0xffffff),black:mat(0x172c31),horn:mat(0xffe6a0)};const cubeGeo=new THREE.BoxGeometry(1,1,1),sphereGeo=new THREE.IcosahedronGeometry(1,0),coneGeo=new THREE.ConeGeometry(1,1,5);function box(parent,m,x,y,z,w,h,d){let o=new THREE.Mesh(cubeGeo,m);o.position.set(x,y,z);o.scale.set(w,h,d);o.castShadow=true;o.receiveShadow=false;parent.add(o);return o}function ball(parent,m,x,y,z,sx,sy,sz){let o=new THREE.Mesh(sphereGeo,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=true;parent.add(o);return o}function cone(parent,m,x,y,z,r,h){let o=new THREE.Mesh(coneGeo,m);o.position.set(x,y,z);o.scale.set(r,h,r);o.castShadow=true;parent.add(o);return o}
 
 // V1.2 procedural art kit. Every piece is real 3D geometry, no external models.
 const palette=(...cs)=>cs.map(c=>new THREE.MeshLambertMaterial({color:c,flatShading:true}));
@@ -1078,7 +1078,7 @@ function makeRow(y){
  if(beginsPool){poolRowsRemaining=2;poolType=type;poolDirection=Math.random()<.5?1:-1;}
  const poolIndex=beginsPool?0:continuingPool?2-poolRowsRemaining:-1;
  const laneDirection=poolIndex>=0?poolDirection:Math.random()<.5?1:-1;
- let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,type==='stampede'?materials.stampedeDirt:(type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.wornGrass:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
+ let group=new THREE.Group();group.position.z=-y;world.add(group);let ground=box(group,type==='stampede'?materials.stampedeDirt:type==='flashflood'?materials.waterbed:type==='lavasurge'?materials.lavaBed:type==='path'?materials.wornGrass:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3],0,(type==='river'||type==='lava')?-.40:-.19,0,ROW_W,.36,1);ground.castShadow=false;ground.receiveShadow=true;
 // TEMPORARY FLOOR-BOUND GRID: each line is part of the actual ground mesh.
 const floorGridMat=new THREE.MeshBasicMaterial({color:tileGridColor,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
 const floorGrid=new THREE.Group();
@@ -1094,14 +1094,14 @@ floorGrid.position.y=.5;
 floorGrid.visible=tileGridEnabled;ground.add(floorGrid);ground.userData.floorGrid=floorGrid;group.userData.floorGrid=floorGrid;
 if(type==='grass'||type==='forest'||type==='sky'){for(let k=0;k<4;k++){let xx=Math.sin(y*13.2+k*17.7)*7.1;let patch=box(group,materials.grass[(((y+k+1)%3)+3)%3],xx,.005,Math.sin(k*7+y)*.27,.38,.012,.24);patch.rotation.y=k*.75;patch.castShadow=false}}if(type==='river'||type==='lava'){ground.material=ground.material.clone();ground.material.color=ground.material.color.clone();if(poolIndex===-1||poolIndex===1)liquidSurface(group,type,laneDirection>0?-LIQUID_INLET_END:-LIQUID_OUTFALL_START,laneDirection>0?LIQUID_OUTFALL_START:LIQUID_INLET_END,poolIndex===1?2.98:.98,LIQUID_LANE_Y,42,poolIndex===1?10:4,y*.47,laneDirection)}if(type==='river'||type==='lava'){ground.userData.liquid=type}// Decorative side terrain: visually continues each biome, but stays outside the playable grid.
 // These strips never enter row.solid, moving hazards, collectibles or collision checks.
-const sideMat=type==='stampede'?materials.stampedeDirt:(type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.wornGrass:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3];
+const sideMat=type==='stampede'?materials.stampedeDirt:type==='flashflood'?materials.waterbed:type==='lavasurge'?materials.lavaBed:type==='path'?materials.wornGrass:type==='river'?materials.river:type==='lava'?materials.lava:type==='tar'?materials.tar:materials.grass[((y%3)+3)%3];
 for(const side of [-1,1]){
   const edgeX=side*14.5;
   // Liquid channels own this off-grid space: grass here obscured the lower outflow.
   if(type!=='river'&&type!=='lava'){
    // Preserve liquid pool containers: this branch is never used by river/lava.
    // Trail and cobblestone lanes stay level with the surrounding ground.
-   const laneMat=type==='stampede'?materials.stampedeDirt:(type==='lavasurge'||type==='flashflood')?materials.stone:type==='path'?materials.wornGrass:null;
+   const laneMat=type==='stampede'?materials.stampedeDirt:type==='flashflood'?materials.waterbed:type==='lavasurge'?materials.lavaBed:type==='path'?materials.wornGrass:null;
    const extension=box(group,laneMat||materials.grass[(((y+1)%3)+3)%3],edgeX,-.19,0,14,.36,1);
    // Small irregular grassy verge near the outer edge, rather than a hard wall.
    if(laneMat){
@@ -1196,24 +1196,13 @@ if(type==='tar'){
 }
 // Low-relief individual ground tiles; only visuals and rider elevation change.
 if(type!=='river'&&type!=='lava'){
- const tileMat=(type==='path')?materials.wornGrass:(type==='tar')?materials.tar:type==='stampede'?materials.stampedeDirt:(type==='lavasurge'||type==='flashflood')?materials.stone:materials.grass[((y%3)+3)%3];
+ const tileMat=(type==='path')?materials.wornGrass:(type==='tar')?materials.tar:type==='stampede'?materials.stampedeDirt:type==='flashflood'?materials.waterbed:type==='lavasurge'?materials.lavaBed:materials.grass[((y%3)+3)%3];
  for(let x=LEFT;x<=RIGHT;x++){
   if(row.solid.has(x)||row.tarSlots?.includes(x)||Math.random()>.38)continue;
   const elevation=.105+Math.random()*.065;
   row.raised.set(x,elevation);
   const tile=box(group,tileMat,x,elevation/2,0,.98,elevation,.98);
   tile.castShadow=true;tile.receiveShadow=true;
-  if(type==='lavasurge'||type==='flashflood'){
-    // Pebble outlines are carried up with the block, not buried underneath it.
-    const cobblePalette=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
-    for(let u=0;u<3;u++)for(let v=0;v<2;v++){
-      const n=Math.abs(Math.sin(y*27.3+x*11.8+u*4.77+v*9.12));
-      const stone=new THREE.Mesh(cachedGeo('raised:cobble',()=>new THREE.BoxGeometry(1,1,1)),
-        new THREE.MeshLambertMaterial({color:cobblePalette[Math.floor(n*cobblePalette.length)]}));
-      stone.position.set(x+(u-1)*.30+(v?.045:0),elevation+.008,(v? .245:-.245));
-      stone.scale.set(.265,.025,.40);stone.rotation.y=(n-.5)*.12;group.add(stone);
-    }
-  }
  }
 }
 if(type==='river'||type==='lava'){
@@ -1255,20 +1244,50 @@ if(type==='tar'){
   // Unique positions ensure every tar pit is an obvious, avoidable lethal tile.
   row.tarPits=[];
   for(let i=0;i<(row.tarSlots?.length||0);i++)row.tarPits.push(makeTar(group,row.tarSlots[i],y*17+i));
-}if(type==='lavasurge'||type==='flashflood'){
-  // Stone-paved lane remains recognizable between surge and flood events.
-  // Individual low-poly cobbles use shared materials and geometry for mobile FPS.
-  const cobbleColors=[0x77776f,0x929087,0x686c68,0xaaa69b,0x7d817b];
-  const cobbleMats=cobbleColors.map(color=>new THREE.MeshLambertMaterial({color,flatShading:true}));
-  const cobbleGeo=cachedGeo('hazard:cobble',()=>new THREE.BoxGeometry(1,1,1));
-  for(let col=0;col<86;col++)for(let band=0;band<2;band++){
-    const seed=Math.abs(Math.sin(y*41.13+col*13.79+band*7.31));
-    const x=-21.26+col*.5+(band?.10:0),z=(band? .245:-.245);
-    const stone=new THREE.Mesh(cobbleGeo,cobbleMats[Math.floor(seed*cobbleMats.length)]);
-    stone.position.set(x,(row.raised.get(Math.round(x))||0)+.012+seed*.008,z);stone.scale.set(.43,.042,.39);stone.rotation.y=(seed-.5)*.15;
-    group.add(stone);
-  }
-
+}// Walkable surge lanes are DRY between events. Their flat decorative seams
+// imply repeated water runoff / volcanic heat, without introducing liquid
+// collision or touching the separate river/lava pool containers.
+if(type==='flashflood'||type==='lavasurge'){
+ const wet=type==='flashflood';
+ const tileGeo=cachedGeo('surge:unitTile',()=>new THREE.BoxGeometry(1,1,1));
+ const palette=wet
+  ?[materials.waterStone,materials.waterSeam,materials.waterMoss,materials.waterbed]
+  :[materials.lavaStone,materials.lavaSeam,materials.lavaAsh,materials.lavaBed];
+ const counts=[90,90,35,45],batches=counts.map((count,i)=>{
+  const m=new THREE.InstancedMesh(tileGeo,palette[i],count);
+  m.castShadow=false;m.receiveShadow=false;group.add(m);return m;
+ });
+ const dummy=new THREE.Object3D();
+ for(let i=0;i<90;i++){
+  const n=Math.abs(Math.sin(y*13.17+i*6.73));
+  const x=-21.15+i*.475,z=(i%3-1)*.27;
+  const height=(row.raised.get(Math.round(x))||0);
+  // Irregular polygon-like slabs, raised by only a few millimeters.
+  dummy.position.set(x,height+.013,z);
+  dummy.rotation.set(0,(n-.5)*.34,0);
+  dummy.scale.set(.33+n*.17,.018,.25+n*.14);
+  dummy.updateMatrix();batches[0].setMatrixAt(i,dummy.matrix);
+  // Thin blue runoff traces or orange heat fissures between solid slabs.
+  dummy.position.set(x+.20,height+.010,z+.09);
+  dummy.rotation.set(0,(n-.5)*.85,0);
+  dummy.scale.set(.045+n*.035,.009,.13+n*.17);
+  dummy.updateMatrix();batches[1].setMatrixAt(i,dummy.matrix);
+ }
+ for(let i=0;i<35;i++){
+  const n=Math.abs(Math.sin(y*7.93+i*9.17));
+  dummy.position.set(-20.9+i*1.21,.015,(n-.5)*.72);
+  dummy.rotation.set(0,n*2,0);
+  dummy.scale.set(.13+n*.12,.012,.11+n*.11);
+  dummy.updateMatrix();batches[2].setMatrixAt(i,dummy.matrix);
+ }
+ for(let i=0;i<45;i++){
+  const n=Math.abs(Math.sin(y*19.33+i*4.19));
+  dummy.position.set(-20.9+i*.95,.009,(n-.5)*.78);
+  dummy.rotation.set(0,n*1.4,0);
+  dummy.scale.set(.09+n*.14,.012,.08+n*.11);
+  dummy.updateMatrix();batches[3].setMatrixAt(i,dummy.matrix);
+ }
+ for(const m of batches)m.instanceMatrix.needsUpdate=true;
 }
 // Lightweight, flat dinosaur footprints and scattered stones across the
 // entire extended stampede lane. Visual only, no changes to collision geometry.
