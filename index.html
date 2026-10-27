@@ -116,7 +116,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Fixed Startup Crash and Tar Pit Generation">🦖 BACK TO THE JUNGLE! 🌿</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Flowing Water Lava and Matching Platform Physics">🌊 LIQUID IN MOTION! 🔥</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -596,6 +596,21 @@ function animateLiquidSurface(info,time,dir){
  }
  pos.needsUpdate=true;info.mesh.geometry.computeVertexNormals();
 }
+// The animated waterfall sheets, foam and particles share one smooth height.
+function flowingLiquidHeight(x,dir){
+ const a=x*dir,smooth=p=>p*p*(3-2*p);
+ if(a<=-LIQUID_INLET_START)return LIQUID_FEEDER_Y;
+ if(a<-LIQUID_INLET_END){
+  const p=(-a-LIQUID_INLET_END)/(LIQUID_INLET_START-LIQUID_INLET_END);
+  return LIQUID_LANE_Y+(LIQUID_FEEDER_Y-LIQUID_LANE_Y)*smooth(p);
+ }
+ if(a<=LIQUID_OUTFALL_START)return LIQUID_LANE_Y;
+ if(a<LIQUID_OUTFALL_END){
+  const p=(a-LIQUID_OUTFALL_START)/(LIQUID_OUTFALL_END-LIQUID_OUTFALL_START);
+  return LIQUID_LANE_Y+(LIQUID_LOWER_Y-LIQUID_LANE_Y)*smooth(p);
+ }
+ return LIQUID_LOWER_Y;
+}
 // Both waterfall surfaces use the same wave phase as adjacent pools, joining at exact vertices.
 function createSpillingFlow(group,type,dir,seed,zWidth=.98,inlet=false){
  const bands=20,lines=zWidth>2?10:4,verts=new Float32Array((bands+1)*(lines+1)*3),indices=[];
@@ -651,14 +666,25 @@ function makeLiquidSpillway(group,row,span=1){
   const inlet=edge<2,top=edge%2===0;
   const lip=inlet?(top?LIQUID_INLET_START:LIQUID_INLET_END):(top?LIQUID_OUTFALL_START:LIQUID_OUTFALL_END);
   const sign=inlet?source:dir,y=inlet?(top?LIQUID_FEEDER_Y:LIQUID_LANE_Y):(top?LIQUID_LANE_Y:LIQUID_LOWER_Y);
-  for(let k=0;k<perEdge;k++)foamData.push({x:sign*(lip+(top?-.05:.08)+.10*Math.sin(k*2.7)),z:(k/(perEdge-1)-.5)*waterWidth,baseY:y+.018,seed:k*.85+edge*1.6,width:.095+(k%3)*.03,depth:.07+(k%4)*.018});
+  for(let k=0;k<perEdge;k++){
+   const jitter=.045*Math.sin(k*2.7);
+   // The splash lives on the surface, INSIDE the correct pool or cascade.
+   const x=inlet?sign*(top?LIQUID_INLET_START-.13+jitter:LIQUID_INLET_END-.13+jitter):
+    sign*(top?LIQUID_OUTFALL_START-.14+jitter:LIQUID_OUTFALL_END+.15+jitter);
+   foamData.push({x,z:(k/(perEdge-1)-.5)*(waterWidth-.06),seed:k*.85+edge*1.6,width:.095+(k%3)*.03,depth:.07+(k%4)*.018});
+  }
  }
  const foamMesh=new THREE.InstancedMesh(liquidCurtainGeo,sprayMat,foamData.length);
  foamMesh.frustumCulled=false;group.add(foamMesh);
  const bubbleData=[];
  for(let edge=0;edge<2;edge++){
   const count=wide?42:21,sign=edge===0?source:dir,baseX=edge===0?LIQUID_INLET_END:LIQUID_OUTFALL_END,baseY=edge===0?LIQUID_LANE_Y:LIQUID_LOWER_Y;
-  for(let k=0;k<count;k++)bubbleData.push({x:sign*(baseX+.13+(k*.31)%1*.62),z:((k*.61803398875)%1-.5)*waterWidth,baseY,phase:k*1.87+edge*.9,width:.034+(k%3)*.014,depth:.033+(k%4)*.012});
+  for(let k=0;k<count;k++){
+   const distance=.13+((k*.31)%1)*.60;
+   // Landing bubbles belong in the low receiving water, never inside the cliff.
+   const x=sign*(edge===0?baseX-distance:baseX+distance);
+   bubbleData.push({x,z:((k*.61803398875)%1-.5)*(waterWidth-.08),phase:k*1.87+edge*.9,width:.034+(k%3)*.014,depth:.033+(k%4)*.012});
+  }
  }
  const bubbleMesh=new THREE.InstancedMesh(foamBubbleGeo,sprayMat,bubbleData.length);
  bubbleMesh.frustumCulled=false;group.add(bubbleMesh);
@@ -683,14 +709,16 @@ function liquidLaneUpdate(row,time){
  }
  for(let i=0;i<foamData.length;i++){
   const f=foamData[i],motion=time*(type==='river'?7:3.8)+f.seed;
-  liquidParticleDummy.position.set(f.x,f.baseY+Math.abs(Math.sin(motion))*.055,f.z);
+  const wave=liquidWave(f.x,f.z,time,dir,type,row.y*.47)*.8;
+  liquidParticleDummy.position.set(f.x,flowingLiquidHeight(f.x,dir)+wave+.035+Math.abs(Math.sin(motion))*.027,f.z);
   liquidParticleDummy.scale.set(f.width*(.85+.20*Math.sin(motion)),.023,f.depth);
   liquidParticleDummy.rotation.set(0,Math.sin(motion)*.22,0);liquidParticleDummy.updateMatrix();foamMesh.setMatrixAt(i,liquidParticleDummy.matrix);
  }
  foamMesh.instanceMatrix.needsUpdate=true;
  for(let i=0;i<bubbleData.length;i++){
   const b=bubbleData[i],phase=time*(type==='river'?4.4:2.2)+b.phase;
-  liquidParticleDummy.position.set(b.x,b.baseY+.03+Math.abs(Math.sin(phase))*.18,b.z+Math.sin(phase*.7)*.027);
+  const z=b.z+Math.sin(phase*.7)*.027;
+  liquidParticleDummy.position.set(b.x,flowingLiquidHeight(b.x,dir)+liquidWave(b.x,z,time,dir,type,row.y*.47)*.8+.037+Math.abs(Math.sin(phase))*.13,z);
   liquidParticleDummy.scale.set(b.width,.025+Math.abs(Math.cos(phase))*.040,b.depth);
   liquidParticleDummy.rotation.set(0,0,0);liquidParticleDummy.updateMatrix();bubbleMesh.setMatrixAt(i,liquidParticleDummy.matrix);
  }
@@ -1677,7 +1705,7 @@ if(state==='playing'||state==='menu'){
  for(const o of r.cosmeticChildren){
   if(o.userData.sway)o.rotation.z=Math.sin(gameTime*1.5+o.userData.seed)*.035;
   if(o.userData.flow!==undefined)o.position.x=o.userData.baseX+Math.sin(gameTime*1.25+o.userData.flow)*.33;
- }for(let m of r.moving){if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}else if(r.type!=='river'){m.mesh.position.y=Math.sin(gameTime*2+m.x)*.028;m.mesh.rotation.z=Math.sin(gameTime*1.7+m.x)*.009}}/* Amber collectible transforms stay fixed. No bobbing or rotation. */if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);
+ }for(let m of r.moving){if(m.bird){m.dangerDisc.position.x=m.x;m.dangerRing.position.x=m.x;m.dangerDisc.material.opacity=m.mesh.position.y<.95?.48:.23;m.dangerRing.material.color.setHex(m.mesh.position.y<.95?0xff463c:0xffe58b);m.mesh.position.y=1.5+1.15*Math.sin(gameTime*1.7)**2;m.mesh.rotation.z=Math.sin(gameTime*8)*.09;if(m.mesh.userData.wings)for(let [i,w] of m.mesh.userData.wings.entries())w.rotation.z=(i===0?1:-1)*Math.sin(gameTime*9)*.3}else if(!m.platform){m.mesh.position.y=Math.sin(gameTime*6+m.x)*.08;m.mesh.rotation.z=Math.sin(gameTime*5+m.x)*.035;let wp=m.mesh.userData.walkParts;if(wp){wp.legs.forEach((l,i)=>l.rotation.x=Math.sin(gameTime*7+m.x+i%2*Math.PI+Math.floor(i/2)*Math.PI)*.3);wp.head.rotation.x=Math.sin(gameTime*3+m.x)*.045;wp.tail.rotation.y=Math.sin(gameTime*3+m.x)*.12;wp.body.rotation.z=Math.sin(gameTime*7+m.x)*.025}}/* Both lava stones and wooden logs retain updateLogMotion physics. */}/* Amber collectible transforms stay fixed. No bobbing or rotation. */if(r.type==='river'||r.type==='lava'){let ground=r.group.children[0];ground.material.color.setHex(r.type==='river'?0x4db4d6:0xef6a2b);ground.material.color.multiplyScalar(.94+Math.sin(gameTime*2+r.y)*.06)}if(r.tarPits)for(let p of r.tarPits)for(let obj of p.mesh.children)if(obj.userData.tarBubble){const phase=gameTime*1.7+obj.userData.tarSeed;obj.scale.y=.75+.22*Math.sin(phase);obj.position.y=.105+.018*Math.sin(phase)}}if(state==='playing'&&avatar){avatar.rotation.z=THREE.MathUtils.damp(avatar.rotation.z,hop?Math.sin(hop.t*Math.PI)*.045:0,10,dt)}camSmooth=THREE.MathUtils.damp(camSmooth,camY,4.5,dt);
 // Visibility changes only when the camera enters a different row band.
 // Refresh newly exposed shadow instances without recalculating all rows each frame.
 if(state==='playing'){
