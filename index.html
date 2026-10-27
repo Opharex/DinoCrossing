@@ -2311,7 +2311,10 @@ function updateDrowningDeath(dt){
 const IMPACT_DEATH_DURATIONS={collision:.83,bird:1.36,flood:.96};
 let impactDeath=null;
 function cancelImpactDeath(){
- impactDeath=null; // No newly constructed scene meshes or materials to dispose.
+ // Return the original attacker to its row before world cleanup/retry.
+ if(impactDeath?.bird&&impactDeath.birdParent)
+  impactDeath.birdParent.attach(impactDeath.bird);
+ impactDeath=null;
 }
 function beginImpactDeath(kind,reason,detail){
  const row=rows.get(py);
@@ -2329,7 +2332,7 @@ function beginImpactDeath(kind,reason,detail){
   duration:IMPACT_DEATH_DURATIONS[kind],
   x:player.position.x,y:player.position.y,z:player.position.z,
   turn:avatar.rotation.y,roll:avatar.rotation.z,dir:direction,
-  bird:bird?.mesh||null,
+  bird:bird?.mesh||null,birdParent:bird?.mesh.parent||null,
   birdX:bird?.mesh.getWorldPosition(new THREE.Vector3()).x??0,
   birdY:bird?.mesh.getWorldPosition(new THREE.Vector3()).y??0,
   birdZ:bird?.mesh.getWorldPosition(new THREE.Vector3()).z??player.position.z,
@@ -2340,8 +2343,10 @@ function beginImpactDeath(kind,reason,detail){
   landed:false,secondSplash:false};
  state='dying';queue.length=0;hop=null;
  if(kind==='bird'&&bird){
-  // Keep the actual attacker in its original row, visible throughout
-  // the grab. Its position is now driven only by the death controller.
+  // Detach the actual attacker while retaining its exact world pose.
+  // Scene-root attachment prevents row culling from hiding the swoop.
+  row.group.updateWorldMatrix(true,true);
+  scene.attach(bird.mesh);
   bird.mesh.visible=true;
   row.group.visible=true;
  }
@@ -2385,7 +2390,7 @@ function updateImpactDeath(dt){
   // One continuous swoop from the actual bird's CURRENT location.
   // Approach from its original x/y/z, meet the dinosaur at grab time,
   // then move the attacker and its captive as one unit.
-  const grabAt=.37;
+  const grabAt=.46;
   const approach=Math.min(1,a/grabAt);
   const dive=approach*approach*(3-2*approach);
   const lift=Math.max(0,(a-grabAt)/(1-grabAt));
@@ -2397,14 +2402,11 @@ function updateImpactDeath(dt){
   const birdY=THREE.MathUtils.lerp(d.birdY,grabY,dive)+elevation;
   const birdZ=THREE.MathUtils.lerp(d.birdZ,grabZ,dive);
   if(d.bird){
-   // Parent-relative coordinates keep the bird on the same lane and
-   // prevent it from vanishing when the swoop begins.
-   const parent=d.bird.parent;
-   const world=new THREE.Vector3(birdX,birdY,birdZ);
-   if(parent)parent.worldToLocal(world);
-   d.bird.position.copy(world);
+   // World-space swoop from the original position, curved into a
+   // physical grab, then a shared ascent with the dinosaur.
+   d.bird.position.set(birdX,birdY+Math.sin(Math.PI*approach)*.38*(1-rise),birdZ);
    d.bird.visible=true;
-   d.bird.rotation.z=Math.sin(d.elapsed*14)*.11;
+   d.bird.rotation.z=Math.sin(d.elapsed*14)*.11-Math.sin(Math.PI*approach)*.25;
    const wings=d.bird.userData.wings;
    if(wings)for(let i=0;i<wings.length;i++)wings[i].rotation.z=
     (i===0?1:-1)*Math.sin(d.elapsed*22)*.65;
@@ -2782,7 +2784,11 @@ if(state==='playing'){
  // This multiplier does not change the saved zoom slider or cameraZoom.
  const cinematicDeath=state==='dying'&&!!player;
  deathCameraBlend=THREE.MathUtils.damp(deathCameraBlend,cinematicDeath?1:0,cinematicDeath?12:7,dt);
- deathCameraZoom=1+deathCameraBlend*1.25;
+ // Give the incoming bird room on screen before zooming close on grab.
+ const birdApproach=cinematicDeath&&impactDeath?.kind==='bird'
+  ?Math.min(1,impactDeath.elapsed/(impactDeath.duration*.46)):1;
+ deathCameraZoom=1+deathCameraBlend*1.25*(cinematicDeath&&impactDeath?.kind==='bird'
+  ?.30+.70*birdApproach:1);
  const desiredZoom=(cameraZoom/100)*deathCameraZoom;
  if(Math.abs(camera.zoom-desiredZoom)>.0005){
   camera.zoom=desiredZoom;
