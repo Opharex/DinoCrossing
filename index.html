@@ -1660,7 +1660,13 @@ function doMove(dx,dy){const fromX=px,sourceRow=rows.get(py),sourcePlatform=(sou
  }
  // Landing from a moving log or lava platform breaks any amber instantly.
  // Ground approach still respects the mosquito/spider multi-hit requirement.
- const landing=(r.type==='river'||r.type==='lava')?nearestPlatformTile(r,nx):null;if(landing)nx=landing.center;hop={fromX:fromX,fromY:py,fromHeight:player.position.y,fromRoll:player.rotation.z,toX:nx,toY:ny,targetPlatform:landing?.platform||null,targetIndex:landing?.index??-1,t:0,turnFrom:avatar.rotation.y,turnTo:dx>0?Math.PI/2:dx<0?-Math.PI/2:dy>0?Math.PI:0};px=nx;py=ny;fx('hop')}// Visible player bounds include facing and hop squash/stretch, excluding the shadow.
+ // On a forward hop off a moving tile, compare the two PHYSICAL tile
+ // centers. Rounding the source X first can report no overlap even when
+ // their visible edges really do overlap (or falsely accept a near miss).
+ const landingAimX=sourcePlatform&&dy!==0?tileX:nx;
+ const landing=(r.type==='river'||r.type==='lava')?nearestPlatformTile(r,landingAimX):null;
+ if(landing)nx=landing.center;
+ hop={fromX:fromX,fromY:py,fromHeight:player.position.y,fromRoll:player.rotation.z,toX:nx,aimX:landingAimX,toY:ny,targetPlatform:landing?.platform||null,targetIndex:landing?.index??-1,t:0,turnFrom:avatar.rotation.y,turnTo:dx>0?Math.PI/2:dx<0?-Math.PI/2:dy>0?Math.PI:0};px=nx;py=ny;fx('hop')}// Visible player bounds include facing and hop squash/stretch, excluding the shadow.
 const playerHitBounds=new THREE.Box3();
 function playerOverlaps(x,center,halfWidth){
   if(!player||!avatar)return false;
@@ -1867,7 +1873,7 @@ if(state==='playing'||state==='menu'){
  if(!hop.targetPlatform&&hop.t>=.50){
   const row=rows.get(hop.toY);
   if(row&&(row.type==='river'||row.type==='lava')){
-   const lateLanding=nearestPlatformTile(row,hop.toX);
+   const lateLanding=nearestPlatformTile(row,hop.aimX??hop.toX);
    if(lateLanding){hop.targetPlatform=lateLanding.platform;hop.targetIndex=lateLanding.index;}
   }
  }
