@@ -79,7 +79,15 @@
 #select #roster .shopSpeciesCopy{flex:1;min-width:0}
 #select .shopFeature{grid-template-columns:minmax(0,1.35fr) minmax(185px,.9fr);position:relative;top:auto;min-height:300px}
 #select .shopStage{min-height:295px}
-#select #skinVariants{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#select #skinVariants{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media(max-width:700px){#select #skinVariants{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#select #skinVariants button.skeletonSkin{border-color:#c8bca1;background:linear-gradient(#5b5249,#292824);position:relative}
+#select #skinVariants button.selected.skeletonSkin{border-color:#fff3cf;background:linear-gradient(#77715a,#404537)}
+#select #skinVariants button.skeletonSkin:focus-visible::after,#select #skinVariants button.skeletonSkin:hover::after{
+ content:attr(data-requirements);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);
+ min-width:190px;max-width:230px;white-space:normal;padding:9px;background:#1c2520;color:#fff3d0;
+ border:2px solid #d8c7a0;border-radius:9px;box-shadow:0 5px 14px #000b;z-index:45;font-size:12px;pointer-events:none}
+#select #fossilRequirements{margin:11px 0 7px;padding:10px;border-radius:10px;border:1px solid #c4b08b;background:#222b23;color:#f3e5c5;line-height:1.5;font-size:13px}
 #select #skinVariants button{border:3px solid #826b4a;min-width:0;min-height:135px;border-radius:14px;margin:0;box-shadow:0 4px #1d1812;background:linear-gradient(#55422e,#29241d);padding:9px 4px;color:#fff1cd;display:flex;flex-direction:column;align-items:center;gap:3px;justify-content:center;font-size:13px}
 #select #skinVariants button.selected{border-color:#ffe28b;background:linear-gradient(#617642,#2e472a);box-shadow:0 0 12px #e2ed7380}
 #select #skinVariants button.techSkin{border-color:#497e8b}
@@ -126,9 +134,9 @@ body.loading-active #menu{display:none!important}
  <section class="shopDetail">
   <div class="shopFeature">
    <div class="shopStage" id="shopStage"><div class="shopStageSky"></div><canvas id="shopCanvas" aria-label="3D dinosaur preview"></canvas><div class="shopStageCaption">↻ DRAG TO ROTATE</div></div>
-   <div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">Original, Tech and Chrome use the same shape and hitbox.</div></div>
+   <div class="shopInfo"><div class="shopInfoEyebrow">DINOSAUR SHOWCASE</div><h2 id="shopName">T. Rex</h2><div id="shopStatus">EQUIPPED</div><div id="fossilRequirements" aria-live="polite" style="display:none"></div><p id="shopDescription">Your prehistoric adventure begins here.</p><button id="shopAction">EQUIPPED</button><div class="shopFootnote">All four skins use the same movement and collision rules.</div></div>
   </div>
-  <div class="shopListHeading">CHOOSE SKIN <span>ORIGINAL · TECH · CHROME</span></div>
+  <div class="shopListHeading">CHOOSE SKIN <span>ORIGINAL · TECH · CHROME · SKELETON</span></div>
   <div id="skinVariants" aria-label="Available skins for selected dinosaur"></div>
  </section>
 </div></div><div class="panel hidden" id="options"><h2>SETTINGS</h2><button id="testAudio" type="button" class="secondary" style="width:100%;margin:8px 0 16px;background:#327a66">🔊 TEST SOUND</button><div id="audioStatus" class="help" style="margin-bottom:12px" aria-live="polite">Tap TEST SOUND to check audio.</div><p>Master volume</p><input id="masterVolume" aria-label="Master volume" type="range" min="0" max="100" value="85"><p>Sound effects</p><input id="sfx" aria-label="Sound effects volume" type="range" min="0" max="100" value="100"><p>Music</p><input id="music" aria-label="Music volume" type="range" min="0" max="100" value="42"><p>Environment ambience</p><input id="ambience" aria-label="Environment ambience volume" type="range" min="0" max="100" value="28"><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe / Tap</option><option value="arrows">On-screen arrow keys</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Arrow keys appear at the bottom during gameplay. Keyboard controls always work.</p><div class="settingRow"><label for="lightingMode">Day / night cycle</label><select id="lightingMode" aria-label="Day and night cycle timing"><option value="score">Tiles crossed</option><option value="clock">Independent clock</option></select></div><p class="help" style="margin-top:-6px;text-align:left">Independent clock: a full day and night every 3 minutes of active play, even when you stand still. Pauses when the game is paused.</p><div class="settingRow"><label for="cameraZoom">Camera zoom <strong id="zoomValue" style="color:#f8dd8f">100%</strong></label><input id="cameraZoom" aria-label="Camera zoom" type="range" min="70" max="170" step="5" value="100" style="width:min(55%,230px)"></div><p class="help" style="margin-top:-6px;text-align:left">100% is the original camera view. Zoom in for a closer view with relaxed side-follow; the camera eases after your dinosaur moves away from center.</p><div class="settingRow"><label for="quality">Graphics quality</label><select id="quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div><div class="settingRow"><label for="tileGridEnabled">Show tile grid</label><input id="tileGridEnabled" type="checkbox" style="width:22px;height:22px"></div><div class="settingRow"><label for="tileGridColor">Tile grid color</label><input id="tileGridColor" type="color" value="#00ffeb" style="width:58px;height:38px;padding:2px;cursor:pointer"></div><div class="settingRow"><label for="showFps">Show FPS</label><input id="showFps" type="checkbox" style="width:22px;height:22px"></div><button id="optionsBack">BACK</button></div></div><div id="loadingScreen" role="status" aria-live="polite" aria-label="DinoCrossing loading">
@@ -165,8 +173,19 @@ try {
   }
 }
 const $=id=>document.getElementById(id), panels=['menu','dead','paused','select','options'];const show=id=>{const previous=panels.find(p=>!$(p).classList.contains('hidden'));if(previous!==id&&audioCtx?.state==='running')fx(id?'open':'close',.55);panels.forEach(p=>$(p).classList.toggle('hidden',p!==id));$('hud').style.display=id?'none':'block'};
-const saveKey='dino-crossing-v2';let saved={};try{saved=JSON.parse(localStorage.getItem(saveKey)||'{}')}catch{};let best=saved.best||0,bank=saved.bank||0,unlocked=new Set(saved.unlocked||[0]),chosen=saved.chosen||0;let lightingMode=saved.lightingMode==='clock'?'clock':'score',lightingClockProgress=0;
-let quality=saved.quality||'medium',showFps=!!saved.showFps,controlMode=saved.controlMode==='arrows'?'arrows':'swipe',cameraZoom=Number.isFinite(+saved.cameraZoom)?Math.max(70,Math.min(170,+saved.cameraZoom)):100,settingsFromPause=false,tileGridEnabled=!!saved.tileGridEnabled,tileGridColor=/^#[0-9a-fA-F]{6}$/.test(saved.tileGridColor||'')?saved.tileGridColor:'#00ffeb';const persist=()=>{try{localStorage.setItem(saveKey,JSON.stringify({best,bank,unlocked:[...unlocked],chosen,sfx:+$('sfx').value,music:+$('music').value,masterVolume:+$('masterVolume').value,ambience:+$('ambience').value,quality,showFps,controlMode,cameraZoom,lightingMode,tileGridEnabled,tileGridColor}))}catch{}};
+const saveKey='dino-crossing-v2';let saved={};try{saved=JSON.parse(localStorage.getItem(saveKey)||'{}')}catch{};let best=saved.best||0,bank=saved.bank||0,unlocked=new Set(saved.unlocked||[0]),chosen=saved.chosen||0;
+// Bit masks for each species: skull=1, ribs=2, legs=4. Missing keys in old
+// saves remain empty; preserve all existing purchases, Amber and settings.
+const fossilParts=Array.from({length:9},(_,i)=>{
+ const raw=Array.isArray(saved.fossilParts)?saved.fossilParts[i]:undefined;
+ return Number.isInteger(raw)&&raw>=0&&raw<=7?raw:0;
+});
+const FOSSIL_NAMES=['Skull','Ribs','Legs'],FOSSIL_BITS=[1,2,4],SKELETON_PRICE=500;
+const fossilMask=base=>fossilParts[base]||0;
+const fossilReady=base=>fossilMask(base)===7;
+const fossilNeeds=base=>FOSSIL_NAMES.filter((_,i)=>!(fossilMask(base)&FOSSIL_BITS[i]));
+const isSkeletonSkin=id=>id>=27&&id<36;let lightingMode=saved.lightingMode==='clock'?'clock':'score',lightingClockProgress=0;
+let quality=saved.quality||'medium',showFps=!!saved.showFps,controlMode=saved.controlMode==='arrows'?'arrows':'swipe',cameraZoom=Number.isFinite(+saved.cameraZoom)?Math.max(70,Math.min(170,+saved.cameraZoom)):100,settingsFromPause=false,tileGridEnabled=!!saved.tileGridEnabled,tileGridColor=/^#[0-9a-fA-F]{6}$/.test(saved.tileGridColor||'')?saved.tileGridColor:'#00ffeb';const persist=()=>{try{localStorage.setItem(saveKey,JSON.stringify({best,bank,unlocked:[...unlocked],chosen,sfx:+$('sfx').value,music:+$('music').value,masterVolume:+$('masterVolume').value,ambience:+$('ambience').value,quality,showFps,controlMode,cameraZoom,lightingMode,tileGridEnabled,tileGridColor,fossilParts:[...fossilParts]}))}catch{}};
 $('sfx').value=saved.sfx??100;$('music').value=saved.music??42;$('masterVolume').value=saved.masterVolume??85;$('ambience').value=saved.ambience??28;
 for(const id of ['sfx','music','masterVolume','ambience']){ $(id).addEventListener('input',()=>{if(typeof mixSync==='function')mixSync();if(typeof musicSync==='function')musicSync()});$(id).addEventListener('change',()=>{saved[id]=+$(id).value;persist()}) }$('quality').value=quality;
 $('cameraZoom').value=cameraZoom;
@@ -193,7 +212,9 @@ const species=[['T. Rex',0,0x5dbb63],['Velociraptor',20,0x4ac8b1],['Triceratops'
 species.push(...species.slice(0,9).map(([name,,color])=>['Tech '+name,150,color]));
 // Chrome starts at ID 18, preserving every existing save and unlock.
 species.push(...species.slice(0,9).map(([name,,color])=>['Chrome '+name,200,color]));
-const shopOrder=Array.from({length:9},(_,i)=>[i,i+9,i+18]).flat();
+// New Skeleton IDs 27..35. Earlier skin IDs 0..26 never change.
+species.push(...species.slice(0,9).map(([name,,color])=>['Skeleton '+name,SKELETON_PRICE,color]));
+const shopOrder=Array.from({length:9},(_,i)=>[i,i+9,i+18,i+27]).flat();
 // Previously equipped Prime skins were removed from the roster.
 if(!Number.isInteger(chosen)||chosen<0||chosen>=species.length)chosen=0;
 
@@ -1969,6 +1990,7 @@ const shopDescriptions=[
 ];
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Tech edition: metallic armor, cyan accents, energy seams and glowing eyes. '+text));
 shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Chrome edition: pure white armor and glowing red eyes. '+text));
+shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Skeleton edition: exposed ivory bones, hollow rib cage and empty dark eye sockets. '+text));
 
 let inspected=chosen,selectedShopSpecies=chosen%9,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
 function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
