@@ -124,7 +124,7 @@ body.loading-active #menu{display:none!important}
 #loadingScreen .loadingRetry{display:none;margin:12px auto 0;background:#ce8b45;box-shadow:0 4px #8d512d}
 #loadingScreen.failed .loadingError,#loadingScreen.failed .loadingRetry{display:block}
 @media(max-height:620px){#loadingScreen{padding-bottom:16px}#loadingScreen .loadingPanel{padding:11px 14px}#loadingScreen h2{font-size:23px}#loadingScreen .loadingStatus{margin:6px 0}#loadingScreen .loadingTrack{height:20px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Closer Advancing Danger Zone and Centered Camera Pursuit">🌑 DANGER IS CLOSER! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#284b36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Dino Crossing"><link rel="icon" href="./icons/icon-192.png" sizes="192x192"></head><body class="loading-active"><div id="ui"><div id="hud"><div id="score">0</div><div id="amber">🟠 0</div><button id="pause">Ⅱ</button><div id="toast"></div><div id="fps">FPS --</div><div id="flash"></div><div id="touchHint">SWIPE TO HOP • TAP TO MOVE FORWARD</div><div id="dpad" aria-label="Movement arrow controls"><button class="up" data-dx="0" data-dy="1" aria-label="Move forward">▲</button><button class="left" data-dx="-1" data-dy="0" aria-label="Move left">◀</button><button class="down" data-dx="0" data-dy="-1" aria-label="Move backward">▼</button><button class="right" data-dx="1" data-dy="0" aria-label="Move right">▶</button></div></div><div id="menu" class="menuScene"><div class="menuShade"></div><div class="menuHeader"><h1>🦖 DINO<br><span>CROSSING</span></h1><div class="updateSplash" id="updateSplash" aria-label="Latest update: Tar Pit Sinking and Charred Lava Surge Death Animations">🌋 CHARRED AND STUCK! 🦖</div></div><div class="menuBottom"><div class="menuStats"><div>🏆 BEST <strong id="menuBest">0</strong></div><div>🟠 AMBER <strong id="menuAmber">0</strong></div></div><button id="play" class="menuPlay">▶ &nbsp; PLAY</button><div class="menuActions"><button id="characters" class="secondary">🦕 DINOSAURS</button><button id="settings" class="secondary">⚙ SETTINGS</button></div></div></div><div class="panel hidden" id="dead"><h1>EXTINCT!</h1><div id="deathReason" style="color:#ffe28a;font-size:23px;font-weight:900;margin:10px 0"></div><p id="deathDetail" class="help" style="font-size:15px"></p><div class="stat">Score: <strong id="finalScore">0</strong></div><div class="stat">Best: <strong id="finalBest">0</strong></div><div class="stat">Amber earned: <strong id="earned">0</strong></div><button id="retry">↻ TRY AGAIN</button><button class="secondary" id="deadMenu">MAIN MENU</button></div><div class="panel hidden" id="paused"><h2>PAUSED</h2><button id="resume">▶ RESUME</button><button id="pauseRestart" class="secondary">↻ RESTART</button><button id="pauseSettings" class="secondary">⚙ SETTINGS</button><button id="pauseMenu" class="secondary">MAIN MENU</button></div><div class="panel hidden" id="select">
 <div class="shopTop"><button id="shopBack" class="secondary" aria-label="Back to menu">❮ BACK</button><div class="shopHeading">🦕 DINO COLLECTION</div><div class="shopMoney">🟠 <span id="shopAmber">0</span></div></div>
 <div class="shopLayout">
  <section class="shopSpeciesSection" aria-label="Choose dinosaur species">
@@ -1527,6 +1527,8 @@ function fx(name,power=1){
    case 'waterDeath':fxNoise(.55,.34*v,1600,'lowpass');fxNoise(.40,.22*v,230,'lowpass',.06);fxTone(125,.37,.19*v,'sine',.43);break;
    case 'lavaDeath':fxNoise(.64,.38*v,3200,'highpass');fxNoise(.48,.25*v,450,'lowpass');fxTone(77,.48,.26*v,'sawtooth',.45);break;
    case 'death':fxTone(310,.34,.18*v,'sawtooth',.32);fxNoise(.28,.11*v,450,'lowpass');break;
+   case 'cartoonBlink':fxTone(710,.075,.15*v,'sine',1.35);fxTone(990,.060,.09*v,'triangle',.80,.035);break;
+   case 'smokePoof':fxNoise(.35,.19*v,460,'lowpass');fxTone(115,.21,.08*v,'sine',.45);break;
    case 'tarDeath':fxTone(92,.46,.25*v,'sine',.38);fxNoise(.42,.22*v,520,'lowpass');break;
    case 'crash':fxNoise(.4,.28*v,700,'lowpass');fxTone(93,.32,.23*v,'sawtooth',.47);break;
    case 'bird':fxTone(960*variation,.34,.19*v,'sawtooth',.43);fxNoise(.30,.08*v,2900,'bandpass');break;
@@ -1576,7 +1578,7 @@ function fx(name,power=1){
 }
 // Compatibility for existing one-off calls; all main actions use dedicated FX above.
 function sound(freq=330,duration=.09,kind='sine'){try{mixInit();fxTone(freq,duration,.12,kind,.67)}catch{}}
-let gameTime=0;let audioCtx;const effects=[];const effectGeo=new THREE.IcosahedronGeometry(1,0),effectMaterials=[new THREE.MeshBasicMaterial({color:0xe9d0a0}),new THREE.MeshBasicMaterial({color:0xffdc65}),new THREE.MeshBasicMaterial({color:0x9edff2}),new THREE.MeshBasicMaterial({color:0xff8542})];function burst(x,y,z,kind=0,count=5){if(quality==='low')count=Math.min(count,3);for(let i=0;i<count;i++){if(effects.length>65)break;let o=new THREE.Mesh(effectGeo,effectMaterials[kind]);o.position.set(x,y,z);o.scale.setScalar(.055+Math.random()*.05);scene.add(o);effects.push({o,life:.35+Math.random()*.3,vy:.35+Math.random()*.85,vx:(Math.random()-.5)*1.5,vz:(Math.random()-.5)*1.2})}}function updateEffects(dt){for(let i=effects.length-1;i>=0;i--){let e=effects[i];e.life-=dt;e.o.position.x+=e.vx*dt;e.o.position.y+=e.vy*dt;e.o.position.z+=e.vz*dt;e.vy-=dt*2.1;e.o.scale.multiplyScalar(Math.max(.8,1-dt*1.6));if(e.life<=0){scene.remove(e.o);effects.splice(i,1)}}}let toastTimeout=0;function toast(msg){$('toast').textContent=msg;$('toast').style.opacity='1';clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').style.opacity='0',1000)}let fpsTime=0,fpsFrames=0;function audio(){return audioCtx||(audioCtx=new (window.AudioContext||window.webkitAudioContext)())}
+let gameTime=0;let audioCtx;const effects=[];const effectGeo=new THREE.IcosahedronGeometry(1,0),effectMaterials=[new THREE.MeshBasicMaterial({color:0xe9d0a0}),new THREE.MeshBasicMaterial({color:0xffdc65}),new THREE.MeshBasicMaterial({color:0x9edff2}),new THREE.MeshBasicMaterial({color:0xff8542}),new THREE.MeshBasicMaterial({color:0x15151a})];function burst(x,y,z,kind=0,count=5){if(quality==='low')count=Math.min(count,3);for(let i=0;i<count;i++){if(effects.length>65)break;let o=new THREE.Mesh(effectGeo,effectMaterials[kind]);o.position.set(x,y,z);o.scale.setScalar(.055+Math.random()*.05);scene.add(o);effects.push({o,life:.35+Math.random()*.3,vy:.35+Math.random()*.85,vx:(Math.random()-.5)*1.5,vz:(Math.random()-.5)*1.2})}}function updateEffects(dt){for(let i=effects.length-1;i>=0;i--){let e=effects[i];e.life-=dt;e.o.position.x+=e.vx*dt;e.o.position.y+=e.vy*dt;e.o.position.z+=e.vz*dt;e.vy-=dt*2.1;e.o.scale.multiplyScalar(Math.max(.8,1-dt*1.6));if(e.life<=0){scene.remove(e.o);effects.splice(i,1)}}}let toastTimeout=0;function toast(msg){$('toast').textContent=msg;$('toast').style.opacity='1';clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').style.opacity='0',1000)}let fpsTime=0,fpsFrames=0;function audio(){return audioCtx||(audioCtx=new (window.AudioContext||window.webkitAudioContext)())}
 // V1.2.20: Original layered prehistoric soundtrack, synthesized locally with Web Audio.
 // No downloads, audio files, or third-party music licenses required.
 const scoreMusic={master:null,bus:null,filter:null,delay:null,feedback:null,clock:null,next:0,step:0,active:false,noise:null};
@@ -2461,9 +2463,9 @@ function updateImpactDeath(dt){
  }
 }
 // Lightweight death batch: lava sinking, herd trampling and off-world falls.
-const EXTRA_DEATH_DURATIONS={lava:.94,stampede:.83,edge:.84,behind:.80};
+const EXTRA_DEATH_DURATIONS={lava:.94,stampede:.83,edge:.84,behind:.80,tar:1.22,lavasurge:1.55};
 let extraDeath=null;
-function cancelExtraDeath(){if(extraDeath?.crumbleRows)for(const p of extraDeath.crumbleRows){p.row.group.position.y=p.y;p.row.group.rotation.x=p.rx;p.row.group.rotation.z=p.rz;}extraDeath=null;}
+function cancelExtraDeath(){if(extraDeath?.charredMeshes)for(const p of extraDeath.charredMeshes){p.mesh.material=p.original;for(const m of p.copies)m.dispose();}if(extraDeath?.eyes)for(const e of extraDeath.eyes)e.mesh.scale.y=e.y;if(extraDeath?.crumbleRows)for(const p of extraDeath.crumbleRows){p.row.group.position.y=p.y;p.row.group.rotation.x=p.rx;p.row.group.rotation.z=p.rz;}extraDeath=null;}
 function beginExtraDeath(kind,reason,detail){
  const row=rows.get(py);
  extraDeath={kind,reason,detail,run:runGeneration,elapsed:0,
@@ -2474,7 +2476,25 @@ function beginExtraDeath(kind,reason,detail){
   x:player.position.x,y:player.position.y,z:player.position.z,
   roll:avatar.rotation.z,pitch:avatar.rotation.x,
   waveX:kind==='stampede'?row?.special?.wave.position.x:0,
-  squashed:false,particles:false};
+  squashed:false,particles:false,blinkCount:0};
+ if(kind==='lavasurge'){
+  // Clone per-player materials: never blacken shared world/skin materials.
+  extraDeath.charredMeshes=[];extraDeath.eyes=[];
+  avatar.traverse(mesh=>{
+   if(!mesh.isMesh||!mesh.material)return;
+   const original=mesh.material,source=Array.isArray(original)?original:[original];
+   if(source.some(m=>m===materials.white||m===materials.black)){
+    extraDeath.eyes.push({mesh,y:mesh.scale.y});return;
+   }
+   const copies=source.map(m=>{
+    const copy=m.clone();if(copy.color)copy.color.setHex(0x050505);
+    if(copy.emissive)copy.emissive.setHex(0);
+    return copy;
+   });
+   mesh.material=Array.isArray(original)?copies:copies[0];
+   extraDeath.charredMeshes.push({mesh,original,copies});
+  });
+ }
  if(kind==='behind'){
   const back=Math.max(-BACK_TERRAIN_ROWS,Math.floor(camY)-15);
   extraDeath.crumbleRows=[...rows.values()].filter(r=>r.y>=back&&r.y<=py)
@@ -2482,7 +2502,9 @@ function beginExtraDeath(kind,reason,detail){
    .map(r=>({row:r,y:r.group.position.y,rx:r.group.rotation.x,rz:r.group.rotation.z}));
  }
  state='dying';queue.length=0;hop=null;
- if(kind==='lava'){
+ if(kind==='lavasurge')fx('lavaDeath',.45);
+ else if(kind==='tar')fx('tarDeath',.7);
+ else if(kind==='lava'){
   burst(player.position.x,LIQUID_LANE_Y+.10,player.position.z,3,9);fx('lavaDeath',.75);
  }else if(kind==='stampede'){
   shake=Math.max(shake,.16);fx('crash',.65);
@@ -2495,7 +2517,30 @@ function updateExtraDeath(dt){
  if(d.run!==runGeneration){cancelExtraDeath();return;}
  d.elapsed=Math.min(d.duration,d.elapsed+dt);
  const a=d.elapsed/d.duration,ease=a*a*(3-2*a);
- if(d.kind==='lava'){
+ if(d.kind==='tar'){
+  // Kick against sticky tar, then sink slowly beneath the surface.
+  const sink=Math.max(0,(a-.10)/.90),smooth=sink*sink*(3-2*sink);
+  player.position.set(d.x+Math.sin(d.elapsed*12)*.065*(1-a),
+   d.y-(d.h+.30)*smooth,d.z);
+  avatar.rotation.z=d.roll+Math.sin(d.elapsed*13)*.12*(1-a);
+  avatar.rotation.x=d.pitch+Math.sin(d.elapsed*9)*.09*(1-a);
+  for(let i=0;i<d.legs.length;i++){
+   const leg=d.legs[i];leg.part.rotation.x=leg.angle+Math.sin(d.elapsed*21+i*Math.PI)*.60*(1-a);
+  }
+  if(!d.particles&&a>.27){d.particles=true;burst(d.x,d.y+.07,d.z,4,quality==='low'?2:6);}
+ }else if(d.kind==='lavasurge'){
+  // The wave passes; charred silhouette blinks twice before black smoke.
+  player.position.set(d.x,d.y,d.z);
+  const blink=(t,c)=>Math.max(0,1-Math.abs(t-c)/.055);
+  const closed=Math.max(blink(a,.46),blink(a,.67));
+  for(const eye of d.eyes||[])eye.mesh.scale.y=Math.max(.06,eye.y*(1-closed*.94));
+  if(a>=.46&&d.blinkCount===0){d.blinkCount=1;fx('cartoonBlink',.8);}
+  if(a>=.67&&d.blinkCount===1){d.blinkCount=2;fx('cartoonBlink',.8);}
+  if(!d.particles&&a>=.84){
+   d.particles=true;burst(d.x,d.y+d.h*.55,d.z,4,quality==='low'?3:13);
+   avatar.visible=false;fx('smokePoof',.7);
+  }
+ }else if(d.kind==='lava'){
   // Molten splash, struggling legs and a head-last sink with smoke.
   const surface=LIQUID_LANE_Y+
    liquidWave(d.x,0,gameTime+d.elapsed,d.row?.dir||1,'lava',(d.row?.y||0)*.47);
@@ -2571,6 +2616,8 @@ function die(reason='Caught by a hazard',detail='Watch your surroundings and try
  // Preserve the normal first-tile grace period.
  if(py===0&&highest===0&&gameTime<.6)return;
  if(reason==='Fell into water!'){beginDrowningDeath(reason,detail);return;}
+ if(reason==='Sank into tar!'){beginExtraDeath('tar',reason,detail);return;}
+ if(reason==='Engulfed by a lava surge!'){beginExtraDeath('lavasurge',reason,detail);return;}
  if(reason==='Fell into lava!'){beginExtraDeath('lava',reason,detail);return;}
  if(reason==='Trampled by a stampede!'){beginExtraDeath('stampede',reason,detail);return;}
  if(reason==='Carried off the edge!'){beginExtraDeath('edge',reason,detail);return;}
@@ -2953,7 +3000,7 @@ if(state==='playing'){
  }else camSide=THREE.MathUtils.damp(camSide,0,4.2,dt);
  // Flood camera tracks the swept-away character for the full carry-off,
  // independent of the normal horizontal pan limit.
- const side=floodCarry&&player?player.position.x:
+ const side=floodCarry&&player?THREE.MathUtils.clamp(player.position.x,LEFT,RIGHT):
   THREE.MathUtils.lerp(camSide,player?player.position.x:camSide,deathCameraBlend*.96);
  // Keep the pterosaur and captive framed together during their ascent.
  const birdLift=impactDeath?.kind==='bird'&&state==='dying';
