@@ -511,181 +511,113 @@ function applyTechSkin(g,chrome=false){
   }
   g.userData.tech=!chrome;g.userData.chrome=chrome;return g;
 }
-// Skeleton skins are real open frameworks, not a white recolour: individual
-// bones outline each species while the ribs have empty space between them.
-const skeletonBoneMat=new THREE.MeshLambertMaterial({color:0xe5dcc4,flatShading:true});
-const skeletonJointMat=new THREE.MeshLambertMaterial({color:0xc9b995,flatShading:true});
-const skeletonSocketMat=new THREE.MeshBasicMaterial({color:0x17191b});
-// Bakes many static skeletal pieces into one mesh per shared material.
-// The hollow gaps remain real geometry, while mobile renderers draw roughly
-// three objects instead of 85-118 separate bones per dinosaur.
-function batchSkeletonGeometry(g){
- g.updateMatrixWorld(true);
- const batches=new Map(),v=new THREE.Vector3(),n=new THREE.Vector3(),nm=new THREE.Matrix3();
- for(const child of [...g.children]){
-  if(!child.isMesh||!child.geometry||!child.material)continue;
-  child.updateMatrix();
-  const geometry=child.geometry,positions=geometry.getAttribute('position'),normals=geometry.getAttribute('normal');
-  if(!positions)continue;
-  let data=batches.get(child.material);
-  if(!data){data={verts:[],normals:[],indices:[]};batches.set(child.material,data);}
-  const offset=data.verts.length/3;
-  nm.getNormalMatrix(child.matrix);
-  for(let i=0;i<positions.count;i++){
-   v.fromBufferAttribute(positions,i).applyMatrix4(child.matrix);
-   data.verts.push(v.x,v.y,v.z);
-   if(normals){n.fromBufferAttribute(normals,i).applyMatrix3(nm).normalize();data.normals.push(n.x,n.y,n.z);}
-   else data.normals.push(0,1,0);
+// Skeleton is a transform of its species' ORIGINAL rig, just like Tech/Chrome.
+// Only the torso surface changes shape. Head, neck, tail, wings, joints, pose,
+// root transform, scale and all original species-specific details are retained.
+const skeletonBoneMat=new THREE.MeshLambertMaterial({color:0xe9dfc9,flatShading:true});
+const skeletonJointMat=new THREE.MeshLambertMaterial({color:0xb9a98c,flatShading:true});
+const skeletonSocketMat=new THREE.MeshBasicMaterial({color:0x121519});
+// Share one open rib-cage mesh for each original torso geometry. The mesh
+// replaces the opaque solid WITHOUT modifying the existing body transform.
+const skeletonRibCache=new WeakMap();
+function skeletonRibGeometry(original){
+ let geometry=skeletonRibCache.get(original);
+ if(geometry)return geometry;
+ if(!original.boundingBox)original.computeBoundingBox();
+ const boxBounds=original.boundingBox,lo=boxBounds.min,hi=boxBounds.max;
+ const cx=(lo.x+hi.x)*.5,cy=(lo.y+hi.y)*.5,cz=(lo.z+hi.z)*.5;
+ const hx=(hi.x-lo.x)*.5,hy=(hi.y-lo.y)*.5,hz=(hi.z-lo.z)*.5;
+ const vertices=[],indices=[],segments=6;
+ const rod=(a,b,r)=>{
+  const delta=new THREE.Vector3().subVectors(b,a),length=delta.length();
+  if(length<.0001)return;
+  delta.multiplyScalar(1/length);
+  const helper=Math.abs(delta.y)<.85?new THREE.Vector3(0,1,0):new THREE.Vector3(1,0,0);
+  const u=new THREE.Vector3().crossVectors(delta,helper).normalize();
+  const v=new THREE.Vector3().crossVectors(delta,u).normalize();
+  const start=vertices.length/3;
+  for(const point of [a,b])for(let i=0;i<segments;i++){
+   const angle=i*Math.PI*2/segments;
+   const x=Math.cos(angle)*r,y=Math.sin(angle)*r;
+   vertices.push(point.x+u.x*x+v.x*y,point.y+u.y*x+v.y*y,point.z+u.z*x+v.z*y);
   }
-  const index=geometry.getIndex();
-  if(index)for(let i=0;i<index.count;i++)data.indices.push(offset+index.getX(i));
-  else for(let i=0;i<positions.count;i++)data.indices.push(offset+i);
+  for(let i=0;i<segments;i++){
+   const j=(i+1)%segments,near=start+i,nearNext=start+j,far=start+segments+i,farNext=start+segments+j;
+   indices.push(near,far,nearNext,nearNext,far,farNext);
+  }
+ };
+ const p=(x,y,z)=>new THREE.Vector3(cx+hx*x,cy+hy*y,cz+hz*z);
+ // Backbone and sternum reach through the original torso, leaving true open
+ // gaps in the sides. Nine narrow ribs sit INSIDE the old solid body's bounds.
+ const r=Math.min(hx,hy,hz)*.075;
+ rod(p(0,.65,-.84),p(0,.65,.84),r*1.7);
+ rod(p(0,-.64,-.70),p(0,-.64,.71),r*.90);
+ for(let i=0;i<9;i++){
+  const z=-.73+i*.183,bulge=.84+.08*Math.sin(i/8*Math.PI);
+  for(const side of [-1,1]){
+   rod(p(0,.63,z),p(side*.68*bulge,.26,z),r);
+   rod(p(side*.68*bulge,.26,z),p(side*.84*bulge,-.24,z+.028),r*.92);
+   rod(p(side*.84*bulge,-.24,z+.028),p(side*.23,-.60,z+.058),r*.78);
+  }
  }
- g.clear();
- for(const [material,data] of batches){
-  const geometry=new THREE.BufferGeometry();
-  geometry.setAttribute('position',new THREE.Float32BufferAttribute(data.verts,3));
-  geometry.setAttribute('normal',new THREE.Float32BufferAttribute(data.normals,3));
-  geometry.setIndex(data.indices);
-  geometry.computeBoundingSphere();
-  geometry.userData.skeletonOwned=true;
-  const obj=new THREE.Mesh(geometry,material);
-  obj.castShadow=true;
-  g.add(obj);
- }
+ // Distinct pelvic and shoulder crossbones maintain the anatomy.
+ for(const z of [-.70,.67])rod(p(-.67,.20,z),p(.67,.20,z),r*1.34);
+ geometry=new THREE.BufferGeometry();
+ geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+ geometry.setIndex(indices);
+ geometry.computeVertexNormals();
+ geometry.computeBoundingSphere();
+ skeletonRibCache.set(original,geometry);
+ cachedGeometrySet.add(geometry); // Never dispose shared rib-cage geometry on Retry.
+ return geometry;
 }
-function skeletonDino(speciesId=0,size=1){
- const g=new THREE.Group();
- const isRaptor=speciesId===1,isBrachio=speciesId===7,isPtera=speciesId===8;
- const isTheropod=[0,1,6].includes(speciesId);
- const isFourLegged=!isTheropod&&!isPtera;
- const sizeWidth=isRaptor?.77:isBrachio?1.25:speciesId===4?1.20:1;
- const spineY=isBrachio?1.24:isPtera?.85:1.02;
- const spineZ=-.16,headY=isBrachio?2.65:isPtera?1.12:1.45;
- const headZ=isBrachio?1.05:isPtera?.72:.97;
- const bone=skeletonBoneMat,joint=skeletonJointMat,socket=skeletonSocketMat;
- const width=sizeWidth*.39;
- const boneLine=(ax,ay,az,bx,by,bz,r=.07,m=bone)=>stem(g,m,ax,ay,az,bx,by,bz,r);
- const jointBall=(x,y,z,r=.10)=>mesh(g,sphereGeo,joint,x,y,z,r,r,r);
- // Exposed spine and tail vertebrae.
- boneLine(0,spineY,-.90,0,spineY,.69,.105);
- for(let i=0;i<7;i++){
-  const z=-.78+i*.21;
-  box(g,joint,0,spineY+.035,z,.21,.16,.115);
+function applySkeletonSkin(g,base){
+ // The torso mesh is literally the same object on the same model hierarchy.
+ // Obstacle-derived dinosaurs expose walkParts.body; theropods/pterosaurs use
+ // the first root-level mesh for their torso.
+ const body=g.userData.walkParts?.body||g.children.find(o=>o.isMesh);
+ if(!body)throw Error('Skeleton source model is missing its torso: '+base);
+ const originalMaterials=new Set();
+ // Keep eye geometry and positions unchanged; turn original whites/pupils
+ // into inset dark sockets without glowing pupils or expanded eye outlines.
+ g.traverse(o=>{
+  if(!o.isMesh)return;
+  if(o.material?.userData?.dinoOwned)originalMaterials.add(o.material);
+  const m=o.material;
+  if(m===materials.white||m===materials.black){
+   o.material=skeletonSocketMat;
+  }else if(m===materials.horn){
+   o.material=skeletonBoneMat;
+  }else{
+   const c=m?.color;
+   const shade=c?(c.r+c.g+c.b)/3:1;
+   o.material=shade<.26?skeletonJointMat:skeletonBoneMat;
+  }
+ });
+ body.geometry=skeletonRibGeometry(body.geometry);
+ body.material=skeletonBoneMat;
+ // Living T. Rex, Velociraptor and Spinosaurus have a solid belly inset
+ // immediately after their torso. Hide it so the ribs remain see-through.
+ if([0,1,6].includes(base)){
+  const belly=g.children[1];
+  if(belly?.isMesh)belly.visible=false;
  }
- for(let i=0;i<6;i++){
-  const a=i/6,b=(i+1)/6;
-  const fromZ=-.90-a*1.72,toZ=-.90-b*1.72;
-  boneLine(0,spineY-.10-a*.48,fromZ,0,spineY-.10-b*.48,toZ,.086-i*.010);
-  box(g,joint,0,spineY-.10-b*.48,toZ,.12-i*.010,.10,.10);
+ // Use the ORIGINAL Pterodactyl wing struts and joints, but remove its opaque
+ // wing membrane. No custom wings or different span are introduced.
+ if(base===8){
+  for(const wing of g.userData.wings||[])
+   wing.traverse(o=>{if(o.isMesh&&o.geometry?.type==='BufferGeometry'&&o.geometry!==body.geometry)o.visible=false;});
  }
- if(speciesId===4)mesh(g,facetGeo,bone,0,spineY-.60,-2.7,.34,.31,.37); // tail club
- // Curved ribs form two fully open sides: no opaque torso or chest shell.
- for(let i=0;i<6;i++){
-  const z=-.61+i*.235,spread=Math.sin((i+1)/7*Math.PI);
-  for(const side of [-1,1]){
-   const x=side*(width*.70+.06*spread),outer=side*(width+.12*spread);
-   const y=spineY-.17;
-   boneLine(0,spineY+.012,z,x,y,z+.035,.049);
-   boneLine(x,y,z+.035,outer,spineY-.45,z+.06,.045);
-   boneLine(outer,spineY-.45,z+.06,side*.16,spineY-.56,z+.095,.037);
-  }
- }
- // Two real hip bones and a small breastbone, still hollow between ribs.
- for(const side of [-1,1]){
-  boneLine(side*.12,spineY-.10,-.72,side*.40,spineY-.38,-.52,.083,joint);
-  jointBall(side*.35,spineY-.30,-.48,.115);
- }
- boneLine(0,spineY-.47,-.40,0,spineY-.47,.34,.053);
- // Long neck vertebrae and the high head distinguish Brachiosaurus.
- if(isBrachio){
-  for(let i=0;i<8;i++){
-   const p=i/8,n=(i+1)/8;
-   boneLine(0,spineY+.1+p*1.36,.37+p*.55,0,spineY+.1+n*1.36,.37+n*.55,.095);
-   jointBall(0,spineY+.1+n*1.36,.37+n*.55,.10);
-  }
- }else boneLine(0,spineY,.56,0,headY-.20,headZ-.19,.12);
- // Actual skull and separated lower jaw. Huge nearly-black side eye
- // cavities replace the opaque living animal's round white eyes.
- const skullWidth=isRaptor?.53:isBrachio?.58:speciesId===2?.88:.73;
- const skullLength=isPtera?.50:isRaptor?.65:.76;
- box(g,bone,0,headY,headZ,skullWidth,.37,skullLength);
- box(g,joint,0,headY-.24,headZ+.19,skullWidth*.81,.075,skullLength*.77);
- box(g,bone,0,headY+.18,headZ-.15,skullWidth*.83,.12,skullLength*.58);
- for(const side of [-1,1]){
-  const eyeX=side*(skullWidth*.5+.013),eyeZ=headZ+.08;
-  mesh(g,sphereGeo,socket,eyeX,headY+.037,eyeZ,.042,.135,.17);
-  boneLine(eyeX,headY+.17,eyeZ-.14,eyeX,headY+.19,eyeZ+.13,.037);
-  mesh(g,sphereGeo,socket,side*(skullWidth*.29),headY-.055,headZ+skullLength*.49,.055,.035,.032);
- }
- // Small distinct leg bones and joints. Theropods stand on two hind limbs;
- // herbivores stand on four, so their skeletal profiles read differently.
- const legX=isTheropod?[ -.32,.32 ]:[ -.33,.33 ];
- const legZ=isFourLegged?[-.57,.51]:[-.34];
- if(!isPtera){
-  for(const z of legZ)for(const x of legX){
-   const y0=spineY-.23,hipX=x*.85;
-   jointBall(hipX,y0,z,.13);
-   const kneeX=x*1.16,kneeY=isBrachio?.49:.43;
-   boneLine(hipX,y0,z,kneeX,kneeY,z+.055,.105);
-   jointBall(kneeX,kneeY,z+.055,.115);
-   boneLine(kneeX,kneeY,z+.055,x,.12,z+.16,.077);
-   boneLine(x,.12,z+.16,x,.065,z+.35,.063);
-   for(const toe of [-1,0,1])boneLine(x,.07,z+.35,x+toe*.09,.045,z+.49,.026);
-  }
-  if(isTheropod)for(const side of [-1,1]){
-   boneLine(side*.30,spineY-.10,.48,side*.44,spineY-.38,.72,.052);
-   boneLine(side*.44,spineY-.38,.72,side*.38,spineY-.52,.86,.038);
-  }
- }
- // Species-specific bones make all nine skeletons identifiable.
- if(speciesId===2){ // Triceratops frill, brow horns, nose horn
-  for(const side of [-1,1]){
-   boneLine(side*.18,headY+.10,headZ-.25,side*.62,headY+.48,headZ-.56,.09);
-   boneLine(side*.62,headY+.48,headZ-.56,side*.62,headY+.68,headZ-.44,.07);
-   horn(g,bone,side*.32,headY+.31,headZ+.42,.095,.60,-.33,side*.12);
-  }
-  horn(g,bone,0,headY+.25,headZ+.67,.082,.34,-.24,0);
- }else if(speciesId===3){ // Stegosaurus bone plates
-  for(let i=0;i<6;i++){
-   const z=.28-i*.24;
-   mesh(g,cachedGeo('skeleton:plate',()=>new THREE.ConeGeometry(.24,.68,4)),bone,0,spineY+.33+Math.sin(i/5*Math.PI)*.10,z,.86,1,.60);
-  }
- }else if(speciesId===4){
-  for(const side of [-1,1])for(let i=0;i<3;i++)
-   horn(g,joint,side*(width+.11),spineY+.12,-.51+i*.31,.09,.30,0,side*.70);
- }else if(speciesId===5){ // Parasaurolophus crest
-  boneLine(0,headY+.20,headZ-.25,0,headY+.79,headZ-.72,.13);
-  boneLine(0,headY+.79,headZ-.72,0,headY+.64,headZ-.96,.09);
- }else if(speciesId===6){ // Tall spinosaurus sail bony spines
-  for(let i=0;i<7;i++){
-   const z=.41-i*.23,h=.47+Math.sin(i/6*Math.PI)*.80;
-   boneLine(0,spineY+.05,z,0,spineY+h,z,.065);
-   if(i>0)boneLine(0,spineY+h,z,0,spineY+.47+Math.sin((i-1)/6*Math.PI)*.80,z+.23,.030,joint);
-  }
- }else if(isPtera){ // Open wing struts and finger bones, never filled membranes
-  for(const side of [-1,1]){
-   boneLine(side*.24,spineY+.03,.20,side*1.10,spineY+.25,.18,.091);
-   boneLine(side*1.10,spineY+.25,.18,side*2.05,spineY+.08,-.22,.070);
-   boneLine(side*2.05,spineY+.08,-.22,side*.58,spineY-.15,-.64,.048);
-   boneLine(side*.24,spineY+.03,.20,side*.58,spineY-.15,-.64,.045);
-   boneLine(side*.55,spineY-.13,-.12,side*1.70,spineY-.02,-.49,.032);
-   boneLine(side*.16,spineY-.05,-.25,side*.39,.10,-.37,.065);
-  }
-  boneLine(0,headY+.13,headZ+.14,0,headY+.59,headZ-.18,.091);
-  box(g,bone,0,headY-.12,headZ+.63,.19,.10,.75); // thin beak
- }else if(isRaptor){
-  for(const side of [-1,1])horn(g,bone,side*.34,.16,-.09,.075,.22,-.2,side*.3);
- }
- // Batch static bones for Android before applying the regular model scale.
- batchSkeletonGeometry(g);
- // Match ordinary player skeleton skin scaling; no special collision behavior.
- g.userData.feet=[];g.userData.eyeParts=[];
- g.scale.setScalar(size);
+ // Materials created for the standalone original theropod are no longer used.
+ for(const m of originalMaterials)m.dispose();
+ g.userData.skeleton=true;
  return g;
 }
 function dino(type=0,size=1){
-if(type>=27&&type<36)return skeletonDino(type-27,size);
+if(type>=27&&type<36){
+ const base=type-27;
+ return applySkeletonSkin(dino(base,size),base);
+}
 const chrome=type>=18,techno=type>=9&&type<18;type=type%9;
 // Each purchased species now builds a distinct silhouette rather than recoloring the T. rex.
 let g;
@@ -2244,8 +2176,8 @@ shopDescriptions.push(...shopDescriptions.slice(0,9).map(text=>'Skeleton edition
 
 let inspected=chosen,selectedShopSpecies=chosen%9,shopRenderer=null,shopScene=null,shopCamera=null,shopModel=null,shopTurn=.25,shopDragging=false,shopLastX=0;
 function initShop3D(){if(shopRenderer||window.__shop3DFailed)return;const canvas=$('shopCanvas');try{shopRenderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});}catch(e){window.__shop3DFailed=true;canvas.style.display='none';$('shopStage').style.background='radial-gradient(circle at 50% 35%,#b5dba0,#426e4d)';$('shopStage').querySelector('.shopStageCaption').textContent='3D PREVIEW UNAVAILABLE · SKINS STILL WORK';return;}shopRenderer.setPixelRatio(Math.min(devicePixelRatio,1.25));shopRenderer.outputColorSpace=THREE.SRGBColorSpace;shopScene=new THREE.Scene();shopCamera=new THREE.PerspectiveCamera(33,1,.1,80);shopCamera.position.set(4.6,3.5,7.4);shopCamera.lookAt(0,1,0);shopScene.add(new THREE.HemisphereLight(0xf8ffe5,0x416a40,2.5));const key=new THREE.DirectionalLight(0xffedbc,3);key.position.set(-3,8,6);shopScene.add(key);const floor=new THREE.Group();shopScene.add(floor);mesh(floor,new THREE.CylinderGeometry(2.5,2.8,.3,12),mat(0x987249),0,-.15,0);mesh(floor,new THREE.CylinderGeometry(2.3,2.4,.09,12),mat(0x719b55),0,.025,0);for(let j=0;j<9;j++){let angle=j*2.399,rr=1.65+(j%3)*.19;let stone=mesh(floor,facetGeo,rocks[j%rocks.length],Math.cos(angle)*rr,.12,Math.sin(angle)*rr,.17,.12,.22);stone.rotation.y=angle;}for(let j=0;j<5;j++){let ang=j*2.5;let fern=new THREE.Group();makeFern(fern,j*2);fern.position.set(Math.cos(ang)*2,.09,Math.sin(ang)*1.7);fern.scale.setScalar(.65);floor.add(fern)}blob(floor,0,0,.95);canvas.addEventListener('pointerdown',e=>{shopDragging=true;shopLastX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!shopDragging)return;shopTurn+=(e.clientX-shopLastX)*.012;shopLastX=e.clientX});canvas.addEventListener('pointerup',()=>shopDragging=false);canvas.addEventListener('pointercancel',()=>shopDragging=false)}
-// Releasing per-dinosaur GPU materials after a preview is removed prevents
-// progressive renderer memory growth when browsing skins or preloading 27 portraits.
+// Release owned skin materials and any retired one-off art when changing
+// previews or starting new runs. Shared skeletal rib geometry stays cached.
 function disposeDinoPreviewMaterials(model){
  if(!model)return;
  const disposed=new Set(),geometries=new Set();
