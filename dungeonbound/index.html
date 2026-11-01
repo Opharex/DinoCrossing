@@ -147,6 +147,153 @@ body{display:block;min-width:0;min-height:0}
  #hud{padding-left:8px;padding-right:8px}
  #hud .stat{min-width:87px;padding:7px 8px}
 }
+
+/* V11: Giant, readable interface. Layout-first; no world-grid or camera changes. */
+#shell{
+ --dpad-width:min(99vw,630px);
+ --dpad-height:min(calc(var(--dpad-width) * 1.16),59dvh);
+ --dpad-bottom:max(9px,env(safe-area-inset-bottom));
+ --ability-size:clamp(138px,32vw,210px);
+}
+/* Status panels must be readable at arm's length. */
+#hud{padding:max(13px,env(safe-area-inset-top)) clamp(8px,2vw,23px) 0}
+#hud .hudtop{gap:clamp(6px,1.5vw,18px)}
+#hud .stat{min-width:clamp(104px,27vw,185px);min-height:clamp(76px,11vw,119px);padding:clamp(9px,1.6vw,16px) clamp(7px,1.8vw,18px);border:3px solid #bda17a;border-radius:clamp(12px,2.5vw,20px);background:linear-gradient(155deg,#384a4af7,#101d28f8);box-shadow:inset 0 2px #ffffff2c,inset 0 0 0 2px #131c21,0 5px #081218,0 9px 18px #0009}
+#hud .stat small{font-size:clamp(12px,2.3vw,18px);line-height:1.3;letter-spacing:clamp(.7px,.2vw,1.7px)}
+#hud .stat b{display:block;font-size:clamp(32px,6.1vw,48px);line-height:1.15;margin-top:3px}
+#hud .coinDot{width:clamp(18px,3.2vw,29px);height:clamp(18px,3.2vw,29px);border-width:3px;vertical-align:0}
+#pauseBtn{width:clamp(65px,10vw,96px);height:clamp(65px,10vw,96px);min-width:clamp(65px,10vw,96px);min-height:0;font-size:clamp(27px,4.6vw,41px);line-height:1;padding:0;margin:0;border-radius:clamp(13px,2.5vw,19px)}
+#warning{top:clamp(110px,16vw,160px);font-size:clamp(14px,2.4vw,24px);letter-spacing:1.5px;text-align:center;width:calc(100% - 24px)}
+#toast{font-size:clamp(18px,3vw,30px);max-width:calc(100vw - 24px);white-space:normal;line-height:1.35}
+#deathCue{font-size:clamp(23px,5.2vw,40px);max-width:94vw;white-space:normal}
+/* Proportional, oversized directional buttons with true matching tap zones. */
+#movement{width:var(--dpad-width);height:var(--dpad-height);bottom:var(--dpad-bottom);gap:clamp(7px,1.8vw,13px);filter:drop-shadow(0 10px 14px #000d)}
+#movement .dir{font-size:clamp(55px,13vw,90px);border-width:4px;border-radius:clamp(20px,5vw,33px);background:linear-gradient(155deg,#627880,#324953 46%,#172e3b);box-shadow:inset 0 3px #ffffff54,inset 0 -5px #07151b,0 6px #071017,0 10px 18px #000a}
+#movement::before{font-size:clamp(49px,11vw,73px);border-radius:clamp(20px,5vw,33px)}
+#ability{width:var(--ability-size);height:var(--ability-size);right:max(10px,env(safe-area-inset-right));bottom:calc(var(--dpad-bottom) + var(--dpad-height) + 14px);padding:8px 4px;border:5px solid #f4d497;border-radius:clamp(25px,5vw,41px);background:linear-gradient(155deg,#526773,#243943 55%,#122630);box-shadow:inset 0 3px #ffffff4d,inset 0 -4px #111d25,0 7px #071218,0 0 0 3px #071218,0 12px 26px #000b;gap:4px}
+#ability span{font-size:clamp(56px,12vw,95px);line-height:1.02}
+#ability small{font-size:clamp(14px,2.75vw,23px);line-height:1.1;font-weight:950;letter-spacing:.5px;color:#fff0c8;text-shadow:0 2px 4px #000}
+#swipeHint{font-size:clamp(14px,2.6vw,21px);bottom:max(30px,env(safe-area-inset-bottom))}
+/* A large carved title panel instead of a postcard floating in an empty screen. */
+#menu.overlay{padding:max(12px,env(safe-area-inset-top)) clamp(10px,2vw,25px) max(12px,env(safe-area-inset-bottom))}
+#menu .menu-panel{width:min(96vw,720px);max-width:720px;max-height:calc(100dvh - max(18px,env(safe-area-inset-top)) - max(22px,env(safe-area-inset-bottom)));padding:clamp(25px,4vw,45px) clamp(18px,4vw,49px) clamp(25px,3vw,40px);border-width:4px;border-radius:22px;box-shadow:0 0 0 4px #172128,0 0 0 9px #776c52,0 0 0 13px #0b121ab3,inset 0 0 0 2px #ffffff22,inset 0 12px 20px #a3a38e17,0 22px 65px #000d}
+#menu .menu-panel::before{inset:9px;border-radius:13px}
+#menu .menu-panel::after{display:none}
+#menu .menu-crest{height:clamp(70px,9vh,104px);gap:clamp(17px,4vw,35px);margin-bottom:clamp(9px,1.5vw,18px)}
+#menu .crest-swords{width:clamp(70px,9vw,104px);height:clamp(70px,9vw,104px);font-size:clamp(35px,5vw,55px);border-width:3px}
+#menu .crest-star{font-size:clamp(21px,3vw,35px)}
+#menu .menu-eyebrow{font-size:clamp(13px,2.05vw,20px);line-height:1.35;letter-spacing:clamp(2px,.45vw,4px);margin:clamp(8px,1.5vw,18px) 0 clamp(10px,1.6vw,16px)}
+#menu .menu-title{font-size:clamp(48px,10vw,95px);line-height:.98;letter-spacing:clamp(0px,.4vw,3px);text-shadow:0 3px #684c38,0 6px #3c3030,0 9px 2px #050b0e,0 15px 24px #000b}
+#menu .menu-title span:last-child{letter-spacing:.07em;margin-left:.05em}
+#menu .menu-tagline{font-size:clamp(12px,2.1vw,22px);letter-spacing:clamp(.4px,.35vw,3px);margin-top:clamp(14px,2.5vw,26px);line-height:1.3}
+#menu .menu-divider{font-size:clamp(16px,2.3vw,25px);margin:clamp(16px,2.5vw,29px) 0 clamp(12px,2vw,21px)}
+#menu .menu-lead{font-size:clamp(17px,2.7vw,27px);line-height:1.4;margin:0 0 clamp(22px,3vw,36px);color:#e2e4d9}
+#menu .menu-actions{margin-top:8px}
+#menu .menu-primary{min-height:clamp(78px,8.6vh,108px);padding:clamp(14px,2.5vw,25px) clamp(15px,2.5vw,30px);font-size:clamp(16px,3vw,27px);border-width:3px;border-radius:14px;gap:12px}
+#menu .menu-primary .menu-action-icon{font-size:clamp(30px,5vw,48px)}
+#menu .menu-primary .menu-action-tail{font-size:clamp(24px,3.2vw,34px)}
+#menu .menu-side-actions{margin-top:clamp(16px,2.5vw,24px);gap:clamp(9px,1.8vw,16px)}
+#menu .menu-secondary{min-height:clamp(67px,7.5vh,94px);font-size:clamp(14px,2.4vw,22px);padding:10px clamp(7px,1.8vw,17px);border-width:3px;border-radius:12px;gap:clamp(5px,1vw,10px)}
+#menu .menu-secondary span:first-child{font-size:clamp(23px,3.5vw,33px)}
+#menu .menu-best{margin-top:clamp(23px,3vw,41px);padding:clamp(16px,2.3vw,27px) 5px;gap:14px}
+#menu .menu-best-label{font-size:clamp(12px,2.25vw,20px);letter-spacing:.8px;max-width:45%}
+#menu #menuBest{font-size:clamp(16px,2.8vw,26px);letter-spacing:.3px}
+#menu .menu-footer{font-size:clamp(11px,1.8vw,18px);letter-spacing:.7px;margin-top:clamp(18px,2vw,26px)}
+/* Enlarge all secondary screens, not just the play menu. */
+.overlay:not(#menu){padding:max(12px,env(safe-area-inset-top)) 12px max(16px,env(safe-area-inset-bottom))}
+.overlay:not(#menu) .frame{width:min(95vw,690px);max-height:calc(100dvh - 35px);padding:clamp(20px,3.6vw,48px) clamp(18px,3.3vw,42px);border-width:4px;border-radius:22px}
+.sectionHeading{font-size:clamp(31px,5vw,54px);margin-bottom:clamp(12px,2vw,23px)}
+.description:not(.menu-lead){font-size:clamp(17px,2.4vw,24px);line-height:1.5}
+.tiny,.detail{font-size:clamp(15px,2vw,21px);line-height:1.45}
+.totalcoins{font-size:clamp(18px,2.6vw,28px)}
+.action:not(.menu-primary):not(.menu-secondary){font-size:clamp(17px,2.6vw,26px);min-height:clamp(63px,8vh,88px);padding:clamp(14px,2vw,22px) 12px;border-width:3px;border-radius:15px}
+.heroCards{gap:clamp(10px,2vw,18px);margin:clamp(15px,2vw,24px) 0}
+.heroCard{min-height:clamp(155px,19vh,209px);padding:clamp(12px,2vw,19px);border-width:3px;border-radius:16px}
+.heroIcon{font-size:clamp(36px,5.5vw,55px)}
+.heroName{font-size:clamp(16px,2.5vw,24px)}
+.heroNote{font-size:clamp(12px,1.9vw,18px)}
+.heroCost{font-size:clamp(14px,2.1vw,21px)}
+.settingRow{font-size:clamp(17px,2.4vw,24px);min-height:clamp(69px,8vh,94px);gap:12px;padding:14px 2px}
+.settingRow label{text-align:left;max-width:55%}
+.settingRow select{font-size:clamp(15px,2vw,20px);min-height:48px;max-width:48%;padding:10px 7px}
+.settingRow input[type=checkbox]{width:clamp(24px,4vw,34px);height:clamp(24px,4vw,34px);accent-color:#e3b96b}
+.deathTitle{font-size:clamp(39px,7vw,74px)}
+.scorebig{font-size:clamp(74px,13vw,130px)}
+.resultgrid{gap:clamp(9px,2vw,16px)}
+.resultgrid>div{font-size:clamp(13px,1.9vw,20px);padding:clamp(14px,2vw,25px);border-width:2px}
+.resultgrid b{font-size:clamp(28px,5vw,45px)}
+/* Compact phones: keep the game visible and controls apart. */
+@media (orientation:portrait) and (max-height:700px){
+ #shell{--dpad-height:min(calc(var(--dpad-width) * 1.04),53dvh);--ability-size:116px}
+ #ability{bottom:calc(var(--dpad-bottom) + var(--dpad-height) + 10px);right:max(8px,env(safe-area-inset-right));border-width:4px}
+ #hud .stat{min-width:94px;min-height:66px;padding:6px 8px}
+ #hud .stat small{font-size:11px}
+ #hud .stat b{font-size:clamp(28px,7vw,33px)}
+ #pauseBtn{min-width:58px;width:58px;height:58px;font-size:25px}
+ #menu .menu-panel{padding:19px 16px 22px}
+ #menu .menu-crest{height:56px;margin-bottom:5px}
+ #menu .crest-swords{width:54px;height:54px;font-size:26px}
+ #menu .menu-title{font-size:clamp(40px,11vw,60px)}
+ #menu .menu-divider{margin:12px 0 9px}
+ #menu .menu-lead{font-size:16px;margin-bottom:15px}
+ #menu .menu-primary{min-height:65px}
+ #menu .menu-secondary{min-height:58px}
+ #menu .menu-best{margin-top:16px;padding:12px 3px}
+ #menu .menu-footer{margin-top:12px}
+}
+/* Short landscape screens: keep controls on their own sides and bring menu Play above fold. */
+@media (orientation:landscape) and (max-height:600px){
+ #shell{--dpad-width:min(67dvh,33vw,350px);--dpad-height:var(--dpad-width);--ability-size:clamp(102px,29dvh,151px)}
+ #movement{left:max(10px,env(safe-area-inset-left));transform:none;bottom:var(--dpad-bottom)}
+ #movement .dir{font-size:clamp(35px,10dvh,57px)}
+ #movement::before{font-size:clamp(29px,8dvh,45px)}
+ #ability{bottom:max(14px,env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right))}
+ #hud .stat{min-height:57px;min-width:101px;padding:4px 11px}
+ #hud .stat b{font-size:26px}
+ #pauseBtn{height:58px;width:58px;min-width:58px;font-size:26px}
+ #menu .menu-panel{width:min(95vw,850px);max-width:850px;display:grid;grid-template-columns:minmax(0, .95fr) minmax(0,1.05fr);column-gap:clamp(15px,2vw,28px);row-gap:5px;align-items:center;padding:14px clamp(16px,2.3vw,30px);max-height:calc(100dvh - 12px)}
+ #menu .menu-crest,#menu .menu-eyebrow,#menu .menu-title,#menu .menu-tagline,#menu .menu-divider,#menu .menu-lead{grid-column:1}
+ #menu .menu-crest{grid-row:1;height:40px;margin:0}
+ #menu .crest-swords{height:41px;width:41px;font-size:23px}
+ #menu .crest-star{font-size:14px}
+ #menu .menu-eyebrow{grid-row:2;font-size:10px;letter-spacing:1px;margin:0}
+ #menu .menu-title{grid-row:3;font-size:clamp(35px,5vw,54px);line-height:.95}
+ #menu .menu-tagline{grid-row:4;font-size:10px;margin:4px 0}
+ #menu .menu-divider{grid-row:5;margin:2px 0}
+ #menu .menu-lead{grid-row:6;font-size:12px;line-height:1.15;margin:0}
+ #menu .menu-actions{grid-column:2;grid-row:1 / span 4;margin:0}
+ #menu .menu-primary{min-height:67px;font-size:clamp(14px,1.9vw,20px)}
+ #menu .menu-primary .menu-action-icon{font-size:25px}
+ #menu .menu-side-actions{margin-top:13px}
+ #menu .menu-secondary{min-height:55px;font-size:clamp(11px,1.5vw,15px)}
+ #menu .menu-best{grid-column:2;grid-row:5 / span 2;margin:0;padding:12px 4px}
+ #menu .menu-best-label{font-size:11px}
+ #menu #menuBest{font-size:14px}
+ #menu .menu-footer{display:none}
+}
+
+/* Wide but moderately short desktop displays should show the complete menu without hidden scores. */
+@media (min-width:1000px) and (min-height:601px) and (max-height:1100px){
+ #menu .menu-panel{padding:21px 34px 23px}
+ #menu .menu-crest{height:70px;margin-bottom:8px}
+ #menu .crest-swords{height:70px;width:70px;font-size:38px}
+ #menu .menu-eyebrow{margin:8px 0 9px;font-size:15px}
+ #menu .menu-title{font-size:clamp(66px,7vw,81px)}
+ #menu .menu-tagline{margin-top:11px;font-size:15px}
+ #menu .menu-divider{margin:11px 0 9px}
+ #menu .menu-lead{font-size:20px;margin-bottom:18px}
+ #menu .menu-primary{min-height:81px}
+ #menu .menu-secondary{min-height:65px}
+ #menu .menu-side-actions{margin-top:13px}
+ #menu .menu-best{margin-top:15px;padding:12px 4px}
+ #menu .menu-footer{margin-top:12px;font-size:12px}
+}
+
+/* Keep enlarged shop cards within narrow phone panels. */
+.heroCards{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0}
+.heroCard{min-width:0;overflow-wrap:anywhere}
+.heroCard .heroName,.heroCard .heroNote,.heroCard .heroCost{overflow-wrap:anywhere;white-space:normal}
+
 </style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement" role="group" aria-label="Movement D-pad"><button class="dir" data-dir="up" aria-label="Forward">▲</button><button class="dir" data-dir="left" aria-label="Left">◀</button><button class="dir" data-dir="right" aria-label="Right">▶</button><button class="dir" data-dir="down" aria-label="Backward">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div><div id="impactFlash" aria-hidden="true"></div><div id="deathCue" role="status" aria-live="polite"></div>
 <section id="menu" class="overlay visible" aria-label="Dungeonbound main menu">
   <div class="menu-atmosphere" aria-hidden="true">
@@ -171,10 +318,10 @@ body{display:block;min-width:0;min-height:0}
   </div>
 </section>
 <section id="heroes" class="overlay"><div class="frame"><h2 class="sectionHeading">HEROES</h2><div class="tiny">Choose a champion. Each has a different power.</div><div class="totalcoins" id="wallet">🟡 0 COINS</div><div class="heroCards" id="heroCards"></div><div class="detail" id="heroDetail"></div><button id="buyUpgrade" class="action">UPGRADE</button><button class="action secondary" data-close="heroes">BACK</button></div></section>
-<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="buttons">D-pad (recommended)</option><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Each D-pad press hops ONE square. Hold to hop repeatedly, or slide your finger between arrows to redirect. Swipe and tap remain optional. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
+<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="buttons">D-pad</option><option value="swipe">Swipe (1 tile)</option><option value="tap">Tap directions</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Each D-pad press hops ONE square. Hold to hop repeatedly, or slide your finger between arrows to redirect. Swipe and tap remain optional. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
 <section id="pause" class="overlay"><div class="frame"><h2 class="sectionHeading">PAUSED</h2><p class="description">The dungeon is frozen. The shadows are waiting.</p><button class="action" id="resume">RESUME</button><button class="action secondary" id="quit">END RUN</button></div></section>
 <section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">FORWARD SQUARES</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
-<div id="version">DUNGEONBOUND V10 · BIGGER WORLD & CONTROLS</div></main><script>
+<div id="version">DUNGEONBOUND V11 · GIANT INTERFACE UPDATE</div></main><script>
 'use strict';
 const $=id=>document.getElementById(id), clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), mix=(a,b,t)=>a+(b-a)*t;
 const HEROES=[
