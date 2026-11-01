@@ -35,13 +35,86 @@
 #hud .stat{background:linear-gradient(#293d47f5,#101a23f5);border-color:#c4a77a}
 #hud .stat b{font-size:clamp(22px,5vw,27px)}
 @media(max-height:650px){#ability{bottom:calc(var(--dpad-bottom) + var(--dpad-size) + 14px);width:62px;height:62px}}
+
+/* V8 full-bleed canvas, no artificial 650px portrait column. */
+html,body{width:100%;height:100%;height:100dvh;margin:0;overflow:hidden}
+body{display:block;min-width:0;min-height:0}
+#shell{width:100%;max-width:none;min-width:0;height:100%;height:100dvh;max-height:none;margin:0;border:0;border-radius:0;box-shadow:none;overflow:hidden}
+#scene{width:100%;height:100%;display:block}
+
+/* V8 Dungeon gate menu: sculpted stone, animated torchlight, engraved gold. */
+#menu.overlay{isolation:isolate;overflow:hidden;justify-content:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 50% 32%,#364747b3 0%,#172630e8 37%,#080f16f7 100%)}
+#menu::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.26;background-image:linear-gradient(90deg,#0000 49%,#03090d 50%,#0000 52%),linear-gradient(#9aa69a12 1px,#0000 2px),repeating-linear-gradient(90deg,#a2a59818 0 2px,#0000 2px 105px);background-size:210px 70px,100% 57px,210px 70px}
+#menu::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 26%,#eabf6830 0%,#101c2200 53%),linear-gradient(90deg,#030608d9 0%,#0000 25%,#0000 75%,#030608d9 100%)}
+#menu .menu-atmosphere{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+#menu .menu-stone-arch{position:absolute;width:min(94vw,780px);height:120%;top:-20%;left:50%;transform:translateX(-50%);border:clamp(13px,3vw,29px) ridge #39464a;border-bottom:0;border-radius:48% 48% 0 0 / 27% 27% 0 0;box-shadow:0 0 0 10px #111a1f,0 0 0 15px #67716a35,inset 0 0 90px 40px #080d12b8,0 0 120px #000a;background:linear-gradient(90deg,#0b1017bb,#28343141 50%,#0b1017bb)}
+#menu .menu-floor{position:absolute;bottom:-30%;left:-30%;width:160%;height:56%;background:repeating-linear-gradient(90deg,#9187710c 0 2px,transparent 2px 88px),repeating-linear-gradient(0deg,#9e907714 0 2px,transparent 2px 70px);transform:perspective(360px) rotateX(63deg);opacity:.6}
+#menu .menu-torch{position:absolute;top:24%;width:32px;height:96px;filter:drop-shadow(0 8px 9px #000)}
+#menu .menu-torch-left{left:max(2%,calc(50% - 360px))}
+#menu .menu-torch-right{right:max(2%,calc(50% - 360px))}
+#menu .torch-sconce{position:absolute;top:43px;left:9px;width:17px;height:43px;background:linear-gradient(90deg,#1a1f24,#889087 42%,#1c252b);clip-path:polygon(0 0,100% 0,78% 100%,24% 100%);border-top:4px solid #c2a475}
+#menu .torch-flame{position:absolute;top:2px;left:6px;width:23px;height:50px;border-radius:65% 35% 58% 42% / 65% 63% 37% 35%;transform:rotate(8deg);background:radial-gradient(ellipse at 48% 74%,#fff7bd 0 12%,#ffb84b 22% 47%,#f26a2d 57%,#f26a2d00 76%);box-shadow:0 0 26px 9px #ff893847;animation:dungeonFlame 2s ease-in-out infinite alternate;transform-origin:bottom}
+#menu .menu-torch-right .torch-flame{animation-delay:-.8s}
+@keyframes dungeonFlame{from{transform:rotate(-9deg) scale(.91,1.04);opacity:.8}to{transform:rotate(10deg) scale(1.08,.96);opacity:1}}
+#menu .menu-panel{position:relative;z-index:1;width:min(100%,495px);max-width:495px;max-height:calc(100dvh - max(12px,env(safe-area-inset-top)) - max(16px,env(safe-area-inset-bottom)) - 9px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#96734d #172126;margin:0;padding:clamp(18px,3vh,29px) clamp(17px,4vw,31px) 20px;border:3px solid #927b59;border-radius:17px;background:linear-gradient(160deg,#3a4448ef 0%,#202e35f8 17%,#14222dfb 52%,#101923fc 100%);box-shadow:0 0 0 4px #172128,0 0 0 7px #776c52,0 0 0 11px #0b121ab3,inset 0 0 0 2px #ffffff17,inset 0 12px 20px #a3a38e17,0 20px 55px #000c}
+#menu .menu-panel::before{content:"";position:absolute;pointer-events:none;inset:7px;border:1px solid #a98e5a4b;border-radius:9px}
+#menu .menu-panel::after{content:"◆";position:absolute;top:10px;left:15px;color:#caa76d77;font-size:10px;pointer-events:none;filter:drop-shadow(calc(min(100vw,495px) - 52px) 0 #caa76d77)}
+#menu .menu-crest{display:flex;align-items:center;justify-content:center;gap:19px;height:59px;margin-bottom:5px;color:#e3bf83;font:900 18px Georgia,serif;text-shadow:0 3px 1px #080e13}
+#menu .crest-swords{width:57px;height:57px;display:grid;place-items:center;font-size:30px;border:2px solid #c6a36e;border-radius:50%;background:radial-gradient(circle at 30% 22%,#536163 0%,#2a373c 43%,#101921 96%);box-shadow:0 0 0 4px #1a2930,0 4px 8px #03070b,inset 0 2px #c7c9b149}
+#menu .crest-star{font-size:18px;color:#9a8f6e}
+#menu .menu-eyebrow{font:700 10px/1.4 Georgia,serif;letter-spacing:4px;color:#b9b9a6;margin:13px 0 7px}
+#menu .menu-title{margin:0;text-transform:uppercase;font-family:Georgia,'Times New Roman',serif;font-size:clamp(38px,10.5vw,62px);font-weight:900;line-height:.98;letter-spacing:clamp(1px,.55vw,3px);color:#f2dfad;text-shadow:0 2px #684c38,0 4px #3c3030,0 6px 2px #050b0e,0 9px 17px #000a}
+#menu .menu-title span{display:block;white-space:nowrap}
+#menu .menu-title span:last-child{font-size:1.12em;letter-spacing:.11em;margin-left:.1em;color:#ffc96c}
+#menu .menu-tagline{font:700 clamp(9px,2.25vw,11px)/1.5 Georgia,serif;letter-spacing:clamp(1px,.5vw,3px);color:#b3c5be;margin-top:13px}
+#menu .menu-divider{display:flex;align-items:center;gap:14px;color:#be9863;justify-content:center;margin:14px 0 11px;font:13px Georgia,serif}
+#menu .menu-divider::before,#menu .menu-divider::after{content:"";height:1px;width:30%;max-width:130px;background:linear-gradient(90deg,transparent,#bc9a63 70%)}
+#menu .menu-divider::after{transform:rotate(180deg)}
+#menu .menu-lead{font-size:clamp(12px,3.1vw,14px);line-height:1.55;color:#c3cbc6;margin:0 0 17px;font-weight:500;text-shadow:0 1px 2px #000b}
+#menu .menu-actions{margin-top:6px}
+#menu .menu-primary{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin:0;min-height:64px;padding:12px clamp(13px,4vw,21px);border:2px solid #ffe1a0;border-radius:9px;background:linear-gradient(180deg,#ffe19c 0%,#edb45d 45%,#ad6b30 100%);box-shadow:inset 0 2px #fff5c9,0 5px 0 #5d3c28,0 10px 18px #0008;color:#34251b;font:900 clamp(13px,3.8vw,18px)/1.15 Georgia,serif;letter-spacing:.45px;text-shadow:0 1px #ffeab6}
+#menu .menu-primary .menu-action-icon{font-size:28px;line-height:1}
+#menu .menu-primary .menu-action-tail{font-size:20px}
+#menu .menu-primary:active{transform:translateY(4px);box-shadow:inset 0 2px #fff5c9,0 1px 0 #5d3c28}
+#menu .menu-side-actions{margin-top:13px;gap:10px}
+#menu .menu-secondary{min-width:0;min-height:57px;margin:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 7px;border:2px solid #7d8981;border-radius:8px;background:linear-gradient(#3a4b4d,#23343b 57%,#1b2a33);box-shadow:inset 0 2px #ffffff1c,0 4px #0d171c;color:#e5dbc3;font:900 clamp(11px,2.8vw,14px) Georgia,serif;letter-spacing:.3px;text-shadow:0 2px #000}
+#menu .menu-secondary span:first-child{color:#e3bf83;font-size:18px}
+#menu .menu-best{border-top:1px solid #877b6061;border-bottom:1px solid #877b6061;margin:21px 0 0;padding:12px 5px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+#menu .menu-best-label{color:#9bacac;font:900 10px/1.3 Georgia,serif;letter-spacing:1.1px;text-align:left;max-width:120px}
+#menu #menuBest{color:#fbd690;font-size:13px;letter-spacing:.6px;white-space:nowrap}
+#menu .menu-footer{color:#849b9a;font:700 9px Georgia,serif;letter-spacing:1.25px;margin-top:15px}
+#menu .menu-footer span{color:#d5aa68;padding:0 6px}
+@media(max-width:360px){#menu .menu-panel{padding:13px 13px 14px}#menu .menu-crest{height:43px;margin:0}#menu .crest-swords{width:44px;height:44px;font-size:23px}#menu .menu-title{font-size:clamp(35px,10.2vw,52px)}#menu .menu-primary{min-height:57px}#menu .menu-secondary{min-height:49px}#menu .menu-best{margin-top:14px}#menu .menu-footer{font-size:8px;letter-spacing:.4px}}
+@media(max-height:730px){#menu .menu-panel{padding-top:12px;padding-bottom:11px}#menu .menu-crest{height:41px;margin:0}#menu .crest-swords{width:43px;height:43px;font-size:22px}#menu .menu-eyebrow{margin:8px 0 4px}#menu .menu-title{font-size:clamp(35px,8vh,53px)}#menu .menu-tagline{margin-top:7px}#menu .menu-divider{margin:9px 0 7px}#menu .menu-lead{margin-bottom:11px;line-height:1.4}#menu .menu-primary{min-height:54px}#menu .menu-secondary{min-height:45px}#menu .menu-side-actions{margin-top:9px}#menu .menu-best{margin-top:14px;padding:9px 4px}#menu .menu-footer{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){#menu .torch-flame{animation:none}}
 </style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement" role="group" aria-label="Movement D-pad"><button class="dir" data-dir="up" aria-label="Forward">▲</button><button class="dir" data-dir="left" aria-label="Left">◀</button><button class="dir" data-dir="right" aria-label="Right">▶</button><button class="dir" data-dir="down" aria-label="Backward">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div>
-<section id="menu" class="overlay visible"><div class="frame"><h1 class="logo">DUNGEON<br>BOUND</h1><div class="subtitle">MOBILE READABILITY · V7</div><div class="medallion">⚔️</div><p class="description">One tap. One hop. One square. One new row, one point.<br>Time your moves, collect treasure, and outrun the dark.</p><button class="action" id="play">⚔ START RUN</button><div class="smallGrid"><button class="action secondary" id="openHeroes">HEROES & SHOP</button><button class="action secondary" id="openSettings">SETTINGS</button></div><p class="tiny" id="menuBest">BEST DEPTH: 0</p></div></section>
+<section id="menu" class="overlay visible" aria-label="Dungeonbound main menu">
+  <div class="menu-atmosphere" aria-hidden="true">
+    <div class="menu-stone-arch"></div>
+    <div class="menu-torch menu-torch-left"><span class="torch-flame"></span><span class="torch-sconce"></span></div>
+    <div class="menu-torch menu-torch-right"><span class="torch-flame"></span><span class="torch-sconce"></span></div>
+    <div class="menu-floor"></div>
+  </div>
+  <div class="frame menu-panel">
+    <div class="menu-crest" aria-hidden="true"><span class="crest-star">✦</span><span class="crest-swords">⚔</span><span class="crest-star">✦</span></div>
+    <div class="menu-eyebrow">THE GATES ARE OPEN</div>
+    <h1 class="logo menu-title"><span>DUNGEON</span><span>BOUND</span></h1>
+    <div class="menu-tagline">ONE STEP CLOSER TO LEGEND</div>
+    <div class="menu-divider" aria-hidden="true"><span>◆</span></div>
+    <p class="description menu-lead">Ancient traps. Forgotten riches.<br>Only the fearless venture deeper.</p>
+    <div class="menu-actions">
+      <button class="action menu-primary" id="play"><span class="menu-action-icon" aria-hidden="true">⚔</span><span>ENTER THE DUNGEON</span><span class="menu-action-tail" aria-hidden="true">❯</span></button>
+      <div class="smallGrid menu-side-actions"><button class="action secondary menu-secondary" id="openHeroes"><span aria-hidden="true">♜</span><span>HEROES & SHOP</span></button><button class="action secondary menu-secondary" id="openSettings"><span aria-hidden="true">⚙</span><span>SETTINGS</span></button></div>
+    </div>
+    <div class="menu-best"><span class="menu-best-label">YOUR DEEPEST DESCENT</span><strong id="menuBest">BEST DEPTH: 0</strong></div>
+    <div class="menu-footer">ONE TILE AT A TIME <span>✦</span> OUTRUN THE DARK</div>
+  </div>
+</section>
 <section id="heroes" class="overlay"><div class="frame"><h2 class="sectionHeading">HEROES</h2><div class="tiny">Choose a champion. Each has a different power.</div><div class="totalcoins" id="wallet">🟡 0 COINS</div><div class="heroCards" id="heroCards"></div><div class="detail" id="heroDetail"></div><button id="buyUpgrade" class="action">UPGRADE</button><button class="action secondary" data-close="heroes">BACK</button></div></section>
 <section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="buttons">D-pad (recommended)</option><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Each D-pad press hops ONE square. Hold to hop repeatedly, or slide your finger between arrows to redirect. Swipe and tap remain optional. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
 <section id="pause" class="overlay"><div class="frame"><h2 class="sectionHeading">PAUSED</h2><p class="description">The dungeon is frozen. The shadows are waiting.</p><button class="action" id="resume">RESUME</button><button class="action secondary" id="quit">END RUN</button></div></section>
 <section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">FORWARD SQUARES</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
-<div id="version">DUNGEONBOUND V7 · MOBILE READABILITY FIXES</div></main><script>
+<div id="version">DUNGEONBOUND V8 · FULLSCREEN DUNGEON MENU</div></main><script>
 'use strict';
 const $=id=>document.getElementById(id), clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), mix=(a,b,t)=>a+(b-a)*t;
 const HEROES=[
