@@ -1,12 +1,20 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#111a23"><title>DUNGEONBOUND · 3D Dungeon Runner</title><style>
 :root{font-family:'Nunito',system-ui,-apple-system,sans-serif;color:#f8f0d5;--gold:#f9c86c;--outline:#151920}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;width:100%;margin:0;overflow:hidden;background:#090f16;user-select:none;touch-action:none}body{display:flex;justify-content:center;align-items:center}#shell{width:min(100vw,650px);height:100dvh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#405057,#141d2a 70%);box-shadow:0 0 70px #0009}#scene{display:block;width:100%;height:100%;touch-action:none;outline:0}#vignette{pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,#0a11188f 0%,transparent 21%,transparent 72%,#07101aa0 100%);mix-blend-mode:multiply}#hud{display:none;position:absolute;inset:0 0 auto;z-index:5;padding:max(env(safe-area-inset-top),18px) 15px 0;pointer-events:none}.hudtop{display:flex;align-items:center;justify-content:space-between;gap:7px}.stat{min-width:88px;border:2px solid #a58b64;background:linear-gradient(#303b40d9,#101a23ee);box-shadow:0 3px 0 #0c1015,0 0 0 2px #1a252b inset;border-radius:12px;padding:7px 12px;text-align:center}.stat small{display:block;color:#b8b5a4;font-size:10px;font-weight:900;letter-spacing:1.3px}.stat b{font-size:24px;color:#fff5d4;text-shadow:0 2px #141b21}.coinDot{display:inline-block;width:15px;height:15px;border:3px solid #ffe2a5;background:#e9a02c;box-shadow:0 0 0 2px #956120 inset;border-radius:50%;vertical-align:0;margin-right:5px}#pauseBtn{pointer-events:auto;min-width:48px;width:48px;height:48px;font-size:20px;border-radius:13px}#ability{display:none;position:absolute;bottom:max(calc(env(safe-area-inset-bottom) + 30px),30px);right:16px;z-index:6;width:75px;height:75px;border:3px solid #e9c18b;border-radius:22px;background:linear-gradient(145deg,#455f65,#1c303b);color:#fff;box-shadow:0 5px #0c1720,0 10px 16px #0006;flex-direction:column;align-items:center;justify-content:center;gap:0;font-weight:900;touch-action:none}#ability span{font-size:27px}#ability small{font-size:9px;letter-spacing:.5px}#ability.cooling{filter:grayscale(.8);opacity:.7}#movement{display:none;position:absolute;left:18px;bottom:max(calc(env(safe-area-inset-bottom) + 24px),24px);z-index:6;width:158px;height:158px;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px}.dir{border:2px solid #a6a49b94;background:#182932b9;color:#fff5d9;border-radius:13px;font-size:23px;touch-action:none;box-shadow:0 3px #080e15}.dir:active{transform:translateY(2px);background:#b78e4f}.dir[data-dir="up"]{grid-column:2;grid-row:1}.dir[data-dir="left"]{grid-column:1;grid-row:2}.dir[data-dir="right"]{grid-column:3;grid-row:2}.dir[data-dir="down"]{grid-column:2;grid-row:3}.dir:focus-visible,.action:focus-visible{outline:3px solid white}#swipeHint{display:none;position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#f9f0ce82;pointer-events:none;white-space:nowrap;z-index:3}#toast{position:absolute;top:21%;left:50%;transform:translate(-50%,-15px);z-index:12;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;background:#111d2de8;border:2px solid #eac779;border-radius:10px;padding:9px 20px;white-space:nowrap;font-size:16px;font-weight:900;color:#ffe6a5;text-shadow:0 2px #000}#toast.on{opacity:1;transform:translate(-50%,0)}.overlay{position:absolute;inset:0;display:none;z-index:10;align-items:center;justify-content:center;flex-direction:column;padding:24px 20px calc(25px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#0d1624b4,#0c1520ad);text-align:center}.overlay.visible{display:flex}.frame{border:3px solid #b7a078;border-radius:20px;max-height:91%;width:min(100%,440px);overflow-y:auto;overscroll-behavior:contain;padding:22px 19px;background:linear-gradient(150deg,#26323bed,#141d29f5);box-shadow:0 12px 0 #090f15,0 0 0 4px #38464d inset,0 0 70px #03070b90}.logo{margin:4px 0 0;font-size:clamp(38px,10vw,61px);line-height:1.05;letter-spacing:-2px;color:#ffe4a1;text-shadow:0 4px 0 #a35b37,0 7px 0 #402f30,0 11px 0 #14191e,0 15px 20px #000;font-weight:900}.subtitle{font-size:11px;font-weight:900;letter-spacing:3px;color:#b6dcd3;margin-top:15px}.medallion{width:78px;height:78px;margin:17px auto 13px;display:grid;place-items:center;border:4px solid #e6c886;background:radial-gradient(circle,#51666a,#24383a);border-radius:22px;box-shadow:0 6px #111a1d;font-size:42px;transform:rotate(-7deg)}.description{font-size:13px;color:#c8d0ce;line-height:1.6;margin:8px 0 18px}.action{display:block;width:100%;margin:11px 0 0;padding:13px 16px;min-height:49px;font:900 15px 'Nunito',system-ui,sans-serif;letter-spacing:1px;cursor:pointer;text-transform:uppercase;touch-action:manipulation;border:2px solid #f9e2a6;background:linear-gradient(#f8cb76,#ca8f46);color:#342719;border-radius:12px;box-shadow:0 5px #83552e,0 7px 14px #0006;text-shadow:0 1px #fff4a5}.action.secondary{color:#e9e7d0;background:linear-gradient(#435964,#263641);border-color:#9babac;box-shadow:0 5px #131f28}.action:active{transform:translateY(3px);box-shadow:0 2px #704827}.smallGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sectionHeading{font-weight:900;font-size:24px;color:#ffe4a4;text-shadow:0 2px #000;margin:0 0 8px}.tiny{color:#adbfbd;font-size:12px}.totalcoins{color:#ffd781;font-weight:900;margin:6px 0 15px}.heroCards{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}.heroCard{text-align:left;position:relative;min-height:115px;cursor:pointer;background:linear-gradient(#35434b,#25323b);border:2px solid #71828b;border-radius:13px;padding:11px;box-shadow:inset 0 1px #ffffff1e;color:#ebf0e6}.heroCard.selected{border-color:#f6cf83;background:linear-gradient(#586457,#303d41);box-shadow:0 0 0 2px #6d573c}.heroCard.locked{filter:saturate(.55)}.heroIcon{font-size:31px;display:block}.heroName{font-size:14px;font-weight:900;display:block}.heroNote{font-size:10px;color:#a6bcbd;line-height:1.3;display:block}.heroCost{font-size:11px;color:#ffdb88;display:block;margin-top:5px;font-weight:900}.detail{font-size:12px;color:#d7d6be;line-height:1.6;margin:8px 0}.settingRow{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #8b96954d;padding:12px 2px;font-size:14px}.settingRow select,.settingRow input{background:#23343e;color:#fff2d2;border:1px solid #8b9c9a;border-radius:8px;padding:6px;font:inherit;max-width:145px}.deathTitle{color:#ffc6a4;font-size:39px;line-height:1.1;font-weight:900;text-shadow:0 4px #7b473d}.scorebig{font-size:62px;font-weight:900;color:#ffe2a5;text-shadow:0 5px #7b5335}.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}.resultgrid>div{background:#0a152281;padding:11px;border:1px solid #5d7780;border-radius:10px;font-size:11px;color:#bad1cd}.resultgrid b{display:block;color:#ffdaa1;font-size:22px}.kbd{display:inline-block;padding:1px 6px;border:1px solid #8caca5;border-radius:4px;background:#1b333e;color:white}#warning{display:none;position:absolute;top:87px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;font-size:12px;letter-spacing:2px;color:#ffb4a2;font-weight:900;text-shadow:0 2px #000}#warning.on{display:block;animation:blink 1s infinite}@keyframes blink{50%{opacity:.3}}#version{position:absolute;bottom:5px;right:8px;z-index:11;font:800 9px system-ui;color:#a8aebe79;pointer-events:none}@media(max-height:700px){.frame{padding:14px}.logo{font-size:39px}.medallion{width:55px;height:55px;font-size:31px;margin:12px auto}.description{margin:5px 0}.action{padding:10px}.heroCards{gap:7px}.heroCard{min-height:93px;padding:7px}}
-</style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement"><button class="dir" data-dir="up">▲</button><button class="dir" data-dir="left">◀</button><button class="dir" data-dir="right">▶</button><button class="dir" data-dir="down">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div>
-<section id="menu" class="overlay visible"><div class="frame"><h1 class="logo">DUNGEON<br>BOUND</h1><div class="subtitle">THE ENDLESS DESCENT · PRECISION GRID V3</div><div class="medallion">⚔️</div><p class="description">One input. One square. One new row, one point.<br>Time your moves, collect treasure, and outrun the dark.</p><button class="action" id="play">⚔ START RUN</button><div class="smallGrid"><button class="action secondary" id="openHeroes">HEROES & SHOP</button><button class="action secondary" id="openSettings">SETTINGS</button></div><p class="tiny" id="menuBest">BEST DEPTH: 0</p></div></section>
+/* V4 tactile, permanently available cross-shaped mobile D-pad. */
+#movement{left:max(14px,env(safe-area-inset-left));bottom:max(22px,calc(env(safe-area-inset-bottom) + 17px));width:clamp(150px,41vw,188px);height:clamp(150px,41vw,188px);gap:5px;touch-action:none;filter:drop-shadow(0 7px 11px #0009)}
+#movement::before{content:"✣";grid-column:2;grid-row:2;display:grid;place-items:center;color:#c1a97e;font-size:22px;pointer-events:none;border-radius:12px;background:linear-gradient(145deg,#303e44,#182833);border:2px solid #7c827e;box-shadow:inset 0 2px 4px #0008}
+#movement .dir{position:relative;z-index:1;cursor:pointer;font-size:clamp(22px,6vw,30px);font-weight:900;color:#f6e8c9;border:2px solid #acaa94;border-radius:13px;background:linear-gradient(150deg,#52616a 0%,#30434b 43%,#1a2c38 100%);box-shadow:inset 0 2px #ffffff30,inset 0 -3px #06131f,0 4px 0 #071016;transition:background .08s,transform .08s,box-shadow .08s}
+#movement .dir.pressed,#movement .dir:active{background:linear-gradient(160deg,#c99a59,#896342);color:#fffbed;box-shadow:inset 0 3px 6px #4f362c,0 1px #10191d;transform:translateY(3px)}
+#movement .dir[data-dir="up"]{grid-column:2;grid-row:1}#movement .dir[data-dir="left"]{grid-column:1;grid-row:2}#movement .dir[data-dir="right"]{grid-column:3;grid-row:2}#movement .dir[data-dir="down"]{grid-column:2;grid-row:3}
+#ability{bottom:max(43px,calc(env(safe-area-inset-bottom) + 38px));right:max(16px,env(safe-area-inset-right))}
+@media(max-height:640px){#movement{width:138px;height:138px;bottom:max(12px,env(safe-area-inset-bottom))}#ability{bottom:max(20px,env(safe-area-inset-bottom))}}
+</style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement" role="group" aria-label="Movement D-pad"><button class="dir" data-dir="up" aria-label="Forward">▲</button><button class="dir" data-dir="left" aria-label="Left">◀</button><button class="dir" data-dir="right" aria-label="Right">▶</button><button class="dir" data-dir="down" aria-label="Backward">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div>
+<section id="menu" class="overlay visible"><div class="frame"><h1 class="logo">DUNGEON<br>BOUND</h1><div class="subtitle">3/4 CAMERA · HOPPING HEROES · V4</div><div class="medallion">⚔️</div><p class="description">One tap. One hop. One square. One new row, one point.<br>Time your moves, collect treasure, and outrun the dark.</p><button class="action" id="play">⚔ START RUN</button><div class="smallGrid"><button class="action secondary" id="openHeroes">HEROES & SHOP</button><button class="action secondary" id="openSettings">SETTINGS</button></div><p class="tiny" id="menuBest">BEST DEPTH: 0</p></div></section>
 <section id="heroes" class="overlay"><div class="frame"><h2 class="sectionHeading">HEROES</h2><div class="tiny">Choose a champion. Each has a different power.</div><div class="totalcoins" id="wallet">🟡 0 COINS</div><div class="heroCards" id="heroCards"></div><div class="detail" id="heroDetail"></div><button id="buyUpgrade" class="action">UPGRADE</button><button class="action secondary" data-close="heroes">BACK</button></div></section>
-<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option><option value="buttons">D-pad</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Every gesture moves exactly ONE square. Use one swipe, the tap-direction control, or the D-pad. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
+<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="buttons">D-pad (recommended)</option><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Each D-pad press hops ONE square. Hold to hop repeatedly, or slide your finger between arrows to redirect. Swipe and tap remain optional. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
 <section id="pause" class="overlay"><div class="frame"><h2 class="sectionHeading">PAUSED</h2><p class="description">The dungeon is frozen. The shadows are waiting.</p><button class="action" id="resume">RESUME</button><button class="action secondary" id="quit">END RUN</button></div></section>
 <section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">FORWARD SQUARES</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
-<div id="version">PRECISION GRID UPDATE V3</div></main><script>
+<div id="version">DUNGEONBOUND V4 · CAMERA & ANIMATION UPDATE</div></main><script>
 'use strict';
 const $=id=>document.getElementById(id), clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), mix=(a,b,t)=>a+(b-a)*t;
 const HEROES=[
@@ -18,7 +26,9 @@ const HEROES=[
  {id:'skeleton',name:'BONEWALKER',icon:'💀',power:'Second Chance',desc:'Automatically revive once per run after a fatal hit.',cost:550,cd:0,color:[.95,.88,.68]},
 ];
 const KEY='dungeonbound_save_v1';function loadSave(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch{return {}}}
-let saved=Object.assign({coins:0,best:0,selected:'knight',unlocked:['knight'],levels:{knight:0},controls:'swipe',holdRepeat:true,repeatSpeed:'normal',swipeSensitivity:'normal',tapForward:false,sound:true,quality:'high'},loadSave());
+let saved=Object.assign({coins:0,best:0,selected:'knight',unlocked:['knight'],levels:{knight:0},controls:'buttons',holdRepeat:true,repeatSpeed:'normal',swipeSensitivity:'normal',tapForward:false,sound:true,quality:'high'},loadSave());
+// V4 defaults existing mobile saves to the requested D-pad once; user choices thereafter persist.
+if(!saved.v4ControlMigrated){if(typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches)saved.controls='buttons';saved.v4ControlMigrated=true;try{localStorage.setItem(KEY,JSON.stringify(saved))}catch{}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(saved))}catch{}}
 function randomGen(seed){let s=seed>>>0;return ()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
 const rng=randomGen(0xF5D41), rand=(a=1,b)=>b===undefined?rng()*a:a+rng()*(b-a),pick=a=>a[Math.floor(rand(a.length))];
@@ -47,10 +57,33 @@ function cscale(c,s){c=color(c);return [c[0]*s,c[1]*s,c[2]*s]}
 class Mesh{constructor(){this.data=[];this.count=0}quad(a,b,c,d,normal,col,mat='smooth'){let I=MATERIALS.indexOf(mat),u=I<0?15:I;let x=u%4,y=Math.floor(u/4),eps=.004,u0=x/4+eps,u1=(x+1)/4-eps,v0=y/4+eps,v1=(y+1)/4-eps;let arr=[[a,u0,v0],[b,u1,v0],[c,u1,v1],[a,u0,v0],[c,u1,v1],[d,u0,v1]];for(let [p,U,V] of arr)this.data.push(p[0],p[1],p[2],normal[0],normal[1],normal[2],col[0],col[1],col[2],U,V);this.count+=6}
 box(x,y,z,w,h,d,material='stone',shade=1,rot=0){let col=cscale(material,shade),a=w/2,b=h/2,c=d/2;let loc=[[-a,-b,-c],[a,-b,-c],[a,b,-c],[-a,b,-c],[-a,-b,c],[a,-b,c],[a,b,c],[-a,b,c]];let cs=Math.cos(rot),sn=Math.sin(rot);let P=loc.map(p=>[x+p[0]*cs+p[2]*sn,y+p[1],z-p[0]*sn+p[2]*cs]);let N=(nx,ny,nz)=>[nx*cs+nz*sn,ny,-nx*sn+nz*cs];let tex=typeof material==='string'?material:'smooth';this.quad(P[4],P[5],P[6],P[7],N(0,0,1),col,tex);this.quad(P[1],P[0],P[3],P[2],N(0,0,-1),col,tex);this.quad(P[0],P[4],P[7],P[3],N(-1,0,0),col,tex);this.quad(P[5],P[1],P[2],P[6],N(1,0,0),col,tex);this.quad(P[7],P[6],P[2],P[3],N(0,1,0),col,tex);this.quad(P[0],P[1],P[5],P[4],N(0,-1,0),col,tex)}
 // Low-poly disk and pie geometry, for coins, torches, and dangerous mechanical wheels.
+// 3-axis local bone rotation: lightweight procedural skeletal poses (no new objects per frame).
+rigBox(x,y,z,w,h,d,material='stone',shade=1,yaw=0,pitch=0,roll=0){
+ let col=cscale(material,shade),hx=w/2,hy=h/2,hz=d/2;
+ let sy=Math.sin(yaw),cy=Math.cos(yaw),sp=Math.sin(pitch),cp=Math.cos(pitch),sr=Math.sin(roll),cr=Math.cos(roll);
+ const rot=(a,b,c)=>{let y1=b*cp-c*sp,z1=b*sp+c*cp,x2=a*cr-y1*sr,y2=a*sr+y1*cr;return [x2*cy+z1*sy,y2,-x2*sy+z1*cy]};
+ const tr=(a,b,c)=>{let r=rot(a,b,c);return [x+r[0],y+r[1],z+r[2]]};
+ let P=[tr(-hx,-hy,-hz),tr(hx,-hy,-hz),tr(hx,hy,-hz),tr(-hx,hy,-hz),tr(-hx,-hy,hz),tr(hx,-hy,hz),tr(hx,hy,hz),tr(-hx,hy,hz)];
+ let tex=typeof material==='string'?material:'smooth';
+ this.quad(P[4],P[5],P[6],P[7],rot(0,0,1),col,tex);
+ this.quad(P[1],P[0],P[3],P[2],rot(0,0,-1),col,tex);
+ this.quad(P[0],P[4],P[7],P[3],rot(-1,0,0),col,tex);
+ this.quad(P[5],P[1],P[2],P[6],rot(1,0,0),col,tex);
+ this.quad(P[7],P[6],P[2],P[3],rot(0,1,0),col,tex);
+ this.quad(P[0],P[1],P[5],P[4],rot(0,-1,0),col,tex)
+}
 disc(x,y,z,r,h,mat='metal',sides=10,angle=0){let col=color(mat),top=y+h/2,bot=y-h/2;for(let i=0;i<sides;i++){let t=angle+i*TAU/sides,n=angle+(i+1)*TAU/sides;let p=[x+Math.cos(t)*r,z+Math.sin(t)*r],q=[x+Math.cos(n)*r,z+Math.sin(n)*r];let normal=[0,1,0];this.triangle([x,top,z],[p[0],top,p[1]],[q[0],top,q[1]],normal,col,mat);this.triangle([x,bot,z],[q[0],bot,q[1]],[p[0],bot,p[1]],[0,-1,0],col,mat);this.quad([p[0],bot,p[1]],[q[0],bot,q[1]],[q[0],top,q[1]],[p[0],top,p[1]],[Math.cos((t+n)/2),0,Math.sin((t+n)/2)],col,mat)}}
 triangle(a,b,c,n,co,mat='smooth'){let I=MATERIALS.indexOf(mat);if(I<0)I=15;let x=I%4,y=Math.floor(I/4);for(let [p,u,v] of [[a,.04,.05],[b,.23,.05],[c,.12,.22]])this.data.push(...p,...n,...co,x/4+u,y/4+v);this.count+=3}
 }
-function perspective(){let eye,at,up=[0,1,0];let aspect=canvas.width/canvas.height;let h=aspect>.9?23:28.7;let w=h*aspect;let targetRow=game?game.camRow:0;at=[0,0,-targetRow*TILE-7.0];eye=[at[0],at[1]+19.6,at[2]+26];let z=normalize(sub(eye,at)),x=normalize(cross(up,z)),y=cross(z,x);let view=[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];let orth=[2/w,0,0,0,0,2/h,0,0,0,0,-.003,0,0,0,0,1];return mmul(orth,view)}
+const CAMERA_PITCH=50*Math.PI/180, CAMERA_YAW=6*Math.PI/180;
+const CAMERA_LOOK_AHEAD=7.2;
+function cameraHeight(){return canvas.width/canvas.height>1?23.6:26.8}
+function perspective(){let up=[0,1,0],aspect=canvas.width/canvas.height,h=cameraHeight(),w=h*aspect;
+ let targetRow=game?game.camRow:0,at=[0,0,-targetRow*TILE-CAMERA_LOOK_AHEAD];
+ let radius=34,eye=[Math.sin(CAMERA_YAW)*Math.cos(CAMERA_PITCH)*radius,Math.sin(CAMERA_PITCH)*radius,at[2]+Math.cos(CAMERA_YAW)*Math.cos(CAMERA_PITCH)*radius];
+ let z=normalize(sub(eye,at)),x=normalize(cross(up,z)),y=cross(z,x);
+ let view=[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];
+ let orth=[2/w,0,0,0,0,2/h,0,0,0,0,-.003,0,0,0,0,1];return mmul(orth,view)}
 function normalize(v){let l=Math.hypot(...v)||1;return v.map(n=>n/l)}function sub(a,b){return a.map((n,i)=>n-b[i])}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]}
 function mmul(a,b){let out=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++)for(let k=0;k<4;k++)out[i+j*4]+=a[i+k*4]*b[k+j*4];return out}
 function resize(){let w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,saved.quality==='low'||softCtx?1:1.75),W=Math.round(w*dpr),H=Math.round(h*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;if(gl)gl.viewport(0,0,W,H)}}
@@ -137,7 +170,7 @@ function instantiateModule(G){let depth=G.nextModuleRow;let tier=Math.floor(dept
  G.nextModuleRow+=mod.lines.length;
 }
 function newGame(menuDemo=false){let qp=new URLSearchParams(location.search),provided=qp.has('seed')?Number(qp.get('seed')):Math.floor(Math.random()*0xffffffff),gen=randomGen(provided);
- let G={status:menuDemo?'demo':'playing',time:0,row:0,x:0,startRow:0,maxRow:0,score:0,camRow:0,shadowRow:-11,coins:0,rows:new Map(),entities:[],nextModuleRow:1,moduleHistory:[],lastModuleId:-1,seed:provided,rng:gen,moveTimer:0,moveDuration:.122,fromX:0,fromRow:0,toX:0,toRow:0,queued:[],face:'up',abilityUntil:0,abilityReady:0,freezeUntil:0,revives:1,shieldUntil:0,slideDir:null,particles:[],demo:menuDemo,reason:'',difficulty:0,frame:0,staticBase:-10,staticEnd:22,seenBiome:0};
+ let G={status:menuDemo?'demo':'playing',time:0,row:0,x:0,startRow:0,maxRow:0,score:0,camRow:0,shadowRow:-11,coins:0,rows:new Map(),entities:[],nextModuleRow:1,moduleHistory:[],lastModuleId:-1,seed:provided,rng:gen,moveTimer:0,moveDuration:.122,fromX:0,fromRow:0,toX:0,toRow:0,queued:[],face:'up',facingAngle:0,targetFaceAngle:0,abilityUntil:0,abilityReady:0,freezeUntil:0,revives:1,shieldUntil:0,slideDir:null,particles:[],demo:menuDemo,reason:'',difficulty:0,frame:0,staticBase:-10,staticEnd:22,seenBiome:0};
  G.hero=HEROES.find(h=>h.id===saved.selected)||HEROES[0];for(let r=-3;r<=0;r++){let arr=[];for(let x=-4;x<=4;x++){let t=tileBlank(x,r,0,Math.abs(x)<=1?null:'pit');t.detail=G.rng();t.decor=G.rng();arr.push(t)}G.rows.set(r,arr)}
  generateRow(G,31);if(menuDemo){G.maxRow=6;G.camRow=5;G.row=5;G.fromRow=5;G.toRow=5}return G
 }
@@ -145,7 +178,18 @@ const R=(G,a,b)=>a+(b-a)*G.rng();const CR=(G,a)=>a[Math.floor(G.rng()*a.length)]
 function generateRow(G,row){while(row>=G.nextModuleRow)instantiateModule(G)}
 function getTile(x,row){return game?.rows.get(row)?.[x+4]||null}
 function ensureRows(){const upper=Math.floor(game.maxRow)+29;generateRow(game,upper);let lower=Math.floor(game.maxRow)-15;for(let r of game.rows.keys())if(r<lower)game.rows.delete(r);game.entities=game.entities.filter(e=>e.row>=lower-2);if(lower>game.staticBase){game.staticBase=lower;staticDirty=true}if(upper>game.staticDrawEnd-3||!game.staticDrawEnd){game.staticDrawEnd=upper;staticDirty=true}}
-function hazardIsActive(t,time){if(!t||!t.hazard||t.disarmedUntil>time)return false;if(t.hazard==='pit')return true;if(['ice','web'].includes(t.hazard))return false;if(t.hazard==='crumble')return t.breakAt>=0&&time>t.breakAt+.54;let cycle=time*2.35+t.phase;switch(t.hazard){case 'spike':return Math.sin(cycle)>.29;case 'flame':return Math.sin(cycle*.85)>.54;default:return false}}
+const SPIKE_SAFE=.53,SPIKE_WARN=.32,SPIKE_EXTEND=.11,SPIKE_ACTIVE=.55,SPIKE_RETRACT=.19;
+const SPIKE_CYCLE=SPIKE_SAFE+SPIKE_WARN+SPIKE_EXTEND+SPIKE_ACTIVE+SPIKE_RETRACT;
+function spikeTiming(t,time){
+ const phase=(t.phase||0)/TAU*SPIKE_CYCLE;
+ const v=((time+phase)%SPIKE_CYCLE+SPIKE_CYCLE)%SPIKE_CYCLE;
+ if(v<SPIKE_SAFE)return {state:'safe',height:0,danger:false,progress:v/SPIKE_SAFE};
+ let a=v-SPIKE_SAFE;if(a<SPIKE_WARN)return {state:'warning',height:.045+Math.sin(a/SPIKE_WARN*Math.PI)*.06,danger:false,progress:a/SPIKE_WARN};
+ a-=SPIKE_WARN;if(a<SPIKE_EXTEND){let p=a/SPIKE_EXTEND;return {state:'extending',height:.10+.48*p,danger:p>=.38,progress:p}}
+ a-=SPIKE_EXTEND;if(a<SPIKE_ACTIVE)return {state:'active',height:.58,danger:true,progress:a/SPIKE_ACTIVE};
+ a-=SPIKE_ACTIVE;let p=Math.min(1,a/SPIKE_RETRACT);return {state:'retracting',height:.58*(1-p),danger:p<.60,progress:p};
+}
+function hazardIsActive(t,time){if(!t||!t.hazard||t.disarmedUntil>time)return false;if(t.hazard==='pit')return true;if(['ice','web'].includes(t.hazard))return false;if(t.hazard==='crumble')return t.breakAt>=0&&time>t.breakAt+.54;if(t.hazard==='spike')return spikeTiming(t,time).danger;let cycle=time*2.35+t.phase;switch(t.hazard){case 'flame':return Math.sin(cycle*.85)>.54;default:return false}}
 function tileAttackAllowed(t){if(!t)return false;if(t.hazard==='pit'||t.hazard==='crumble')return game.hero.id==='vampire'&&game.abilityUntil>game.time;return game.shieldUntil>game.time||(game.hero.id==='golem'&&t.hazard==='flame')}
 function actorState(e,time){let v=time*e.speed+e.phase;
  if(e.type==='arrow'){let progress=((v/2.3)%1+1)%1;return {x:e.lo-1+progress*(e.hi-e.lo+2),row:e.row,active:progress>.02&&progress<.97}}
@@ -171,7 +215,7 @@ function updateForwardScore(row){if(row<=game.maxRow)return;game.maxRow=row;
  if(Math.floor(row/65)>game.seenBiome){game.seenBiome=Math.floor(row/65);showToast('✧ '+biomes[game.seenBiome%biomes.length].name)}
  ensureRows();
 }
-function clearMovementInputs(){if(game)game.queued=[];heldInput=null;pressedKeys.clear();touchContact=null;}
+function clearMovementInputs(){if(game)game.queued=[];heldInput=null;pressedKeys.clear();touchContact=null;padPointer=null;padDirection=null;clearPadHighlight()}
 // Only discrete axis-aligned unit vectors may enter the logical grid simulator.
 function move(dx,dr,automatic=false,source='tap'){
  if(!game||game.status!=='playing'||Math.abs(dx)+Math.abs(dr)!==1)return false;
@@ -194,7 +238,7 @@ function move(dx,dr,automatic=false,source='tap'){
  game.x=x;game.row=row;game.toX=x;game.toRow=row;
  game.moveDuration=tile?.hazard==='web'?.24:.122;
  game.moveTimer=game.moveDuration;
- game.face=dr>0?'up':dr<0?'down':dx<0?'left':'right';
+ game.face=dr>0?'up':dr<0?'down':dx<0?'left':'right';game.targetFaceAngle=dr>0?0:dr<0?Math.PI:dx<0?-Math.PI/2:Math.PI/2;
  game.slideDir=tile?.hazard==='ice'?[dx,dr]:tile?.conveyor?[tile.conveyor,0]:null;
  sound('move');updateForwardScore(row);
  if(!tile||tile.hazard==='pit'){if(!tileAttackAllowed({hazard:'pit'}))die('pit');return true}
@@ -235,6 +279,10 @@ function tick(dt){if(!game)return;clock+=dt;game.frame++;if(toastTimer>0){toastT
  if(game.status!=='playing')return;
  game.time+=dt;const before=game.actorClock||0;if(game.freezeUntil<=game.time)game.actorClock=(game.actorClock||0)+dt;
  game.moveTimer=Math.max(0,game.moveTimer-dt);
+ // Shortest-arc turn overlaps hopping; logical movement is never blocked by visual rotation.
+ let turnDelta=Math.atan2(Math.sin(game.targetFaceAngle-game.facingAngle),Math.cos(game.targetFaceAngle-game.facingAngle));
+ game.facingAngle+=turnDelta*Math.min(1,dt*24);
+
  if(game.moveTimer===0){
   if(game.slideDir){const d=game.slideDir;game.slideDir=null;move(...d,true)}
   else if(game.queued.length){const next=game.queued.shift();move(next.dx,next.dr,true)}
@@ -244,6 +292,15 @@ function tick(dt){if(!game)return;clock+=dt;game.frame++;if(toastTimer>0){toastT
  if(game.row<=game.shadowRow+.3){die('dark');return}
  const tile=getTile(game.x,game.row);if(tile){if(tile.hazard==='crumble'&&tile.breakAt<0)tile.breakAt=game.time;if(hazardIsActive(tile,game.actorClock||0)&&!tileAttackAllowed(tile))die(tile.hazard)}
  if(game.status==='playing')checkActors(before,game.actorClock||0);
+ if(game.status==='playing'){
+  let near=0;for(let r=game.row-2;r<=game.row+4;r++)for(let tile of game.rows.get(r)||[]){
+   if(tile.hazard==='spike'&&tile.disarmedUntil<=game.time&&Math.abs(tile.x-game.x)<=2){
+    if(spikeTiming(tile,before).state!=='warning'&&spikeTiming(tile,game.actorClock||0).state==='warning')near++;
+   }
+  }
+  if(near&&game.time>(game.lastSpikeWarning||-10)+.19){game.lastSpikeWarning=game.time;sound('warning')}
+ }
+
  if(game.frame%7===0){for(let list of game.rows.values())for(let t of list)if(t.hazard==='crumble'&&t.breakAt>=0&&!t.broken&&game.time>t.breakAt+.54){t.broken=true;staticDirty=true}}
  for(let p of game.particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;p.vy-=7.5*dt;p.life-=dt}game.particles=game.particles.filter(p=>p.life>0);
  if(game.frame%12===0)updateAbilityUI();$('warning').classList.toggle('on',game.row-game.shadowRow<4)
@@ -273,7 +330,7 @@ function drawRuin(m,x,row,biome,variation){const b=biomes[biome],X=x*TILE,Z=-row
  if(variation.hazard==='web'){m.box(X,.054,Z,.92,.012,.024,'bone',.77);m.box(X,.054,Z,.92,.012,.024,'bone',.77,Math.PI/2);for(let i=0;i<3;i++)m.box(X,.05,Z,.46+i*.19,.008,.023,'bone',.72,q()*TAU)}
  if(variation.hazard==='crusher'){m.box(X,.034,Z,1.13,.07,1.12,'metal',.5);m.box(X,.066,Z,.8,.035,.81,'gold',.63)}
  if(variation.hazard==='laser'){m.box(X-.54,.09,Z,.18,.22,.22,'metal',.72);m.box(X+.54,.09,Z,.18,.22,.22,'metal',.72)}
- if(variation.hazard==='spike'){m.box(X,.027,Z,1.17,.028,1.12,'metal',.66);for(let i=-1;i<=1;i++)m.box(X+i*.32,.049,Z,.047,.012,.89,'metal',.84)}
+ if(variation.hazard==='spike'){m.box(X,.038,Z,1.15,.03,1.13,'obsidian',.66);for(let i=-1;i<=1;i++)m.box(X+i*.34,.060,Z,.087,.016,.99,'metal',.69);for(let i=-1;i<=1;i++)m.box(X,.061,Z+i*.34,.99,.015,.071,'metal',.70)}
  if(variation.hazard==='flame'){m.box(X,.04,Z,.82,.072,.82,'obsidian',.87);for(let i=-1;i<=1;i++)m.box(X+i*.21,.079,Z,.07,.03,.65,'metal',.71)}
  if(variation.hazard==='saw'){m.box(X,.044,Z,1.23,.05,.26,'metal',.5);m.box(X,.058,Z,.2,.08,1.22,'metal',.51)}
  if(variation.hazard==='arrow'){m.box(X,.05,Z,.55,.06,.65,'metal',.58);m.box(X,.09,Z,.16,.02,.12,'gold',.66)}
@@ -285,34 +342,123 @@ function drawScenery(m,row,biome){let b=biomes[biome];for(let edge of [-1,1]){le
  if(rv()<.36){let sign=edge*(4.75*TILE),zz=z+(rv()-.5)*.7;if(biome===0||biome===3){m.box(sign,.08,zz,.22,.23,.2,'moss',.82);m.box(sign,.18,zz,.12,.2,.13,'grass',.85)}else if(biome===1){m.box(sign,.24,zz,.19,.48,.21,'ice',1.05);m.box(sign,.49,zz,.09,.14,.08,'smooth',1.0)}else{m.box(sign,.15,zz,.29,.39,.19,'obsidian',.7)}}}
 }
 function buildStatic(){if(!game)return;let m=new Mesh();let base=Math.max(game.staticBase,Math.floor(game.maxRow)-12),end=Math.floor(game.maxRow)+25;for(let row=base;row<=end;row++){let tiles=game.rows.get(row);if(!tiles)continue;let biome=tiles[0].biome;for(let t of tiles)if(t.hazard!=='pit')drawRuin(m,t.x,row,biome,t);drawScenery(m,row,biome)}for(let e of game.entities){if(e.row<base||e.row>end)continue;let z=-e.row*TILE;if(e.type==='arrow'){m.box((e.lo-.85)*TILE,.24,z,.22,.38,.58,'wood',.77);m.box((e.lo-.71)*TILE,.31,z,.41,.12,.16,'metal',.85)}else if(e.type==='spinner'){m.box(e.base*TILE,.07,z,.39,.15,.39,'gold',.74)}else{let mid=(e.lo+e.hi)/2;m.box(mid*TILE,.09,z,(e.hi-e.lo)*TILE+.45,.10,.22,'metal',.54);m.box(e.lo*TILE,.13,z,.28,.17,.33,'slate',.75);m.box(e.hi*TILE,.13,z,.28,.17,.33,'slate',.75)}}staticMesh=m;staticDirty=false;game.lastBuiltRow=game.maxRow}
-function drawKnight(m,X,Y,Z,H,t){let col=H.color;let step=game?.moveTimer>0?(game.moveTimer/game.moveDuration):0;let hop=step>0?Math.sin((1-step)*Math.PI)*.12:0;Y+=hop;let face=game?.face==='left'?-Math.PI/2:game?.face==='right'?Math.PI/2:game?.face==='down'?Math.PI:0;const F=(dx,dy,dz,w,h,d,mat,shade=1,rot=0)=>{let sn=Math.sin(face),cs=Math.cos(face),xx=dx*cs+dz*sn,zz=-dx*sn+dz*cs;m.box(X+xx,Y+dy,Z+zz,w,h,d,mat,shade,rot+face)};
- // Distinct miniature character proportions, separate modeled hands, greaves, armor and head.
- let gait=step?Math.sin((1-step)*Math.PI*2)*.16:Math.sin(t*4)*.025;
- F(-.19,.23,-gait,.24,.45,.29,'dark',.9);F(.19,.23,gait,.24,.45,.29,'dark',.9);
- F(-.18,.11,-gait-.06,.29,.18,.4,'obsidian',.85);F(.18,.11,gait-.06,.29,.18,.4,'obsidian',.85);
- F(0,.83,0,.81,.89,.56,col,1);F(0,.83,-.302,.62,.64,.06,'metal',.86);
- F(0,.56,-.316,.84,.13,.08,'gold',.66);
- F(-.47,.97,0,.34,.32,.46,'metal',.82);F(.47,.97,0,.34,.32,.46,'metal',.82);
- F(-.52,.55,-.03,.24,.48,.27,col,.77);F(.52,.55,-.03,.24,.48,.27,col,.77);
- F(-.51,.38,-.18,.25,.24,.27,'bone',.94);F(.51,.38,-.18,.25,.24,.27,'bone',.94);
- F(0,1.52,0,.62,.64,.59,H.id==='skeleton'?'bone':H.id==='golem'?'stone':H.id==='vampire'?'cloth':'metal',1.03);
- F(0,1.49,-.313,.49,.15,.06,H.id==='skeleton'?'dark':'obsidian',.72);
- F(-.16,1.49,-.351,.11,.085,.05,H.id==='skeleton'?'dark':H.id==='vampire'?'gold':'smooth',1.1);
- F(.16,1.49,-.351,.11,.085,.05,H.id==='skeleton'?'dark':H.id==='vampire'?'gold':'smooth',1.1);
- if(H.id==='knight'){F(0,1.84,.02,.25,.21,.42,'gold',.85);F(0,2.0,.08,.22,.14,.46,[.97,.48,.28],1);F(0,1.75,-.33,.50,.09,.09,'metal',.67);F(-.1,1.34,.34,.74,.79,.12,[.82,.28,.30],.82)}
- else if(H.id==='vampire'){F(0,1.84,0,.87,.2,.75,'cloth',.72);F(0,1.97,.1,.48,.16,.47,'cloth',.68);F(0,1.15,.35,1.05,1.11,.10,[.55,.19,.48],.9)}
- else if(H.id==='golem'){F(0,1.87,0,.71,.28,.73,'stone',.7);F(-.25,1.35,-.36,.13,.33,.08,'gold',.73);F(.25,1.35,-.36,.13,.33,.08,'gold',.73)}
- else if(H.id==='inventor'){F(0,1.86,0,.79,.15,.76,'wood',.77);F(0,2,.07,.35,.15,.37,'metal',.86);F(0,1.39,-.36,.57,.17,.13,'gold',.9);F(.15,1.48,-.44,.16,.10,.07,'ice',1)}
- else if(H.id==='sorcerer'){F(0,1.93,.1,.92,.2,.87,'cloth',.9);F(0,2.19,.08,.46,.34,.48,'cloth',.8);F(0,1.07,.33,.92,.92,.09,'cloth',.81)}
- else if(H.id==='skeleton'){F(-.2,1.57,-.31,.12,.1,.08,'dark',.7);F(.2,1.57,-.31,.12,.1,.08,'dark',.7);F(0,1.28,-.31,.38,.14,.06,'dark',.7);F(-.13,.79,-.343,.08,.63,.07,'bone',.8);F(.13,.79,-.343,.08,.63,.07,'bone',.8)}
- // Detailed sword and shield equipment, not featureless blocks.
- F(-.64,.77,-.39,.51,.61,.10,'wood',.8);F(-.64,.79,-.45,.43,.51,.06,'metal',.82);F(-.64,.78,-.494,.16,.25,.05,'gold',.94);
- F(.67,.67,-.25,.09,.64,.09,'wood',.84);F(.67,1.25,-.25,.15,.58,.10,'metal',1);F(.67,1.59,-.25,.1,.15,.1,'smooth',1.05);F(.67,1,-.25,.35,.10,.17,'gold',.9);
- if(game?.abilityUntil>game.time&&(game.status==='playing'||game.status==='paused')){for(let i=0;i<8;i++){let a=t*2.5+i*TAU/8;m.box(X+Math.cos(a)*.83,Y+.92+Math.sin(t*3+i)*.2,Z+Math.sin(a)*.83,.12,.22,.12,[.56,.93,1],1.2,a)}}}
+// Procedural bone pivots: independent torso, head, upper/lower legs and arms.
+// Movement accepts integer grid positions independently of the visual hop.
+function drawKnight(m,X,Y,Z,H,t){
+ const moving=game?.moveTimer>0, p=moving?clamp(1-game.moveTimer/game.moveDuration,0,1):0;
+ const arc=moving?Math.sin(p*Math.PI):0;
+ const anticipation=moving?Math.max(0,1-p/.14)*.075:0;
+ const landing=moving?Math.max(0,(p-.83)/.17)*.07:0;
+ const footTuck=moving?Math.pow(Math.max(0,arc),1.2)*.12:0;
+ const hop=moving?arc*.33-anticipation-landing:0;
+ const hero=H.id;
+ let breathing=Math.sin(t*(hero==='golem'?1.35:2.35))* .023;
+ let weightShift=!moving?Math.sin(t*.92)*.018:0;
+ let idleLean=!moving?Math.sin(t*.68+(hero==='inventor'?1.5:0))*.037:0;
+ let float=hero==='vampire'&&!moving?.035+Math.sin(t*2.1)*.025:0;
+ let torsoY=breathing+weightShift-anticipation*.56-landing*.57;
+ let gesture=hero==='sorcerer'?.10*Math.sin(t*1.8):hero==='inventor'?.065*Math.sin(t*2.1):0;
+ let gait=moving?Math.sin(p*Math.PI*2)*.16:0;
+ let face=game?.facingAngle||0;
+ Y+=hop+float;
+ // Every local part is rotated around the character root; pitch/roll animate individual limbs.
+ const F=(dx,dy,dz,w,h,d,mat,shade=1,rot=0,pitch=0,roll=0)=>{
+  let sn=Math.sin(face),cs=Math.cos(face),xx=dx*cs+dz*sn,zz=-dx*sn+dz*cs;
+  m.rigBox(X+xx,Y+dy,Z+zz,w,h,d,mat,shade,face+rot,pitch,roll);
+ };
+ const legSplay=hero==='golem'?.23:.19;
+ for(let side of [-1,1]){
+  let direction=side*gait, stride=moving?direction:Math.sin(t*.8+side)*.014;
+  let knee=footTuck*(.95+side*.05);
+  // Hip, knee, shin and boot track separately instead of moving one solid body cube.
+  F(side*legSplay,.425+torsoY*.45, stride*.42,.235,.37,.25,'dark',.93,0,direction*.83+arc*.24,side*.05);
+  F(side*legSplay,.230+knee*.55,stride*.86-.015,.218,.28,.24,'metal',.76,0,-direction*.6-arc*.22,0);
+  F(side*legSplay,.125+knee,stride*1.06-.075,.31,.20,.43,'obsidian',.86,0,-direction*.35,0);
+  F(side*legSplay,.41+torsoY*.25,stride*.22-.15,.06,.28,.15,H.color,.79,0,direction*.35);
+ }
+ let lean=(moving?.075*Math.sin(Math.PI*p):0)+idleLean;
+ F(0,.86+torsoY,0,.81,.86,.57,H.color,1,0,lean,Math.sin(t*.74)*.02);
+ F(0,.87+torsoY,-.302,.63,.63,.07,'metal',.84,0,lean);
+ F(0,.58+torsoY,-.317,.83,.14,.09,'gold',.66);
+ let headY=1.52+torsoY*.65,headTilt=!moving?Math.sin(t*.91)*.035:0;
+ F(0,headY,0,.62,.64,.59,hero==='skeleton'?'bone':hero==='golem'?'stone':hero==='vampire'?'cloth':'metal',1.03,0,headTilt,-idleLean*.65);
+ F(0,headY-.02,-.314,.49,.15,.06,hero==='skeleton'?'dark':'obsidian',.72,0,headTilt);
+ for(let sx of [-.16,.16])F(sx,headY-.02,-.353,.112,.083,.05,hero==='skeleton'?'dark':hero==='vampire'?'gold':'smooth',1.10,0,headTilt);
+ for(let side of [-1,1]){
+  let armSwing=(moving?side*gait*.75:Math.sin(t*1.15+side)*.027)+gesture;
+  let sideSway=side*.045*Math.sin(t*.78);
+  F(side*.47,1.05+torsoY,0,.34,.31,.46,'metal',.84,0,armSwing*.3,sideSway);
+  F(side*.54,.79+torsoY+armSwing*.12,-.016-armSwing*.09,.23,.43,.29,H.color,.79,0,armSwing,side*.09);
+  F(side*.55,.48+torsoY+armSwing*.16,-.067-armSwing*.17,.23,.26,.27,'bone',.96,0,armSwing*.72);
+ }
+ if(hero==='knight'){
+  F(0,1.84+torsoY*.6,.02,.25,.21,.42,'gold',.85);F(0,2+torsoY*.6,.08,.22,.14,.46,[.97,.48,.28],1);
+  F(0,1.75+torsoY*.6,-.33,.50,.09,.09,'metal',.67);
+  F(-.10,1.33+torsoY,.34,.74,.82,.12,[.82,.28,.30],.82,0,-.04+arc*.18);
+ }else if(hero==='vampire'){
+  F(0,1.84+torsoY*.7,0,.87,.2,.75,'cloth',.72);
+  F(0,1.98+torsoY*.7,.1,.48,.16,.47,'cloth',.68);
+  F(0,1.15+torsoY,.35+Math.sin(t*2.3)*.025,1.05,1.12,.10,[.55,.19,.48],.9,0,-.08+arc*.13);
+ }else if(hero==='golem'){
+  F(0,1.88+torsoY*.7,0,.71,.27,.73,'stone',.7);
+  for(let sx of [-.25,.25])F(sx,1.35+torsoY,-.36,.13,.33,.08,'gold',.73);
+ }else if(hero==='inventor'){
+  F(0,1.86+torsoY*.7,0,.79,.15,.76,'wood',.77);
+  F(0,2+torsoY*.7,.07,.35,.15,.37,'metal',.86);
+  F(0,1.39+torsoY,-.36,.57,.17,.13,'gold',.9);
+  F(.15,1.48+torsoY,-.44,.16,.10,.07,'ice',1);
+ }else if(hero==='sorcerer'){
+  F(0,1.93+torsoY*.6,.1,.92,.2,.87,'cloth',.9);
+  F(0,2.19+torsoY*.6,.08,.46,.34,.48,'cloth',.8);
+  F(0,1.07+torsoY,.33,.92,.92,.09,'cloth',.81,0,.025*Math.sin(t*2));
+ }else if(hero==='skeleton'){
+  for(let sx of [-.2,.2])F(sx,headY+.05,-.31,.12,.1,.08,'dark',.7);
+  F(0,1.28+torsoY,-.31,.38,.14,.06,'dark',.7);
+  for(let sx of [-.13,.13])F(sx,.79+torsoY,-.343,.08,.63,.07,'bone',.8);
+ }
+ // Equipment follows arms, including the hop follow-through.
+ let shieldSwing=(moving?-gait*.13:Math.sin(t*.95)*.015);
+ F(-.65,.77+torsoY+shieldSwing,-.39,.51,.61,.10,'wood',.8,0,.12*arc);
+ F(-.65,.79+torsoY+shieldSwing,-.45,.43,.51,.06,'metal',.82,0,.12*arc);
+ F(-.65,.78+torsoY+shieldSwing,-.494,.16,.25,.05,'gold',.94);
+ let swordSwing=moving?gait*.18:.013*Math.sin(t*1.4);
+ F(.68,.68+torsoY+swordSwing,-.25,.09,.64,.09,'wood',.84,0,-.13*arc);
+ F(.68,1.27+torsoY+swordSwing,-.25,.15,.58,.10,'metal',1,0,-.13*arc);
+ F(.68,1.6+torsoY+swordSwing,-.25,.10,.15,.10,'smooth',1.05);
+ F(.68,1.01+torsoY+swordSwing,-.25,.35,.1,.17,'gold',.9);
+ if(game?.abilityUntil>game.time&&(game.status==='playing'||game.status==='paused'))for(let i=0;i<7;i++){
+  let a=t*2.5+i*TAU/7;
+  m.box(X+Math.cos(a)*.84,Y+.92+Math.sin(t*3+i)*.2,Z+Math.sin(a)*.84,.11,.2,.11,[.56,.93,1],1.2,a)
+ }
+}
 function drawCoin(m,x,y,z,value,t){if(value===25){m.box(x,y,z,.59,.5,.48,'wood',.84);m.box(x,y+.26,z,.65,.1,.52,'gold',.89);m.box(x,y+.02,z-.25,.15,.25,.08,'gold',.85);return}let a=t*2.7;let w=.38,h=.4;let co=value===4?[.92,.19,.17]:value===3?[.23,.60,1]:value===2?[.29,.93,.48]:[1,.78,.30];let w2=Math.max(.09,Math.abs(Math.cos(a))*.39);m.box(x,y+Math.sin(t*3)*.09,z,w2,h,.09,co,1);m.box(x,y+Math.sin(t*3)*.09+.01,z-.059,Math.max(.035,w2*.49),h*.53,.025,value===10?[1,.68,.43]:'gold',1.12);m.box(x,y+Math.sin(t*3)*.09,z-.09,.035,.16,.014,'bone',1.05)}
-function drawSpikes(m,X,Z,t,active){let n=active?.44:.06;for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){let xx=X+i*.34,zz=Z+j*.34;m.box(xx,.12+n*.52,zz,.15,.22+n,.15,'metal',.95);m.box(xx,.24+n,zz,.06,.19+n*.55,.06,'smooth',.81)}}
+function drawSpikes(m,X,Z,t,tile){
+ let st=spikeTiming(tile,t),warning=st.state==='warning',danger=st.danger;
+ // Recessed mechanical base and a beveled amber warning channel.
+ m.box(X,.053,Z,1.14,.041,1.14,'obsidian',.72);
+ for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){
+  let xx=X+i*.34,zz=Z+j*.34,base=.045+st.height;
+  if(st.state==='safe')m.box(xx,.072,zz,.15,.025,.15,'metal',.74);
+  else{
+   let h=Math.max(.05,st.height),wiggle=warning?Math.sin(t*45+i*4+j*7)*.012:0;
+   m.box(xx+wiggle,.048+h*.48,zz,.17,Math.max(.065,h),.17,danger?'metal':'slate',danger?1.12:.93);
+   m.box(xx,.061+h,zz,.075,.09+h*.19,.075,danger?'smooth':'gold',danger?1:.83);
+  }
+ }
+ if(warning||st.state==='extending'){
+  let flare=.69+.18*Math.sin(st.progress*Math.PI*5);
+  for(let edge of [-1,1]){
+   m.box(X+edge*.54,.084,Z,.052,.055,1.08,[1,.67,.24],flare);
+   m.box(X,.083,Z+edge*.54,1.08,.055,.052,[1,.67,.24],flare);
+  }
+  // Rattle and tiny exposed tips signal danger before the lethal extension.
+  if(warning){for(let n=0;n<3;n++){let a=n*TAU/3+tile.phase;
+   m.box(X+Math.cos(a)*.43,.13+Math.sin(t*17+a)*.035,Z+Math.sin(a)*.42,.043,.045,.048,'gold',.95)}}
+ }
+ if(st.state==='retracting')m.box(X,.055,Z,1.05,.015,1.05,'slate',.67);
+}
 function drawTrap(m,t,T){if(!t.hazard||t.disarmedUntil>game.time)return;let x=t.x*TILE,z=-t.row*TILE,time=T;let active=hazardIsActive(t,time);let pulse=Math.sin(time*2.9+t.phase);
-if(t.hazard==='spike')drawSpikes(m,x,z,time,active);
+if(t.hazard==='spike')drawSpikes(m,x,z,time,t);
 else if(t.hazard==='flame'){let height=active?(.72+Math.sin(time*12+t.phase)*.15):.06;let cols=[[1,.46,.19],[1,.68,.2],[1,.89,.27]];for(let i=0;i<3;i++)m.box(x+(i-1)*.23,.12+height*(.5+i*.12),z+Math.sin(time*9+i)*.09,.23,height*(.8+i*.12),.25,cols[i],1,Math.sin(time*7+i)*.13)}
 else if(t.hazard==='saw'){let rot=time*5+t.phase;let h=active?.46:.15;m.disc(x,h,z,.35,.16,'metal',10,rot);for(let i=0;i<10;i++){let a=rot+i*TAU/10;m.box(x+Math.cos(a)*.4,h,z+Math.sin(a)*.4,.22,.12,.16,'smooth',.82,a)}m.box(x,h+.1,z,.14,.13,.14,'gold',.75)}
 else if(t.hazard==='arrow'){let phase=(time*.65+t.phase)%TAU;if(active){let aa=(phase/TAU)*1.15-.5;m.box(x+aa,.26,z,.44,.11,.09,'metal',.94);m.box(x+aa+.25,.26,z,.12,.16,.11,'gold',.73)}}
@@ -330,7 +476,7 @@ function drawActors(m){let time=game.actorClock||0;for(let e of game.entities){i
 
 function drawDynamic(){let m=new Mesh(),t=game.time||clock;for(let row=Math.floor(game.maxRow)-10;row<=Math.floor(game.maxRow)+17;row++){let tiles=game.rows.get(row);if(!tiles)continue;for(let tile of tiles){if(tile.coin)drawCoin(m,tile.x*TILE,.52,-row*TILE,tile.coin,t+tile.phase);if(tile.hazard&&tile.hazard!=='pit')drawTrap(m,tile,game.actorClock||0)}}
 if(game.status!=='demo'){drawDark(m,clock);drawActors(m)}
-let k=game.moveDuration?clamp(1-game.moveTimer/game.moveDuration,0,1):1;let smooth=k*k*(3-2*k);let px=game.status==='demo'?0:mix(game.fromX,game.x,smooth)*TILE;let pz=game.status==='demo'?-5*TILE:-mix(game.fromRow,game.row,smooth)*TILE; m.box(px,.048,pz,.38,.011,.27,'dark',.44); drawKnight(m,px,.08,pz,game.hero,t);
+let k=game.moveDuration?clamp(1-game.moveTimer/game.moveDuration,0,1):1;let smooth=k*k*(3-2*k);let px=game.status==='demo'?0:mix(game.fromX,game.x,smooth)*TILE;let pz=game.status==='demo'?-5*TILE:-mix(game.fromRow,game.row,smooth)*TILE; let jumpP=game.moveTimer>0?1-game.moveTimer/game.moveDuration:0,shadowJump=game.moveTimer>0?Math.sin(jumpP*Math.PI):0;m.box(px,.049,pz,.43-shadowJump*.12,.012,.31-shadowJump*.08,'dark',.45-shadowJump*.13);drawKnight(m,px,.04,pz,game.hero,t);
 for(let p of game.particles)if(p.life>0)m.box(p.x,p.y,p.z,.09,.09,.09,p.color,Math.min(1.2,p.life*1.4));return m}
 
 // Lightweight compatibility renderer: perspective-projected 3D triangles in Canvas2D.
@@ -338,8 +484,8 @@ for(let p of game.particles)if(p.life>0)m.box(p.x,p.y,p.z,.09,.09,.09,p.color,Ma
 let softStaticTriangles=[],softLastMesh=null;
 function softTriangles(mesh){const a=mesh.data,out=[];for(let i=0;i<a.length;i+=33){let x1=a[i],y1=a[i+1],z1=a[i+2],x2=a[i+11],y2=a[i+12],z2=a[i+13],x3=a[i+22],y3=a[i+23],z3=a[i+24];let normal=[a[i+3],a[i+4],a[i+5]],light=.65+Math.max(0,dot(normal,normalize([-.54,1,.58])))*.38;let color=[a[i+6],a[i+7],a[i+8]].map(v=>Math.round(clamp(v*light,0,1)*255));out.push({p:[x1,y1,z1,x2,y2,z2,x3,y3,z3],depth:(y1+y2+y3)*.59+(z1+z2+z3)*.81,col:`rgb(${color.join(',')})`})}out.sort((a,b)=>a.depth-b.depth);return out}
 function renderSoftware(){resize();if(staticDirty||Math.abs(game.maxRow-(game.lastBuiltRow||0))>=4)buildStatic();if(softLastMesh!==staticMesh){softStaticTriangles=softTriangles(staticMesh);softLastMesh=staticMesh}
-const ctx=softCtx,W=canvas.width,H=canvas.height,s=W/15.0;let grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#253844');grd.addColorStop(.5,'#15242e');grd.addColorStop(1,'#0b121d');ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);let camz=game.camRow*TILE+7;
-function draw(tris){let lastColor='';for(let tr of tris){let p=tr.p;let points=[];for(let i=0;i<9;i+=3){let x=p[i],y=p[i+1],z=p[i+2]+camz;points.push([W*.5+x*s,H*.5-(.798*y-.602*z)*s])}if(tr.col!==lastColor){ctx.fillStyle=tr.col;lastColor=tr.col}ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);ctx.lineTo(points[1][0],points[1][1]);ctx.lineTo(points[2][0],points[2][1]);ctx.closePath();ctx.fill()}}
+const ctx=softCtx,W=canvas.width,H=canvas.height,s=H/cameraHeight();let grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#253844');grd.addColorStop(.5,'#15242e');grd.addColorStop(1,'#0b121d');ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);let camz=game.camRow*TILE+CAMERA_LOOK_AHEAD, cy=Math.cos(CAMERA_YAW),sy=Math.sin(CAMERA_YAW),cp=Math.cos(CAMERA_PITCH),sp=Math.sin(CAMERA_PITCH);
+function draw(tris){let lastColor='';for(let tr of tris){let p=tr.p;let points=[];for(let i=0;i<9;i+=3){let x=p[i],y=p[i+1],z=p[i+2]+camz;points.push([W*.5+(cy*x-sy*z)*s,H*.5-(-sp*sy*x+cp*y-sp*cy*z)*s])}if(tr.col!==lastColor){ctx.fillStyle=tr.col;lastColor=tr.col}ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);ctx.lineTo(points[1][0],points[1][1]);ctx.lineTo(points[2][0],points[2][1]);ctx.closePath();ctx.fill()}}
 draw(softStaticTriangles);draw(softTriangles(drawDynamic()));}
 function render(){if(!game)return;if(!gl){renderSoftware();return}resize();gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);gl.uniformMatrix4fv(uniVP,false,perspective());gl.uniform1f(uniTime,clock);gl.uniform1f(uniFog,game.camRow*TILE);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,atlas);
 if(staticDirty||Math.abs(game.maxRow-(game.lastBuiltRow||0))>=4)buildStatic();upload(meshStatic,staticMesh,staticGpuCache===staticMesh);staticGpuCache=staticMesh;upload(meshDynamic,drawDynamic())}
@@ -364,17 +510,40 @@ const pressedKeys=new Set();let heldInput=null,touchContact=null;
 function repeatPeriod(){return saved.repeatSpeed==='slow'?.21:saved.repeatSpeed==='fast'?.126:.16}
 function swipeThreshold(){return saved.swipeSensitivity==='sensitive'?16:saved.swipeSensitivity==='firm'?33:23}
 function stepInput(dx,dr,source='tap'){return move(dx,dr,false,source)}
-function beginHold(dx,dr,kind,id){heldInput={dx,dr,kind,id,nextRepeat:game.time+.24};stepInput(dx,dr,'tap')}
+function beginHold(dx,dr,kind,id){if(!game||game.status!=='playing')return;heldInput={dx,dr,kind,id,nextRepeat:game.time+.23};stepInput(dx,dr,kind==='button'?'dpad':'tap')}
 function stopHold(kind=null,id=null){if(!heldInput)return;if(kind&&heldInput.kind!==kind)return;if(id!==null&&heldInput.id!==id)return;
  heldInput=null;if(game)game.queued=game.queued.filter(q=>q.source!=='hold')}
 function tileDir(name){return name==='left'?[-1,0]:name==='right'?[1,0]:name==='down'?[0,-1]:[0,1]}
-for(const button of document.querySelectorAll('.dir')){
- button.addEventListener('pointerdown',e=>{if(game?.status!=='playing')return;e.preventDefault();button.setPointerCapture(e.pointerId);
-  let [dx,dr]=tileDir(button.dataset.dir);beginHold(dx,dr,'button',e.pointerId)});
- button.addEventListener('pointerup',e=>{e.preventDefault();stopHold('button',e.pointerId)});
- button.addEventListener('pointercancel',e=>stopHold('button',e.pointerId));
- button.addEventListener('lostpointercapture',e=>stopHold('button',e.pointerId));
+const dpad=$('movement');let padPointer=null,padDirection=null;
+function clearPadHighlight(){for(const b of dpad.querySelectorAll('.dir'))b.classList.remove('pressed')}
+function dirAtPoint(x,y){
+ for(const b of dpad.querySelectorAll('.dir')){
+  const r=b.getBoundingClientRect();if(x>=r.left-3&&x<=r.right+3&&y>=r.top-3&&y<=r.bottom+3)return b.dataset.dir;
+ }
+ return null;
 }
+function choosePadDirection(name,id){
+ if(padDirection===name)return;
+ stopHold('button',id); // remove the prior held input before switching arrows
+ if(game)game.queued=game.queued.filter(q=>q.source!=='hold'&&q.source!=='dpad');
+ padDirection=name;clearPadHighlight();
+ if(!name)return;
+ const button=dpad.querySelector('.dir[data-dir="'+name+'"]');button?.classList.add('pressed');
+ const [dx,dr]=tileDir(name);beginHold(dx,dr,'button',id);
+}
+dpad.addEventListener('pointerdown',e=>{
+ if(game?.status!=='playing'||padPointer!==null)return;
+ const name=dirAtPoint(e.clientX,e.clientY);if(!name)return;
+ e.preventDefault();padPointer=e.pointerId;dpad.setPointerCapture(e.pointerId);choosePadDirection(name,e.pointerId);
+});
+dpad.addEventListener('pointermove',e=>{
+ if(e.pointerId!==padPointer||game?.status!=='playing')return;
+ e.preventDefault();choosePadDirection(dirAtPoint(e.clientX,e.clientY),e.pointerId);
+});
+function releasePad(id){if(padPointer!==id)return;stopHold('button',id);padPointer=null;padDirection=null;clearPadHighlight()}
+dpad.addEventListener('pointerup',e=>{e.preventDefault();releasePad(e.pointerId)});
+dpad.addEventListener('pointercancel',e=>releasePad(e.pointerId));
+dpad.addEventListener('lostpointercapture',e=>releasePad(e.pointerId));
 function tapDirection(clientX,clientY){let r=canvas.getBoundingClientRect();let nx=(clientX-r.left)/r.width-.5,ny=(clientY-r.top)/r.height-.5;
  // Compare normalized displacement so the four screen regions are similarly accessible in portrait mode.
  return Math.abs(nx)>Math.abs(ny)?(nx>0?[1,0]:[-1,0]):(ny>0?[0,-1]:[0,1]);
