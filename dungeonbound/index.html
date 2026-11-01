@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#111a23"><title>DUNGEONBOUND · 3D Dungeon Runner</title><style>
 :root{font-family:'Nunito',system-ui,-apple-system,sans-serif;color:#f8f0d5;--gold:#f9c86c;--outline:#151920}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;width:100%;margin:0;overflow:hidden;background:#090f16;user-select:none;touch-action:none}body{display:flex;justify-content:center;align-items:center}#shell{width:min(100vw,650px);height:100dvh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#405057,#141d2a 70%);box-shadow:0 0 70px #0009}#scene{display:block;width:100%;height:100%;touch-action:none;outline:0}#vignette{pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,#0a11188f 0%,transparent 21%,transparent 72%,#07101aa0 100%);mix-blend-mode:multiply}#hud{display:none;position:absolute;inset:0 0 auto;z-index:5;padding:max(env(safe-area-inset-top),18px) 15px 0;pointer-events:none}.hudtop{display:flex;align-items:center;justify-content:space-between;gap:7px}.stat{min-width:88px;border:2px solid #a58b64;background:linear-gradient(#303b40d9,#101a23ee);box-shadow:0 3px 0 #0c1015,0 0 0 2px #1a252b inset;border-radius:12px;padding:7px 12px;text-align:center}.stat small{display:block;color:#b8b5a4;font-size:10px;font-weight:900;letter-spacing:1.3px}.stat b{font-size:24px;color:#fff5d4;text-shadow:0 2px #141b21}.coinDot{display:inline-block;width:15px;height:15px;border:3px solid #ffe2a5;background:#e9a02c;box-shadow:0 0 0 2px #956120 inset;border-radius:50%;vertical-align:0;margin-right:5px}#pauseBtn{pointer-events:auto;min-width:48px;width:48px;height:48px;font-size:20px;border-radius:13px}#ability{display:none;position:absolute;bottom:max(calc(env(safe-area-inset-bottom) + 30px),30px);right:16px;z-index:6;width:75px;height:75px;border:3px solid #e9c18b;border-radius:22px;background:linear-gradient(145deg,#455f65,#1c303b);color:#fff;box-shadow:0 5px #0c1720,0 10px 16px #0006;flex-direction:column;align-items:center;justify-content:center;gap:0;font-weight:900;touch-action:none}#ability span{font-size:27px}#ability small{font-size:9px;letter-spacing:.5px}#ability.cooling{filter:grayscale(.8);opacity:.7}#movement{display:none;position:absolute;left:18px;bottom:max(calc(env(safe-area-inset-bottom) + 24px),24px);z-index:6;width:158px;height:158px;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px}.dir{border:2px solid #a6a49b94;background:#182932b9;color:#fff5d9;border-radius:13px;font-size:23px;touch-action:none;box-shadow:0 3px #080e15}.dir:active{transform:translateY(2px);background:#b78e4f}.dir[data-dir="up"]{grid-column:2;grid-row:1}.dir[data-dir="left"]{grid-column:1;grid-row:2}.dir[data-dir="right"]{grid-column:3;grid-row:2}.dir[data-dir="down"]{grid-column:2;grid-row:3}.dir:focus-visible,.action:focus-visible{outline:3px solid white}#swipeHint{display:none;position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#f9f0ce82;pointer-events:none;white-space:nowrap;z-index:3}#toast{position:absolute;top:21%;left:50%;transform:translate(-50%,-15px);z-index:12;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;background:#111d2de8;border:2px solid #eac779;border-radius:10px;padding:9px 20px;white-space:nowrap;font-size:16px;font-weight:900;color:#ffe6a5;text-shadow:0 2px #000}#toast.on{opacity:1;transform:translate(-50%,0)}.overlay{position:absolute;inset:0;display:none;z-index:10;align-items:center;justify-content:center;flex-direction:column;padding:24px 20px calc(25px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#0d1624b4,#0c1520ad);text-align:center}.overlay.visible{display:flex}.frame{border:3px solid #b7a078;border-radius:20px;max-height:91%;width:min(100%,440px);overflow-y:auto;overscroll-behavior:contain;padding:22px 19px;background:linear-gradient(150deg,#26323bed,#141d29f5);box-shadow:0 12px 0 #090f15,0 0 0 4px #38464d inset,0 0 70px #03070b90}.logo{margin:4px 0 0;font-size:clamp(38px,10vw,61px);line-height:1.05;letter-spacing:-2px;color:#ffe4a1;text-shadow:0 4px 0 #a35b37,0 7px 0 #402f30,0 11px 0 #14191e,0 15px 20px #000;font-weight:900}.subtitle{font-size:11px;font-weight:900;letter-spacing:3px;color:#b6dcd3;margin-top:15px}.medallion{width:78px;height:78px;margin:17px auto 13px;display:grid;place-items:center;border:4px solid #e6c886;background:radial-gradient(circle,#51666a,#24383a);border-radius:22px;box-shadow:0 6px #111a1d;font-size:42px;transform:rotate(-7deg)}.description{font-size:13px;color:#c8d0ce;line-height:1.6;margin:8px 0 18px}.action{display:block;width:100%;margin:11px 0 0;padding:13px 16px;min-height:49px;font:900 15px 'Nunito',system-ui,sans-serif;letter-spacing:1px;cursor:pointer;text-transform:uppercase;touch-action:manipulation;border:2px solid #f9e2a6;background:linear-gradient(#f8cb76,#ca8f46);color:#342719;border-radius:12px;box-shadow:0 5px #83552e,0 7px 14px #0006;text-shadow:0 1px #fff4a5}.action.secondary{color:#e9e7d0;background:linear-gradient(#435964,#263641);border-color:#9babac;box-shadow:0 5px #131f28}.action:active{transform:translateY(3px);box-shadow:0 2px #704827}.smallGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sectionHeading{font-weight:900;font-size:24px;color:#ffe4a4;text-shadow:0 2px #000;margin:0 0 8px}.tiny{color:#adbfbd;font-size:12px}.totalcoins{color:#ffd781;font-weight:900;margin:6px 0 15px}.heroCards{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}.heroCard{text-align:left;position:relative;min-height:115px;cursor:pointer;background:linear-gradient(#35434b,#25323b);border:2px solid #71828b;border-radius:13px;padding:11px;box-shadow:inset 0 1px #ffffff1e;color:#ebf0e6}.heroCard.selected{border-color:#f6cf83;background:linear-gradient(#586457,#303d41);box-shadow:0 0 0 2px #6d573c}.heroCard.locked{filter:saturate(.55)}.heroIcon{font-size:31px;display:block}.heroName{font-size:14px;font-weight:900;display:block}.heroNote{font-size:10px;color:#a6bcbd;line-height:1.3;display:block}.heroCost{font-size:11px;color:#ffdb88;display:block;margin-top:5px;font-weight:900}.detail{font-size:12px;color:#d7d6be;line-height:1.6;margin:8px 0}.settingRow{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #8b96954d;padding:12px 2px;font-size:14px}.settingRow select,.settingRow input{background:#23343e;color:#fff2d2;border:1px solid #8b9c9a;border-radius:8px;padding:6px;font:inherit;max-width:145px}.deathTitle{color:#ffc6a4;font-size:39px;line-height:1.1;font-weight:900;text-shadow:0 4px #7b473d}.scorebig{font-size:62px;font-weight:900;color:#ffe2a5;text-shadow:0 5px #7b5335}.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}.resultgrid>div{background:#0a152281;padding:11px;border:1px solid #5d7780;border-radius:10px;font-size:11px;color:#bad1cd}.resultgrid b{display:block;color:#ffdaa1;font-size:22px}.kbd{display:inline-block;padding:1px 6px;border:1px solid #8caca5;border-radius:4px;background:#1b333e;color:white}#warning{display:none;position:absolute;top:87px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;font-size:12px;letter-spacing:2px;color:#ffb4a2;font-weight:900;text-shadow:0 2px #000}#warning.on{display:block;animation:blink 1s infinite}@keyframes blink{50%{opacity:.3}}#version{position:absolute;bottom:5px;right:8px;z-index:11;font:800 9px system-ui;color:#a8aebe79;pointer-events:none}@media(max-height:700px){.frame{padding:14px}.logo{font-size:39px}.medallion{width:55px;height:55px;font-size:31px;margin:12px auto}.description{margin:5px 0}.action{padding:10px}.heroCards{gap:7px}.heroCard{min-height:93px;padding:7px}}
-</style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>DEPTH</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement"><button class="dir" data-dir="up">▲</button><button class="dir" data-dir="left">◀</button><button class="dir" data-dir="right">▶</button><button class="dir" data-dir="down">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div>
-<section id="menu" class="overlay visible"><div class="frame"><h1 class="logo">DUNGEON<br>BOUND</h1><div class="subtitle">THE ENDLESS DESCENT · GAMEPLAY OVERHAUL V2</div><div class="medallion">⚔️</div><p class="description">One step at a time. A thousand ways to die.<br>Time your moves, collect treasure, and outrun the dark.</p><button class="action" id="play">⚔ START RUN</button><div class="smallGrid"><button class="action secondary" id="openHeroes">HEROES & SHOP</button><button class="action secondary" id="openSettings">SETTINGS</button></div><p class="tiny" id="menuBest">BEST DEPTH: 0</p></div></section>
+</style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement"><button class="dir" data-dir="up">▲</button><button class="dir" data-dir="left">◀</button><button class="dir" data-dir="right">▶</button><button class="dir" data-dir="down">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div>
+<section id="menu" class="overlay visible"><div class="frame"><h1 class="logo">DUNGEON<br>BOUND</h1><div class="subtitle">THE ENDLESS DESCENT · PRECISION GRID V3</div><div class="medallion">⚔️</div><p class="description">One input. One square. One new row, one point.<br>Time your moves, collect treasure, and outrun the dark.</p><button class="action" id="play">⚔ START RUN</button><div class="smallGrid"><button class="action secondary" id="openHeroes">HEROES & SHOP</button><button class="action secondary" id="openSettings">SETTINGS</button></div><p class="tiny" id="menuBest">BEST DEPTH: 0</p></div></section>
 <section id="heroes" class="overlay"><div class="frame"><h2 class="sectionHeading">HEROES</h2><div class="tiny">Choose a champion. Each has a different power.</div><div class="totalcoins" id="wallet">🟡 0 COINS</div><div class="heroCards" id="heroCards"></div><div class="detail" id="heroDetail"></div><button id="buyUpgrade" class="action">UPGRADE</button><button class="action secondary" data-close="heroes">BACK</button></div></section>
-<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">Swipe</option><option value="buttons">D-pad</option></select></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Swipe or use directional buttons to move one square at a time. Avoid hazards even when standing still. Use your hero's special ability to survive.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
+<section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option><option value="buttons">D-pad</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Every gesture moves exactly ONE square. Use one swipe, the tap-direction control, or the D-pad. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
 <section id="pause" class="overlay"><div class="frame"><h2 class="sectionHeading">PAUSED</h2><p class="description">The dungeon is frozen. The shadows are waiting.</p><button class="action" id="resume">RESUME</button><button class="action secondary" id="quit">END RUN</button></div></section>
-<section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">TILES SURVIVED</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
-<div id="version">GAMEPLAY V2 · MODULE DUNGEONS</div></main><script>
+<section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">FORWARD SQUARES</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
+<div id="version">PRECISION GRID UPDATE V3</div></main><script>
 'use strict';
 const $=id=>document.getElementById(id), clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), mix=(a,b,t)=>a+(b-a)*t;
 const HEROES=[
@@ -18,7 +18,7 @@ const HEROES=[
  {id:'skeleton',name:'BONEWALKER',icon:'💀',power:'Second Chance',desc:'Automatically revive once per run after a fatal hit.',cost:550,cd:0,color:[.95,.88,.68]},
 ];
 const KEY='dungeonbound_save_v1';function loadSave(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch{return {}}}
-let saved=Object.assign({coins:0,best:0,selected:'knight',unlocked:['knight'],levels:{knight:0},controls:'swipe',sound:true,quality:'high'},loadSave());
+let saved=Object.assign({coins:0,best:0,selected:'knight',unlocked:['knight'],levels:{knight:0},controls:'swipe',holdRepeat:true,repeatSpeed:'normal',swipeSensitivity:'normal',tapForward:false,sound:true,quality:'high'},loadSave());
 function save(){try{localStorage.setItem(KEY,JSON.stringify(saved))}catch{}}
 function randomGen(seed){let s=seed>>>0;return ()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
 const rng=randomGen(0xF5D41), rand=(a=1,b)=>b===undefined?rng()*a:a+rng()*(b-a),pick=a=>a[Math.floor(rand(a.length))];
@@ -50,7 +50,7 @@ box(x,y,z,w,h,d,material='stone',shade=1,rot=0){let col=cscale(material,shade),a
 disc(x,y,z,r,h,mat='metal',sides=10,angle=0){let col=color(mat),top=y+h/2,bot=y-h/2;for(let i=0;i<sides;i++){let t=angle+i*TAU/sides,n=angle+(i+1)*TAU/sides;let p=[x+Math.cos(t)*r,z+Math.sin(t)*r],q=[x+Math.cos(n)*r,z+Math.sin(n)*r];let normal=[0,1,0];this.triangle([x,top,z],[p[0],top,p[1]],[q[0],top,q[1]],normal,col,mat);this.triangle([x,bot,z],[q[0],bot,q[1]],[p[0],bot,p[1]],[0,-1,0],col,mat);this.quad([p[0],bot,p[1]],[q[0],bot,q[1]],[q[0],top,q[1]],[p[0],top,p[1]],[Math.cos((t+n)/2),0,Math.sin((t+n)/2)],col,mat)}}
 triangle(a,b,c,n,co,mat='smooth'){let I=MATERIALS.indexOf(mat);if(I<0)I=15;let x=I%4,y=Math.floor(I/4);for(let [p,u,v] of [[a,.04,.05],[b,.23,.05],[c,.12,.22]])this.data.push(...p,...n,...co,x/4+u,y/4+v);this.count+=3}
 }
-function perspective(){let eye,at,up=[0,1,0];let aspect=canvas.width/canvas.height;let h=aspect>.9?23:28.7;let w=h*aspect;let targetRow=game?game.camRow:0;at=[0,0,-targetRow*TILE-7.0];eye=[at[0]+3.5,at[1]+18.5,at[2]+27];let z=normalize(sub(eye,at)),x=normalize(cross(up,z)),y=cross(z,x);let view=[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];let orth=[2/w,0,0,0,0,2/h,0,0,0,0,-.003,0,0,0,0,1];return mmul(orth,view)}
+function perspective(){let eye,at,up=[0,1,0];let aspect=canvas.width/canvas.height;let h=aspect>.9?23:28.7;let w=h*aspect;let targetRow=game?game.camRow:0;at=[0,0,-targetRow*TILE-7.0];eye=[at[0],at[1]+19.6,at[2]+26];let z=normalize(sub(eye,at)),x=normalize(cross(up,z)),y=cross(z,x);let view=[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];let orth=[2/w,0,0,0,0,2/h,0,0,0,0,-.003,0,0,0,0,1];return mmul(orth,view)}
 function normalize(v){let l=Math.hypot(...v)||1;return v.map(n=>n/l)}function sub(a,b){return a.map((n,i)=>n-b[i])}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]}
 function mmul(a,b){let out=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++)for(let k=0;k<4;k++)out[i+j*4]+=a[i+k*4]*b[k+j*4];return out}
 function resize(){let w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,saved.quality==='low'||softCtx?1:1.75),W=Math.round(w*dpr),H=Math.round(h*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;if(gl)gl.viewport(0,0,W,H)}}
@@ -137,7 +137,7 @@ function instantiateModule(G){let depth=G.nextModuleRow;let tier=Math.floor(dept
  G.nextModuleRow+=mod.lines.length;
 }
 function newGame(menuDemo=false){let qp=new URLSearchParams(location.search),provided=qp.has('seed')?Number(qp.get('seed')):Math.floor(Math.random()*0xffffffff),gen=randomGen(provided);
- let G={status:menuDemo?'demo':'playing',time:0,row:0,x:0,maxRow:0,camRow:0,shadowRow:-11,coins:0,rows:new Map(),entities:[],nextModuleRow:1,moduleHistory:[],lastModuleId:-1,seed:provided,rng:gen,moveTimer:0,moveDuration:.115,fromX:0,fromRow:0,toX:0,toRow:0,queued:null,face:'up',abilityUntil:0,abilityReady:0,freezeUntil:0,revives:1,shieldUntil:0,slideDir:null,particles:[],demo:menuDemo,reason:'',difficulty:0,frame:0,staticBase:-10,staticEnd:22,seenBiome:0};
+ let G={status:menuDemo?'demo':'playing',time:0,row:0,x:0,startRow:0,maxRow:0,score:0,camRow:0,shadowRow:-11,coins:0,rows:new Map(),entities:[],nextModuleRow:1,moduleHistory:[],lastModuleId:-1,seed:provided,rng:gen,moveTimer:0,moveDuration:.122,fromX:0,fromRow:0,toX:0,toRow:0,queued:[],face:'up',abilityUntil:0,abilityReady:0,freezeUntil:0,revives:1,shieldUntil:0,slideDir:null,particles:[],demo:menuDemo,reason:'',difficulty:0,frame:0,staticBase:-10,staticEnd:22,seenBiome:0};
  G.hero=HEROES.find(h=>h.id===saved.selected)||HEROES[0];for(let r=-3;r<=0;r++){let arr=[];for(let x=-4;x<=4;x++){let t=tileBlank(x,r,0,Math.abs(x)<=1?null:'pit');t.detail=G.rng();t.decor=G.rng();arr.push(t)}G.rows.set(r,arr)}
  generateRow(G,31);if(menuDemo){G.maxRow=6;G.camRow=5;G.row=5;G.fromRow=5;G.toRow=5}return G
 }
@@ -164,22 +164,51 @@ let audioCtx=null;function sound(kind){if(!saved.sound)return;try{audioCtx=audio
 function showToast(message){$('toast').textContent=message;$('toast').classList.add('on');toastTimer=2.1}
 function collect(t){if(!t||!t.coin||game.demo)return;const val=t.coin;t.coin=0;game.coins+=val;game.frame++;saved.coins+=val;save();sound(val>1?'rare':'coin');if(val>=3)showToast(val===4?'✦ CRIMSON COIN +4':'✦ RARE COIN +'+val);for(let i=0;i<8;i++)game.particles.push({x:game.x*TILE,y:.7,z:-game.row*TILE,vx:rand(-1,1),vy:rand(.6,2.5),vz:rand(-1,1),life:.5+rand(.4),color:[1,.76,.27]});$('coins').textContent=game.coins}
 
-function move(dx,dr,automatic=false){if(!game||game.status!=='playing'||(!dx&&!dr))return false;
- if(game.moveTimer>.012){if(!automatic)game.queued=[dx,dr];return false}
- let x=game.x+dx,row=game.row+dr;if(x< -4||x>4||row<Math.max(-2,Math.floor(game.maxRow)-16))return false;
+// A single grid position drives geometry, scoring, collision and all movement validation.
+function updateForwardScore(row){if(row<=game.maxRow)return;game.maxRow=row;
+ game.score=game.maxRow-game.startRow;game.difficulty=Math.floor(game.score/35);
+ $('score').textContent=game.score;
+ if(Math.floor(row/65)>game.seenBiome){game.seenBiome=Math.floor(row/65);showToast('✧ '+biomes[game.seenBiome%biomes.length].name)}
+ ensureRows();
+}
+function clearMovementInputs(){if(game)game.queued=[];heldInput=null;pressedKeys.clear();touchContact=null;}
+// Only discrete axis-aligned unit vectors may enter the logical grid simulator.
+function move(dx,dr,automatic=false,source='tap'){
+ if(!game||game.status!=='playing'||Math.abs(dx)+Math.abs(dr)!==1)return false;
+ if(game.moveTimer>0.00001){
+  if(!automatic){
+   if(source==='hold'){
+    if(!game.queued.some(q=>q.source==='hold')&&game.queued.length<2)game.queued.push({dx,dr,source});
+   }else if(game.queued.length<3)game.queued.push({dx,dr,source});
+  }
+  return false;
+ }
+ const x=game.x+dx,row=game.row+dr;
+ if(x< -4||x>4||row<Math.max(-2,game.maxRow-16))return false;
  generateRow(game,row);const tile=getTile(x,row);
  if(tile?.pot){tile.pot=false;tile.coin=1+Math.floor(game.rng()*2);staticDirty=true;collect(tile);sound('hit');return false}
  if(tile?.chest){tile.chest=false;tile.coin=3+Math.floor(game.rng()*2);staticDirty=true;collect(tile);return false}
  if(tile?.hazard==='wall'){sound('click');return false}
- game.fromX=game.x;game.fromRow=game.row;game.toX=x;game.toRow=row;game.x=x;game.row=row;
- game.moveDuration=tile?.hazard==='web'?.24:.112;game.moveTimer=game.moveDuration;
+ // Integer coordinates are updated ONCE, never incremented by animated deltas.
+ game.fromX=game.x;game.fromRow=game.row;
+ game.x=x;game.row=row;game.toX=x;game.toRow=row;
+ game.moveDuration=tile?.hazard==='web'?.24:.122;
+ game.moveTimer=game.moveDuration;
  game.face=dr>0?'up':dr<0?'down':dx<0?'left':'right';
  game.slideDir=tile?.hazard==='ice'?[dx,dr]:tile?.conveyor?[tile.conveyor,0]:null;
- sound('move');if(row>game.maxRow){game.maxRow=row;game.difficulty=Math.floor(row/35);$('score').textContent=row;if(Math.floor(row/65)>game.seenBiome){game.seenBiome=Math.floor(row/65);showToast('✧ '+biomes[game.seenBiome%biomes.length].name)}ensureRows()}
+ sound('move');updateForwardScore(row);
  if(!tile||tile.hazard==='pit'){if(!tileAttackAllowed({hazard:'pit'}))die('pit');return true}
  if(tile.hazard==='crumble'&&tile.breakAt<0)tile.breakAt=game.time;
  if(hazardIsActive(tile,game.actorClock||0)&&!tileAttackAllowed(tile)){die(tile.hazard);return true}
- collect(tile);if(tile.teleport){let dst=getTile(tile.teleport.x,tile.teleport.row);if(dst&&dst.hazard!=='pit'){game.x=dst.x;game.row=dst.row;game.fromX=dst.x;game.fromRow=dst.row;game.toX=dst.x;game.toRow=dst.row;game.moveTimer=0;game.slideDir=null;collect(dst);showToast('✦ RIFT PORTAL');if(game.row>game.maxRow){game.maxRow=game.row;$('score').textContent=game.maxRow;ensureRows()}}}return true
+ collect(tile);
+ if(tile.teleport){let dst=getTile(tile.teleport.x,tile.teleport.row);
+  if(dst&&dst.hazard!=='pit'){
+   game.x=dst.x;game.row=dst.row;game.fromX=dst.x;game.fromRow=dst.row;
+   game.toX=dst.x;game.toRow=dst.row;game.moveTimer=0;game.slideDir=null;
+   collect(dst);updateForwardScore(game.row);showToast('✦ RIFT PORTAL');
+  }
+ }
+ return true;
 }
 
 function activateAbility(){if(!game||game.status!=='playing')return;let H=game.hero;if(H.id==='skeleton'){showToast('PASSIVE: SECOND CHANCE');return}if(game.time<game.abilityReady){sound('click');return}let lvl=saved.levels[H.id]||0;
@@ -194,10 +223,10 @@ function activateAbility(){if(!game||game.status!=='playing')return;let H=game.h
  sound('ability');if(H.id!=='knight')showToast('✦ '+H.power.toUpperCase());for(let i=0;i<20;i++)game.particles.push({x:game.x*TILE,y:.7,z:-game.row*TILE,vx:rand(-3,3),vy:rand(.3,3),vz:rand(-3,3),life:.5+rand(.7),color:H.color})
 }
 function die(reason){if(game.status!=='playing')return;if(game.hero.id==='skeleton'&&game.revives>0){game.revives--;game.shieldUntil=game.time+2.5;game.abilityUntil=game.shieldUntil;const tile=getTile(game.x,game.row);if(!tile||tile.hazard==='pit'){game.x=game.fromX;game.row=game.fromRow}sound('revive');showToast('☠ SECOND CHANCE!');return}
-if(game.shieldUntil>game.time&&reason!=='dark')return;game.reason=hazardNames[reason]||'The dungeon claimed another adventurer.';game.status='dead';sound('hit');saved.best=Math.max(saved.best,game.maxRow);save();$('finalScore').textContent=game.maxRow;$('finalBest').textContent=saved.best;$('finalCoins').textContent=game.coins;$('deathReason').textContent=game.reason;setTimeout(()=>{if(game?.status==='dead')showScreen('death')},550);for(let i=0;i<50;i++)game.particles.push({x:game.x*TILE,y:1,z:-game.row*TILE,vx:rand(-4,4),vy:rand(.3,5),vz:rand(-4,4),life:rand(.5,1.5),color:i%3===0?[1,.35,.25]:game.hero.color})}
-function startGame(){game=newGame();staticDirty=true;showScreen(null);$('score').textContent=0;$('coins').textContent=0;$('hud').style.display='block';$('ability').style.display='flex';setControls();sound('click');updateAbilityUI();canvas.focus?.()}
+if(game.shieldUntil>game.time&&reason!=='dark')return;game.reason=hazardNames[reason]||'The dungeon claimed another adventurer.';game.status='dead';clearMovementInputs();sound('hit');saved.best=Math.max(saved.best,game.score);save();$('finalScore').textContent=game.score;$('finalBest').textContent=saved.best;$('finalCoins').textContent=game.coins;$('deathReason').textContent=game.reason;setTimeout(()=>{if(game?.status==='dead')showScreen('death')},550);for(let i=0;i<50;i++)game.particles.push({x:game.x*TILE,y:1,z:-game.row*TILE,vx:rand(-4,4),vy:rand(.3,5),vz:rand(-4,4),life:rand(.5,1.5),color:i%3===0?[1,.35,.25]:game.hero.color})}
+function startGame(){clearMovementInputs();game=newGame();staticDirty=true;showScreen(null);$('score').textContent=0;$('coins').textContent=0;$('hud').style.display='block';$('ability').style.display='flex';setControls();sound('click');updateAbilityUI();canvas.focus?.()}
 function updateAbilityUI(){let a=$('ability'),H=game?.hero;if(!H)return;let left=game.abilityReady-game.time;a.classList.toggle('cooling',left>0);a.querySelector('span').textContent=H.icon;a.querySelector('small').textContent=H.id==='skeleton'?'PASSIVE':left>0?left.toFixed(0)+'s':'ABILITY'}
-function pause(){if(!game)return;if(game.status==='playing'){game.status='paused';showScreen('pause');sound('click')}else if(game.status==='paused'){resume()}}
+function pause(){if(!game)return;if(game.status==='playing'){clearMovementInputs();game.status='paused';showScreen('pause');sound('click')}else if(game.status==='paused'){resume()}}
 function resume(){if(game?.status==='paused'){game.status='playing';showScreen(null);sound('click')}}
 
 function tick(dt){if(!game)return;clock+=dt;game.frame++;if(toastTimer>0){toastTimer-=dt;if(toastTimer<=0)$('toast').classList.remove('on')}
@@ -206,7 +235,10 @@ function tick(dt){if(!game)return;clock+=dt;game.frame++;if(toastTimer>0){toastT
  if(game.status!=='playing')return;
  game.time+=dt;const before=game.actorClock||0;if(game.freezeUntil<=game.time)game.actorClock=(game.actorClock||0)+dt;
  game.moveTimer=Math.max(0,game.moveTimer-dt);
- if(game.moveTimer===0){if(game.slideDir){let d=game.slideDir;game.slideDir=null;move(...d,true)}else if(game.queued){let d=game.queued;game.queued=null;move(...d,true)}}
+ if(game.moveTimer===0){
+  if(game.slideDir){const d=game.slideDir;game.slideDir=null;move(...d,true)}
+  else if(game.queued.length){const next=game.queued.shift();move(next.dx,next.dr,true)}
+ }
  game.camRow=mix(game.camRow,Math.max(0,game.maxRow),1-Math.exp(-dt*4.9));
  const speed=.28+Math.min(game.maxRow*.0015,.32);game.shadowRow+=dt*speed;
  if(game.row<=game.shadowRow+.3){die('dark');return}
@@ -220,9 +252,19 @@ function tick(dt){if(!game)return;clock+=dt;game.frame++;if(toastTimer>0){toastT
 function drawRuin(m,x,row,biome,variation){const b=biomes[biome],X=x*TILE,Z=-row*TILE;let seed=randomGen(((row+23)*1664525+(x+12)*1013904223)>>>0);const q=()=>seed();let floorMat=b.mat;if(variation.hazard==='pit'||variation.hazard==='crumble'&&variation.broken){// Individually raised, broken stone edges around the abyss.
  m.box(X-TILE*.4,-.34,Z-TILE*.38,.15,.6,.20,b.rim,.73);m.box(X+TILE*.4,-.32,Z+TILE*.37,.17,.55,.21,b.rim,.73);
  if(q()<.55)m.box(X+TILE*(q()-.5),-.65,Z+TILE*(q()-.5),.18,.2,.16,b.rim,.65);return}
- let h=.47,level=-.34;m.box(X,level,Z,TILE*.98,h,TILE*.98,b.rim,.72);m.box(X,-.065,Z,TILE*.955,.105,TILE*.955,floorMat,.9+q()*.12);if(variation.hazard==='wall'){m.box(X,.47,Z,TILE*.94,1.07,TILE*.94,b.rim,.76);m.box(X,1.05,Z,TILE*.92,.13,TILE*.92,b.mat,.9);m.box(X,.57,Z+TILE*.476,.79,.12,.065,b.accent,.62);return}
+ let h=.47,level=-.34;// Visible 3D tile footprint: dark mortar border, bevelled outer lip and inset textured surface.
+ m.box(X,level,Z,TILE*.975,h,TILE*.975,b.rim,.60);
+ m.box(X,-.058,Z,TILE*.943,.093,TILE*.943,'dark',.52);
+ m.box(X,-.031,Z,TILE*.913,.102,TILE*.913,b.rim,.89);
+ m.box(X,-.018,Z,TILE*.862,.117,TILE*.862,floorMat,.96+q()*.10);
+ // Subtle individually modelled bevels outline the four edges without a glowing grid overlay.
+ const edge=TILE*.437, edgeSpan=TILE*.843;
+ m.box(X+edge,.037,Z,.038,.023,edgeSpan,b.accent,.65);
+ m.box(X-edge,.037,Z,.038,.023,edgeSpan,b.accent,.65);
+ m.box(X,.037,Z+edge,edgeSpan,.023,.038,b.accent,.65);
+ m.box(X,.037,Z-edge,edgeSpan,.023,.038,b.accent,.65);if(variation.hazard==='wall'){m.box(X,.47,Z,TILE*.94,1.07,TILE*.94,b.rim,.76);m.box(X,1.05,Z,TILE*.92,.13,TILE*.92,b.mat,.9);m.box(X,.57,Z+TILE*.476,.79,.12,.065,b.accent,.62);return}
  // Individually raised carved stones, slab borders and misaligned masonry.
- if(floorMat!=='ice'&&floorMat!=='obsidian'&&q()>.17){let slabCount=saved.quality==='low'?2:4;for(let i=0;i<slabCount;i++){let xx=X+(i%2? .26:-.26)+(q()-.5)*.07,zz=Z+(i<2?-.24:.24);let mat=q()<.1?b.accent:floorMat;m.box(xx,-.001+q()*.009,zz,.53,.028,.48,mat,.87+q()*.18)}}
+ if(floorMat!=='ice'&&floorMat!=='obsidian'&&q()>.34){let xx=X+(q()-.5)*.45,zz=Z+(q()-.5)*.45;m.box(xx,.046,zz,.27,.008,.022,b.rim,.67,q()*TAU)}
  if(floorMat==='ice'){m.box(X,.01,Z,TILE*.82,.028,TILE*.81,'ice',.93);for(let i=0;i<3;i++){let zz=Z+(q()-.5),xx=X+(q()-.5);m.box(xx,.045,zz,.36,.012,.018,'smooth',1.2,q()*TAU)}}
  if(floorMat==='obsidian'){for(let i=0;i<3;i++){let z=Z+(q()-.5)*.9,xx=X+(q()-.5)*1.0;m.box(xx,-.003,z,.3,.009,.025,'lava',.83,q()*TAU)}}
  if(q()<.24&&variation.hazard!=='spike'&&variation.hazard!=='flame'){let xx=X+(q()-.5)*.9,zz=Z+(q()-.5)*.8;let moss=q()>.4?b.accent:'slate';m.box(xx,.032,zz,.21,.04,.11,moss,.75+q()*.25,q()*TAU)}
@@ -243,7 +285,7 @@ function drawScenery(m,row,biome){let b=biomes[biome];for(let edge of [-1,1]){le
  if(rv()<.36){let sign=edge*(4.75*TILE),zz=z+(rv()-.5)*.7;if(biome===0||biome===3){m.box(sign,.08,zz,.22,.23,.2,'moss',.82);m.box(sign,.18,zz,.12,.2,.13,'grass',.85)}else if(biome===1){m.box(sign,.24,zz,.19,.48,.21,'ice',1.05);m.box(sign,.49,zz,.09,.14,.08,'smooth',1.0)}else{m.box(sign,.15,zz,.29,.39,.19,'obsidian',.7)}}}
 }
 function buildStatic(){if(!game)return;let m=new Mesh();let base=Math.max(game.staticBase,Math.floor(game.maxRow)-12),end=Math.floor(game.maxRow)+25;for(let row=base;row<=end;row++){let tiles=game.rows.get(row);if(!tiles)continue;let biome=tiles[0].biome;for(let t of tiles)if(t.hazard!=='pit')drawRuin(m,t.x,row,biome,t);drawScenery(m,row,biome)}for(let e of game.entities){if(e.row<base||e.row>end)continue;let z=-e.row*TILE;if(e.type==='arrow'){m.box((e.lo-.85)*TILE,.24,z,.22,.38,.58,'wood',.77);m.box((e.lo-.71)*TILE,.31,z,.41,.12,.16,'metal',.85)}else if(e.type==='spinner'){m.box(e.base*TILE,.07,z,.39,.15,.39,'gold',.74)}else{let mid=(e.lo+e.hi)/2;m.box(mid*TILE,.09,z,(e.hi-e.lo)*TILE+.45,.10,.22,'metal',.54);m.box(e.lo*TILE,.13,z,.28,.17,.33,'slate',.75);m.box(e.hi*TILE,.13,z,.28,.17,.33,'slate',.75)}}staticMesh=m;staticDirty=false;game.lastBuiltRow=game.maxRow}
-function drawKnight(m,X,Y,Z,H,t){let col=H.color;let bounce=Math.sin(t*8)*.015,step=game?.moveTimer>0?(game.moveTimer/game.moveDuration):0;let hop=Math.sin((1-step)*Math.PI)*.16;Y+=bounce+hop;let face=game?.face==='left'?-Math.PI/2:game?.face==='right'?Math.PI/2:game?.face==='down'?Math.PI:0;const F=(dx,dy,dz,w,h,d,mat,shade=1,rot=0)=>{let sn=Math.sin(face),cs=Math.cos(face),xx=dx*cs+dz*sn,zz=-dx*sn+dz*cs;m.box(X+xx,Y+dy,Z+zz,w,h,d,mat,shade,rot+face)};
+function drawKnight(m,X,Y,Z,H,t){let col=H.color;let step=game?.moveTimer>0?(game.moveTimer/game.moveDuration):0;let hop=step>0?Math.sin((1-step)*Math.PI)*.12:0;Y+=hop;let face=game?.face==='left'?-Math.PI/2:game?.face==='right'?Math.PI/2:game?.face==='down'?Math.PI:0;const F=(dx,dy,dz,w,h,d,mat,shade=1,rot=0)=>{let sn=Math.sin(face),cs=Math.cos(face),xx=dx*cs+dz*sn,zz=-dx*sn+dz*cs;m.box(X+xx,Y+dy,Z+zz,w,h,d,mat,shade,rot+face)};
  // Distinct miniature character proportions, separate modeled hands, greaves, armor and head.
  let gait=step?Math.sin((1-step)*Math.PI*2)*.16:Math.sin(t*4)*.025;
  F(-.19,.23,-gait,.24,.45,.29,'dark',.9);F(.19,.23,gait,.24,.45,.29,'dark',.9);
@@ -288,33 +330,112 @@ function drawActors(m){let time=game.actorClock||0;for(let e of game.entities){i
 
 function drawDynamic(){let m=new Mesh(),t=game.time||clock;for(let row=Math.floor(game.maxRow)-10;row<=Math.floor(game.maxRow)+17;row++){let tiles=game.rows.get(row);if(!tiles)continue;for(let tile of tiles){if(tile.coin)drawCoin(m,tile.x*TILE,.52,-row*TILE,tile.coin,t+tile.phase);if(tile.hazard&&tile.hazard!=='pit')drawTrap(m,tile,game.actorClock||0)}}
 if(game.status!=='demo'){drawDark(m,clock);drawActors(m)}
-let k=game.moveDuration?clamp(1-game.moveTimer/game.moveDuration,0,1):1;let smooth=k*k*(3-2*k);let px=game.status==='demo'?0:mix(game.fromX,game.x,smooth)*TILE;let pz=game.status==='demo'?-5*TILE:-mix(game.fromRow,game.row,smooth)*TILE;drawKnight(m,px,.08,pz,game.hero,t);
+let k=game.moveDuration?clamp(1-game.moveTimer/game.moveDuration,0,1):1;let smooth=k*k*(3-2*k);let px=game.status==='demo'?0:mix(game.fromX,game.x,smooth)*TILE;let pz=game.status==='demo'?-5*TILE:-mix(game.fromRow,game.row,smooth)*TILE; m.box(px,.048,pz,.38,.011,.27,'dark',.44); drawKnight(m,px,.08,pz,game.hero,t);
 for(let p of game.particles)if(p.life>0)m.box(p.x,p.y,p.z,.09,.09,.09,p.color,Math.min(1.2,p.life*1.4));return m}
 
 // Lightweight compatibility renderer: perspective-projected 3D triangles in Canvas2D.
 // Phones with WebGL2 use the textured, GPU-accelerated renderer above.
 let softStaticTriangles=[],softLastMesh=null;
-function softTriangles(mesh){const a=mesh.data,out=[];for(let i=0;i<a.length;i+=33){let x1=a[i],y1=a[i+1],z1=a[i+2],x2=a[i+11],y2=a[i+12],z2=a[i+13],x3=a[i+22],y3=a[i+23],z3=a[i+24];let normal=[a[i+3],a[i+4],a[i+5]],light=.65+Math.max(0,dot(normal,normalize([-.54,1,.58])))*.38;let color=[a[i+6],a[i+7],a[i+8]].map(v=>Math.round(clamp(v*light,0,1)*255));out.push({p:[x1,y1,z1,x2,y2,z2,x3,y3,z3],depth:(x1+x2+x3)*.27+(y1+y2+y3)*.57+(z1+z2+z3)*.76,col:`rgb(${color.join(',')})`})}out.sort((a,b)=>a.depth-b.depth);return out}
+function softTriangles(mesh){const a=mesh.data,out=[];for(let i=0;i<a.length;i+=33){let x1=a[i],y1=a[i+1],z1=a[i+2],x2=a[i+11],y2=a[i+12],z2=a[i+13],x3=a[i+22],y3=a[i+23],z3=a[i+24];let normal=[a[i+3],a[i+4],a[i+5]],light=.65+Math.max(0,dot(normal,normalize([-.54,1,.58])))*.38;let color=[a[i+6],a[i+7],a[i+8]].map(v=>Math.round(clamp(v*light,0,1)*255));out.push({p:[x1,y1,z1,x2,y2,z2,x3,y3,z3],depth:(y1+y2+y3)*.59+(z1+z2+z3)*.81,col:`rgb(${color.join(',')})`})}out.sort((a,b)=>a.depth-b.depth);return out}
 function renderSoftware(){resize();if(staticDirty||Math.abs(game.maxRow-(game.lastBuiltRow||0))>=4)buildStatic();if(softLastMesh!==staticMesh){softStaticTriangles=softTriangles(staticMesh);softLastMesh=staticMesh}
 const ctx=softCtx,W=canvas.width,H=canvas.height,s=W/15.0;let grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#253844');grd.addColorStop(.5,'#15242e');grd.addColorStop(1,'#0b121d');ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);let camz=game.camRow*TILE+7;
-function draw(tris){let lastColor='';for(let tr of tris){let p=tr.p;let points=[];for(let i=0;i<9;i+=3){let x=p[i],y=p[i+1],z=p[i+2]+camz;points.push([W*.5+(.992*x-.129*z)*s+W*.045,H*.5-(-.075*x+.824*y-.559*z)*s])}if(tr.col!==lastColor){ctx.fillStyle=tr.col;lastColor=tr.col}ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);ctx.lineTo(points[1][0],points[1][1]);ctx.lineTo(points[2][0],points[2][1]);ctx.closePath();ctx.fill()}}
+function draw(tris){let lastColor='';for(let tr of tris){let p=tr.p;let points=[];for(let i=0;i<9;i+=3){let x=p[i],y=p[i+1],z=p[i+2]+camz;points.push([W*.5+x*s,H*.5-(.798*y-.602*z)*s])}if(tr.col!==lastColor){ctx.fillStyle=tr.col;lastColor=tr.col}ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);ctx.lineTo(points[1][0],points[1][1]);ctx.lineTo(points[2][0],points[2][1]);ctx.closePath();ctx.fill()}}
 draw(softStaticTriangles);draw(softTriangles(drawDynamic()));}
 function render(){if(!game)return;if(!gl){renderSoftware();return}resize();gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(program);gl.uniformMatrix4fv(uniVP,false,perspective());gl.uniform1f(uniTime,clock);gl.uniform1f(uniFog,game.camRow*TILE);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,atlas);
 if(staticDirty||Math.abs(game.maxRow-(game.lastBuiltRow||0))>=4)buildStatic();upload(meshStatic,staticMesh,staticGpuCache===staticMesh);staticGpuCache=staticMesh;upload(meshDynamic,drawDynamic())}
-let returnTo='menu';function showScreen(name){for(let id of ['menu','heroes','settings','pause','death'])$(id).classList.toggle('visible',name===id);if(name==='menu'){ $('menuBest').textContent='BEST DEPTH: '+saved.best; $('hud').style.display='none';$('ability').style.display='none';$('movement').style.display='none';$('swipeHint').style.display='none';$('warning').classList.remove('on')}if(name==='death'||name==='pause'){ $('movement').style.display='none';$('swipeHint').style.display='none';$('ability').style.display='none'}if(name===null){$('ability').style.display='flex';setControls()}}
-function setControls(){let mode=saved.controls;let on=game?.status==='playing';$('movement').style.display=on&&mode==='buttons'?'grid':'none';$('swipeHint').style.display=on&&mode==='swipe'?'block':'none'}
-function menu(){game=newGame(true);staticDirty=true;showScreen('menu');sound('click')}
+let returnTo='menu';function showScreen(name){for(let id of ['menu','heroes','settings','pause','death'])$(id).classList.toggle('visible',name===id);if(name==='menu'){ $('menuBest').textContent='BEST SCORE: '+saved.best; $('hud').style.display='none';$('ability').style.display='none';$('movement').style.display='none';$('swipeHint').style.display='none';$('warning').classList.remove('on')}if(name==='death'||name==='pause'){ $('movement').style.display='none';$('swipeHint').style.display='none';$('ability').style.display='none'}if(name===null){$('ability').style.display='flex';setControls()}}
+function setControls(){let mode=saved.controls;let on=game?.status==='playing';$('movement').style.display=on&&mode==='buttons'?'grid':'none';$('swipeHint').style.display=on&&mode==='swipe'?'block':'none';if(on)$('swipeHint').textContent=saved.tapForward?'SWIPE: 1 SQUARE  ·  TAP: FORWARD':'ONE SWIPE = ONE SQUARE'}
+function menu(){clearMovementInputs();game=newGame(true);staticDirty=true;showScreen('menu');sound('click')}
 function heroes(from='menu'){returnTo=from;heroCardSelected=saved.selected;renderHeroCards();showScreen('heroes');sound('click')}
 function renderHeroCards(){let el=$('heroCards');el.replaceChildren();$('wallet').textContent='🟡 '+saved.coins+' COINS';for(let H of HEROES){let has=saved.unlocked.includes(H.id);let b=document.createElement('button');b.className='heroCard'+(heroCardSelected===H.id?' selected':'')+(has?'':' locked');b.innerHTML=`<span class="heroIcon">${H.icon}</span><span class="heroName">${H.name}</span><span class="heroNote">${H.power}</span><span class="heroCost">${has?'✓ UNLOCKED':'🟡 '+H.cost}</span>`;b.addEventListener('click',()=>{heroCardSelected=H.id;if(has){saved.selected=H.id;save()}renderHeroCards();sound('click')});el.appendChild(b)}let H=HEROES.find(h=>h.id===heroCardSelected)||HEROES[0];let owned=saved.unlocked.includes(H.id),lvl=saved.levels[H.id]||0;let cost=75+lvl*85;$('heroDetail').textContent=H.desc+' '+(owned?'· Upgrade level '+lvl+'/5':'· Unlock for '+H.cost+' coins');let btn=$('buyUpgrade');btn.textContent=owned?lvl>=5?'MAXIMUM UPGRADE':'UPGRADE POWER · 🟡 '+cost:'UNLOCK HERO · 🟡 '+H.cost;btn.disabled=owned?lvl>=5||saved.coins<cost:saved.coins<H.cost;btn.style.opacity=btn.disabled?'.5':'1'}
 function purchase(){let H=HEROES.find(h=>h.id===heroCardSelected),owned=saved.unlocked.includes(H.id),lvl=saved.levels[H.id]||0;let cost=owned?75+lvl*85:H.cost;if(saved.coins<cost||(owned&&lvl>=5))return;saved.coins-=cost;if(owned)saved.levels[H.id]=lvl+1;else{saved.unlocked.push(H.id);saved.levels[H.id]=0;saved.selected=H.id}save();sound('unlock');showToast(owned?'POWER UPGRADED!':'NEW HERO UNLOCKED!');renderHeroCards()}
-$('play').onclick=startGame;$('retry').onclick=startGame;$('home').onclick=menu;$('openHeroes').onclick=()=>heroes('menu');$('deathHeroes').onclick=()=>heroes('death');$('openSettings').onclick=()=>{returnTo='menu';$('controlMode').value=saved.controls;$('soundToggle').checked=saved.sound;$('quality').value=saved.quality;showScreen('settings')};$('buyUpgrade').onclick=purchase;
+$('play').onclick=startGame;$('retry').onclick=startGame;$('home').onclick=menu;$('openHeroes').onclick=()=>heroes('menu');$('deathHeroes').onclick=()=>heroes('death');$('openSettings').onclick=()=>{returnTo='menu';$('controlMode').value=saved.controls;$('holdRepeat').checked=saved.holdRepeat;$('repeatSpeed').value=saved.repeatSpeed;$('swipeSensitivity').value=saved.swipeSensitivity;$('tapForward').checked=saved.tapForward;$('soundToggle').checked=saved.sound;$('quality').value=saved.quality;showScreen('settings')};$('buyUpgrade').onclick=purchase;
 for(let b of document.querySelectorAll('[data-close]'))b.onclick=()=>{let from=b.dataset.close;showScreen(from==='heroes'?returnTo:'menu');if(from==='heroes'&&returnTo==='death'&&game?.status==='dead'){$('hud').style.display='block'}sound('click')};
 $('pauseBtn').onclick=pause;$('resume').onclick=resume;$('quit').onclick=menu;$('ability').onclick=activateAbility;
-$('controlMode').onchange=e=>{saved.controls=e.target.value;save()};$('soundToggle').onchange=e=>{saved.sound=e.target.checked;save()};$('quality').onchange=e=>{saved.quality=e.target.value;save();resize();staticDirty=true};
-let heldDir=null,heldTimer=0;for(let b of document.querySelectorAll('.dir')){function step(){let d=b.dataset.dir;move(d==='left'?-1:d==='right'?1:0,d==='up'?1:d==='down'?-1:0)}b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);heldDir=b.dataset.dir;heldTimer=0;step()});b.addEventListener('pointerup',()=>heldDir=null);b.addEventListener('pointercancel',()=>heldDir=null)}
-let pdown=null;canvas.addEventListener('pointerdown',e=>{if(game?.status!=='playing')return;pdown={x:e.clientX,y:e.clientY,moved:false};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!pdown||saved.controls!=='swipe'||game?.status!=='playing')return;let dx=e.clientX-pdown.x,dy=e.clientY-pdown.y;if(Math.max(Math.abs(dx),Math.abs(dy))>=25){if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?-1:1);pdown={x:e.clientX,y:e.clientY,moved:true}}});canvas.addEventListener('pointerup',e=>{if(!pdown)return;let dx=e.clientX-pdown.x,dy=e.clientY-pdown.y;if(Math.max(Math.abs(dx),Math.abs(dy))>=15){if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?-1:1)}else if(saved.controls==='swipe'&&!pdown.moved)move(0,1);pdown=null});canvas.addEventListener('pointercancel',()=>pdown=null);
-const keymap={ArrowUp:[0,1],KeyW:[0,1],ArrowDown:[0,-1],KeyS:[0,-1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0]};let lastKey=new Map();window.addEventListener('keydown',e=>{if(e.code==='Escape'){e.preventDefault();pause();return}if(e.code==='Space'){if(game?.status==='playing'){e.preventDefault();activateAbility()}return}if(keymap[e.code]){e.preventDefault();if(game?.status!=='playing'||(e.repeat&&performance.now()-(lastKey.get(e.code)||0)<105))return;lastKey.set(e.code,performance.now());move(...keymap[e.code])}});
+$('controlMode').onchange=e=>{saved.controls=e.target.value;clearMovementInputs();setControls();save()};
+$('holdRepeat').onchange=e=>{saved.holdRepeat=e.target.checked;if(!saved.holdRepeat)stopHold();save()};
+$('repeatSpeed').onchange=e=>{saved.repeatSpeed=e.target.value;save()};
+$('swipeSensitivity').onchange=e=>{saved.swipeSensitivity=e.target.value;save()};
+$('tapForward').onchange=e=>{saved.tapForward=e.target.checked;save()};
+$('soundToggle').onchange=e=>{saved.sound=e.target.checked;save()};
+$('quality').onchange=e=>{saved.quality=e.target.value;save();resize();staticDirty=true};
+const keymap={ArrowUp:[0,1],KeyW:[0,1],ArrowDown:[0,-1],KeyS:[0,-1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0]};
+const pressedKeys=new Set();let heldInput=null,touchContact=null;
+function repeatPeriod(){return saved.repeatSpeed==='slow'?.21:saved.repeatSpeed==='fast'?.126:.16}
+function swipeThreshold(){return saved.swipeSensitivity==='sensitive'?16:saved.swipeSensitivity==='firm'?33:23}
+function stepInput(dx,dr,source='tap'){return move(dx,dr,false,source)}
+function beginHold(dx,dr,kind,id){heldInput={dx,dr,kind,id,nextRepeat:game.time+.24};stepInput(dx,dr,'tap')}
+function stopHold(kind=null,id=null){if(!heldInput)return;if(kind&&heldInput.kind!==kind)return;if(id!==null&&heldInput.id!==id)return;
+ heldInput=null;if(game)game.queued=game.queued.filter(q=>q.source!=='hold')}
+function tileDir(name){return name==='left'?[-1,0]:name==='right'?[1,0]:name==='down'?[0,-1]:[0,1]}
+for(const button of document.querySelectorAll('.dir')){
+ button.addEventListener('pointerdown',e=>{if(game?.status!=='playing')return;e.preventDefault();button.setPointerCapture(e.pointerId);
+  let [dx,dr]=tileDir(button.dataset.dir);beginHold(dx,dr,'button',e.pointerId)});
+ button.addEventListener('pointerup',e=>{e.preventDefault();stopHold('button',e.pointerId)});
+ button.addEventListener('pointercancel',e=>stopHold('button',e.pointerId));
+ button.addEventListener('lostpointercapture',e=>stopHold('button',e.pointerId));
+}
+function tapDirection(clientX,clientY){let r=canvas.getBoundingClientRect();let nx=(clientX-r.left)/r.width-.5,ny=(clientY-r.top)/r.height-.5;
+ // Compare normalized displacement so the four screen regions are similarly accessible in portrait mode.
+ return Math.abs(nx)>Math.abs(ny)?(nx>0?[1,0]:[-1,0]):(ny>0?[0,-1]:[0,1]);
+}
+canvas.addEventListener('pointerdown',e=>{
+ if(game?.status!=='playing'||touchContact)return;
+ e.preventDefault();canvas.setPointerCapture(e.pointerId);
+ touchContact={id:e.pointerId,x:e.clientX,y:e.clientY,consumed:false};
+ if(saved.controls==='tap'){let [dx,dr]=tapDirection(e.clientX,e.clientY);beginHold(dx,dr,'tapregion',e.pointerId);touchContact.consumed=true}
+});
+canvas.addEventListener('pointermove',e=>{
+ if(!touchContact||e.pointerId!==touchContact.id||game?.status!=='playing')return;
+ if(saved.controls!=='swipe'||touchContact.consumed)return;
+ const dx=e.clientX-touchContact.x,dy=e.clientY-touchContact.y;
+ if(Math.hypot(dx,dy)<swipeThreshold())return;
+ touchContact.consumed=true; // Exactly one step per gesture, including very long swipes.
+ if(Math.abs(dx)>Math.abs(dy))stepInput(Math.sign(dx),0);
+ else stepInput(0,-Math.sign(dy));
+});
+canvas.addEventListener('pointerup',e=>{
+ if(!touchContact||e.pointerId!==touchContact.id)return;
+ e.preventDefault();
+ const origin=touchContact;touchContact=null;
+ if(saved.controls==='tap'){stopHold('tapregion',e.pointerId);return}
+ if(saved.controls==='swipe'&&!origin.consumed){
+  const dx=e.clientX-origin.x,dy=e.clientY-origin.y;
+  if(Math.hypot(dx,dy)>=swipeThreshold()){
+   if(Math.abs(dx)>Math.abs(dy))stepInput(Math.sign(dx),0);else stepInput(0,-Math.sign(dy));
+  }else if(saved.tapForward)stepInput(0,1);
+ }
+});
+canvas.addEventListener('pointercancel',e=>{if(touchContact?.id===e.pointerId)touchContact=null;stopHold('tapregion',e.pointerId)});
+canvas.addEventListener('lostpointercapture',e=>{if(touchContact?.id===e.pointerId)touchContact=null;stopHold('tapregion',e.pointerId)});
+window.addEventListener('keydown',e=>{
+ if(e.code==='Escape'){e.preventDefault();if(!e.repeat)pause();return}
+ if(e.code==='Space'){if(game?.status==='playing'){e.preventDefault();if(!e.repeat)activateAbility()}return}
+ const dir=keymap[e.code];if(!dir)return;e.preventDefault();
+ if(game?.status!=='playing'||e.repeat||pressedKeys.has(e.code))return;
+ pressedKeys.add(e.code);beginHold(dir[0],dir[1],'keyboard',e.code);
+});
+window.addEventListener('keyup',e=>{
+ if(!keymap[e.code])return;pressedKeys.delete(e.code);
+ if(heldInput?.kind==='keyboard'&&heldInput.id===e.code){stopHold('keyboard',e.code);
+  if(pressedKeys.size){let code=[...pressedKeys].at(-1),dir=keymap[code];beginHold(dir[0],dir[1],'keyboard',code)}}
+});
 window.addEventListener('blur',()=>{if(game?.status==='playing')pause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&game?.status==='playing')pause()});window.addEventListener('resize',resize);
-let last=0;function loop(ms){let dt=Math.min(.045,(ms-last)/1000||0);last=ms;if(heldDir&&game?.status==='playing'){heldTimer+=dt;if(heldTimer>.116){heldTimer=0;let d=heldDir;move(d==='left'?-1:d==='right'?1:0,d==='up'?1:d==='down'?-1:0)}}tick(dt);render();requestAnimationFrame(loop)}
-try{if(renderingOK)initGL();else console.info('WebGL2 unavailable, using the compatibility 3D renderer.');game=newGame(true);staticDirty=true;$('controlMode').value=saved.controls;$('soundToggle').checked=saved.sound;$('quality').value=saved.quality;$('menuBest').textContent='BEST DEPTH: '+saved.best;requestAnimationFrame(loop)}catch(error){console.error('Failed to initialize 3D dungeon:',error);$('menu').querySelector('.description').textContent='This game needs a browser with WebGL2 hardware acceleration. '+error.message;}
+// Fixed 120 Hz simulation: step logic is independent of 30/60/120 FPS rendering.
+const FIXED_DT=1/120;let last=0,accumulator=0;
+function simulationStep(){
+ if(heldInput&&saved.holdRepeat&&game?.status==='playing'){
+  if(game.time+1e-8>=heldInput.nextRepeat){
+   heldInput.nextRepeat+=repeatPeriod();stepInput(heldInput.dx,heldInput.dr,'hold');
+  }
+ }
+ tick(FIXED_DT);
+}
+function loop(ms){
+ if(!last)last=ms;
+ let delta=Math.min(.15,Math.max(0,(ms-last)/1000));last=ms;accumulator+=delta;
+ let steps=0;while(accumulator>=FIXED_DT&&steps<20){simulationStep();accumulator-=FIXED_DT;steps++}
+ render();requestAnimationFrame(loop);
+}
+try{if(renderingOK)initGL();else console.info('WebGL2 unavailable, using the compatibility 3D renderer.');game=newGame(true);staticDirty=true;$('controlMode').value=saved.controls;$('holdRepeat').checked=saved.holdRepeat;$('repeatSpeed').value=saved.repeatSpeed;$('swipeSensitivity').value=saved.swipeSensitivity;$('tapForward').checked=saved.tapForward;$('soundToggle').checked=saved.sound;$('quality').value=saved.quality;$('menuBest').textContent='BEST SCORE: '+saved.best;requestAnimationFrame(loop)}catch(error){console.error('Failed to initialize 3D dungeon:',error);$('menu').querySelector('.description').textContent='This game needs a browser with WebGL2 hardware acceleration. '+error.message;}
 </script></body></html>
