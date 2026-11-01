@@ -95,6 +95,58 @@ body{display:block;min-width:0;min-height:0}
 #deathCue{position:absolute;top:23%;left:50%;transform:translate(-50%,18px) scale(.96);z-index:8;pointer-events:none;color:#ffe1ab;text-align:center;font-size:clamp(16px,5vw,26px);font-weight:950;letter-spacing:2px;text-shadow:0 2px #34191a,0 4px 12px #000,0 0 24px #ce5a27;opacity:0;white-space:nowrap}
 #deathCue.on{animation:dungeonLastBreath 1.55s cubic-bezier(.18,.75,.2,1) forwards}
 @keyframes dungeonLastBreath{0%{opacity:0;transform:translate(-50%,18px) scale(.92)}16%{opacity:1;transform:translate(-50%,0) scale(1)}73%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-12px) scale(.99)}}
+
+/* V10: closer dungeon camera, genuinely enlarged controls, touch-safe adaptive layout. */
+#shell{
+ --dpad-width:min(98vw,490px);
+ --dpad-height:min(calc(var(--dpad-width) * 1.23),54dvh);
+ --dpad-bottom:max(8px,env(safe-area-inset-bottom));
+ --ability-size:clamp(104px,28vw,125px);
+}
+#movement{
+ left:50%;transform:translateX(-50%);
+ width:var(--dpad-width);height:var(--dpad-height);
+ bottom:var(--dpad-bottom);
+ gap:clamp(5px,1.5vw,10px);
+ filter:drop-shadow(0 8px 12px #000b);
+}
+#movement .dir{
+ font-size:clamp(46px,12.6vw,68px);font-weight:900;
+ border-width:3px;border-radius:clamp(18px,5vw,26px);
+ min-width:0;min-height:0;
+}
+#movement::before{font-size:clamp(39px,10.7vw,59px);border-radius:clamp(18px,5vw,26px)}
+#ability{
+ width:var(--ability-size);height:var(--ability-size);
+ right:max(10px,env(safe-area-inset-right));
+ bottom:calc(var(--dpad-bottom) + var(--dpad-height) + 12px);
+ border-width:4px;border-radius:25px;
+ box-shadow:inset 0 2px #ffffff44,0 6px 0 #0c1720,0 0 0 3px #08131a,0 15px 25px #0009;
+ gap:3px;
+}
+#ability span{font-size:clamp(44px,12vw,57px);line-height:1.08}
+#ability small{font-size:clamp(12px,3.1vw,15px);letter-spacing:.7px;line-height:1.1}
+#hud .stat{min-width:clamp(93px,25vw,124px);padding:9px 12px;border-width:3px}
+#hud .stat small{font-size:clamp(10px,2.7vw,12px)}
+#hud .stat b{font-size:clamp(26px,7.4vw,33px)}
+#pauseBtn{width:clamp(54px,14vw,64px);height:clamp(54px,14vw,64px);font-size:25px}
+#deathCue{font-size:clamp(19px,5.7vw,29px)}
+@media(orientation:landscape) and (max-height:600px){
+ #shell{--dpad-width:min(63dvh,34vw,320px);--dpad-height:var(--dpad-width);--dpad-bottom:max(10px,env(safe-area-inset-bottom));--ability-size:clamp(92px,26dvh,122px)}
+ #movement{left:max(14px,env(safe-area-inset-left));transform:none;bottom:var(--dpad-bottom)}
+ #movement .dir{font-size:clamp(32px,10dvh,52px)}
+ #movement::before{font-size:clamp(24px,8dvh,40px)}
+ #ability{right:max(16px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom))}
+ #hud .stat{padding:5px 10px;min-width:96px}
+ #hud .stat b{font-size:23px}
+ #pauseBtn{width:48px;height:48px}
+}
+@media(max-width:340px) and (orientation:portrait){
+ #shell{--ability-size:96px}
+ #ability{right:8px}
+ #hud{padding-left:8px;padding-right:8px}
+ #hud .stat{min-width:87px;padding:7px 8px}
+}
 </style></head><body><main id="shell"><canvas id="scene" aria-label="3D dungeon game"></canvas><div id="vignette"></div><div id="hud"><div class="hudtop"><div class="stat"><small>SCORE</small><b id="score">0</b></div><div class="stat"><small>COINS</small><b><i class="coinDot"></i><span id="coins">0</span></b></div><button class="action secondary" id="pauseBtn" aria-label="Pause">Ⅱ</button></div></div><div id="warning">THE DARKNESS APPROACHES</div><div id="movement" role="group" aria-label="Movement D-pad"><button class="dir" data-dir="up" aria-label="Forward">▲</button><button class="dir" data-dir="left" aria-label="Left">◀</button><button class="dir" data-dir="right" aria-label="Right">▶</button><button class="dir" data-dir="down" aria-label="Backward">▼</button></div><div id="swipeHint">SWIPE / TAP TO MOVE · TAP ABILITY</div><button id="ability"><span>🛡️</span><small>READY</small></button><div id="toast"></div><div id="impactFlash" aria-hidden="true"></div><div id="deathCue" role="status" aria-live="polite"></div>
 <section id="menu" class="overlay visible" aria-label="Dungeonbound main menu">
   <div class="menu-atmosphere" aria-hidden="true">
@@ -122,7 +174,7 @@ body{display:block;min-width:0;min-height:0}
 <section id="settings" class="overlay"><div class="frame"><h2 class="sectionHeading">SETTINGS</h2><div class="settingRow"><label for="controlMode">Controls</label><select id="controlMode"><option value="buttons">D-pad (recommended)</option><option value="swipe">One-step swipe</option><option value="tap">Tap directions</option></select></div><div class="settingRow"><label for="holdRepeat">Hold-to-repeat</label><input type="checkbox" id="holdRepeat" checked></div><div class="settingRow"><label for="repeatSpeed">Repeat speed</label><select id="repeatSpeed"><option value="slow">Deliberate</option><option value="normal">Normal</option><option value="fast">Quick</option></select></div><div class="settingRow"><label for="swipeSensitivity">Swipe sensitivity</label><select id="swipeSensitivity"><option value="sensitive">Sensitive</option><option value="normal">Normal</option><option value="firm">Firm</option></select></div><div class="settingRow"><label for="tapForward">Tap to move forward (swipe mode)</label><input type="checkbox" id="tapForward"></div><div class="settingRow"><label for="soundToggle">Sound effects</label><input type="checkbox" id="soundToggle" checked></div><div class="settingRow"><label for="quality">3D detail</label><select id="quality"><option value="high">High</option><option value="low">Battery saver</option></select></div><p class="description">Each D-pad press hops ONE square. Hold to hop repeatedly, or slide your finger between arrows to redirect. Swipe and tap remain optional. Hold repeating is optional. Score increases only when you reach a new furthest-forward row.</p><p class="tiny">Desktop: <span class="kbd">WASD</span> / <span class="kbd">Arrows</span> to move · <span class="kbd">Space</span> ability · <span class="kbd">Esc</span> pause</p><button class="action secondary" data-close="settings">BACK</button></div></section>
 <section id="pause" class="overlay"><div class="frame"><h2 class="sectionHeading">PAUSED</h2><p class="description">The dungeon is frozen. The shadows are waiting.</p><button class="action" id="resume">RESUME</button><button class="action secondary" id="quit">END RUN</button></div></section>
 <section id="death" class="overlay"><div class="frame"><div class="deathTitle">RUN OVER</div><p id="deathReason" class="description">The dungeon claimed another adventurer.</p><div class="scorebig" id="finalScore">0</div><span class="tiny">FORWARD SQUARES</span><div class="resultgrid"><div>COINS GATHERED<b id="finalCoins">0</b></div><div>PERSONAL BEST<b id="finalBest">0</b></div></div><button class="action" id="retry">↻ TRY AGAIN</button><div class="smallGrid"><button class="action secondary" id="deathHeroes">HEROES</button><button class="action secondary" id="home">MAIN MENU</button></div></div></section>
-<div id="version">DUNGEONBOUND V9 · CRUMBLING FLOOR & DEATH ANIMATIONS</div></main><script>
+<div id="version">DUNGEONBOUND V10 · BIGGER WORLD & CONTROLS</div></main><script>
 'use strict';
 const $=id=>document.getElementById(id), clamp=(n,a,b)=>Math.max(a,Math.min(b,n)), mix=(a,b,t)=>a+(b-a)*t;
 const HEROES=[
@@ -184,8 +236,10 @@ disc(x,y,z,r,h,mat='metal',sides=10,angle=0){let col=color(mat),top=y+h/2,bot=y-
 triangle(a,b,c,n,co,mat='smooth'){let I=MATERIALS.indexOf(mat);if(I<0)I=15;let x=I%4,y=Math.floor(I/4);for(let [p,u,v] of [[a,.04,.05],[b,.23,.05],[c,.12,.22]])this.data.push(...p,...n,...co,x/4+u,y/4+v);this.count+=3}
 }
 const CAMERA_PITCH=50*Math.PI/180, CAMERA_YAW=6*Math.PI/180;
-const CAMERA_LOOK_AHEAD=2.0; // Composition only: character appears higher on screen; grid, camera tracking and scoring remain unchanged.
-function cameraHeight(){return canvas.width/canvas.height>1?23.6:26.8}
+const CAMERA_LOOK_AHEAD=-3.25; // Higher in frame so the larger centered controls do not hide the hero; camera-only.
+// V10: optical camera zoom only. The tile grid, hitboxes and gameplay speed are unchanged.
+// Keep cameraHeight identical for WebGL and compatibility canvas renderers.
+function cameraHeight(){return canvas.width/canvas.height>1?15.5:20.8}
 function perspective(){let up=[0,1,0],aspect=canvas.width/canvas.height,h=cameraHeight(),w=h*aspect;
  let targetRow=game?game.camRow:0,at=[0,0,-targetRow*TILE-CAMERA_LOOK_AHEAD];
  let radius=34,eye=[Math.sin(CAMERA_YAW)*Math.cos(CAMERA_PITCH)*radius,Math.sin(CAMERA_PITCH)*radius,at[2]+Math.cos(CAMERA_YAW)*Math.cos(CAMERA_PITCH)*radius];
